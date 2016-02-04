@@ -1,13 +1,13 @@
 ﻿namespace Interapp.Data.Models
 {
-    using Common.Constants;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Common.Constants;
 
     public class University
     {
-        private ICollection<User> students { get; set; }
+        private ICollection<User> students;
         private ICollection<Document> documentRequirements;
 
         public University()

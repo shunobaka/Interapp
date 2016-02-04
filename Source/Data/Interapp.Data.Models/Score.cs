@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using Common.Constants;
     using Common.Enums;
-    using System.ComponentModel.DataAnnotations;
 
     public class Score
     {
