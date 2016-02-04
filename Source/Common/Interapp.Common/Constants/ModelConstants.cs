@@ -28,6 +28,13 @@
         public const int ScoreToeflMax = 677;
         public const string ScoreCambridgeResultRegex = "^[ABC]{1}$";
 
+        public const int ScoreSatTotalMin = 600;
+        public const int ScoreSatTotalMax = 2400;
+        public const int ScoreIBTToeflMin = 0;
+        public const int ScoreIBTToeflMax = 120;
+        public const int ScorePBTToelfMin = 310;
+        public const int ScorePBTToeflMax = 677;
+
         public const int UserNamesMinLength = 2;
         public const int UserNamesMaxLength = 20;
         public const string UserNamesRegex = "^[A-Z][a-z-]$";
