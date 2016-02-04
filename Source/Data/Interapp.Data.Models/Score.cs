@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;
     using Common.Enums;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Score
     {
@@ -21,11 +22,21 @@
         [Range(ModelConstants.ScoreToeflMin, ModelConstants.ScoreToeflMax)]
         public int? ToeflResult { get; set; }
 
-        public ToeflType ToeflType { get; set; }
+        public ToeflType? ToeflType { get; set; }
 
         [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
         public char? CambridgeResult { get; set; }
 
-        public CambridgeLevel CambridgeLevel { get; set; }
+        public CambridgeLevel? CambridgeLevel { get; set; }
+
+        //public string StudentId { get; set; }
+
+        //[ForeignKey("StudentId")]
+        //public virtual User Student { get; set; }
+
+        //public int? UniversityId { get; set; }
+
+        //[ForeignKey("UniversityId")]
+        //public virtual University University { get; set; }
     }
 }
