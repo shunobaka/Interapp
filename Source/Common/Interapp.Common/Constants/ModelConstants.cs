@@ -20,5 +20,11 @@
 
         public const int DocumentNameMinLength = 2;
         public const int DocumentNameMaxLength = 40;
+
+        public const int ScoreSatMin = 200;
+        public const int ScoreSatMax = 800;
+        public const int ScoreToeflMin = 0;
+        public const int ScoreToeflMax = 677;
+        public const string ScoreCambridgeResultRegex = "^[ABC]{1}$";
     }
 }
