@@ -2,9 +2,8 @@
 {
     public enum CambridgeLevel
     {
-        None = 0,
-        FCE = 1,
-        CAE = 2,
-        CPE = 3
+        FCE = 0,
+        CAE = 1,
+        CPE = 2
     }
 }

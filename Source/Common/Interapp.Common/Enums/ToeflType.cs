@@ -2,8 +2,7 @@
 {
     public enum ToeflType
     {
-        None = 0,
-        IBT = 1,
-        PBT = 2
+        IBT = 0,
+        PBT = 1
     }
 }
