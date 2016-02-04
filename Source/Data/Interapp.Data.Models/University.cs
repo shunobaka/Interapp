@@ -8,12 +8,12 @@
     public class University
     {
         private ICollection<User> students { get; set; }
-        private ICollection<Document> documentsRequirement;
+        private ICollection<Document> documentRequirements;
 
         public University()
         {
             this.students = new HashSet<User>();
-            this.documentsRequirement = new HashSet<Document>();
+            this.documentRequirements = new HashSet<Document>();
         }
 
         [Key]
@@ -23,6 +23,7 @@
         [Index(IsUnique = true)]
         [MinLength(ModelConstants.UniversityNameMinLength)]
         [MaxLength(ModelConstants.UniversityNameMaxLength)]
+        [RegularExpression(ModelConstants.UniversityNameRegex)]
         public string Name { get; set; }
 
         [Range(ModelConstants.UniversityTuitionFeeMin, ModelConstants.UniversityTuitionFeeMax)]
@@ -43,18 +44,18 @@
         public int ScoreRequirementId { get; set; }
 
         [ForeignKey("ScoreRequirementId")]
-        public virtual Score ScoreRequirement { get; set; }
+        public virtual Score ScoreRequirements { get; set; }
 
-        public virtual ICollection<Document> DocumentsRequirement
+        public virtual ICollection<Document> DocumentRequirements
         {
             get
             {
-                return this.documentsRequirement;
+                return this.documentRequirements;
             }
 
             set
             {
-                this.documentsRequirement = value;
+                this.documentRequirements = value;
             }
         }
 
