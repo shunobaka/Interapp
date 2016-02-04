@@ -25,6 +25,7 @@
         [MaxLength(ModelConstants.CountryNameMaxLenght)]
         public string Name { get; set; }
 
+        [InverseProperty("Country")]
         public virtual ICollection<User> Users
         {
             get
@@ -38,6 +39,7 @@
             }
         }
 
+        [InverseProperty("Country")]
         public virtual ICollection<University> Universities
         {
             get

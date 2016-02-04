@@ -25,6 +25,7 @@
         [MaxLength(ModelConstants.MajorNameMaxLength)]
         public string Name { get; set; }
 
+        [InverseProperty("Major")]
         public virtual ICollection<Application> Applications
         {
             get
@@ -38,6 +39,7 @@
             }
         }
 
+        [InverseProperty("Major")]
         public virtual ICollection<User> Students
         {
             get

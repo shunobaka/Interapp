@@ -27,5 +27,24 @@
         {
             return new InterappDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.Essay)
+                .WithRequired(e => e.Author);
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.Country)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Application>()
+                .HasRequired(a => a.University)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -28,12 +28,11 @@
 
         [Range(ModelConstants.UniversityTuitionFeeMin, ModelConstants.UniversityTuitionFeeMax)]
         public int TuitionFee { get; set; }
-
-        [Required]
+        
         public int CountryId { get; set; }
 
         [ForeignKey("CountryId")]
-        public virtual Country Country { get; set; }
+        public Country Country { get; set; }
 
         [Required]
         public string DirectorId { get; set; }
@@ -41,10 +40,11 @@
         [ForeignKey("DirectorId")]
         public virtual User Director { get; set; }
 
-        public int ScoreRequirementId { get; set; }
+        //[ForeignKey("ScoreRequirements")]
+        //public int? ScoreRequirementId { get; set; }
 
-        [ForeignKey("ScoreRequirementId")]
-        public virtual Score ScoreRequirements { get; set; }
+        ////[ForeignKey("ScoreRequirementId")]
+        //public virtual Score ScoreRequirements { get; set; }
 
         public virtual ICollection<Document> DocumentRequirements
         {
@@ -59,6 +59,7 @@
             }
         }
 
+        [InverseProperty("University")]
         public virtual ICollection<User> Students
         {
             get
