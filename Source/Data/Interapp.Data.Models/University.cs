@@ -8,10 +8,12 @@
     public class University
     {
         private ICollection<User> students { get; set; }
+        private ICollection<Document> documentsRequirement;
 
         public University()
         {
             this.students = new HashSet<User>();
+            this.documentsRequirement = new HashSet<Document>();
         }
 
         [Key]
@@ -42,6 +44,19 @@
 
         [ForeignKey("ScoreRequirementId")]
         public virtual Score ScoreRequirement { get; set; }
+
+        public virtual ICollection<Document> DocumentsRequirement
+        {
+            get
+            {
+                return this.documentsRequirement;
+            }
+
+            set
+            {
+                this.documentsRequirement = value;
+            }
+        }
 
         public virtual ICollection<User> Students
         {
