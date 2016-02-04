@@ -1,4 +1,4 @@
-﻿namespace Interapp.Data.Models
+﻿namespace Interapp.Common.Enums
 {
     public enum CambridgeLevel
     {
