@@ -26,5 +26,9 @@
         public const int ScoreToeflMin = 0;
         public const int ScoreToeflMax = 677;
         public const string ScoreCambridgeResultRegex = "^[ABC]{1}$";
+
+        public const int UserNamesMinLength = 2;
+        public const int UserNamesMaxLength = 20;
+        public const string UserNamesRegex = "^[A-Z][a-z-]$";
     }
 }

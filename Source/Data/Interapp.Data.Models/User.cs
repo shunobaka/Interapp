@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Data.Models
 {
+    using Common.Constants;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -20,8 +21,16 @@
             this.documents = new HashSet<Document>();
         }
 
+        [Required]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
         public string FirstName { get; set; }
 
+        [Required]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
         public string LastName { get; set; }
         
         public DateTime DateOfBrith { get; set; }
