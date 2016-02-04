@@ -10,6 +10,8 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
+        public IDbSet<Application> Applications { get; set; }
 
         public IDbSet<Country> Countries { get; set; }
 
