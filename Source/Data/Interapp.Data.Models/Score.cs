@@ -10,24 +10,20 @@
         [Key]
         public int Id { get; set; }
 
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatCRResult { get; set; }
 
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatWritingResult { get; set; }
-
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatMathResult { get; set; }
+        public int RequiredSAT { get; set; }
 
         [Range(ModelConstants.ScoreToeflMin, ModelConstants.ScoreToeflMax)]
-        public int? ToeflResult { get; set; }
+        public int? RequiredIBTToefl { get; set; }
 
-        public ToeflType? ToeflType { get; set; }
+        [Range(ModelConstants.ScoreToeflMin, ModelConstants.ScoreToeflMax)]
+        public int? RequiredPBTToefl { get; set; }
+
 
         [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char? CambridgeResult { get; set; }
+        public char? RequiredCambridgeScore { get; set; }
 
-        public CambridgeLevel? CambridgeLevel { get; set; }
+        public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 
         //public string StudentId { get; set; }
 

@@ -8,12 +8,12 @@
     public class Major
     {
         private ICollection<Application> applications;
-        private ICollection<User> students;
+        private ICollection<StudentInfo> students;
 
         public Major()
         {
             this.applications = new HashSet<Application>();
-            this.students = new HashSet<User>();
+            this.students = new HashSet<StudentInfo>();
         }
         
         [Key]
@@ -40,7 +40,7 @@
         }
 
         [InverseProperty("Major")]
-        public virtual ICollection<User> Students
+        public virtual ICollection<StudentInfo> Students
         {
             get
             {

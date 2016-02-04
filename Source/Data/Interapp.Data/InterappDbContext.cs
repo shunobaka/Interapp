@@ -19,9 +19,11 @@
 
         public IDbSet<Major> Majors { get; set; }
 
-        public IDbSet<Score> Scores { get; set; }
-
         public IDbSet<University> Universities { get; set; }
+
+        public IDbSet<DirectorInfo> DirectorInfoes { get; set; }
+
+        public IDbSet<StudentInfo> StudentInfoes { get; set; }
 
         public static InterappDbContext Create()
         {
@@ -31,6 +33,14 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
+                .HasOptional(u => u.DirectorInfo)
+                .WithRequired(d => d.Director);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.StudentInfo)
+                .WithRequired(d => d.Student);
+
+            modelBuilder.Entity<StudentInfo>()
                 .HasOptional(u => u.Essay)
                 .WithRequired(e => e.Author);
 
