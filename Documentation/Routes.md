@@ -20,6 +20,7 @@
     - GET - Provides a list of all countries with information about users and universities from there
   - /countries/info/:id
     - GET - provides info for a given country by id
+
 ## Student Area (Student role)
 - /student/universities
   - /student/universities/add
@@ -35,17 +36,20 @@
   - /student/application/preview/:id
     - GET - previews an application which is yet not sent
   - /student/application/sumbit
-    - POST - sumbits a filled application
+    - POST - sumbits a filled application\
+
 ## Users Area (Logged in user)
 - /user/profile
   - /user/profile/info
   - /user/profile/edit
 - /users/:username
+
 ## Director Area (Director role)
 - /director/universities
   - /director/universities/list
   - /director/universities/create
   - /director/universities/edit/:id
+
 ## Administration Area (Admin role)
 - /admin/users
   - /admin/users/all
