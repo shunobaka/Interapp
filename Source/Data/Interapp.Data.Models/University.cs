@@ -4,15 +4,16 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using Common.Constants;
+    using Common.Enums;
 
     public class University
     {
-        private ICollection<User> students;
+        private ICollection<StudentInfo> students;
         private ICollection<Document> documentRequirements;
 
         public University()
         {
-            this.students = new HashSet<User>();
+            this.students = new HashSet<StudentInfo>();
             this.documentRequirements = new HashSet<Document>();
         }
 
@@ -28,23 +29,31 @@
 
         [Range(ModelConstants.UniversityTuitionFeeMin, ModelConstants.UniversityTuitionFeeMax)]
         public int TuitionFee { get; set; }
-
-        [Required]
+        
         public int CountryId { get; set; }
 
         [ForeignKey("CountryId")]
-        public virtual Country Country { get; set; }
+        public Country Country { get; set; }
+
+        [Range(ModelConstants.ScoreSatTotalMin, ModelConstants.ScoreSatTotalMax)]
+        public int? RequiredSAT { get; set; }
+
+        [Range(ModelConstants.ScoreIBTToeflMin, ModelConstants.ScoreIBTToeflMax)]
+        public int? RequiredIBTToefl { get; set; }
+
+        [Range(ModelConstants.ScorePBTToelfMin, ModelConstants.ScorePBTToeflMax)]
+        public int? RequiredPBTToefl { get; set; }
+
+        [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
+        public char? RequiredCambridgeScore { get; set; }
+
+        public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 
         [Required]
         public string DirectorId { get; set; }
 
         [ForeignKey("DirectorId")]
-        public virtual User Director { get; set; }
-
-        public int ScoreRequirementId { get; set; }
-
-        [ForeignKey("ScoreRequirementId")]
-        public virtual Score ScoreRequirements { get; set; }
+        public virtual DirectorInfo Director { get; set; }
 
         public virtual ICollection<Document> DocumentRequirements
         {
@@ -59,7 +68,8 @@
             }
         }
 
-        public virtual ICollection<User> Students
+        [InverseProperty("University")]
+        public virtual ICollection<StudentInfo> Students
         {
             get
             {

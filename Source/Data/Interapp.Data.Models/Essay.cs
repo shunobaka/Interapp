@@ -6,9 +6,6 @@
 
     public class Essay
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [MinLength(ModelConstants.EssayTitleMinLength)]
         [MaxLength(ModelConstants.EssayTitleMaxLength)]
@@ -18,11 +15,12 @@
         [MinLength(ModelConstants.EssayContentMinLength)]
         [MaxLength(ModelConstants.EssayContentMaxLength)]
         public string Content { get; set; }
-
+        
         [Required]
+        [Key]
         public string AuthorId { get; set; }
-
+        
         [ForeignKey("AuthorId")]
-        public virtual User Author { get; set; }
+        public virtual StudentInfo Author { get; set; }
     }
 }

@@ -8,12 +8,12 @@
     public class Major
     {
         private ICollection<Application> applications;
-        private ICollection<User> students;
+        private ICollection<StudentInfo> students;
 
         public Major()
         {
             this.applications = new HashSet<Application>();
-            this.students = new HashSet<User>();
+            this.students = new HashSet<StudentInfo>();
         }
         
         [Key]
@@ -25,6 +25,7 @@
         [MaxLength(ModelConstants.MajorNameMaxLength)]
         public string Name { get; set; }
 
+        [InverseProperty("Major")]
         public virtual ICollection<Application> Applications
         {
             get
@@ -38,7 +39,8 @@
             }
         }
 
-        public virtual ICollection<User> Students
+        [InverseProperty("Major")]
+        public virtual ICollection<StudentInfo> Students
         {
             get
             {

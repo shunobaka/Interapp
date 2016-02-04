@@ -10,6 +10,8 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
+        public IDbSet<Application> Applications { get; set; }
 
         public IDbSet<Country> Countries { get; set; }
 
@@ -19,13 +21,42 @@
 
         public IDbSet<Major> Majors { get; set; }
 
-        public IDbSet<Score> Scores { get; set; }
-
         public IDbSet<University> Universities { get; set; }
+
+        public IDbSet<DirectorInfo> DirectorInfoes { get; set; }
+
+        public IDbSet<StudentInfo> StudentInfoes { get; set; }
 
         public static InterappDbContext Create()
         {
             return new InterappDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.DirectorInfo)
+                .WithRequired(d => d.Director);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(u => u.StudentInfo)
+                .WithRequired(d => d.Student);
+
+            modelBuilder.Entity<StudentInfo>()
+                .HasOptional(u => u.Essay)
+                .WithRequired(e => e.Author);
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.Country)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Application>()
+                .HasRequired(a => a.University)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

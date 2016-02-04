@@ -21,7 +21,7 @@
         public string StudentId { get; set; }
 
         [ForeignKey("StudentId")]
-        public virtual User Student { get; set; }
+        public virtual StudentInfo Student { get; set; }
 
         [Required]
         public int MajorId { get; set; }

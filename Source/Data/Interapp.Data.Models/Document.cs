@@ -16,11 +16,15 @@
 
         [Required]
         public string Content { get; set; }
-
-        [Required]
+        
         public string AuthorId { get; set; }
         
         [ForeignKey("AuthorId")]
-        public virtual User Author { get; set; }
+        public virtual StudentInfo Author { get; set; }
+
+        public int? UniversityId { get; set; }
+
+        [ForeignKey("UniversityId")]
+        public virtual University University { get; set; }
     }
 }
