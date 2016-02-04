@@ -12,5 +12,10 @@
 
         public const int MajorNameMinLength = 10;
         public const int MajorNameMaxLength = 80;
+
+        public const int EssayTitleMinLength = 2;
+        public const int EssayTitleMaxLength = 80;
+        public const int EssayContentMinLength = 1800;
+        public const int EssayContentMaxLength = 3600;
     }
 }
