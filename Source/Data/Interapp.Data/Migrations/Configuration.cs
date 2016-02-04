@@ -1,11 +1,11 @@
 namespace Interapp.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Interapp.Data.InterappDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<InterappDbContext>
     {
         public Configuration()
         {
@@ -13,20 +13,22 @@ namespace Interapp.Data.Migrations
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Interapp.Data.InterappDbContext context)
+        protected override void Seed(InterappDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Roles.Any())
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                var admin = new IdentityRole { Name = "Administrator" };
+                manager.Create(admin);
+
+                var director = new IdentityRole { Name = "Director" };
+                manager.Create(director);
+
+                var student = new IdentityRole { Name = "Student" };
+                manager.Create(student);
+            }
         }
     }
 }
