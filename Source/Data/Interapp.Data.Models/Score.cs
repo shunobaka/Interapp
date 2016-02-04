@@ -1,6 +1,7 @@
 ﻿namespace Interapp.Data.Models
 {
     using Common.Constants;
+    using Common.Enums;
     using System.ComponentModel.DataAnnotations;
 
     public class Score
@@ -23,7 +24,7 @@
         public ToeflType ToeflType { get; set; }
 
         [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char CambridgeResult { get; set; }
+        public char? CambridgeResult { get; set; }
 
         public CambridgeLevel CambridgeLevel { get; set; }
     }

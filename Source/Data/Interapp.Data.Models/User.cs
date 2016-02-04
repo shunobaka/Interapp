@@ -47,6 +47,11 @@
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
 
+        public int? ScoreId { get; set; }
+
+        [ForeignKey("ScoreId")]
+        public Score Score { get; set; }
+
         public virtual ICollection<Application> Applications
         {
             get
