@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Data.Models
 {
+    using Common.Constants;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -16,6 +17,8 @@
         public int Id { get; set; }
 
         [Required]
+        [MinLength(ModelConstants.CountryNameMinLength)]
+        [MaxLength(ModelConstants.CountryNameMaxLenght)]
         public string Name { get; set; }
 
         public virtual ICollection<User> Users
