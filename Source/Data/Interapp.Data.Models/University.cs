@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Data.Models
 {
+    using Common.Constants;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -18,9 +19,11 @@
 
         [Required]
         [Index(IsUnique = true)]
+        [MinLength(ModelConstants.UniversityNameMinLength)]
+        [MaxLength(ModelConstants.UniversityNameMaxLength)]
         public string Name { get; set; }
 
-        [Range(0, 100000)]
+        [Range(ModelConstants.UniversityTuitionFeeMin, ModelConstants.UniversityTuitionFeeMax)]
         public int TuitionFee { get; set; }
 
         [Required]
