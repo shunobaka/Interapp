@@ -23,15 +23,18 @@
         public string LastName { get; set; }
         
         public DateTime DateOfBrith { get; set; }
-
-        [Required]
-        public int UniversityId { get; set; }
+        
+        public int? UniversityId { get; set; }
 
         [ForeignKey("UniversityId")]
         public virtual University University { get; set; }
 
-        [Required]
-        public int MajorId { get; set; }
+        public int? EssayId { get; set; }
+
+        [ForeignKey("EssayId")]
+        public virtual Essay Essay { get; set; }
+
+        public int? MajorId { get; set; }
 
         [ForeignKey("MajorId")]
         public virtual Major Major { get; set; }
