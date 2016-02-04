@@ -4,7 +4,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
 
-    public class InterappDbContext : IdentityDbContext<User>
+    public class InterappDbContext : IdentityDbContext<User>, IInterappDbContext
     {
         public InterappDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
