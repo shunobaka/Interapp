@@ -4,7 +4,6 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -12,10 +11,12 @@
     public class User : IdentityUser
     {
         private ICollection<Application> applications;
+        private ICollection<Document> documents;
 
         public User()
         {
             this.applications = new HashSet<Application>();
+            this.documents = new HashSet<Document>();
         }
 
         public string FirstName { get; set; }
@@ -49,6 +50,19 @@
             set
             {
                 this.applications = value;
+            }
+        }
+
+        public virtual ICollection<Document> Documents
+        {
+            get
+            {
+                return this.documents;
+            }
+
+            set
+            {
+                this.documents = value;
             }
         }
 
