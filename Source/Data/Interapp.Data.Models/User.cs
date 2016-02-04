@@ -4,6 +4,8 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -21,6 +23,18 @@
         public string LastName { get; set; }
         
         public DateTime DateOfBrith { get; set; }
+
+        [Required]
+        public int UniversityId { get; set; }
+
+        [ForeignKey("UniversityId")]
+        public virtual University University { get; set; }
+
+        [Required]
+        public int MajorId { get; set; }
+
+        [ForeignKey("MajorId")]
+        public virtual Major Major { get; set; }
 
         public virtual ICollection<Application> Applications
         {

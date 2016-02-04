@@ -22,5 +22,11 @@
 
         [ForeignKey("StudentId")]
         public virtual User Student { get; set; }
+
+        [Required]
+        public int MajorId { get; set; }
+
+        [ForeignKey("MajorId")]
+        public virtual Major Major { get; set; }
     }
 }
