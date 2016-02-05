@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD112133-15B4-4DDA-8907-1B28A4F47A0D}</ProjectGuid>
+    <ProjectGuid>{87CAD520-3D00-41D2-AE47-EF81CD3A49A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interapp.Services</RootNamespace>
-    <AssemblyName>Interapp.Services</AssemblyName>
+    <RootNamespace>Interapp.Services.Common</RootNamespace>
+    <AssemblyName>Interapp.Services.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,22 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IUniversitiesService.cs" />
+    <Compile Include="FilterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Data\Interapp.Data.Models\Interapp.Data.Models.csproj">
-      <Project>{414780b8-3bbe-4942-bfcf-8f27d215d3a9}</Project>
-      <Name>Interapp.Data.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Data\Interapp.Data\Interapp.Data.csproj">
-      <Project>{fa884807-e1bf-4bf9-b245-6c82a57babec}</Project>
-      <Name>Interapp.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interapp.Services.Common\Interapp.Services.Common.csproj">
-      <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
-      <Name>Interapp.Services.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
