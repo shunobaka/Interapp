@@ -6,9 +6,9 @@
 
     public interface IUniversitiesService
     {
-        IQueryable All();
+        IQueryable<University> All();
 
-        IQueryable GetFiltered(FilterModel filter);
+        IQueryable<University> GetFiltered(FilterModel filter);
 
         University GetById(int id);
 
