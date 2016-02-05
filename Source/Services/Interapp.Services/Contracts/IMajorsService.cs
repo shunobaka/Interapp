@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Services.Contracts
 {
     using System.Linq;
-    using Data.Models;
     using Common;
+    using Data.Models;
 
     public interface IMajorsService
     {

@@ -11,12 +11,14 @@
         private ICollection<University> universitiesOfInterest;
         private ICollection<Application> applications;
         private ICollection<Document> documents;
+        private ICollection<Response> responses;
 
         public StudentInfo()
         {
             this.universitiesOfInterest = new HashSet<University>();
             this.applications = new HashSet<Application>();
             this.documents = new HashSet<Document>();
+            this.responses = new HashSet<Response>();
         }
 
         [Key]
@@ -82,6 +84,19 @@
             set
             {
                 this.universitiesOfInterest = value;
+            }
+        }
+
+        public virtual ICollection<Response> Responses
+        {
+            get
+            {
+                return this.responses;
+            }
+
+            set
+            {
+                this.responses = value;
             }
         }
     }

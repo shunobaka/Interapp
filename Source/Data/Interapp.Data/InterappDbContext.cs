@@ -29,6 +29,8 @@
 
         public IDbSet<StudentInfo> StudentInfos { get; set; }
 
+        public IDbSet<Response> Responses { get; set; }
+
         public static InterappDbContext Create()
         {
             return new InterappDbContext();
