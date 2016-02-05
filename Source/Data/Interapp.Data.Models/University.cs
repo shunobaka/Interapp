@@ -11,12 +11,14 @@
         private ICollection<StudentInfo> students;
         private ICollection<StudentInfo> interestedStudents;
         private ICollection<Document> documentRequirements;
+        private ICollection<Response> responses;
 
         public University()
         {
             this.students = new HashSet<StudentInfo>();
             this.interestedStudents = new HashSet<StudentInfo>();
             this.documentRequirements = new HashSet<Document>();
+            this.responses = new HashSet<Response>();
         }
 
         [Key]
@@ -95,6 +97,19 @@
             set
             {
                 this.students = value;
+            }
+        }
+
+        public virtual ICollection<Response> Responses
+        {
+            get
+            {
+                return this.responses;
+            }
+
+            set
+            {
+                this.responses = value;
             }
         }
     }
