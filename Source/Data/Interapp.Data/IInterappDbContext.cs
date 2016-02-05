@@ -1,15 +1,14 @@
 ﻿namespace Interapp.Data
 {
-    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using Models;
 
     public interface IInterappDbContext : IDisposable
     {
-        int SaveChanges();
-
         IDbSet<User> Users { get; set; }
+
         IDbSet<Application> Applications { get; set; }
 
         IDbSet<Country> Countries { get; set; }
@@ -20,6 +19,8 @@
 
         IDbSet<Major> Majors { get; set; }
 
+        IDbSet<ScoreReport> ScoreReports { get; set; }
+
         IDbSet<University> Universities { get; set; }
 
         IDbSet<DirectorInfo> DirectorInfoes { get; set; }
@@ -29,5 +30,7 @@
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+
+        int SaveChanges();
     }
 }

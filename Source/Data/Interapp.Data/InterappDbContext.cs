@@ -21,6 +21,8 @@
 
         public IDbSet<Major> Majors { get; set; }
 
+        public IDbSet<ScoreReport> ScoreReports { get; set; }
+
         public IDbSet<University> Universities { get; set; }
 
         public IDbSet<DirectorInfo> DirectorInfoes { get; set; }
