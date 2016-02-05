@@ -3,7 +3,7 @@
     public class ModelConstants
     {
         public const int CountryNameMinLength = 2;
-        public const int CountryNameMaxLenght = 30;
+        public const int CountryNameMaxLenght = 50;
 
         public const int UniversityNameMinLength = 5;
         public const int UniversityNameMaxLength = 80;
