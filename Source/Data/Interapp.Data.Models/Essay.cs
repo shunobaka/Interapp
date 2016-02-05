@@ -16,8 +16,8 @@
         [MaxLength(ModelConstants.EssayContentMaxLength)]
         public string Content { get; set; }
         
-        [Required]
         [Key]
+        [Required]
         public string AuthorId { get; set; }
         
         [ForeignKey("AuthorId")]

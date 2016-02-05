@@ -10,7 +10,7 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public IDbSet<Application> Applications { get; set; }
 
         public IDbSet<Country> Countries { get; set; }
@@ -45,6 +45,10 @@
             modelBuilder.Entity<StudentInfo>()
                 .HasOptional(u => u.Essay)
                 .WithRequired(e => e.Author);
+
+            modelBuilder.Entity<StudentInfo>()
+                .HasOptional(u => u.Scores)
+                .WithRequired(e => e.StudentInfo);
 
             modelBuilder.Entity<User>()
                 .HasRequired(u => u.Country)
