@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IApplicationsService.cs" />
+    <Compile Include="Contracts\ICountriesService.cs" />
+    <Compile Include="Contracts\IEssaysService.cs" />
+    <Compile Include="Contracts\IMajorsService.cs" />
+    <Compile Include="Contracts\IStudentInfoesService.cs" />
     <Compile Include="Contracts\IUniversitiesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

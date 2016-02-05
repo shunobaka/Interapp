@@ -60,6 +60,7 @@
     <Compile Include="IInterappDbContext.cs" />
     <Compile Include="InterappDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seeder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
