@@ -9,11 +9,13 @@
     public class University
     {
         private ICollection<StudentInfo> students;
+        private ICollection<StudentInfo> interestedStudents;
         private ICollection<Document> documentRequirements;
 
         public University()
         {
             this.students = new HashSet<StudentInfo>();
+            this.interestedStudents = new HashSet<StudentInfo>();
             this.documentRequirements = new HashSet<Document>();
         }
 
@@ -65,6 +67,20 @@
             set
             {
                 this.documentRequirements = value;
+            }
+        }
+
+        [InverseProperty("UniversitiesOfInterest")]
+        public virtual ICollection<StudentInfo> InterestedStudents
+        {
+            get
+            {
+                return this.interestedStudents;
+            }
+
+            set
+            {
+                this.interestedStudents = value;
             }
         }
 
