@@ -23,9 +23,9 @@
 
         IDbSet<University> Universities { get; set; }
 
-        IDbSet<DirectorInfo> DirectorInfoes { get; set; }
+        IDbSet<DirectorInfo> DirectorInfos { get; set; }
 
-        IDbSet<StudentInfo> StudentInfoes { get; set; }
+        IDbSet<StudentInfo> StudentInfos { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 

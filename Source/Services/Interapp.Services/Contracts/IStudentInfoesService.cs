@@ -2,7 +2,7 @@
 {
     using Data.Models;
 
-    public interface IStudentInfoesService
+    public interface IStudentInfosService
     {
         StudentInfo GetById(int id);
 

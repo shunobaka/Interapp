@@ -25,9 +25,9 @@
 
         public IDbSet<University> Universities { get; set; }
 
-        public IDbSet<DirectorInfo> DirectorInfoes { get; set; }
+        public IDbSet<DirectorInfo> DirectorInfos { get; set; }
 
-        public IDbSet<StudentInfo> StudentInfoes { get; set; }
+        public IDbSet<StudentInfo> StudentInfos { get; set; }
 
         public static InterappDbContext Create()
         {
