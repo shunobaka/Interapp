@@ -1,6 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.StudentInfoViewModels
 {
-    public class StudentInfoEssayViewModel
+    using Data.Models;
+    using Infrastructure.Mappings;
+
+    public class StudentInfoEssayViewModel : IMapFrom<Essay>
     {
         public string Title { get; set; }
 

@@ -1,6 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.StudentInfoViewModels
 {
-    public class StudentInfoDocumentViewModel
+    using Data.Models;
+    using Infrastructure.Mappings;
+
+    public class StudentInfoDocumentViewModel : IMapFrom<Document>
     {
         public string Name { get; set; }
     }
