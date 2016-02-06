@@ -19,7 +19,7 @@
         public ActionResult Info()
         {
             var userId = this.User.Identity.GetUserId();
-            var studentInfo = this.studentInfos.GetById(userId);
+            var studentInfo = this.studentInfos.GetFullInfoById(userId);
 
             var model = Mapper.Map<StudentInfoViewModel>(studentInfo);
 

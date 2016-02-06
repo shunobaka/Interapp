@@ -1,9 +1,11 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Linq;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
+    using System.Data.Entity;
 
     public class StudentInfosService : IStudentInfosService
     {
@@ -59,6 +61,24 @@
         public IQueryable<StudentInfo> GetByMajor(int majorId)
         {
             return this.studentInfos.All().Where(s => s.MajorId == majorId);
+        }
+
+        public StudentInfo GetFullInfoById(string id)
+        {
+            var student = this.studentInfos
+                .All()
+                .Where(s => s.StudentId == id)
+                .Include(s => s.Documents)
+                .Include(s => s.UniversitiesOfInterest)
+                .Include(s => s.Student)
+                .Include(s => s.Essay)
+                .Include(s => s.Scores)
+                .Include(s => s.Applications)
+                .Include(s => s.Major)
+                .Include(s => s.University)
+                .Include(s => s.Responses)
+                .FirstOrDefault();
+            return student;
         }
 
         public void Update(string studentId, StudentInfo info)
