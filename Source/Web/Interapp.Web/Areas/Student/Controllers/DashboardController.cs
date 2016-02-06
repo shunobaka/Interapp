@@ -1,5 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
+    using AutoMapper;
+    using Models.StudentInfoViewModels;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using System.Web.Mvc;
@@ -19,7 +21,9 @@
             var userId = this.User.Identity.GetUserId();
             var studentInfo = this.studentInfos.GetById(userId);
 
-            return View();
+            var model = Mapper.Map<StudentInfoViewModel>(studentInfo);
+
+            return View(model);
         }
     }
 }
