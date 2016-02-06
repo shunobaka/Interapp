@@ -52,7 +52,8 @@
 
         public StudentInfo GetById(string id)
         {
-            return this.studentInfos.All().Where(s => s.StudentId == id).FirstOrDefault();
+            var student = this.studentInfos.All().Where(s => s.StudentId == id).FirstOrDefault();
+            return student;
         }
 
         public IQueryable<StudentInfo> GetByMajor(int majorId)

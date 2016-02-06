@@ -1,0 +1,88 @@
+﻿@model Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoViewModel
+@{
+    ViewBag.Title = "Info";
+}
+
+@{ 
+    var allDocuments = new List<Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoDocumentViewModel>();
+
+    foreach (var university in Model.UniversitiesOfInterest)
+    {
+        allDocuments.AddRange(university.DocumentRequirements);
+    }
+
+    var uniqueRequiredDocuments = allDocuments.Select(d => d.Name).Distinct();
+}
+
+<h2>@Model.Student.FirstName @Model.Student.LastName's Dashboard</h2>
+<h4>All your information at one place.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h3>Required documents</h3>
+        @for (var i = 0; i < Model.Documents.Count(); i++)
+        {
+            <div class="form-group">
+                @if (uniqueRequiredDocuments.Contains(Model.Documents[i].Name))
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+                @Html.LabelFor(m => m.Documents[i].Name)
+            </div>
+        }
+        <div class="form-group">
+            @if (Model.Essay != null)
+            {
+                <input type="checkbox" checked="checked" disabled="disabled" />
+            }
+            else
+            {
+                <input type="checkbox" disabled="disabled" />
+            }
+            <label>Essay</label>
+            <div class="pull-right">
+                @Html.ActionLink("Review", "", "Essay", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Edit", "Edit", "Essay", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+        <div class="form-group">
+            @if (Model.Scores != null)
+            {
+                <input type="checkbox" checked="checked" disabled="disabled" />
+            }
+            else
+            {
+                <input type="checkbox" disabled="disabled" />
+            }
+            <label>Scores</label>
+            <div class="pull-right">
+                @Html.ActionLink("Review", "", "Scores", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Edit", "Edit", "Scores", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Universities you are interested in</h3>
+        @if (Model.UniversitiesOfInterest != null && Model.UniversitiesOfInterest.Count != 0)
+        {
+            for(var i = 0; i < Model.UniversitiesOfInterest.Count; i++)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UniversitiesOfInterest[i])
+                    @*@Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id}, new { @class = "btn btn-info"})*@
+                    @Html.RouteLink("Details", "~/Universities/Details", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info" })
+                </div>
+            }
+        }
+        else
+        {
+            <div class="form-group">
+                <label>You have no universities in your interests.</label>
+            </div>
+        }
+    </div>
+</div>

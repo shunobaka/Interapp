@@ -23,10 +23,12 @@ namespace Interapp.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ICountriesService countries;
+        private IStudentInfosService studentInfos;
 
-        public AccountController(ICountriesService countries)
+        public AccountController(ICountriesService countries, IStudentInfosService studentInfos)
         {
             this.countries = countries;
+            this.studentInfos = studentInfos;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
@@ -183,6 +185,16 @@ namespace Interapp.Web.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, ((UserRoles)model.Role).ToString());
+
+                    if ((UserRoles)model.Role == UserRoles.Student)
+                    {
+                        this.studentInfos.Create(user.Id);
+                    }
+                    else if ((UserRoles)model.Role == UserRoles.Director)
+                    {
+                        // TODO: Create director info for user
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
