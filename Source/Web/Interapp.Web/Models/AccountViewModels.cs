@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Interapp.Common.Constants;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Interapp.Web.Models
 {
@@ -65,6 +68,10 @@ namespace Interapp.Web.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -77,8 +84,33 @@ namespace Interapp.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "First name")]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of birth")]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Country")]
+        public int CountryId { get; set; }
+
+        public IEnumerable<SelectListItem> Countries { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -96,7 +128,7 @@ namespace Interapp.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
