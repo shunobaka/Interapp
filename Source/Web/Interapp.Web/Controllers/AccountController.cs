@@ -23,8 +23,9 @@ namespace Interapp.Web.Controllers
         private ApplicationUserManager _userManager;
         private ICountriesService countries;
 
-        public AccountController()
+        public AccountController(ICountriesService countries)
         {
+            this.countries = countries;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
@@ -153,11 +154,11 @@ namespace Interapp.Web.Controllers
                     this.countries.All().ToList(),
                     null,
                     DateTime.Now.AddHours(1),
-                    TimeSpan.FromMinutes(30),
+                    TimeSpan.Zero,
                     CacheItemPriority.Default, null);
             }
 
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name");
+            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
 
             return View(model);
         }
@@ -171,7 +172,7 @@ namespace Interapp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBrith = model.DateOfBirth };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

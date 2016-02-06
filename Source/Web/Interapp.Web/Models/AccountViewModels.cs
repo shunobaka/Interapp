@@ -103,7 +103,6 @@ namespace Interapp.Web.Models
 
         [Required]
         [Display(Name = "Date of birth")]
-        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
