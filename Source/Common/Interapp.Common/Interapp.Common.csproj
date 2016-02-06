@@ -43,6 +43,7 @@
     <Compile Include="Constants\Assemblies.cs" />
     <Compile Include="Constants\ModelConstants.cs" />
     <Compile Include="Enums\CambridgeLevel.cs" />
+    <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Enums\ToeflType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

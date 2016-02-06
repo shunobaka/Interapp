@@ -1,4 +1,5 @@
 ﻿using Interapp.Common.Constants;
+using Interapp.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -110,6 +111,11 @@ namespace Interapp.Web.Models
         public int CountryId { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        [EnumDataType(typeof(UserRoles), ErrorMessage = "The user type is invalid.")]
+        public int Role { get; set; }
     }
 
     public class ResetPasswordViewModel
