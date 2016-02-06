@@ -12,7 +12,7 @@
 
         Country GetById(int id);
 
-        void UpdateById(int id, Country university);
+        void UpdateById(int id, Country country);
 
         void DeleteById(int id);
 
