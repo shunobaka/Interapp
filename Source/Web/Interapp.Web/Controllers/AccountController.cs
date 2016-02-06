@@ -10,6 +10,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Interapp.Web.Models;
 using Interapp.Data.Models;
+using Interapp.Services.Contracts;
+using System.Web.Caching;
+using System.Collections.Generic;
 
 namespace Interapp.Web.Controllers
 {
@@ -18,15 +21,17 @@ namespace Interapp.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ICountriesService countries;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.countries = countries;
         }
 
         public ApplicationSignInManager SignInManager
@@ -140,7 +145,21 @@ namespace Interapp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.FromMinutes(30),
+                    CacheItemPriority.Default, null);
+            }
+
+            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name");
+
+            return View(model);
         }
 
         //
