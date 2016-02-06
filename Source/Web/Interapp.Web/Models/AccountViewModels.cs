@@ -1,4 +1,5 @@
 ﻿using Interapp.Common.Constants;
+using Interapp.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -52,9 +53,8 @@ namespace Interapp.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -103,7 +103,6 @@ namespace Interapp.Web.Models
 
         [Required]
         [Display(Name = "Date of birth")]
-        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
@@ -111,6 +110,11 @@ namespace Interapp.Web.Models
         public int CountryId { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        [EnumDataType(typeof(UserRoles), ErrorMessage = "The user type is invalid.")]
+        public int Role { get; set; }
     }
 
     public class ResetPasswordViewModel
