@@ -13,6 +13,7 @@ using Interapp.Data.Models;
 using Interapp.Services.Contracts;
 using System.Web.Caching;
 using System.Collections.Generic;
+using Interapp.Common.Enums;
 
 namespace Interapp.Web.Controllers
 {
@@ -176,6 +177,7 @@ namespace Interapp.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, ((UserRoles)model.Role).ToString());
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -188,6 +190,18 @@ namespace Interapp.Web.Controllers
                 }
                 AddErrors(result);
             }
+
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return View(model);
