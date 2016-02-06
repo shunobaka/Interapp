@@ -44,7 +44,7 @@
     <Compile Include="Contracts\ICountriesService.cs" />
     <Compile Include="Contracts\IEssaysService.cs" />
     <Compile Include="Contracts\IMajorsService.cs" />
-    <Compile Include="Contracts\IStudentInfoesService.cs" />
+    <Compile Include="Contracts\IStudentInfosService.cs" />
     <Compile Include="Contracts\IUniversitiesService.cs" />
     <Compile Include="CountriesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
