@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
       <Private>True</Private>
@@ -210,6 +214,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoEssayViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoUniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -235,6 +246,7 @@
     <Content Include="Areas\Student\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -284,8 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
