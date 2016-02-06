@@ -171,6 +171,11 @@ namespace Interapp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (this.countries.GetById(model.CountryId) == null)
+            {
+                this.ModelState.AddModelError("Country", "No such country was found, please contact administrator.");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBrith = model.DateOfBirth };
