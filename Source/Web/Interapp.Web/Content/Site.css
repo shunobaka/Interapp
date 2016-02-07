@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+input.large-input,
+select.large-input,
+textarea.large-input {
+    max-width: 600px;
+}
+
+textarea.large-input {
+    min-height: 200px;
+}

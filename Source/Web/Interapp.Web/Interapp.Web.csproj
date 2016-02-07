@@ -215,10 +215,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoEssayViewModel.cs" />
+    <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoUniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
@@ -250,6 +251,10 @@
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Review.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Delete.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Deleted.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
