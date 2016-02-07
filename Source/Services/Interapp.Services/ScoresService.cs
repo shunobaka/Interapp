@@ -23,6 +23,7 @@
         public void Delete(string studentId)
         {
             this.scores.Delete(studentId);
+            this.scores.SaveChanges();
         }
 
         public ScoreReport GetByStudentId(string studentId)
