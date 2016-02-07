@@ -60,6 +60,7 @@
         {
             var model = new DeleteInfoViewModel()
             {
+                ControllerName = "Essay",
                 ItemName = "essay"
             };
             return this.View(model);
@@ -69,9 +70,10 @@
         {
             var model = new DeleteInfoViewModel()
             {
+                ControllerName = "Essay",
                 ItemName = "essay"
             };
-            return this.View();
+            return this.View(model);
         }
 
         [HttpPost]
