@@ -1,0 +1,15 @@
+﻿@model Interapp.Web.Areas.Student.Models.ScoresViewModels.ScoresViewModel
+
+@{
+    ViewBag.Title = "Scores";
+}
+
+<h2>Review scores</h2>
+@Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
+@if (Model != null)
+{
+    @Html.ActionLink("Edit scores", "Edit", null, new { @class = "btn btn-warning pull-right" })
+    @Html.ActionLink("Delete scores", "Delete", null, new { @class = "btn btn-danger pull-right" })
+}
+<hr />
+
