@@ -4,6 +4,7 @@
     using Data.Models;
     using Infrastructure.Mappings;
     using EssayViewModels;
+    using ScoresViewModels;
 
     public class StudentInfoViewModel : IMapFrom<StudentInfo>
     {
