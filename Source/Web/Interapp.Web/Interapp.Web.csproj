@@ -216,6 +216,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
+    <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
@@ -252,8 +254,9 @@
     <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Review.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Essay\Delete.cshtml" />
-    <Content Include="Areas\Student\Views\Essay\Deleted.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\Delete.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\Deleted.cshtml" />
+    <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -303,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
