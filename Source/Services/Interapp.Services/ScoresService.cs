@@ -1,9 +1,8 @@
 ﻿namespace Interapp.Services
 {
-    using Contracts;
     using System.Linq;
+    using Contracts;
     using Data.Models;
-    using System;
     using Data.Repositories;
 
     public class ScoresService : IScoresService
@@ -38,7 +37,25 @@
 
         public void Update(ScoreReport newScores)
         {
-            this.scores.Update(newScores);
+            var scoreReport = this.scores
+                .All()
+                .Where(e => e.StudentInfoId == newScores.StudentInfoId)
+                .FirstOrDefault();
+
+            if (scoreReport == null)
+            {
+                this.Create(newScores);
+                return;
+            }
+
+            scoreReport.SatCRResult = newScores.SatCRResult;
+            scoreReport.SatMathResult = newScores.SatMathResult;
+            scoreReport.SatWritingResult = newScores.SatWritingResult;
+            scoreReport.ToeflType = newScores.ToeflType;
+            scoreReport.ToeflResult = newScores.ToeflResult;
+            scoreReport.CambridgeLevel = newScores.CambridgeLevel;
+            scoreReport.CambridgeResult = newScores.CambridgeResult;
+
             this.scores.SaveChanges();
         }
     }
