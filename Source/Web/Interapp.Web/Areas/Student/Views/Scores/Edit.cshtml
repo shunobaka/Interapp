@@ -1,0 +1,45 @@
+﻿@model Interapp.Web.Areas.Student.Models.ScoresViewModels.ScoresViewModel
+@{
+    ViewBag.Title = "Edit scores";
+}
+
+<h2>Edit your scores</h2>
+<hr />
+@using (Html.BeginForm("Edit", "Scores", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(s => s.SatCRResult)
+        @Html.TextBoxFor(s => s.SatCRResult, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.SatMathResult)
+        @Html.TextBoxFor(s => s.SatMathResult, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.SatWritingResult)
+        @Html.TextBoxFor(s => s.SatWritingResult, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.ToeflType)
+        @Html.EnumDropDownListFor(s => s.ToeflType, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.ToeflResult)
+        @Html.TextBoxFor(s => s.ToeflResult, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.CambridgeLevel)
+        @Html.EnumDropDownListFor(s => s.CambridgeLevel, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(s => s.CambridgeResult)
+        @Html.EnumDropDownListFor(s => s.CambridgeResult, new { @class = "form-control" })
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        @Html.ActionLink("Cancel", "Review", null, new { @class = "btn btn-danger" })
+    </div>
+}
+
