@@ -1,9 +1,9 @@
 ﻿@model Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoViewModel
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = "Dashboard";
 }
 
-@{ 
+@{
     var allDocuments = new List<Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoDocumentViewModel>();
 
     foreach (var university in Model.UniversitiesOfInterest)
@@ -45,8 +45,15 @@
             }
             <label>Essay</label>
             <div class="pull-right">
-                @Html.ActionLink("Review", "Review", "Essay", null, new { @class = "btn btn-success" })
-                @Html.ActionLink("Edit", "Edit", "Essay", null, new { @class = "btn btn-warning" })
+                @if (Model.Essay == null)
+                {
+                    @Html.ActionLink("Create", "Edit", "Essay", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Review", "Review", "Essay", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Edit", "Edit", "Essay", null, new { @class = "btn btn-warning" })
+                }
             </div>
         </div>
         <div class="form-group">
@@ -60,8 +67,15 @@
             }
             <label>Scores</label>
             <div class="pull-right">
-                @Html.ActionLink("Review", "Review", "Scores", null, new { @class = "btn btn-success" })
-                @Html.ActionLink("Edit", "Edit", "Scores", null, new { @class = "btn btn-warning" })
+                @if (Model.Scores == null)
+                {
+                    @Html.ActionLink("Fill scores", "Edit", "Scores", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Review", "Review", "Scores", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Edit", "Edit", "Scores", null, new { @class = "btn btn-warning" })
+                }
             </div>
         </div>
     </div>
@@ -69,7 +83,7 @@
         <h3>Universities you are interested in</h3>
         @if (Model.UniversitiesOfInterest != null && Model.UniversitiesOfInterest.Count != 0)
         {
-            for(var i = 0; i < Model.UniversitiesOfInterest.Count; i++)
+            for (var i = 0; i < Model.UniversitiesOfInterest.Count; i++)
             {
                 <div class="form-group">
                     @Html.LabelFor(m => m.UniversitiesOfInterest[i])

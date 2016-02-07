@@ -32,3 +32,11 @@ textarea.large-input {
 textarea.large-input {
     min-height: 200px;
 }
+
+.pull-right {
+    margin: 0 5px;
+}
+
+.pull-right a {
+    margin: 0 5px;
+}

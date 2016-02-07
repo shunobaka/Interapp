@@ -1,0 +1,36 @@
+﻿@model Interapp.Web.Areas.Student.Models.ScoresViewModels.ScoresViewModel
+
+@{
+    ViewBag.Title = "Scores";
+}
+
+<h2>Review scores</h2>
+@Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
+@if (Model != null)
+{
+    @Html.ActionLink("Edit scores", "Edit", null, new { @class = "btn btn-warning pull-right" })
+    @Html.ActionLink("Delete scores", "Delete", null, new { @class = "btn btn-danger pull-right" })
+}
+<hr />
+@if (Model == null)
+{
+    <h3 class="text-center">You have not filled your scores yet.</h3>
+    <h4 class="text-center">Click @Html.ActionLink("here", "Edit", null, new { @class = "btn btn-success" }) to fill your scores.</h4>
+}
+else
+{
+    @Html.LabelFor(s => s.SatCRResult)
+    <h5>@Model.SatCRResult</h5>
+    @Html.LabelFor(s => s.SatMathResult)
+    <h5>@Model.SatMathResult</h5>
+    @Html.LabelFor(s => s.SatWritingResult)
+    <h5>@Model.SatWritingResult</h5>
+    @Html.LabelFor(s => s.ToeflType)
+    <h5>@Model.ToeflType</h5>
+    @Html.LabelFor(s => s.ToeflResult)
+    <h5>@Model.ToeflResult</h5>
+    @Html.LabelFor(s => s.CambridgeLevel)
+    <h5>@Model.CambridgeLevel</h5>
+    @Html.LabelFor(s => s.CambridgeResult)
+    <h5>@Model.CambridgeResult</h5>
+}

@@ -1,12 +1,13 @@
 ﻿@model Interapp.Web.Areas.Student.Models.EssayViewModels.EssayViewModel
 @{
-    ViewBag.Title = "Review essay";
+    ViewBag.Title = "Essay";
 }
 
 <h2>Review essay</h2>
+@Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
 @if (Model != null)
 {
-    @Html.ActionLink("Edit essay", "Edit", null, new { @class = "btn btn-warning"})
+    @Html.ActionLink("Edit essay", "Edit", null, new { @class = "btn btn-warning pull-right"})
     @Html.ActionLink("Delete essay", "Delete", null, new { @class = "btn btn-danger pull-right" })
 }
 <hr />

@@ -29,7 +29,6 @@
         public const int ScoreSatMax = 800;
         public const int ScoreToeflMin = 0;
         public const int ScoreToeflMax = 677;
-        public const string ScoreCambridgeResultRegex = "[ABC]{1}";
 
         public const int ScoreSatTotalMin = 600;
         public const int ScoreSatTotalMax = 2400;

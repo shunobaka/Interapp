@@ -47,9 +47,8 @@
 
         [Range(ModelConstants.ScorePBTToelfMin, ModelConstants.ScorePBTToeflMax)]
         public int? RequiredPBTToefl { get; set; }
-
-        [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char? RequiredCambridgeScore { get; set; }
+        
+        public CambridgeResult? RequiredCambridgeScore { get; set; }
 
         public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 

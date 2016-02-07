@@ -5,6 +5,7 @@
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using System.Web.Mvc;
+    using Models.Shared;
 
     [Authorize(Roles = "Student")]
     public class EssayController : Controller
@@ -23,7 +24,6 @@
                 .GetByStudentId(studentId);
 
             var model = Mapper.Map<EssayViewModel>(essay);
-            this.HttpContext.Session.Add("Essay", model);
 
             return this.View(model);
         }
@@ -58,11 +58,19 @@
         [HttpGet]
         public ActionResult Delete()
         {
-            return this.View();
+            var model = new DeleteInfoViewModel()
+            {
+                ItemName = "essay"
+            };
+            return this.View(model);
         }
         
         public ActionResult Deleted()
         {
+            var model = new DeleteInfoViewModel()
+            {
+                ItemName = "essay"
+            };
             return this.View();
         }
 
