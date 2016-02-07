@@ -19,18 +19,102 @@
 }
 else
 {
-    @Html.LabelFor(s => s.SatCRResult)
-    <h5>@Model.SatCRResult</h5>
-    @Html.LabelFor(s => s.SatMathResult)
-    <h5>@Model.SatMathResult</h5>
-    @Html.LabelFor(s => s.SatWritingResult)
-    <h5>@Model.SatWritingResult</h5>
-    @Html.LabelFor(s => s.ToeflType)
-    <h5>@Model.ToeflType</h5>
-    @Html.LabelFor(s => s.ToeflResult)
-    <h5>@Model.ToeflResult</h5>
-    @Html.LabelFor(s => s.CambridgeLevel)
-    <h5>@Model.CambridgeLevel</h5>
-    @Html.LabelFor(s => s.CambridgeResult)
-    <h5>@Model.CambridgeResult</h5>
+    <h4 class="text-bold text-success">SAT Scores</h4>
+    <hr />
+    <div class="scores-container">
+        <div class="form-group">
+            @Html.LabelFor(s => s.SatCRResult)
+            <br />
+            @if (Model.SatCRResult == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.SatCRResult)
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.SatMathResult)
+            <br />
+            @if (Model.SatMathResult == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.SatMathResult)
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.SatWritingResult)
+            <br />
+            @if (Model.SatWritingResult == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.SatWritingResult)
+            }
+        </div>
+    </div>
+    <hr />
+    <h4 class="text-bold text-success">TOEFL Scores</h4>
+    <hr />
+    <div class="scores-container">
+        <div class="form-group">
+            @Html.LabelFor(s => s.ToeflType)
+            <br />
+            @if (Model.ToeflType == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.ToeflType)
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.ToeflResult)
+            <br />
+            @if (Model.ToeflResult == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.ToeflResult)
+            }
+        </div>
+    </div>
+    <hr />
+    <h4 class="text-bold text-success">Cambridge Scores</h4>
+    <hr />
+    <div class="scores-container">
+        <div class="form-group">
+            @Html.LabelFor(s => s.CambridgeLevel)
+            <br />
+            @if (Model.CambridgeLevel == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.CambridgeLevel)
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.CambridgeResult)
+            <br />
+            @if (Model.CambridgeResult == null)
+            {
+                @Html.Encode("Not entered")
+            }
+            else
+            {
+                @Html.DisplayTextFor(s => s.CambridgeResult)
+            }
+        </div>
+    </div>
 }
