@@ -1,0 +1,11 @@
+﻿@model Interapp.Web.Areas.Student.Models.Shared.DeleteInfoViewModel
+@{
+    ViewBag.Title = "Deleted";
+}
+
+<h2>Your @Model.ItemName has been successfully deleted</h2>
+<hr />
+<h4>From here you can go to</h4>
+@Html.ActionLink("Your Dashboard", "Info", "Dashboard", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-success" })
+

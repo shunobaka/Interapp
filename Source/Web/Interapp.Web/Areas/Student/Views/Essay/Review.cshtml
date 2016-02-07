@@ -1,0 +1,29 @@
+﻿@model Interapp.Web.Areas.Student.Models.EssayViewModels.EssayViewModel
+@{
+    ViewBag.Title = "Essay";
+}
+
+<h2>Review essay</h2>
+@Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
+@if (Model != null)
+{
+    @Html.ActionLink("Edit essay", "Edit", null, new { @class = "btn btn-warning pull-right"})
+    @Html.ActionLink("Delete essay", "Delete", null, new { @class = "btn btn-danger pull-right" })
+}
+<hr />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 modal-content">
+        @if (Model == null)
+        {
+            <h3 class="text-center">You have not yet wrote an essay</h3>
+            <hr />
+            <h4 class="text-center">Click @Html.ActionLink("here", "Edit", null, new { @class = "btn btn-success" }) to create your essay.</h4>
+        }
+        else
+        {
+            <h3 class="text-center">@Model.Title</h3>
+            <hr />
+            <h4>@Model.Content</h4>
+        }
+    </div>
+</div>

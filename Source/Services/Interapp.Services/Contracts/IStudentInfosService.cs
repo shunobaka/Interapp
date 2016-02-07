@@ -16,5 +16,7 @@
         void EnrollStudent(string studentId, int universityId, int majorId);
 
         void Create(string studentId);
+
+        StudentInfo GetFullInfoById(string id);
     }
 }
