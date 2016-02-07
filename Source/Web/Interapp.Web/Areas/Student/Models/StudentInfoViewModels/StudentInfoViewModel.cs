@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Data.Models;
     using Infrastructure.Mappings;
+    using EssayViewModels;
 
     public class StudentInfoViewModel : IMapFrom<StudentInfo>
     {
@@ -10,9 +11,9 @@
 
         public StudentInfoUniversityViewModel University { get; set; }
 
-        public StudentInfoEssayViewModel Essay { get; set; }
+        public EssayViewModel Essay { get; set; }
 
-        public StudentInfoScoresViewModel Scores { get; set; }
+        public ScoresViewModel Scores { get; set; }
 
         public StudentInfoMajorViewModel Major { get; set; }
 
