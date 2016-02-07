@@ -24,7 +24,6 @@
                 .GetByStudentId(studentId);
 
             var model = Mapper.Map<EssayViewModel>(essay);
-            this.HttpContext.Session.Add("Essay", model);
 
             return this.View(model);
         }

@@ -257,6 +257,7 @@
     <Content Include="Areas\Student\Views\Shared\Delete.cshtml" />
     <Content Include="Areas\Student\Views\Shared\Deleted.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
+    <Content Include="Areas\Student\Views\Scores\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
