@@ -60,6 +60,7 @@
             essay.Title = title;
             essay.Content = content;
             this.essays.Update(essay);
+            this.essays.SaveChanges();
         }
     }
 }
