@@ -1,0 +1,18 @@
+﻿@model IList<Interapp.Web.Areas.Student.Models.DocumentViewModels.DocumentViewModel>
+@{
+    ViewBag.Title = "All documents";
+}
+
+<h2>Review documents</h2>
+<hr />
+@if (Model == null || Model.Count == 0)
+{
+    <h4>You have no documents created.</h4>
+}
+@for (var i = 0; i < Model.Count; i++)
+{
+    <div class="form-group">
+        @Html.LabelFor(d => d[i].Name)
+        @Html.LabelFor(d => d[i].Content)
+    </div>
+}
