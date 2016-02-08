@@ -3,6 +3,7 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Interapp.Services.Contracts;
+    using Models.Shared;
     using Microsoft.AspNet.Identity;
     using Models.DocumentViewModels;
     using Models.UniversityViewModels;
@@ -134,6 +135,44 @@
             }
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ControllerName = "Documents",
+                ItemName = "document",
+                ItemId = id
+            };
+            return this.View(model);
+        }
+
+        public ActionResult Deleted()
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ControllerName = "Documents",
+                ItemName = "document"
+            };
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+            var document = this.documents.GetById(id);
+            var studentId = this.User.Identity.GetUserId();
+
+            if (document.AuthorId != studentId)
+            {
+                return this.View("Unathorized");
+            }
+
+            this.documents.Delete(id);
+
+            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }
