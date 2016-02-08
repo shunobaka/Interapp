@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Data.Models;
     using Interapp.Services.Contracts;
     using Models.Shared;
     using Microsoft.AspNet.Identity;
@@ -25,15 +26,6 @@
 
         public ActionResult All()
         {
-            //var studentId = this.User.Identity.GetUserId();
-            //var studentDocuments = this.documents
-            //    .GetByStudent(studentId)
-            //    .ProjectTo<DocumentViewModel>()
-            //    .ToList();
-
-            //var universities = this.universities
-            //    .GetForUserWithDocuments(studentId);
-            // TODO: Finish and add model to view
             var studentId = this.User.Identity.GetUserId();
             var studentInfo = this.students.GetFullInfoById(studentId);
 
@@ -52,24 +44,19 @@
             return View(model);
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id != null)
+            var studentId = this.User.Identity.GetUserId();
+            var document = this.documents.GetById(id);
+
+            if (document == null || document.AuthorId != studentId)
             {
-                var studentId = this.User.Identity.GetUserId();
-                var document = this.documents.GetById((int)id);
-
-                if (document == null || document.AuthorId != studentId)
-                {
-                    return this.View();
-                }
-
-                var model = Mapper.Map<DocumentViewModel>(document);
-
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
         }
 
         [HttpGet]
@@ -94,24 +81,19 @@
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id != null)
+            var studentId = this.User.Identity.GetUserId();
+            var document = this.documents.GetById(id);
+
+            if (document == null || document.AuthorId != studentId)
             {
-                var studentId = this.User.Identity.GetUserId();
-                var document = this.documents.GetById((int)id);
-
-                if (document == null || document.AuthorId != studentId)
-                {
-                    return this.View();
-                }
-
-                var model = Mapper.Map<DocumentViewModel>(document);
-
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
         }
 
         [HttpPost]
@@ -128,8 +110,13 @@
 
             if (this.ModelState.IsValid)
             {
-                // TODO: Implement update
-                //this.documents.(studentId, model.Name, model.Content);
+                var document = new Document()
+                {
+                    Name = model.Name,
+                    Id = model.Id,
+                    Content = model.Content
+                };
+                this.documents.Update(document);
 
                 return this.RedirectToAction(nameof(this.All));
             }
