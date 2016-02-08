@@ -7,8 +7,8 @@
 @Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
 @if (Model != null)
 {
-    @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-warning pull-right" })
-    @Html.ActionLink("Delete", "Delete", null, new { @class = "btn btn-danger pull-right" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger pull-right" })
 }
 <hr />
 @if (Model == null)

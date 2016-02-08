@@ -19,5 +19,9 @@
         public string Content { get; set; }
 
         public UniversityViewModel University { get; set; }
+
+        public int? UniversityId { get; set; }
+
+        public string AuthorId { get; set; }
     }
 }

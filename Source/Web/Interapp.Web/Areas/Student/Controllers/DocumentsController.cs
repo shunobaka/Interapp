@@ -53,18 +53,22 @@
 
         public ActionResult Details(int? id)
         {
-            var studentId = this.User.Identity.GetUserId();
-            var studentDocuments = this.documents.GetByStudent(studentId);
-
-            if (studentDocuments == null)
+            if (id != null)
             {
-                return this.View();
+                var studentId = this.User.Identity.GetUserId();
+                var document = this.documents.GetById((int)id);
+
+                if (document == null || document.AuthorId != studentId)
+                {
+                    return this.View();
+                }
+
+                var model = Mapper.Map<DocumentViewModel>(document);
+
+                return this.View(model);
             }
 
-            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
-            var model = Mapper.Map<DocumentViewModel>(document);
-
-            return this.View(model);
+            return this.View();
         }
 
         [HttpGet]
@@ -89,29 +93,42 @@
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            var studentId = this.User.Identity.GetUserId();
-            var studentDocuments = this.documents.GetByStudent(studentId);
-
-            if (studentDocuments == null)
+            if (id != null)
             {
-                return this.View();
+                var studentId = this.User.Identity.GetUserId();
+                var document = this.documents.GetById((int)id);
+
+                if (document == null || document.AuthorId != studentId)
+                {
+                    return this.View();
+                }
+
+                var model = Mapper.Map<DocumentViewModel>(document);
+
+                return this.View(model);
             }
 
-            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
-            var model = Mapper.Map<DocumentViewModel>(document);
-
-            return this.View(model);
+            return this.View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(DocumentViewModel model)
         {
+            var original = this.documents.GetById(model.Id);
+            var studentId = this.User.Identity.GetUserId();
+
+            if (original.AuthorId != studentId)
+            {
+                this.ModelState.AddModelError("Oh snap!", "You are not authorized to edit this document!!!");
+            }
+
             if (this.ModelState.IsValid)
             {
-                var studentId = this.User.Identity.GetUserId();
-                this.documents.CreateForStudent(studentId, model.Name, model.Content);
+                // TODO: Implement update
+                //this.documents.(studentId, model.Name, model.Content);
 
                 return this.RedirectToAction(nameof(this.All));
             }
