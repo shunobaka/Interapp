@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Interapp.Services.Contracts;
     using Microsoft.AspNet.Identity;
@@ -36,15 +37,86 @@
             var studentInfo = this.students.GetFullInfoById(studentId);
 
             var studentDocuments = studentInfo.Documents.AsQueryable().ProjectTo<DocumentViewModel>().ToList();
-            var universities = studentInfo.UniversitiesOfInterest.AsQueryable().ProjectTo<UniversityViewModel>().ToList();
+            var requiredDocuments = this.documents
+                .GetRequiredForStudent(studentId)
+                .ProjectTo<DocumentViewModel>()
+                .ToList();
 
             var model = new DocumentsFullViewModel()
             {
                 StudentDocuments = studentDocuments,
-                Universities = universities
+                RequiredDocuments = requiredDocuments
             };
 
             return View(model);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            var studentId = this.User.Identity.GetUserId();
+            var studentDocuments = this.documents.GetByStudent(studentId);
+
+            if (studentDocuments == null)
+            {
+                return this.View();
+            }
+
+            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(DocumentViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var studentId = this.User.Identity.GetUserId();
+                this.documents.CreateForStudent(studentId, model.Name, model.Content);
+
+                return this.RedirectToAction(nameof(this.All));
+            }
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var studentId = this.User.Identity.GetUserId();
+            var studentDocuments = this.documents.GetByStudent(studentId);
+
+            if (studentDocuments == null)
+            {
+                return this.View();
+            }
+
+            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(DocumentViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var studentId = this.User.Identity.GetUserId();
+                this.documents.CreateForStudent(studentId, model.Name, model.Content);
+
+                return this.RedirectToAction(nameof(this.All));
+            }
+
+            return this.View(model);
         }
     }
 }

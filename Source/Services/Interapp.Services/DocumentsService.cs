@@ -5,14 +5,16 @@
     using Data.Models;
     using Interapp.Services.Contracts;
     using Data.Repositories;
-
+    using System.Data.Entity;
     public class DocumentsService : IDocumentsService
     {
         private IRepository<Document> documents;
+        private IRepository<University> universities;
 
-        public DocumentsService(IRepository<Document> documents)
+        public DocumentsService(IRepository<Document> documents, IRepository<University> universities)
         {
             this.documents = documents;
+            this.universities = universities;
         }
 
         public void CreateForStudent(string studentId, string name, string content)
@@ -59,6 +61,18 @@
             return this.documents
                 .All()
                 .Where(d => d.UniversityId == universityId);
+        }
+
+        public IQueryable<Document> GetRequiredForStudent(string studentId)
+        {
+            // TODO: Check logic
+            var requiredDocuments = this.documents.All()
+                .Where(d => d.University != null &&
+                    d.University.InterestedStudents.FirstOrDefault(s => s.StudentId == studentId) != null &&
+                    !d.University.InterestedStudents.FirstOrDefault(s => s.StudentId == studentId).Documents.Any(sd => sd.Name == d.Name))
+                .Include(d => d.University);
+
+            return requiredDocuments;
         }
     }
 }

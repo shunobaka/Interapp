@@ -13,6 +13,6 @@
         
         public int TuitionFee { get; set; }
 
-        public ICollection<StudentInfoDocumentViewModel> DocumentRequirements { get; set; }
+        public IList<StudentInfoDocumentViewModel> DocumentRequirements { get; set; }
     }
 }
