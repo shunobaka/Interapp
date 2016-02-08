@@ -12,7 +12,7 @@
 
         University GetById(int id);
 
-        void UpdateById(int id, University university);
+        void Update(University university);
 
         void DeleteById(int id);
 

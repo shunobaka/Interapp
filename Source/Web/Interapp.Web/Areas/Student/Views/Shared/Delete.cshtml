@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
         <h3>Are you sure you want to delete your @Model.ItemName?</h3>
-        @using (Html.BeginForm("DeletePost", Model.ControllerName, FormMethod.Post))
+        @using (Html.BeginForm("DeletePost", Model.ControllerName, new { id = Model.ItemId }, FormMethod.Post, null))
         {
             <input type="submit" value="Yes" class="btn btn-danger" />
             @Html.ActionLink("No", "Review", null, new { @class = "btn btn-success" })

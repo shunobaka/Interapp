@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.ScoresViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+    using Common.Constants;
     using Common.Enums;
     using Data.Models;
     using Infrastructure.Mappings;
-    using Common.Constants;
-    using System.ComponentModel.DataAnnotations;
 
     public class ScoresViewModel : IMapFrom<ScoreReport>
     {
