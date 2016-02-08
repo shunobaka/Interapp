@@ -6,6 +6,7 @@
     using Data.Models;
     using Models.ScoresViewModels;
     using Microsoft.AspNet.Identity;
+    using Models.Shared;
 
     public class ScoresController : Controller
     {
@@ -51,7 +52,7 @@
                     CambridgeResult = model.CambridgeResult,
                     SatCRResult = model.SatCRResult,
                     SatMathResult = model.SatMathResult,
-                    SatWritingResult = model.SatMathResult,
+                    SatWritingResult = model.SatWritingResult,
                     ToeflResult = model.ToeflResult,
                     ToeflType = model.ToeflType,
                     StudentInfoId = studentId
@@ -62,6 +63,36 @@
             }
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete()
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ItemName = "scores",
+                ControllerName = "Scores"
+            };
+            return this.View(model);
+        }
+
+        public ActionResult Deleted()
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ItemName = "scores",
+                ControllerName = "Scores"
+            };
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost()
+        {
+            var studentId = this.User.Identity.GetUserId();
+            this.scores.Delete(studentId);
+
+            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }

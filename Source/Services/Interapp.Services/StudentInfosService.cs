@@ -69,6 +69,7 @@
                 .All()
                 .Where(s => s.StudentId == id)
                 .Include(s => s.Documents)
+                .Include("Documents")
                 .Include(s => s.UniversitiesOfInterest)
                 .Include(s => s.Student)
                 .Include(s => s.Essay)
@@ -79,6 +80,23 @@
                 .Include(s => s.Responses)
                 .FirstOrDefault();
             return student;
+        }
+
+        public IQueryable<University> GetUserUniversitiesWithDocuments(string studentId)
+        {
+            var student = this.studentInfos
+                .All()
+                .Include("Documents")
+                .Include("Universities")
+                .Where(s => s.StudentId == studentId)
+                .FirstOrDefault();
+
+            if (student == null)
+            {
+                return null;
+            }
+
+            return student.UniversitiesOfInterest.AsQueryable();
         }
 
         public void Update(string studentId, StudentInfo info)

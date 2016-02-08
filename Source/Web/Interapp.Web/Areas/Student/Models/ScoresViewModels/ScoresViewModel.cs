@@ -27,7 +27,7 @@
         [Display(Name = "Type of TOEFL")]
         public ToeflType? ToeflType { get; set; }
 
-        [Display(Name = "Cambridge Result")]
+        [Display(Name = "Cambridge Mark")]
         public CambridgeResult? CambridgeResult { get; set; }
 
         [Display(Name = "Cambridge Level")]

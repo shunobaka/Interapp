@@ -40,3 +40,11 @@ textarea.large-input {
 .pull-right a {
     margin: 0 5px;
 }
+
+.scores-container {
+    margin-left: 30px;
+}
+
+.text-bold {
+    font-weight: bold;
+}

@@ -18,5 +18,7 @@
         void Create(string studentId);
 
         StudentInfo GetFullInfoById(string id);
+
+        IQueryable<University> GetUserUniversitiesWithDocuments(string studentId);
     }
 }
