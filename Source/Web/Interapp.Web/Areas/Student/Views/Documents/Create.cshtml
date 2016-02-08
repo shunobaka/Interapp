@@ -1,0 +1,23 @@
+﻿@model Interapp.Web.Areas.Student.Models.DocumentViewModels.DocumentViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add new document</h2>
+<hr />
+@using (Html.BeginForm("Create", "Documents", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(d => d.Name)
+        @Html.TextBoxFor(d => d.Name, new { @class = "form-control large-input" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.Content)
+        @Html.TextAreaFor(d => d.Content, new { @class = "form-control large-input" })
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Create" />
+        <input type="reset" class="btn btn-warning" value="Clear" />
+        @Html.ActionLink("Cancel", "All", "Documents", null, new { @class = "btn btn-primary" })
+    </div>
+}
