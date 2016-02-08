@@ -84,5 +84,21 @@
                 .Where(d => d.Id == id)
                 .FirstOrDefault();
         }
+
+        public void Update(Document document)
+        {
+            var original = this.documents
+                .All()
+                .Where(d => d.Id == document.Id)
+                .FirstOrDefault();
+
+            if (original != null)
+            {
+                original.Name = document.Name;
+                original.Content = document.Content;
+            }
+
+            this.documents.SaveChanges();
+        }
     }
 }

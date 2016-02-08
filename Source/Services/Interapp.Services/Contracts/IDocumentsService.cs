@@ -18,5 +18,7 @@
         IQueryable<Document> GetRequiredForStudent(string studentId);
 
         Document GetById(int id);
+
+        void Update(Document document);
     }
 }

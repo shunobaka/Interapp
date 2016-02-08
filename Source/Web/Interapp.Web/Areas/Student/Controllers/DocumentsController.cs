@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Data.Models;
     using Interapp.Services.Contracts;
     using Models.Shared;
     using Microsoft.AspNet.Identity;
@@ -128,9 +129,14 @@
 
             if (this.ModelState.IsValid)
             {
-                // TODO: Implement update
-                //this.documents.(studentId, model.Name, model.Content);
-
+                var document = new Document()
+                {
+                    Name = model.Name,
+                    Id = model.Id,
+                    Content = model.Content
+                };
+                this.documents.Update(document);
+           
                 return this.RedirectToAction(nameof(this.All));
             }
 
