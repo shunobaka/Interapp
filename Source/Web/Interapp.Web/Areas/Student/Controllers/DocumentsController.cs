@@ -67,9 +67,25 @@
             return this.View(model);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(DocumentViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var studentId = this.User.Identity.GetUserId();
+                this.documents.CreateForStudent(studentId, model.Name, model.Content);
+
+                return this.RedirectToAction(nameof(this.All));
+            }
+
+            return this.View(model);
         }
     }
 }

@@ -7,6 +7,8 @@
 <hr />
 @using (Html.BeginForm("Create", "Documents", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(null, new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(d => d.Name)
         @Html.TextBoxFor(d => d.Name, new { @class = "form-control large-input" })
@@ -20,4 +22,8 @@
         <input type="reset" class="btn btn-warning" value="Clear" />
         @Html.ActionLink("Cancel", "All", "Documents", null, new { @class = "btn btn-primary" })
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
