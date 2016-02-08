@@ -17,9 +17,9 @@
 }
 else
 {
-    @Html.LabelFor(d => d.Name)
-    @Html.DisplayTextFor(d => d.Name)
+    <h5>Name of document</h5>
+    <h4>@Model.Name</h4>
     <br />
-    @Html.LabelFor(d => d.Content)
-    @Html.DisplayTextFor(d => d.Content)
+    <h5>Content</h5>
+    <h4>@Model.Content</h4>
 }
