@@ -7,6 +7,8 @@
 
     public class DocumentViewModel : IMapFrom<Document>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(ModelConstants.DocumentNameMinLength)]
         [MaxLength(ModelConstants.DocumentNameMaxLength)]
