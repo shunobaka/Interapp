@@ -68,11 +68,21 @@
             // TODO: Check logic
             var requiredDocuments = this.documents.All()
                 .Where(d => d.University != null &&
-                    d.University.InterestedStudents.FirstOrDefault(s => s.StudentId == studentId) != null &&
-                    !d.University.InterestedStudents.FirstOrDefault(s => s.StudentId == studentId).Documents.Any(sd => sd.Name == d.Name))
+                    d.University.InterestedStudents
+                        .FirstOrDefault(s => s.StudentId == studentId) != null &&
+                    !d.University.InterestedStudents
+                        .FirstOrDefault(s => s.StudentId == studentId).Documents.Any(sd => sd.Name == d.Name))
                 .Include(d => d.University);
 
             return requiredDocuments;
+        }
+
+        public Document GetById(int id)
+        {
+            return this.documents
+                .All()
+                .Where(d => d.Id == id)
+                .FirstOrDefault();
         }
     }
 }
