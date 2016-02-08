@@ -17,5 +17,7 @@
         void DeleteById(int id);
 
         void Create(string directorId, string name, int tuitionFee, int countryId);
+
+        IQueryable<University> GetForUserWithDocuments(string studentId);
     }
 }

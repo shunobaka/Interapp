@@ -1,10 +1,11 @@
-﻿namespace Interapp.Web.Areas.Student.Models.StudentInfoViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.UniversityViewModels
 {
     using Data.Models;
     using Infrastructure.Mappings;
+    using StudentInfoViewModels;
     using System.Collections.Generic;
 
-    public class StudentInfoUniversityViewModel : IMapFrom<University>
+    public class UniversityViewModel : IMapFrom<University>
     {
         public int Id { get; set; }
 
