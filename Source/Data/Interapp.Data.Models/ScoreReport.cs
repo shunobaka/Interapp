@@ -27,9 +27,8 @@
         public int? ToeflResult { get; set; }
 
         public ToeflType? ToeflType { get; set; }
-
-        [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char? CambridgeResult { get; set; }
+        
+        public CambridgeResult? CambridgeResult { get; set; }
 
         public CambridgeLevel? CambridgeLevel { get; set; }
     }

@@ -10,6 +10,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Interapp.Web.Models;
 using Interapp.Data.Models;
+using Interapp.Services.Contracts;
+using System.Web.Caching;
+using System.Collections.Generic;
+using Interapp.Common.Enums;
 
 namespace Interapp.Web.Controllers
 {
@@ -18,15 +22,20 @@ namespace Interapp.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ICountriesService countries;
+        private IStudentInfosService studentInfos;
 
-        public AccountController()
+        public AccountController(ICountriesService countries, IStudentInfosService studentInfos)
         {
+            this.countries = countries;
+            this.studentInfos = studentInfos;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.countries = countries;
         }
 
         public ApplicationSignInManager SignInManager
@@ -76,7 +85,7 @@ namespace Interapp.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -140,7 +149,21 @@ namespace Interapp.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+
+            return View(model);
         }
 
         //
@@ -150,12 +173,28 @@ namespace Interapp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if (this.countries.GetById(model.CountryId) == null)
+            {
+                this.ModelState.AddModelError("Country", "No such country was found, please contact administrator.");
+            }
+
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBrith = model.DateOfBirth };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, ((UserRoles)model.Role).ToString());
+
+                    if ((UserRoles)model.Role == UserRoles.Student)
+                    {
+                        this.studentInfos.Create(user.Id);
+                    }
+                    else if ((UserRoles)model.Role == UserRoles.Director)
+                    {
+                        // TODO: Create director info for user
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -168,6 +207,18 @@ namespace Interapp.Web.Controllers
                 }
                 AddErrors(result);
             }
+
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return View(model);
