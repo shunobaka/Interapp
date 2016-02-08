@@ -7,6 +7,6 @@
     {
         public IList<DocumentViewModel> StudentDocuments { get; set; }
 
-        public IList<UniversityViewModel> Universities { get; set; }
+        public IList<DocumentViewModel> RequiredDocuments { get; set; }
     }
 }

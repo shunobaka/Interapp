@@ -36,12 +36,15 @@
             var studentInfo = this.students.GetFullInfoById(studentId);
 
             var studentDocuments = studentInfo.Documents.AsQueryable().ProjectTo<DocumentViewModel>().ToList();
-            var universities = studentInfo.UniversitiesOfInterest.AsQueryable().ProjectTo<UniversityViewModel>().ToList();
+            var requiredDocuments = this.documents
+                .GetRequiredForStudent(studentId)
+                .ProjectTo<DocumentViewModel>()
+                .ToList();
 
             var model = new DocumentsFullViewModel()
             {
                 StudentDocuments = studentDocuments,
-                Universities = universities
+                RequiredDocuments = requiredDocuments
             };
 
             return View(model);

@@ -4,6 +4,7 @@
     using Common.Constants;
     using Data.Models;
     using Infrastructure.Mappings;
+    using UniversityViewModels;
 
     public class DocumentViewModel : IMapFrom<Document>
     {
@@ -16,5 +17,7 @@
 
         [Required]
         public string Content { get; set; }
+
+        public UniversityViewModel University { get; set; }
     }
 }

@@ -15,6 +15,6 @@
 
         void Delete(int documentId);
 
-        IQueryable<Document> GetRequiredForStudent(string studentId)
+        IQueryable<Document> GetRequiredForStudent(string studentId);
     }
 }
