@@ -14,5 +14,7 @@
         void CreateForUniversity(int universityId, string name, string content);
 
         void Delete(int documentId);
+
+        IQueryable<Document> GetRequiredForStudent(string studentId)
     }
 }
