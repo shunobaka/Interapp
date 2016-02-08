@@ -87,5 +87,36 @@
 
             return this.View(model);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var studentId = this.User.Identity.GetUserId();
+            var studentDocuments = this.documents.GetByStudent(studentId);
+
+            if (studentDocuments == null)
+            {
+                return this.View();
+            }
+
+            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(DocumentViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var studentId = this.User.Identity.GetUserId();
+                this.documents.CreateForStudent(studentId, model.Name, model.Content);
+
+                return this.RedirectToAction(nameof(this.All));
+            }
+
+            return this.View(model);
+        }
     }
 }
