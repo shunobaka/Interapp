@@ -262,6 +262,8 @@
     <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Documents\All.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

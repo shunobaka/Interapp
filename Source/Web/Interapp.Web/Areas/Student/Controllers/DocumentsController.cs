@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Interapp.Services.Contracts;
     using Microsoft.AspNet.Identity;
@@ -48,6 +49,27 @@
             };
 
             return View(model);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            var studentId = this.User.Identity.GetUserId();
+            var studentDocuments = this.documents.GetByStudent(studentId);
+
+            if (studentDocuments == null)
+            {
+                return this.View();
+            }
+
+            var document = studentDocuments.Where(d => d.Id == id).FirstOrDefault();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
+        }
+
+        public ActionResult Create()
+        {
+            return this.View();
         }
     }
 }
