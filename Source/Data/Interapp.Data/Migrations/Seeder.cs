@@ -1,8 +1,8 @@
-﻿using Interapp.Data.Models;
-using System.Collections.Generic;
-
-namespace Interapp.Data.Migrations
+﻿namespace Interapp.Data.Migrations
 {
+    using System.Collections.Generic;
+    using Models;
+
     public class Seeder
     {
         public Seeder()

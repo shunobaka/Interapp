@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using Data.Models;
-    using Infrastructure.Mappings;
     using EssayViewModels;
+    using Infrastructure.Mappings;
     using ScoresViewModels;
     using UniversityViewModels;
 

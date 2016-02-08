@@ -1,11 +1,11 @@
 ﻿namespace Interapp.Services
 {
-    using System;
-    using System.Linq;
-    using Data.Models;
-    using Interapp.Services.Contracts;
-    using Data.Repositories;
     using System.Data.Entity;
+    using System.Linq;
+    using Contracts;
+    using Data.Models;
+    using Data.Repositories;
+
     public class DocumentsService : IDocumentsService
     {
         private IRepository<Document> documents;
