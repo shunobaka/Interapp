@@ -12,12 +12,10 @@
 
         University GetById(int id);
 
-        void UpdateById(int id, University university);
+        void Update(University university);
 
         void DeleteById(int id);
 
         void Create(string directorId, string name, int tuitionFee, int countryId);
-
-        IQueryable<University> GetForUserWithDocuments(string studentId);
     }
 }
