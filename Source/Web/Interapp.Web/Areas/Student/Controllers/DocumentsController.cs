@@ -114,6 +114,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(DocumentViewModel model)
         {
             var original = this.documents.GetById(model.Id);
