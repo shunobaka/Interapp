@@ -5,8 +5,8 @@
 
     public class DocumentsFullViewModel
     {
-        public ICollection<DocumentViewModel> StudentDocuments { get; set; }
+        public IList<DocumentViewModel> StudentDocuments { get; set; }
 
-        public ICollection<UniversityViewModel> Universities { get; set; }
+        public IList<UniversityViewModel> Universities { get; set; }
     }
 }

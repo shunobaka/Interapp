@@ -218,6 +218,7 @@
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentsFullViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
@@ -225,7 +226,7 @@
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoUniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversityViewModels\StudentInfoUniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
