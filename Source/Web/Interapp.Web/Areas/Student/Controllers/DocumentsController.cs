@@ -10,21 +10,27 @@
     public class DocumentsController : Controller
     {
         private IDocumentsService documents;
+        private IUniversitiesService universities;
 
-        public DocumentsController(IDocumentsService documents)
+        public DocumentsController(IDocumentsService documents, IUniversitiesService universities)
         {
             this.documents = documents;
+            this.universities = universities;
         }
 
         public ActionResult All()
         {
             var studentId = this.User.Identity.GetUserId();
-            var model = this.documents
+            var studentDocuments = this.documents
                 .GetByStudent(studentId)
                 .ProjectTo<DocumentViewModel>()
                 .ToList();
 
-            return View(model);
+            var universities = this.universities
+                .GetForUserWithDocuments(studentId);
+            // TODO: Finish and add model to view
+
+            return View();
         }
     }
 }

@@ -5,14 +5,27 @@
 
 <h2>Review documents</h2>
 <hr />
-@if (Model == null || Model.Count == 0)
-{
-    <h4>You have no documents created.</h4>
-}
-@for (var i = 0; i < Model.Count; i++)
-{
-    <div class="form-group">
-        @Html.LabelFor(d => d[i].Name)
-        @Html.LabelFor(d => d[i].Content)
+<div class="row">
+    <div class="col-md-6">
+        <h3>Required documents by university</h3>
     </div>
-}
+    <div class="col-md-6">
+        <h3>Your documents</h3>
+        @if (Model == null || Model.Count == 0)
+        {
+            <h4>You have no documents.</h4>
+        }
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <div class="form-group">
+                @Html.LabelFor(d => d[i].Name)
+                <br />
+                @Html.ActionLink("Edit", "Edit", new { id = Model[i].Id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model[i].Id }, new { @class = "btn btn-danger" })
+            </div>
+        }
+        <div class="form-group">
+            @Html.ActionLink("Create document", "Create", "Documents", new { @class = "btn btn-success" })
+        </div>
+    </div>
+</div
