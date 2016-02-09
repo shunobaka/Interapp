@@ -215,7 +215,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
+    <Compile Include="Areas\Director\Models\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
@@ -271,6 +273,7 @@
     <Content Include="Areas\Director\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Director\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\Add.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -320,7 +323,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Director\Models\" />
     <Folder Include="Areas\Director\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
