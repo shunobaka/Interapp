@@ -7,6 +7,7 @@
     using Data.Models;
     using Data.Repositories;
     using System.Data.Entity;
+    using Interapp.Common.Enums;
     public class UniversitiesService : IUniversitiesService
     {
         private IRepository<University> universities;
@@ -54,10 +55,35 @@
             throw new NotImplementedException();
         }
 
-        public void Update(University university)
+        public void Update(
+            int universityId,
+            int countryId,
+            string name,
+            CambridgeLevel? cambridgeLevel,
+            CambridgeResult? cambridgeScore, 
+            int ibtToefl,
+            int pbtToefl,
+            int sat,
+            int tuition)
         {
-            this.universities.Update(university);
-            this.universities.SaveChanges();
+            var university = this.universities
+                .All()
+                .Where(u => u.Id == universityId)
+                .FirstOrDefault();
+
+            if (university != null)
+            {
+                university.CountryId = countryId;
+                university.Name = name;
+                university.RequiredCambridgeLevel = cambridgeLevel;
+                university.RequiredCambridgeScore = cambridgeScore;
+                university.RequiredIBTToefl = ibtToefl;
+                university.RequiredPBTToefl = pbtToefl;
+                university.RequiredSAT = sat;
+                university.TuitionFee = tuition;
+
+                this.universities.SaveChanges();
+            }
         }
     }
 }
