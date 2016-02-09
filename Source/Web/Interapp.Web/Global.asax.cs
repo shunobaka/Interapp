@@ -1,10 +1,10 @@
-﻿using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using Interapp.Common.Constants;
-
-namespace Interapp.Web
+﻿namespace Interapp.Web
 {
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using Common.Constants;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

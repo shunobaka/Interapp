@@ -1,12 +1,12 @@
-﻿using Interapp.Common.Constants;
-using Interapp.Common.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
-namespace Interapp.Web.Models
+﻿namespace Interapp.Web.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using Common.Constants;
+    using Common.Enums;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -22,8 +22,11 @@ namespace Interapp.Web.Models
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+
+        public ICollection<SelectListItem> Providers { get; set; }
+
         public string ReturnUrl { get; set; }
+
         public bool RememberMe { get; set; }
     }
 

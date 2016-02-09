@@ -8,6 +8,7 @@
     using Microsoft.AspNet.Identity;
     using Models.Shared;
 
+    [Authorize(Roles = "Student")]
     public class ScoresController : Controller
     {
         private IScoresService scores;

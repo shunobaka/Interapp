@@ -4,12 +4,13 @@
     using AutoMapper.QueryableExtensions;
     using Data.Models;
     using Interapp.Services.Contracts;
+    using Models.Shared;
     using Microsoft.AspNet.Identity;
     using Models.DocumentViewModels;
-    using Models.UniversityViewModels;
     using System.Linq;
     using System.Web.Mvc;
 
+    [Authorize(Roles = "Student")]
     public class DocumentsController : Controller
     {
         private IDocumentsService documents;
@@ -25,15 +26,6 @@
 
         public ActionResult All()
         {
-            //var studentId = this.User.Identity.GetUserId();
-            //var studentDocuments = this.documents
-            //    .GetByStudent(studentId)
-            //    .ProjectTo<DocumentViewModel>()
-            //    .ToList();
-
-            //var universities = this.universities
-            //    .GetForUserWithDocuments(studentId);
-            // TODO: Finish and add model to view
             var studentId = this.User.Identity.GetUserId();
             var studentInfo = this.students.GetFullInfoById(studentId);
 
@@ -52,24 +44,19 @@
             return View(model);
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id != null)
+            var studentId = this.User.Identity.GetUserId();
+            var document = this.documents.GetById(id);
+
+            if (document == null || document.AuthorId != studentId)
             {
-                var studentId = this.User.Identity.GetUserId();
-                var document = this.documents.GetById((int)id);
-
-                if (document == null || document.AuthorId != studentId)
-                {
-                    return this.View();
-                }
-
-                var model = Mapper.Map<DocumentViewModel>(document);
-
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
         }
 
         [HttpGet]
@@ -94,24 +81,19 @@
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id != null)
+            var studentId = this.User.Identity.GetUserId();
+            var document = this.documents.GetById(id);
+
+            if (document == null || document.AuthorId != studentId)
             {
-                var studentId = this.User.Identity.GetUserId();
-                var document = this.documents.GetById((int)id);
-
-                if (document == null || document.AuthorId != studentId)
-                {
-                    return this.View();
-                }
-
-                var model = Mapper.Map<DocumentViewModel>(document);
-
-                return this.View(model);
+                return this.View();
             }
 
-            return this.View();
+            var model = Mapper.Map<DocumentViewModel>(document);
+
+            return this.View(model);
         }
 
         [HttpPost]
@@ -135,11 +117,49 @@
                     Content = model.Content
                 };
                 this.documents.Update(document);
-           
+
                 return this.RedirectToAction(nameof(this.All));
             }
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ControllerName = "Documents",
+                ItemName = "document",
+                ItemId = id
+            };
+            return this.View(model);
+        }
+
+        public ActionResult Deleted()
+        {
+            var model = new DeleteInfoViewModel()
+            {
+                ControllerName = "Documents",
+                ItemName = "document"
+            };
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+            var document = this.documents.GetById(id);
+            var studentId = this.User.Identity.GetUserId();
+
+            if (document.AuthorId != studentId)
+            {
+                return this.View("Unathorized");
+            }
+
+            this.documents.Delete(id);
+
+            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }

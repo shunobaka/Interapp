@@ -1,10 +1,9 @@
 ﻿namespace Interapp.Services
 {
-    using System;
+    using System.Linq;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Linq;
 
     public class EssaysService : IEssaysService
     {

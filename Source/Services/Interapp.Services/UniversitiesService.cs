@@ -2,9 +2,9 @@
 {
     using System;
     using System.Linq;
+    using Common;
     using Contracts;
     using Data.Models;
-    using Common;
     using Data.Repositories;
 
     public class UniversitiesService : IUniversitiesService
