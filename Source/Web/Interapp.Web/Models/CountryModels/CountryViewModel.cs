@@ -1,9 +1,11 @@
 ﻿namespace Interapp.Web.Models.CountryModels
 {
     using Common.Constants;
+    using Data.Models;
+    using Infrastructure.Mappings;
     using System.ComponentModel.DataAnnotations;
 
-    public class CountryViewModel
+    public class CountryViewModel : IMapFrom<Country>
     {
         public int Id { get; set; }
 
