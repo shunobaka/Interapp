@@ -89,13 +89,22 @@
 
         public IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter)
         {
+            if (universities == null)
+            {
+                return universities;
+            }
+
             universities = universities.OrderBy(u => u.Name);
             var page = 1;
             var pageSize = 10;
 
             if (filter != null)
             {
-                universities = universities.Where(u => u.Name.Contains(filter.Filter));
+                if (filter.Filter != null)
+                {
+                    universities = universities.Where(u => u.Name.Contains(filter.Filter));
+                }
+
                 page = filter.Page;
                 pageSize = filter.PageSize;
 
