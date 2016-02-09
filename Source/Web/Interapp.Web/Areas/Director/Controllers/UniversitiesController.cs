@@ -117,6 +117,7 @@
                 // TODO: Implement
             }
 
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
         }
     }
