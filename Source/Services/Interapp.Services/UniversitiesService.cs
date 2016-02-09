@@ -61,9 +61,9 @@
             string name,
             CambridgeLevel? cambridgeLevel,
             CambridgeResult? cambridgeScore, 
-            int ibtToefl,
-            int pbtToefl,
-            int sat,
+            int? ibtToefl,
+            int? pbtToefl,
+            int? sat,
             int tuition)
         {
             var university = this.universities
