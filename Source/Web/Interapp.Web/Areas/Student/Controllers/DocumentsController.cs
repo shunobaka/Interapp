@@ -7,10 +7,10 @@
     using Models.Shared;
     using Microsoft.AspNet.Identity;
     using Models.DocumentViewModels;
-    using Models.UniversityViewModels;
     using System.Linq;
     using System.Web.Mvc;
 
+    [Authorize(Roles = "Student")]
     public class DocumentsController : Controller
     {
         private IDocumentsService documents;
