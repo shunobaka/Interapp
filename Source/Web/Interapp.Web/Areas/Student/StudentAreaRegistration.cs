@@ -15,10 +15,12 @@
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Student_default",
-                "Student/{controller}/{action}/{id}",
-                new { controller = "Dashboard", action = "Info", id = UrlParameter.Optional }
-            );
+                name: "Student_default",
+                url: "Student/{controller}/{action}/{id}",
+                defaults: new { controller = "Dashboard", action = "Info", id = UrlParameter.Optional },
+                namespaces: new string[] { "Student.Controllers" }
+            )
+            .DataTokens["UseNamespaceFallback"] = true;
         }
     }
 }
