@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
       <Private>True</Private>
@@ -202,6 +206,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -209,6 +214,26 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Director\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
+    <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityCreateViewModel.cs" />
+    <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
+    <Compile Include="Areas\Student\Controllers\EssayController.cs" />
+    <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentsFullViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversityViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -216,7 +241,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
+    <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CountryModels\CountryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -230,6 +258,25 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Student\Views\web.config" />
+    <Content Include="Areas\Director\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Review.cshtml" />
+    <Content Include="Areas\Student\Views\Essay\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\Delete.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\Deleted.cshtml" />
+    <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
+    <Content Include="Areas\Student\Views\Scores\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\All.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\Create.cshtml" />
+    <Content Include="Areas\Student\Views\Documents\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\Unauthorized.cshtml" />
+    <Content Include="Areas\Director\Views\web.config" />
+    <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Director\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\Add.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -279,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Director\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -3,6 +3,7 @@
     using System.Linq;
     using Common;
     using Data.Models;
+    using Interapp.Common.Enums;
 
     public interface IUniversitiesService
     {
@@ -12,7 +13,15 @@
 
         University GetById(int id);
 
-        void UpdateById(int id, University university);
+        void Update(int universityId,
+            int countryId,
+            string name,
+            CambridgeLevel? cambridgeLevel,
+            CambridgeResult? cambridgeScore,
+            int? ibtToefl,
+            int? pbtToefl,
+            int? sat,
+            int tuition);
 
         void DeleteById(int id);
 

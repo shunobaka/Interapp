@@ -1,38 +1,40 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Interapp.Web.Models;
-using Interapp.Data.Models;
-using Interapp.Services.Contracts;
-using System.Web.Caching;
-using System.Collections.Generic;
-using Interapp.Common.Enums;
-
-namespace Interapp.Web.Controllers
+﻿namespace Interapp.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Mvc;
+    using Common.Enums;
+    using Data.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Models;
+    using Services.Contracts;
+
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ICountriesService countries;
+        private IStudentInfosService studentInfos;
+        private IDirectorInfosService directorInfos;
 
-        public AccountController(ICountriesService countries)
+        public AccountController(ICountriesService countries, IStudentInfosService studentInfos, IDirectorInfosService directorInfos)
         {
             this.countries = countries;
+            this.studentInfos = studentInfos;
+            this.directorInfos = directorInfos;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            this.UserManager = userManager;
+            this.SignInManager = signInManager;
             this.countries = countries;
         }
 
@@ -40,11 +42,12 @@ namespace Interapp.Web.Controllers
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return this._signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
+
             private set 
             { 
-                _signInManager = value; 
+                this._signInManager = value; 
             }
         }
 
@@ -52,25 +55,37 @@ namespace Interapp.Web.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return this._userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
-                _userManager = value;
+                this._userManager = value;
             }
         }
 
-        //
-        // GET: /Account/Login
+        private IEnumerable<Country> GetCountries()
+        {
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
+        }
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return this.View();
         }
-
-        //
-        // POST: /Account/Login
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -78,24 +93,22 @@ namespace Interapp.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
+            var result = await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return this.RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    return this.View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return this.View(model);
             }
         }
 
@@ -148,18 +161,8 @@ namespace Interapp.Web.Controllers
         public ActionResult Register()
         {
             var model = new RegisterViewModel();
-            
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
 
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             return View(model);
         }
@@ -183,6 +186,16 @@ namespace Interapp.Web.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, ((UserRoles)model.Role).ToString());
+
+                    if ((UserRoles)model.Role == UserRoles.Student)
+                    {
+                        this.studentInfos.Create(user.Id);
+                    }
+                    else if ((UserRoles)model.Role == UserRoles.Director)
+                    {
+                        this.directorInfos.Create(user.Id);
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -196,17 +209,7 @@ namespace Interapp.Web.Controllers
                 AddErrors(result);
             }
 
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return View(model);
