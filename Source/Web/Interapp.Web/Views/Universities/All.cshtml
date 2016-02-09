@@ -1,0 +1,19 @@
+﻿@model Interapp.Web.Models.Shared.AllUniversitiesViewModel
+@{
+    ViewBag.Title = "All universities";
+}
+
+<h2>List of Universities</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>There are no universities</h3>
+}
+else
+{
+    @Html.Partial("_UniversitiesFilterPartial")
+    foreach(var university in Model.Universities)
+    {
+        <h3>@university.Name</h3>
+    }
+}
