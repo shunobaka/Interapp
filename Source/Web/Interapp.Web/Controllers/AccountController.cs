@@ -61,6 +61,21 @@
                 this._userManager = value;
             }
         }
+
+        private IEnumerable<Country> GetCountries()
+        {
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
+        }
         
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -144,18 +159,8 @@
         public ActionResult Register()
         {
             var model = new RegisterViewModel();
-            
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
 
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             return View(model);
         }
@@ -202,17 +207,7 @@
                 AddErrors(result);
             }
 
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return View(model);
