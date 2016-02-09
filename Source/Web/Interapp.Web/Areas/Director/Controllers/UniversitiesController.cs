@@ -2,7 +2,7 @@
 {
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models;
+    using Models.UniversityViewModels;
     using Services.Contracts;
     using System;
     using System.Collections.Generic;

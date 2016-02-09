@@ -1,7 +1,6 @@
-﻿namespace Interapp.Web.Areas.Director.Models
+﻿namespace Interapp.Web.Areas.Director.Models.UniversityViewModels
 {
     using Common.Constants;
-    using Data.Models;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
