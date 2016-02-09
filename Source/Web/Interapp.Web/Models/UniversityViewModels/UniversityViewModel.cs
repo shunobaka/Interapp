@@ -2,9 +2,11 @@
 {
     using Common.Enums;
     using CountryViewModels;
+    using Data.Models;
     using DirectorInfoViewModels;
+    using Infrastructure.Mappings;
 
-    public class UniversityViewModel
+    public class UniversityViewModel : IMapFrom<University>
     {
         public int Id { get; set; }
        

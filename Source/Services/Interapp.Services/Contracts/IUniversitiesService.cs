@@ -27,6 +27,8 @@
 
         void Create(string directorId, string name, int tuitionFee, int countryId);
 
-        IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter)
+        IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter);
+
+        IQueryable<University> AllExtended();
     }
 }

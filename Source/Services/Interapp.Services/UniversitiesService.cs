@@ -8,6 +8,7 @@
     using Data.Repositories;
     using System.Data.Entity;
     using Interapp.Common.Enums;
+
     public class UniversitiesService : IUniversitiesService
     {
         private IRepository<University> universities;
@@ -162,6 +163,15 @@
                 .Take(pageSize);
 
             return universities;
+        }
+
+        public IQueryable<University> AllExtended()
+        {
+            return this.universities
+                .All()
+                .Include(u => u.Country)
+                .Include(u => u.Director)
+                .Include(u => u.Director.Director);
         }
     }
 }

@@ -6,6 +6,6 @@
 
     public class DirectorInfoViewModel : IMapFrom<DirectorInfo>
     {
-        public UserViewModel User { get; set; }
+        public UserViewModel Director { get; set; }
     }
 }

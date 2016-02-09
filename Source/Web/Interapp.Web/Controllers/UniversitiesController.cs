@@ -23,7 +23,7 @@
         {
             if (this.HttpContext.Cache["Universities"] == null)
             {
-                var unis = this.universities.All();
+                var unis = this.universities.AllExtended();
                 this.HttpContext.Cache.Add("Countries",
                     unis,
                     null,
