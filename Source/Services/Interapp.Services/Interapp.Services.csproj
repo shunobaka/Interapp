@@ -59,16 +59,21 @@
   <ItemGroup>
     <Compile Include="Contracts\IApplicationsService.cs" />
     <Compile Include="Contracts\ICountriesService.cs" />
+    <Compile Include="Contracts\IDirectorInfosService.cs" />
+    <Compile Include="Contracts\IDocumentsService.cs" />
     <Compile Include="Contracts\IEssaysService.cs" />
     <Compile Include="Contracts\IMajorsService.cs" />
     <Compile Include="Contracts\IScoresService.cs" />
     <Compile Include="Contracts\IStudentInfosService.cs" />
     <Compile Include="Contracts\IUniversitiesService.cs" />
     <Compile Include="CountriesService.cs" />
+    <Compile Include="DirectorInfosService.cs" />
+    <Compile Include="DocumentsService.cs" />
     <Compile Include="EssaysService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoresService.cs" />
     <Compile Include="StudentInfosService.cs" />
+    <Compile Include="UniversitiesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Interapp.Common\Interapp.Common.csproj">

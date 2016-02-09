@@ -1,11 +1,10 @@
 ﻿namespace Interapp.Services
 {
-    using System;
+    using System.Data.Entity;
     using System.Linq;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Data.Entity;
 
     public class StudentInfosService : IStudentInfosService
     {
@@ -20,7 +19,7 @@
 
         public void AddUniversityOfInterest(string studentId, University university)
         {
-            var student = studentInfos
+            var student = this.studentInfos
                 .All()
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
@@ -31,25 +30,25 @@
 
         public void Create(string studentId)
         {
-            var student = users
+            var student = this.users
                 .All()
                 .Where(u => u.Id == studentId)
                 .FirstOrDefault();
 
             student.StudentInfo = new StudentInfo();
-            users.SaveChanges();
+            this.users.SaveChanges();
         }
 
         public void EnrollStudent(string studentId, int universityId, int majorId)
         {
-            var student = studentInfos
+            var student = this.studentInfos
                 .All()
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
             student.UniversityId = universityId;
             student.MajorId = majorId;
-            studentInfos.SaveChanges();
+            this.studentInfos.SaveChanges();
         }
 
         public StudentInfo GetById(string id)
@@ -69,6 +68,7 @@
                 .All()
                 .Where(s => s.StudentId == id)
                 .Include(s => s.Documents)
+                .Include("Documents")
                 .Include(s => s.UniversitiesOfInterest)
                 .Include(s => s.Student)
                 .Include(s => s.Essay)
@@ -81,15 +81,33 @@
             return student;
         }
 
+        public IQueryable<University> GetUserUniversitiesWithDocuments(string studentId)
+        {
+            var student = this.studentInfos
+                .All()
+                .Include("Documents")
+                .Include("Universities")
+                .Where(s => s.StudentId == studentId)
+                .FirstOrDefault();
+
+            if (student == null)
+            {
+                return null;
+            }
+
+            return student.UniversitiesOfInterest.AsQueryable();
+        }
+
         public void Update(string studentId, StudentInfo info)
         {
-            var student = studentInfos
+            var student = this.studentInfos
                 .All()
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
             this.studentInfos.Update(info);
             this.studentInfos.SaveChanges();
+            // TODO: Fix maybe?
         }
     }
 }

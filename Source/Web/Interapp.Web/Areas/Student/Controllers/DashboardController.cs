@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper;
-    using Models.StudentInfoViewModels;
-    using Microsoft.AspNet.Identity;
-    using Services.Contracts;
     using System.Web.Mvc;
+    using AutoMapper;
+    using Microsoft.AspNet.Identity;
+    using Models.StudentInfoViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Student")]
     public class DashboardController : Controller
@@ -23,7 +23,7 @@
 
             var model = Mapper.Map<StudentInfoViewModel>(studentInfo);
 
-            return View(model);
+            return this.View(model);
         }
     }
 }
