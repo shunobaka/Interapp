@@ -94,6 +94,15 @@
         [HttpPost]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
+            var cachedCountries = GetCountries();
+
+            var countryExists = cachedCountries.Any(c => c.Id == model.CountryId);
+
+            if (!countryExists)
+            {
+                this.ModelState.AddModelError("Nonexisting country", "No such country exists.");
+            }
+
             var university = this.universities.GetById(id);
             var userId = this.User.Identity.GetUserId();
 
