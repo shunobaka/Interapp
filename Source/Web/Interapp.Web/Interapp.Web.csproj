@@ -217,7 +217,8 @@
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
-    <Compile Include="Areas\Director\Models\UniversityCreateViewModel.cs" />
+    <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityCreateViewModel.cs" />
+    <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CountryModels\CountryViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -274,6 +276,7 @@
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Director\Views\Home\Index.cshtml" />
     <Content Include="Areas\Director\Views\Universities\Add.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

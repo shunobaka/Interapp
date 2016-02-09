@@ -22,11 +22,13 @@
         private ApplicationUserManager _userManager;
         private ICountriesService countries;
         private IStudentInfosService studentInfos;
+        private IDirectorInfosService directorInfos;
 
-        public AccountController(ICountriesService countries, IStudentInfosService studentInfos)
+        public AccountController(ICountriesService countries, IStudentInfosService studentInfos, IDirectorInfosService directorInfos)
         {
             this.countries = countries;
             this.studentInfos = studentInfos;
+            this.directorInfos = directorInfos;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
@@ -191,7 +193,7 @@
                     }
                     else if ((UserRoles)model.Role == UserRoles.Director)
                     {
-                        // TODO: Create director info for user
+                        this.directorInfos.Create(user.Id);
                     }
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

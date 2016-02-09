@@ -1,8 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
+    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models;
+    using Models.UniversityViewModels;
     using Services.Contracts;
     using System;
     using System.Collections.Generic;
@@ -67,6 +68,53 @@
                 var directorId = this.User.Identity.GetUserId();
                 this.universities.Create(directorId, model.Name, model.TuitionFee, model.CountryId);
                 return this.RedirectToAction("Index", "Home", null);
+            }
+
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var university = this.universities.GetById(id);
+            var userId = this.User.Identity.GetUserId();
+
+            if (university != null && university.DirectorId == userId)
+            {
+                var model = Mapper.Map<UniversityViewModel>(university);
+                model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
+
+                return this.View(model);
+            }
+
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, UniversityViewModel model)
+        {
+            var cachedCountries = GetCountries();
+
+            var countryExists = cachedCountries.Any(c => c.Id == model.CountryId);
+
+            if (!countryExists)
+            {
+                this.ModelState.AddModelError("Nonexisting country", "No such country exists.");
+            }
+
+            var university = this.universities.GetById(id);
+            var userId = this.User.Identity.GetUserId();
+
+            if (university == null || university.DirectorId == userId)
+            {
+                this.ModelState.AddModelError("Edit", "Either there is no such university, or you don't have permissions to edit it.");
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                //this.universities.Update();
+                // TODO: Implement
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);

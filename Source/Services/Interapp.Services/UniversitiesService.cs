@@ -6,7 +6,7 @@
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-
+    using System.Data.Entity;
     public class UniversitiesService : IUniversitiesService
     {
         private IRepository<University> universities;
@@ -45,6 +45,7 @@
         {
             return this.universities.All()
                 .Where(u => u.Id == id)
+                .Include(u => u.Director)
                 .FirstOrDefault();
         }
 
