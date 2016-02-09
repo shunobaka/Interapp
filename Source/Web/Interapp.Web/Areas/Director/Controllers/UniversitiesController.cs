@@ -90,5 +90,25 @@
 
             return this.View();
         }
+
+        [HttpPost]
+        public ActionResult Edit(int id, UniversityViewModel model)
+        {
+            var university = this.universities.GetById(id);
+            var userId = this.User.Identity.GetUserId();
+
+            if (university == null || university.DirectorId == userId)
+            {
+                this.ModelState.AddModelError("Edit", "Either there is no such university, or you don't have permissions to edit it.");
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                //this.universities.Update();
+                // TODO: Implement
+            }
+
+            return this.View(model);
+        }
     }
 }
