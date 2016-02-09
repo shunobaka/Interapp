@@ -60,7 +60,7 @@
             int countryId,
             string name,
             CambridgeLevel? cambridgeLevel,
-            CambridgeResult? cambridgeScore, 
+            CambridgeResult? cambridgeScore,
             int? ibtToefl,
             int? pbtToefl,
             int? sat,
@@ -84,6 +84,84 @@
 
                 this.universities.SaveChanges();
             }
+        }
+
+        public IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter)
+        {
+            universities = universities.OrderBy(u => u.Name);
+            var page = 1;
+            var pageSize = 10;
+
+            if (filter != null)
+            {
+                universities = universities.Where(u => u.Name.Contains(filter.Filter));
+                page = filter.Page;
+                pageSize = filter.PageSize;
+
+                if (filter.OrderBy == null)
+                {
+                    if (filter.Order == "asc")
+                    {
+                        if (filter.OrderBy == "name")
+                        {
+                            universities = universities.OrderBy(u => u.Name);
+                        }
+                        else if (filter.OrderBy == "country")
+                        {
+                            universities = universities.OrderBy(u => u.Country);
+                        }
+                        else if (filter.OrderBy == "tuition")
+                        {
+                            universities = universities.OrderBy(u => u.TuitionFee);
+                        }
+                        else if (filter.OrderBy == "sat")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredSAT);
+                        }
+                        else if (filter.OrderBy == "toeflpbt")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredPBTToefl);
+                        }
+                        else if (filter.OrderBy == "toeflibt")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredIBTToefl);
+                        }
+                    }
+                    else
+                    {
+                        if (filter.OrderBy == "name")
+                        {
+                            universities = universities.OrderByDescending(u => u.Name);
+                        }
+                        else if (filter.OrderBy == "country")
+                        {
+                            universities = universities.OrderByDescending(u => u.Country);
+                        }
+                        else if (filter.OrderBy == "tuition")
+                        {
+                            universities = universities.OrderByDescending(u => u.TuitionFee);
+                        }
+                        else if (filter.OrderBy == "sat")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredSAT);
+                        }
+                        else if (filter.OrderBy == "toeflpbt")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredPBTToefl);
+                        }
+                        else if (filter.OrderBy == "toeflibt")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredIBTToefl);
+                        }
+                    }
+                }
+            }
+
+            universities = universities
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            return universities;
         }
     }
 }
