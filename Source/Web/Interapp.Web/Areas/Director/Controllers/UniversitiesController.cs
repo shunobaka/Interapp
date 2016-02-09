@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
+    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
     using Models.UniversityViewModels;
@@ -71,6 +72,23 @@
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var university = this.universities.GetById(id);
+            var userId = this.User.Identity.GetUserId();
+
+            if (university != null && university.DirectorId == userId)
+            {
+                var model = Mapper.Map<UniversityViewModel>(university);
+                model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
+
+                return this.View(model);
+            }
+
+            return this.View();
         }
     }
 }
