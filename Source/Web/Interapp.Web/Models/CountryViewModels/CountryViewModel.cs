@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models.CountryModels
+﻿namespace Interapp.Web.Models.CountryViewModels
 {
     using Common.Constants;
     using Data.Models;
