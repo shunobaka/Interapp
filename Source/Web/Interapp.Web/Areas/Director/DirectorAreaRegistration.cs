@@ -2,25 +2,25 @@
 
 namespace Interapp.Web.Areas.Director
 {
-    public class DirectorAreaRegistration : AreaRegistration 
+    public class DirectorAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Director";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Director_default",
-                "Director/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new string[] { "Director.Controllers" }
+                name: "Director_default",
+                url: "Director/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "Interapp.Web.Areas.Director.Controllers" }
             )
-            .DataTokens["UseNamespaceFallback"] = true;
+            .DataTokens["UseNamespaceFallback"] = false;
         }
     }
 }

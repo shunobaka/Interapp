@@ -214,6 +214,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
@@ -269,6 +270,7 @@
     <Content Include="Areas\Student\Views\Shared\Unauthorized.cshtml" />
     <Content Include="Areas\Director\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Director\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -318,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Director\Controllers\" />
     <Folder Include="Areas\Director\Models\" />
     <Folder Include="Areas\Director\Views\Shared\" />
   </ItemGroup>
