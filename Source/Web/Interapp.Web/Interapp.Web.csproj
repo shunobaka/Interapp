@@ -237,6 +237,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UniversitiesController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,8 +245,11 @@
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CountryModels\CountryViewModel.cs" />
+    <Compile Include="Models\CountryViewModels\CountryViewModel.cs" />
+    <Compile Include="Models\DirectorInfoViewModels\DirectorInfoViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UniversityViewModels\UniversityViewModel.cs" />
+    <Compile Include="Models\UserViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -328,6 +332,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
+    <Folder Include="Views\Universities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -349,6 +354,10 @@
     <ProjectReference Include="..\..\Data\Interapp.Data\Interapp.Data.csproj">
       <Project>{fa884807-e1bf-4bf9-b245-6c82a57babec}</Project>
       <Name>Interapp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Interapp.Services.Common\Interapp.Services.Common.csproj">
+      <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
+      <Name>Interapp.Services.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>
