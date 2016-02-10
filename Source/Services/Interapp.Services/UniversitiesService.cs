@@ -49,6 +49,8 @@
                 .Where(u => u.Id == id)
                 .Include(u => u.Director)
                 .Include(u => u.Country)
+                .Include(u => u.Students.Count)
+                .Include(u => u.InterestedStudents.Count)
                 .FirstOrDefault();
         }
 
