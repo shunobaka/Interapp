@@ -22,11 +22,13 @@
         private ApplicationUserManager _userManager;
         private ICountriesService countries;
         private IStudentInfosService studentInfos;
+        private IDirectorInfosService directorInfos;
 
-        public AccountController(ICountriesService countries, IStudentInfosService studentInfos)
+        public AccountController(ICountriesService countries, IStudentInfosService studentInfos, IDirectorInfosService directorInfos)
         {
             this.countries = countries;
             this.studentInfos = studentInfos;
+            this.directorInfos = directorInfos;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ICountriesService countries)
@@ -60,6 +62,21 @@
             {
                 this._userManager = value;
             }
+        }
+
+        private IEnumerable<Country> GetCountries()
+        {
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add("Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default, null);
+            }
+
+            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
         }
         
         [AllowAnonymous]
@@ -144,18 +161,8 @@
         public ActionResult Register()
         {
             var model = new RegisterViewModel();
-            
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
 
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             return View(model);
         }
@@ -186,7 +193,7 @@
                     }
                     else if ((UserRoles)model.Role == UserRoles.Director)
                     {
-                        // TODO: Create director info for user
+                        this.directorInfos.Create(user.Id);
                     }
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -202,17 +209,7 @@
                 AddErrors(result);
             }
 
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            model.Countries = new SelectList((IEnumerable<Country>)this.HttpContext.Cache["Countries"], "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return View(model);

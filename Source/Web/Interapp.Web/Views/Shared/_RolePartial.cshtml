@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    if (this.User.IsInRole("Student"))
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="role-menu">Student <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="role-menu">
+                    <li><a href="/Student">Dashboard</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+    else if (this.User.IsInRole("Director"))
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="role-menu">Director <span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="role-menu">
+                    <li><a href="/Director">Panel</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+}
