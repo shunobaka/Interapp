@@ -48,6 +48,7 @@
             return this.universities.All()
                 .Where(u => u.Id == id)
                 .Include(u => u.Director)
+                .Include(u => u.Country)
                 .FirstOrDefault();
         }
 
@@ -181,6 +182,13 @@
                 .Include(u => u.Country)
                 .Include(u => u.Director)
                 .Include(u => u.Director.Director);
+        }
+
+        public IQueryable<University> AllSimple()
+        {
+            return this.universities
+                .All()
+                .Include(u => u.Country);
         }
     }
 }

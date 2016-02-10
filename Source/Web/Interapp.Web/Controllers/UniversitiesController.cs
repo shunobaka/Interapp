@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Web.Controllers
 {
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.Models;
     using Interapp.Services.Common;
@@ -7,6 +8,7 @@
     using Models.Shared;
     using Models.UniversityViewModels;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
@@ -24,9 +26,9 @@
         {
             if (this.HttpContext.Cache["Universities"] == null)
             {
-                var unis = this.universities.AllExtended();
+                var unis = this.universities.AllSimple().ToList();
                 this.HttpContext.Cache.Add("UniversitiesCount",
-                    unis.Count(),
+                    unis.Count,
                     null,
                     DateTime.Now.AddHours(1),
                     TimeSpan.Zero,
@@ -40,8 +42,8 @@
             }
 
             var filteredUnis = this.universities
-                .FilterUniversities((IQueryable<University>)this.HttpContext.Cache["Universities"], model)
-                .ProjectTo<UniversityViewModel>()
+                .FilterUniversities(((IList<University>)this.HttpContext.Cache["Universities"]).AsQueryable(), model)
+                .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 
             var viewDataModel = new AllUniversitiesViewModel()
@@ -52,6 +54,14 @@
             };
 
             return View(viewDataModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var university = this.universities.GetById(id);
+            var model = Mapper.Map<UniversityViewModel>(university);
+
+            return this.View(model);
         }
     }
 }

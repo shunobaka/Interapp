@@ -30,5 +30,7 @@
         IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter);
 
         IQueryable<University> AllExtended();
+
+        IQueryable<University> AllSimple();
     }
 }
