@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
@@ -10,19 +11,23 @@
     {
         private IRepository<StudentInfo> studentInfos;
         private IRepository<User> users;
+        private IRepository<University> universities;
 
-        public StudentInfosService(IRepository<StudentInfo> studentInfos, IRepository<User> users)
+        public StudentInfosService(IRepository<StudentInfo> studentInfos, IRepository<User> users, IRepository<University> universities)
         {
             this.studentInfos = studentInfos;
             this.users = users;
+            this.universities = universities;
         }
 
-        public void AddUniversityOfInterest(string studentId, University university)
+        public void AddUniversityOfInterest(string studentId, int universityId)
         {
             var student = this.studentInfos
                 .All()
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
+
+            var university = this.universities.GetById(universityId);
 
             student.UniversitiesOfInterest.Add(university);
             this.studentInfos.SaveChanges();
@@ -108,6 +113,17 @@
             this.studentInfos.Update(info);
             this.studentInfos.SaveChanges();
             //// TODO: Fix maybe?
+        }
+
+        public IQueryable<University> GetUniversitiesOfInterest(string studentId)
+        {
+            var student = this.studentInfos
+                .All()
+                .Where(s => s.StudentId == studentId)
+                .Include(s => s.UniversitiesOfInterest)
+                .FirstOrDefault();
+
+            return student.UniversitiesOfInterest.AsQueryable();
         }
     }
 }

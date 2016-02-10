@@ -11,7 +11,7 @@
 
         void Update(string studentId, StudentInfo info);
 
-        void AddUniversityOfInterest(string studentId, University university);
+        void AddUniversityOfInterest(string studentId, int universityId);
 
         void EnrollStudent(string studentId, int universityId, int majorId);
 
@@ -20,5 +20,7 @@
         StudentInfo GetFullInfoById(string id);
 
         IQueryable<University> GetUserUniversitiesWithDocuments(string studentId);
+
+        IQueryable<University> GetUniversitiesOfInterest(string studentId);
     }
 }
