@@ -13,6 +13,7 @@
     using System.Web.Caching;
     using System.Web.Mvc;
 
+    [Authorize]
     public class UniversitiesController : Controller
     {
         private IUniversitiesService universities;
