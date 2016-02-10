@@ -54,12 +54,13 @@
         {
             if (this.HttpContext.Cache["Universities"] == null)
             {
+                // TODO: Make cache for hour
                 var unis = this.universities.AllSimple().ToList();
                 this.HttpContext.Cache.Add(
                     "Universities",
                     unis,
                     null,
-                    DateTime.Now.AddHours(1),
+                    DateTime.Now.AddSeconds(10),
                     TimeSpan.Zero,
                     CacheItemPriority.Default,
                     null);
