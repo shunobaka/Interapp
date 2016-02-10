@@ -85,10 +85,13 @@
         {
             for (var i = 0; i < Model.UniversitiesOfInterest.Count; i++)
             {
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UniversitiesOfInterest[i])
-                    @*@Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id}, new { @class = "btn btn-info"})*@
-                    @Html.RouteLink("Details", "~/Universities/Details", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info" })
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <h4>@Model.UniversitiesOfInterest[i].Name</h4>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info pull-right" })
+                    </div>
                 </div>
             }
         }

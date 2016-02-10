@@ -6,6 +6,7 @@
     using Contracts;
     using Data.Models;
     using Data.Repositories;
+    using Data;
 
     public class StudentInfosService : IStudentInfosService
     {
@@ -22,15 +23,19 @@
 
         public void AddUniversityOfInterest(string studentId, int universityId)
         {
-            var student = this.studentInfos
-                .All()
+            // TEMPORARY WORK-AROUND
+            // TODO: Fix 
+            var db = new InterappDbContext();
+            var student = db.StudentInfos
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
-            var university = this.universities.GetById(universityId);
-
+            var university = db.Universities
+                .Where(u => u.Id == universityId)
+                .FirstOrDefault();
+            
             student.UniversitiesOfInterest.Add(university);
-            this.studentInfos.SaveChanges();
+            db.SaveChanges();
         }
 
         public void Create(string studentId)

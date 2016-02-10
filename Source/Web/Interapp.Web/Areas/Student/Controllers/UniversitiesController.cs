@@ -9,6 +9,7 @@
     using Web.Models.UniversityViewModels;
     using Microsoft.AspNet.Identity;
 
+    [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
     {
         private IUniversitiesService universities;
@@ -36,6 +37,26 @@
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Add(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var studentId = this.User.Identity.GetUserId();
+                var universitiesOfInterest = this.studentInfos.GetUniversitiesOfInterest(studentId);
+
+                if (!universitiesOfInterest.Any(u => u.Id == id))
+                {
+                    this.studentInfos.AddUniversityOfInterest(studentId, id);
+                    return this.PartialView("_SuccessfullyAdded");
+                }
+
+                return this.PartialView("_AlreadyAdded");
+            }
+
+            return this.PartialView("_NotAjaxError");
         }
     }
 }
