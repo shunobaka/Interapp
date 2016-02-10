@@ -25,7 +25,7 @@
         <h5>Interested students: @Model.InterestedStudents</h5>
         @if (this.User.IsInRole("Student"))
         {
-            @Html.ActionLink("Add to universities of interest", "Add", "Universities", new { area = "Student" }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Add to universities of interest", "Add", "Universities", new { area = "Student", id = Model.Id }, new { @class = "btn btn-success" })
         }
         </div>
         <div class="col-md-6">
