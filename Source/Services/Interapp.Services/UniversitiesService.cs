@@ -1,12 +1,12 @@
 ﻿namespace Interapp.Services
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Data.Entity;
     using Interapp.Common.Enums;
 
     public class UniversitiesService : IUniversitiesService

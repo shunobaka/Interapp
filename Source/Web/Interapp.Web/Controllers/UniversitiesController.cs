@@ -1,17 +1,17 @@
 ﻿namespace Interapp.Web.Controllers
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using Data.Models;
-    using Interapp.Services.Common;
-    using Interapp.Services.Contracts;
-    using Models.Shared;
-    using Models.UniversityViewModels;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Data.Models;
+    using Models.Shared;
+    using Models.UniversityViewModels;
+    using Services.Common;
+    using Services.Contracts;
 
     [Authorize]
     public class UniversitiesController : Controller
@@ -22,26 +22,10 @@
         {
             this.universities = universities;
         }
-
-        private IList<University> GetUniversities()
-        {
-            if (this.HttpContext.Cache["Universities"] == null)
-            {
-                var unis = this.universities.AllSimple().ToList();
-                this.HttpContext.Cache.Add("Universities",
-                    unis,
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            return (IList<University>)this.HttpContext.Cache["Universities"];
-        }
         
         public ActionResult All(FilterModel model)
         {
-            var unis = GetUniversities();
+            var unis = this.GetUniversities();
 
             var filteredUnis = this.universities
                 .FilterUniversities(unis.AsQueryable(), model)
@@ -55,7 +39,7 @@
                 UniversitiesCount = unis.Count
             };
 
-            return View(viewDataModel);
+            return this.View(viewDataModel);
         }
 
         public ActionResult Details(int id)
@@ -64,6 +48,24 @@
             var model = Mapper.Map<UniversityViewModel>(university);
 
             return this.View(model);
+        }
+
+        private IList<University> GetUniversities()
+        {
+            if (this.HttpContext.Cache["Universities"] == null)
+            {
+                var unis = this.universities.AllSimple().ToList();
+                this.HttpContext.Cache.Add(
+                    "Universities",
+                    unis,
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default,
+                    null);
+            }
+
+            return (IList<University>)this.HttpContext.Cache["Universities"];
         }
     }
 }

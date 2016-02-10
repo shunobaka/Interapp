@@ -1,11 +1,11 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
     using Models.UniversityViewModels;
     using Services.Contracts;
-    using System.Linq;
-    using System.Web.Mvc;
 
     [Authorize(Roles = "Director")]
     public class HomeController : Controller
@@ -26,7 +26,7 @@
                 .ProjectTo<UniversityViewModel>()
                 .ToList();
 
-            return View(model);
+            return this.View(model);
         }
     }
 }

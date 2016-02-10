@@ -13,7 +13,8 @@
 
         University GetById(int id);
 
-        void Update(int universityId,
+        void Update(
+            int universityId,
             int countryId,
             string name,
             CambridgeLevel? cambridgeLevel,

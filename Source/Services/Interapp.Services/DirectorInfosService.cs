@@ -1,11 +1,12 @@
 ﻿namespace Interapp.Services
 {
-    using Contracts;
     using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Linq;
-    using System.Data.Entity;
+
     public class DirectorInfosService : IDirectorInfosService
     {
         private IRepository<DirectorInfo> directorInfos;
