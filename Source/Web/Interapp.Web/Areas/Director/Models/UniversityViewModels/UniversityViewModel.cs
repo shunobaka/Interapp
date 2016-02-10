@@ -7,7 +7,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Web.Models.CountryModels;
+    using Web.Models.CountryViewModels;
 
     public class UniversityViewModel : IMapFrom<University>
     {
