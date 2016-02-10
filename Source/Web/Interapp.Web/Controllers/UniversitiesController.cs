@@ -21,18 +21,12 @@
         {
             this.universities = universities;
         }
-        
-        public ActionResult All(FilterModel model)
+
+        private IList<University> GetUniversities()
         {
             if (this.HttpContext.Cache["Universities"] == null)
             {
                 var unis = this.universities.AllSimple().ToList();
-                this.HttpContext.Cache.Add("UniversitiesCount",
-                    unis.Count,
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
                 this.HttpContext.Cache.Add("Universities",
                     unis,
                     null,
@@ -41,8 +35,15 @@
                     CacheItemPriority.Default, null);
             }
 
+            return (IList<University>)this.HttpContext.Cache["Universities"];
+        }
+        
+        public ActionResult All(FilterModel model)
+        {
+            var unis = GetUniversities();
+
             var filteredUnis = this.universities
-                .FilterUniversities(((IList<University>)this.HttpContext.Cache["Universities"]).AsQueryable(), model)
+                .FilterUniversities(unis.AsQueryable(), model)
                 .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 
@@ -50,7 +51,7 @@
             {
                 Universities = filteredUnis,
                 Filter = model,
-                UniversitiesCount = (int)this.HttpContext.Cache["UniversitiesCount"]
+                UniversitiesCount = unis.Count
             };
 
             return View(viewDataModel);
