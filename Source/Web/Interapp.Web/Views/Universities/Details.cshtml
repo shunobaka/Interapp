@@ -1,0 +1,41 @@
+﻿@model Interapp.Web.Models.UniversityViewModels.UniversityViewModel
+@{
+    ViewBag.Title = "University Details";
+}
+
+<h2>University details</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>No such university exists!</h3>
+    @Html.ActionLink("Return to universities list", "All", "Universities", null, new { @class = "btn btn-primary" })
+    return;
+}
+
+<h2 class="text-center">@Model.Name</h2>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <h3 class="text-center">General Information</h3>
+        <hr />
+        <h5>Country: @Model.Country.Name</h5>
+        <h5>Director: @Model.Director.Director.FirstName @Model.Director.Director.LastName</h5>
+        <h5>Tuition fee: @string.Format("{0:C}", Model.TuitionFee)</h5>
+    </div>
+    <div class="col-md-6">
+        <h3 class="text-center">Admissions Information</h3>
+        <hr />
+        <div class="col-md-6">
+            <h4>Scores and Certificates Requirements</h4>
+            <h5>SAT: @((Model.RequiredSAT != null) ? Html.Raw(Model.RequiredSAT) : Html.Raw("None"))</h5>
+            <h5>TOEFL (IBT/PBT): @((Model.RequiredIBTToefl != null) ? Html.Raw(Model.RequiredIBTToefl) : Html.Raw("None")) / @((Model.RequiredPBTToefl != null) ? Html.Raw(Model.RequiredPBTToefl) : Html.Raw("None"))</h5>
+            <h5>Cambridge: @((Model.RequiredCambridgeScore != null) ? Html.Raw(Model.RequiredCambridgeLevel + " " + Model.RequiredCambridgeScore) : Html.Raw("Not required"))</h5>
+        </div>
+        <div class="col-md-6">
+            <h4>Document requirements</h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h2>Place for image</h2>
+    </div>
+</div>
