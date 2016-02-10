@@ -16,7 +16,7 @@
 
         public int CountryId { get; set; }
 
-        public CountryViewModel Country { get; set; }
+        public virtual CountryViewModel Country { get; set; }
         
         public int? RequiredSAT { get; set; }
         
@@ -28,6 +28,6 @@
 
         public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 
-        public DirectorInfoViewModel Director { get; set; }
+        public virtual DirectorInfoViewModel Director { get; set; }
     }
 }

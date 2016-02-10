@@ -237,6 +237,7 @@
     <Compile Include="Models\DirectorInfoViewModels\DirectorInfoViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Shared\AllUniversitiesViewModel.cs" />
+    <Compile Include="Models\UniversityViewModels\UniversitySimpleViewModel.cs" />
     <Compile Include="Models\UniversityViewModels\UniversityViewModel.cs" />
     <Compile Include="Models\UserViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Shared\_RolePartial.cshtml" />
     <Content Include="Views\Universities\All.cshtml" />
     <Content Include="Views\Shared\_UniversitiesFilterPartial.cshtml" />
+    <Content Include="Views\Universities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
