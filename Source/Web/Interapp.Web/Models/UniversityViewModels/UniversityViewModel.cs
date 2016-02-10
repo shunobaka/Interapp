@@ -6,7 +6,8 @@
     using DirectorInfoViewModels;
     using Infrastructure.Mappings;
     using AutoMapper;
-
+    using System.Collections.Generic;
+    using DocumentViewModels;
     public class UniversityViewModel : IMapFrom<University>, IHaveCustomMappings
     {
         public int Id { get; set; }
@@ -34,6 +35,8 @@
         public int EnrolledStudents { get; set; }
 
         public int InterestedStudents { get; set; }
+
+        public ICollection<DocumentViewModel> DocumentRequirements { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
