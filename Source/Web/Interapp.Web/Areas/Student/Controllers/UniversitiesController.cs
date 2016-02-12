@@ -8,7 +8,9 @@
     using Web.Models.Shared;
     using Web.Models.UniversityViewModels;
     using Microsoft.AspNet.Identity;
-
+    using Models.Shared;
+    using AutoMapper;
+    using Models.StudentInfoViewModels;
     [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
     {
@@ -63,7 +65,17 @@
         {
             var studentId = this.User.Identity.GetUserId();
             var university = this.universities.GetById(id);
-            var user = this.studentInfos.GetById(studentId);
+            var student = this.studentInfos.GetById(studentId);
+            var eligiblity = this.studentInfos.IsEligibleToApply(student, university);
+
+            var model = new DetailsInformationViewModel()
+            {
+                Eligibility = eligiblity,
+                Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
+                University = Mapper.Map<Models.UniversityViewModels.UniversityViewModel>(university)
+            };
+
+            return this.View(model);
         }
     }
 }
