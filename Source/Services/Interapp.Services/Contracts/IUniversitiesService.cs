@@ -13,7 +13,8 @@
 
         University GetById(int id);
 
-        void Update(int universityId,
+        void Update(
+            int universityId,
             int countryId,
             string name,
             CambridgeLevel? cambridgeLevel,
@@ -29,8 +30,10 @@
 
         IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter);
 
-        IQueryable<University> AllExtended();
+        IQueryable<University> AllWithDirectorAndCountry();
 
-        IQueryable<University> AllSimple();
+        IQueryable<University> AllWithCountry();
+
+        University GetByIdWithDocuments(int id);
     }
 }

@@ -1,13 +1,14 @@
 ﻿namespace Interapp.Web.Models.UniversityViewModels
 {
+    using System.Collections.Generic;
+    using AutoMapper;
     using Common.Enums;
     using CountryViewModels;
     using Data.Models;
     using DirectorInfoViewModels;
-    using Infrastructure.Mappings;
-    using AutoMapper;
-    using System.Collections.Generic;
     using DocumentViewModels;
+    using Infrastructure.Mappings;
+
     public class UniversityViewModel : IMapFrom<University>, IHaveCustomMappings
     {
         public int Id { get; set; }

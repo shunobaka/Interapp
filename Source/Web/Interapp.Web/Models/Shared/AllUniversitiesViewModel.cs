@@ -1,7 +1,7 @@
 ﻿namespace Interapp.Web.Models.Shared
 {
-    using Services.Common;
     using System.Collections.Generic;
+    using Services.Common;
     using UniversityViewModels;
 
     public class AllUniversitiesViewModel
