@@ -1,6 +1,7 @@
 ﻿namespace Interapp.Services.Contracts
 {
     using System.Linq;
+    using Common;
     using Data.Models;
 
     public interface IStudentInfosService
@@ -22,5 +23,7 @@
         IQueryable<University> GetUserUniversitiesWithDocuments(string studentId);
 
         IQueryable<University> GetUniversitiesOfInterest(string studentId);
+
+        ApplicationEligibility IsEligibleToApply(StudentInfo student, University university);
     }
 }
