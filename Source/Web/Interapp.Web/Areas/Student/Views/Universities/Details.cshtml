@@ -3,7 +3,13 @@
     ViewBag.Title = "University details";
 }
 
-<h2>Application details for @Model.University.Name</h2>
+<div class="col-md-8">
+    <h2>Application details for @Model.University.Name</h2>
+</div>
+<div class="col-md-4">
+    <br />
+    @Html.ActionLink("Back to universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+</div>
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -12,4 +18,18 @@
     <div class="col-md-6">
         @Html.Partial("_StudentInfo")
     </div>
+</div>
+<div class="row text-center">
+    <hr />
+    <div class="col-md-8 col-md-offset-2">
+        <h5 class="@(Model.Eligibility.IsEligible ? Html.Raw("text-success") : Html.Raw("text-danger"))">@Model.Eligibility.Message</h5>
+        @if (Model.Eligibility.IsEligible)
+        {
+            using (Html.BeginForm("Submit", "Applications", new { id = Model.University.Id }, FormMethod.Post, null))
+            {
+                <input type="submit" value="Submit application" class="btn btn-primary" />
+            }
+        }
+    </div>
+    <hr />
 </div>
