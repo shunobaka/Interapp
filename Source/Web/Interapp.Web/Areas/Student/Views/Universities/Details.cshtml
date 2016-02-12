@@ -3,12 +3,14 @@
     ViewBag.Title = "University details";
 }
 
-<div class="col-md-8">
-    <h2>Application details for @Model.University.Name</h2>
-</div>
-<div class="col-md-4">
-    <br />
-    @Html.ActionLink("Back to universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+<div class="row">
+    <div class="col-md-8">
+        <h2>Application details for @Model.University.Name</h2>
+    </div>
+    <div class="col-md-4">
+        <br />
+        @Html.ActionLink("Back to universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+    </div>
 </div>
 <hr />
 <div class="row">
