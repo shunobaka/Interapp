@@ -11,6 +11,7 @@
     using Models.Shared;
     using AutoMapper;
     using Models.StudentInfoViewModels;
+    using Models.UniversityViewModels;
     [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
     {
@@ -72,7 +73,7 @@
             {
                 Eligibility = eligiblity,
                 Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = Mapper.Map<Models.UniversityViewModels.UniversityViewModel>(university)
+                University = Mapper.Map<UniversityDetailsViewModel>(university)
             };
 
             return this.View(model);

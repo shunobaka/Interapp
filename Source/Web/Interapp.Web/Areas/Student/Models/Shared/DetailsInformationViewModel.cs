@@ -6,7 +6,7 @@
 
     public class DetailsInformationViewModel
     {
-        public UniversityViewModel University { get; set; }
+        public UniversityDetailsViewModel University { get; set; }
 
         public StudentInfoApplicationViewModel Student { get; set; }
 
