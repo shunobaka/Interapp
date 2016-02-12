@@ -23,20 +23,6 @@
 
         public void AddUniversityOfInterest(string studentId, int universityId)
         {
-            // TEMPORARY WORK-AROUND
-            // TODO: Fix 
-            //var db = new InterappDbContext();
-            //var student = db.StudentInfos
-            //    .Where(s => s.StudentId == studentId)
-            //    .FirstOrDefault();
-
-            //var university = db.Universities
-            //    .Where(u => u.Id == universityId)
-            //    .FirstOrDefault();
-
-            //student.UniversitiesOfInterest.Add(university);
-            //db.SaveChanges();
-
             var student = this.studentInfos
                 .All()
                 .Where(s => s.StudentId == studentId)
@@ -49,7 +35,7 @@
 
             this.universities.Detach(university);
             student.UniversitiesOfInterest.Add(university);
-            this.studentInfos.Attach<University>(university);
+            this.studentInfos.Attach(university);
             this.studentInfos.SaveChanges();
         }
 

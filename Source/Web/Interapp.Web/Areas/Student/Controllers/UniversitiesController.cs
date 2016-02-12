@@ -58,5 +58,12 @@
 
             return this.PartialView("_NotAjaxError");
         }
+
+        public ActionResult Details(int id)
+        {
+            var studentId = this.User.Identity.GetUserId();
+            var university = this.universities.GetById(id);
+            var user = this.studentInfos.GetById(studentId);
+        }
     }
 }
