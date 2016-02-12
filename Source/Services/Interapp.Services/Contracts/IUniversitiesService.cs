@@ -30,8 +30,10 @@
 
         IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter);
 
-        IQueryable<University> AllExtended();
+        IQueryable<University> AllWithDirectorAndCountry();
 
-        IQueryable<University> AllSimple();
+        IQueryable<University> AllWithCountry();
+
+        University GetByIdWithDocuments(int id);
     }
 }
