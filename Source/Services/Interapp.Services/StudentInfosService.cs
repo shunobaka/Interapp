@@ -6,6 +6,7 @@
     using Data.Models;
     using Data.Repositories;
     using Common;
+    using System;
 
     public class StudentInfosService : IStudentInfosService
     {
@@ -185,6 +186,16 @@
             eligibilityResult.Message = "You are eligible to apply for the university.";
             eligibilityResult.IsEligible = true;
             return eligibilityResult;
+        }
+
+        public StudentInfo GetByIdWithDocumentsAndScores(string id)
+        {
+            return this.studentInfos
+                .All()
+                .Where(s => s.StudentId == id)
+                .Include(s => s.Documents)
+                .Include(s => s.Scores)
+                .FirstOrDefault();
         }
     }
 }

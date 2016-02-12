@@ -25,5 +25,7 @@
         IQueryable<University> GetUniversitiesOfInterest(string studentId);
 
         ApplicationEligibility IsEligibleToApply(StudentInfo student, University university);
+
+        StudentInfo GetByIdWithDocumentsAndScores(string id);
     }
 }
