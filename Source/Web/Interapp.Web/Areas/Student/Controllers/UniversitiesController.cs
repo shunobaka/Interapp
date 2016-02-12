@@ -65,8 +65,8 @@
         public ActionResult Details(int id)
         {
             var studentId = this.User.Identity.GetUserId();
-            var university = this.universities.GetById(id);
-            var student = this.studentInfos.GetById(studentId);
+            var university = this.universities.GetByIdWithDocuments(id);
+            var student = this.studentInfos.GetByIdWithDocumentsAndScores(studentId);
             var eligiblity = this.studentInfos.IsEligibleToApply(student, university);
 
             var model = new DetailsInformationViewModel()

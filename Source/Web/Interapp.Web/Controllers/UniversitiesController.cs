@@ -55,7 +55,7 @@
             if (this.HttpContext.Cache["Universities"] == null)
             {
                 // TODO: Make cache for hour
-                var unis = this.universities.AllSimple().ToList();
+                var unis = this.universities.AllWithCountry().ToList();
                 this.HttpContext.Cache.Add(
                     "Universities",
                     unis,
