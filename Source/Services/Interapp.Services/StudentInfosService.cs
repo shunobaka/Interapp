@@ -2,11 +2,10 @@
 {
     using System.Data.Entity;
     using System.Linq;
+    using Common;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using Common;
-    using System;
 
     public class StudentInfosService : IStudentInfosService
     {

@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Services
 {
-    using Contracts;
     using System;
-    using Data.Models;
-    using Common;
     using System.Linq;
+    using Common;
+    using Contracts;
+    using Data.Models;
     using Data.Repositories;
 
     public class ApplicationsService : IApplicationsService
