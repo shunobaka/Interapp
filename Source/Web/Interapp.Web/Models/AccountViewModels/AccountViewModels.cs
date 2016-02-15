@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models
+﻿namespace Interapp.Web.Models.AccountViewModels
 {
     using System;
     using System.Collections.Generic;

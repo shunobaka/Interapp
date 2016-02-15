@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models
+﻿namespace Interapp.Web.Models.ManageViewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
