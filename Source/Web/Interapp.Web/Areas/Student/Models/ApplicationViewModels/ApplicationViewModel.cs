@@ -27,6 +27,6 @@
         [Required]
         public int MajorId { get; set; }
         
-        public virtual Major Major { get; set; }
+        public virtual MajorViewModel Major { get; set; }
     }
 }
