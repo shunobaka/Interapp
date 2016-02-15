@@ -1,8 +1,7 @@
-﻿namespace Interapp.Web.Models.DirectorInfoViewModels
+﻿namespace Interapp.Web.Models.UniversitiesViewModels
 {
     using Data.Models;
     using Infrastructure.Mappings;
-    using UserViewModels;
 
     public class DirectorInfoViewModel : IMapFrom<DirectorInfo>
     {

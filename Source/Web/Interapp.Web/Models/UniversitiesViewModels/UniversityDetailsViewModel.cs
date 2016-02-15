@@ -1,15 +1,12 @@
-﻿namespace Interapp.Web.Models.UniversityViewModels
+﻿namespace Interapp.Web.Models.UniversitiesViewModels
 {
     using System.Collections.Generic;
     using AutoMapper;
     using Common.Enums;
-    using CountryViewModels;
     using Data.Models;
-    using DirectorInfoViewModels;
-    using DocumentViewModels;
     using Infrastructure.Mappings;
 
-    public class UniversityViewModel : IMapFrom<University>, IHaveCustomMappings
+    public class UniversityDetailsViewModel : IMapFrom<University>, IHaveCustomMappings
     {
         public int Id { get; set; }
        
@@ -41,10 +38,10 @@
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<University, UniversityViewModel>()
+            configuration.CreateMap<University, UniversityDetailsViewModel>()
                 .ForMember(u => u.EnrolledStudents, opts => opts.MapFrom(u => u.Students.Count));
 
-            configuration.CreateMap<University, UniversityViewModel>()
+            configuration.CreateMap<University, UniversityDetailsViewModel>()
                 .ForMember(u => u.InterestedStudents, opts => opts.MapFrom(u => u.InterestedStudents.Count));
         }
     }

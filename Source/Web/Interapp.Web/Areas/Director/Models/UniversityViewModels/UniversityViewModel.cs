@@ -7,8 +7,7 @@
     using Common.Enums;
     using Data.Models;
     using Infrastructure.Mappings;
-    using Web.Models.CountryViewModels;
-
+    using Web.Models.UniversitiesViewModels;
     public class UniversityViewModel : IMapFrom<University>
     {
         public int Id { get; set; }

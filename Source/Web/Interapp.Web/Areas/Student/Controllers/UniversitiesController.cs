@@ -5,13 +5,13 @@
     using AutoMapper.QueryableExtensions;
     using Services.Common;
     using Services.Contracts;
-    using Web.Models.Shared;
-    using Web.Models.UniversityViewModels;
     using Microsoft.AspNet.Identity;
     using Models.Shared;
     using AutoMapper;
     using Models.StudentInfoViewModels;
     using Models.UniversityViewModels;
+    using Web.Models.UniversitiesViewModels;
+
     [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
     {
@@ -32,7 +32,7 @@
                 .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 
-            var viewModel = new AllUniversitiesViewModel()
+            var viewModel = new UniversitiesListViewModel()
             {
                 Universities = viewModelUnis,
                 UniversitiesCount = viewModelUnis.Count,
@@ -73,7 +73,7 @@
             {
                 Eligibility = eligiblity,
                 Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = Mapper.Map<UniversityDetailsViewModel>(university)
+                University = Mapper.Map<Models.UniversityViewModels.UniversityDetailsViewModel>(university)
             };
 
             return this.View(model);

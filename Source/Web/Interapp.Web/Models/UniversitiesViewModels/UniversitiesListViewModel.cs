@@ -1,10 +1,10 @@
-﻿namespace Interapp.Web.Models.Shared
+﻿namespace Interapp.Web.Models.UniversitiesViewModels
 {
     using System.Collections.Generic;
     using Services.Common;
-    using UniversityViewModels;
+    using UniversitiesViewModels;
 
-    public class AllUniversitiesViewModel
+    public class UniversitiesListViewModel
     {
         public IEnumerable<UniversitySimpleViewModel> Universities { get; set; }
 

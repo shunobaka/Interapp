@@ -1,6 +1,5 @@
-﻿namespace Interapp.Web.Models.UniversityViewModels
+﻿namespace Interapp.Web.Models.UniversitiesViewModels
 {
-    using CountryViewModels;
     using Data.Models;
     using Infrastructure.Mappings;
 

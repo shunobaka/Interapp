@@ -239,14 +239,14 @@
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\CountryViewModels\CountryViewModel.cs" />
-    <Compile Include="Models\DirectorInfoViewModels\DirectorInfoViewModel.cs" />
-    <Compile Include="Models\DocumentViewModels\DocumentViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\CountryViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\DirectorInfoViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\DocumentViewModel.cs" />
     <Compile Include="Models\ManageViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\Shared\AllUniversitiesViewModel.cs" />
-    <Compile Include="Models\UniversityViewModels\UniversitySimpleViewModel.cs" />
-    <Compile Include="Models\UniversityViewModels\UniversityViewModel.cs" />
-    <Compile Include="Models\UserViewModels\UserViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
+    <Compile Include="Models\UniversitiesViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -340,6 +340,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Areas\Student\Views\Applications\" />
+    <Folder Include="Models\CountryViewModels\" />
+    <Folder Include="Models\Shared\" />
+    <Folder Include="Models\UserViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
