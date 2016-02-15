@@ -1,13 +1,14 @@
 ﻿namespace Interapp.Services
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Data.Entity;
     using Interapp.Common.Enums;
+
     public class UniversitiesService : IUniversitiesService
     {
         private IRepository<University> universities;
@@ -47,6 +48,10 @@
             return this.universities.All()
                 .Where(u => u.Id == id)
                 .Include(u => u.Director)
+                .Include(u => u.Country)
+                .Include(u => u.Students)
+                .Include(u => u.InterestedStudents)
+                .Include(u => u.DocumentRequirements)
                 .FirstOrDefault();
         }
 
@@ -60,10 +65,10 @@
             int countryId,
             string name,
             CambridgeLevel? cambridgeLevel,
-            CambridgeResult? cambridgeScore, 
-            int ibtToefl,
-            int pbtToefl,
-            int sat,
+            CambridgeResult? cambridgeScore,
+            int? ibtToefl,
+            int? pbtToefl,
+            int? sat,
             int tuition)
         {
             var university = this.universities
@@ -84,6 +89,118 @@
 
                 this.universities.SaveChanges();
             }
+        }
+
+        public IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter)
+        {
+            if (universities == null)
+            {
+                return universities;
+            }
+
+            universities = universities.OrderBy(u => u.Name);
+            var page = 1;
+            var pageSize = 10;
+
+            if (filter != null)
+            {
+                if (filter.Filter != null)
+                {
+                    universities = universities.Where(u => u.Name.Contains(filter.Filter));
+                }
+
+                page = filter.Page;
+                pageSize = filter.PageSize;
+
+                if (filter.OrderBy == null)
+                {
+                    if (filter.Order == "asc")
+                    {
+                        if (filter.OrderBy == "name")
+                        {
+                            universities = universities.OrderBy(u => u.Name);
+                        }
+                        else if (filter.OrderBy == "country")
+                        {
+                            universities = universities.OrderBy(u => u.Country);
+                        }
+                        else if (filter.OrderBy == "tuition")
+                        {
+                            universities = universities.OrderBy(u => u.TuitionFee);
+                        }
+                        else if (filter.OrderBy == "sat")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredSAT);
+                        }
+                        else if (filter.OrderBy == "toeflpbt")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredPBTToefl);
+                        }
+                        else if (filter.OrderBy == "toeflibt")
+                        {
+                            universities = universities.OrderBy(u => u.RequiredIBTToefl);
+                        }
+                    }
+                    else
+                    {
+                        if (filter.OrderBy == "name")
+                        {
+                            universities = universities.OrderByDescending(u => u.Name);
+                        }
+                        else if (filter.OrderBy == "country")
+                        {
+                            universities = universities.OrderByDescending(u => u.Country);
+                        }
+                        else if (filter.OrderBy == "tuition")
+                        {
+                            universities = universities.OrderByDescending(u => u.TuitionFee);
+                        }
+                        else if (filter.OrderBy == "sat")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredSAT);
+                        }
+                        else if (filter.OrderBy == "toeflpbt")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredPBTToefl);
+                        }
+                        else if (filter.OrderBy == "toeflibt")
+                        {
+                            universities = universities.OrderByDescending(u => u.RequiredIBTToefl);
+                        }
+                    }
+                }
+            }
+
+            universities = universities
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+
+            return universities;
+        }
+
+        public IQueryable<University> AllWithDirectorAndCountry()
+        {
+            return this.universities
+                .All()
+                .Include(u => u.Country)
+                .Include(u => u.Director)
+                .Include(u => u.Director.Director);
+        }
+
+        public IQueryable<University> AllWithCountry()
+        {
+            return this.universities
+                .All()
+                .Include(u => u.Country);
+        }
+
+        public University GetByIdWithDocuments(int id)
+        {
+            return this.universities
+                .All()
+                .Where(u => u.Id == id)
+                .Include(u => u.DocumentRequirements)
+                .FirstOrDefault();
         }
     }
 }

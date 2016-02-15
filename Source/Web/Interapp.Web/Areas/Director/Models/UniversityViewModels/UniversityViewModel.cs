@@ -1,13 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Director.Models.UniversityViewModels
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using Common.Constants;
     using Common.Enums;
     using Data.Models;
     using Infrastructure.Mappings;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
-    using Web.Models.CountryModels;
+    using Web.Models.CountryViewModels;
 
     public class UniversityViewModel : IMapFrom<University>
     {

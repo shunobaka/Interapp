@@ -13,18 +13,27 @@
 
         University GetById(int id);
 
-        void Update(int universityId,
+        void Update(
+            int universityId,
             int countryId,
             string name,
             CambridgeLevel? cambridgeLevel,
             CambridgeResult? cambridgeScore,
-            int ibtToefl,
-            int pbtToefl,
-            int sat,
+            int? ibtToefl,
+            int? pbtToefl,
+            int? sat,
             int tuition);
 
         void DeleteById(int id);
 
         void Create(string directorId, string name, int tuitionFee, int countryId);
+
+        IQueryable<University> FilterUniversities(IQueryable<University> universities, FilterModel filter);
+
+        IQueryable<University> AllWithDirectorAndCountry();
+
+        IQueryable<University> AllWithCountry();
+
+        University GetByIdWithDocuments(int id);
     }
 }

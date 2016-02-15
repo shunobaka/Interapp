@@ -186,23 +186,11 @@
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -223,20 +211,25 @@
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentsFullViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\Shared\DetailsInformationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoApplicationViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversityViewModels\UniversityDetailsViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversityViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UniversitiesController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -244,8 +237,14 @@
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CountryModels\CountryViewModel.cs" />
+    <Compile Include="Models\CountryViewModels\CountryViewModel.cs" />
+    <Compile Include="Models\DirectorInfoViewModels\DirectorInfoViewModel.cs" />
+    <Compile Include="Models\DocumentViewModels\DocumentViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Shared\AllUniversitiesViewModel.cs" />
+    <Compile Include="Models\UniversityViewModels\UniversitySimpleViewModel.cs" />
+    <Compile Include="Models\UniversityViewModels\UniversityViewModel.cs" />
+    <Compile Include="Models\UserViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -277,6 +276,13 @@
     <Content Include="Areas\Director\Views\Home\Index.cshtml" />
     <Content Include="Areas\Director\Views\Universities\Add.cshtml" />
     <Content Include="Areas\Director\Views\Universities\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\All.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_SuccessfullyAdded.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_AlreadyAdded.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_NotAjaxError.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_UniversityInfo.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_StudentInfo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -323,6 +329,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_RolePartial.cshtml" />
+    <Content Include="Views\Universities\All.cshtml" />
+    <Content Include="Views\Shared\_UniversitiesFilterPartial.cshtml" />
+    <Content Include="Views\Universities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -348,6 +358,10 @@
     <ProjectReference Include="..\..\Data\Interapp.Data\Interapp.Data.csproj">
       <Project>{fa884807-e1bf-4bf9-b245-6c82a57babec}</Project>
       <Name>Interapp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Interapp.Services.Common\Interapp.Services.Common.csproj">
+      <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
+      <Name>Interapp.Services.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>

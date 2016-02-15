@@ -1,9 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Director.Models.UniversityViewModels
 {
-    using Common.Constants;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Common.Constants;
 
     public class UniversityCreateViewModel
     {

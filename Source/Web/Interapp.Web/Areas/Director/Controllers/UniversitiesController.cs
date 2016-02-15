@@ -106,15 +106,25 @@
             var university = this.universities.GetById(id);
             var userId = this.User.Identity.GetUserId();
 
-            if (university == null || university.DirectorId == userId)
+            if (university == null || university.DirectorId != userId)
             {
                 this.ModelState.AddModelError("Edit", "Either there is no such university, or you don't have permissions to edit it.");
             }
 
             if (this.ModelState.IsValid)
             {
-                //this.universities.Update();
-                // TODO: Implement
+                this.universities.Update(
+                    id,
+                    model.CountryId,
+                    model.Name,
+                    model.RequiredCambridgeLevel,
+                    model.RequiredCambridgeScore,
+                    model.RequiredIBTToefl,
+                    model.RequiredPBTToefl,
+                    model.RequiredSAT,
+                    model.TuitionFee);
+                return this.RedirectToAction(nameof(this.Add));
+                // TODO: Change redirect
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);

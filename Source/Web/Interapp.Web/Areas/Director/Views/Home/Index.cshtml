@@ -1,9 +1,31 @@
-﻿
+﻿@model IEnumerable<Interapp.Web.Areas.Director.Models.UniversityViewModels.UniversityViewModel>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Director Area</h2>
+<h2>Director's panel</h2>
 <hr />
-<h3>My universities</h3>
-@Html.ActionLink("Add new university", "Add", "Universities", null, new { @class = "btn btn-primary" })
+<div class="row">
+    <div class="col-md-6">
+        <h3>My universities</h3>
+        @Html.ActionLink("Add new university", "Add", "Universities", null, new { @class = "btn btn-primary" })
+        @if (Model == null || Model.Count() == 0)
+        {
+            <h4>You still have no universities.</h4>
+        }
+        else
+        {
+            <br />
+            <br />
+            foreach (var university in Model)
+            {
+                <div class="form-group">
+                    @Html.LabelForModel(university.Name)
+                    @Html.ActionLink("Details", "Details", "Universities", new { area = "", id = university.Id }, new { @class = "btn btn-success pull-right" })
+                    @Html.ActionLink("Edit", "Edit", "Universities", new { id = university.Id }, new { @class = "btn btn-warning pull-right" })
+                    <br />
+                </div>
+            }
+        }
+    </div>
+</div>
