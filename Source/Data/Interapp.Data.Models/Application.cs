@@ -11,7 +11,9 @@
 
         public DateTime? DateCreated { get; set; }
 
-        public bool IsReviewed { get; set; } 
+        public bool IsReviewed { get; set; }
+
+        public bool IsAnswered { get; set; }
 
         [Required]
         public int UniversityId { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Common;
@@ -195,6 +196,14 @@
                 .Include(s => s.Documents)
                 .Include(s => s.Scores)
                 .FirstOrDefault();
+        }
+
+        public ApplicationEligibility IsEligibleToApply(string studentId, int universityId)
+        {
+            var student = this.studentInfos.GetById(studentId);
+            var university = this.universities.GetById(universityId);
+
+            return this.IsEligibleToApply(student, university);
         }
     }
 }

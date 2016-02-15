@@ -216,6 +216,9 @@
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
