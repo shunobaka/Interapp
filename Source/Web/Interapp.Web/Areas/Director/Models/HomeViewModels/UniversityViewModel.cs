@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Director.Models.UniversityViewModels
+﻿namespace Interapp.Web.Areas.Director.Models.HomeViewModels
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@
     using Common.Enums;
     using Data.Models;
     using Infrastructure.Mappings;
-    using Web.Models.UniversitiesViewModels;
+
     public class UniversityViewModel : IMapFrom<University>
     {
         public int Id { get; set; }
