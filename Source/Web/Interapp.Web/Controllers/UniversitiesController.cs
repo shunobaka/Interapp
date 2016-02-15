@@ -8,10 +8,9 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.Models;
-    using Models.Shared;
-    using Models.UniversityViewModels;
     using Services.Common;
     using Services.Contracts;
+    using Models.UniversitiesViewModels;
 
     [Authorize]
     public class UniversitiesController : Controller
@@ -32,7 +31,7 @@
                 .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 
-            var viewDataModel = new AllUniversitiesViewModel()
+            var viewDataModel = new UniversitiesListViewModel()
             {
                 Universities = filteredUnis,
                 Filter = model,
@@ -45,7 +44,7 @@
         public ActionResult Details(int id)
         {
             var university = this.universities.GetById(id);
-            var model = Mapper.Map<UniversityViewModel>(university);
+            var model = Mapper.Map<UniversityDetailsViewModel>(university);
 
             return this.View(model);
         }

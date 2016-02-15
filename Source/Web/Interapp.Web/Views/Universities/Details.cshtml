@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Models.UniversityViewModels.UniversityViewModel
+﻿@model Interapp.Web.Models.UniversitiesViewModels.UniversityDetailsViewModel
 @{
     ViewBag.Title = "University Details";
 }
@@ -15,7 +15,7 @@
     {
         <div class="col-md-6">
             <br />
-            @using (@Ajax.BeginForm("Calculate", null, new AjaxOptions
+            @using (@Ajax.BeginForm("Add university", null, new AjaxOptions
             {
                 UpdateTargetId = "result",
                 InsertionMode = InsertionMode.Replace
