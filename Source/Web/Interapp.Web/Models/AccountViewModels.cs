@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Interapp.Web.Models
+﻿namespace Interapp.Web.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using Common.Constants;
+    using Common.Enums;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -18,8 +22,11 @@ namespace Interapp.Web.Models
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+
+        public ICollection<SelectListItem> Providers { get; set; }
+
         public string ReturnUrl { get; set; }
+
         public bool RememberMe { get; set; }
     }
 
@@ -31,6 +38,7 @@ namespace Interapp.Web.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -49,9 +57,8 @@ namespace Interapp.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -65,6 +72,10 @@ namespace Interapp.Web.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -77,8 +88,37 @@ namespace Interapp.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "First name")]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last name")]
+        [MinLength(ModelConstants.UserNamesMinLength)]
+        [MaxLength(ModelConstants.UserNamesMaxLength)]
+        [RegularExpression(ModelConstants.UserNamesRegex)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of birth")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Country")]
+        public int CountryId { get; set; }
+
+        public IEnumerable<SelectListItem> Countries { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        [EnumDataType(typeof(UserRoles), ErrorMessage = "The user type is invalid.")]
+        public int Role { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -96,7 +136,7 @@ namespace Interapp.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

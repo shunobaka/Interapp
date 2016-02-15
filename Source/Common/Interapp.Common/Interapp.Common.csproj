@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Assemblies.cs" />
     <Compile Include="Constants\ModelConstants.cs" />
+    <Compile Include="Constants\ModelErrorMessages.cs" />
     <Compile Include="Enums\CambridgeLevel.cs" />
+    <Compile Include="Enums\CambridgeResult.cs" />
+    <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Enums\ToeflType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

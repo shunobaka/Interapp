@@ -1,0 +1,25 @@
+﻿@model Interapp.Web.Areas.Student.Models.DocumentViewModels.DocumentViewModel
+@{
+    ViewBag.Title = "Document details";
+}
+
+<h2>Details for document</h2>
+@Html.ActionLink("Back to dashboard", "", "Dashboard", null, new { @class = "btn btn-success" })
+@if (Model != null)
+{
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger pull-right" })
+}
+<hr />
+@if (Model == null)
+{
+    <h4>You don't have such document.</h4>
+}
+else
+{
+    <h5>Name of document</h5>
+    <h4>@Model.Name</h4>
+    <br />
+    <h5>Content</h5>
+    <h4>@Model.Content</h4>
+}

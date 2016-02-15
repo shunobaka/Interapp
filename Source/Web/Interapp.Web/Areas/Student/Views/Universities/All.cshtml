@@ -1,0 +1,31 @@
+﻿@model Interapp.Web.Models.Shared.AllUniversitiesViewModel
+@{
+    ViewBag.Title = "All universities";
+}
+
+<h2>My universities of interest</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>There are no universities of interest</h3>
+}
+else
+{
+    @Html.Partial("_UniversitiesFilterPartial")
+    <hr />
+    <div class="row">
+        @foreach (var university in Model.Universities)
+        {
+            <div class="col-md-6">
+                <div class="col-md-8">
+                    <h3>@university.Name</h3>
+                    <h5>Country: @university.Country.Name</h5>
+                    <h5>Tuition fee: @string.Format("{0:C}", university.TuitionFee)</h5>
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("View Details", "Details", "Universities", new { id = university.Id }, new { @class = "btn btn-primary pull-right" })
+                </div>
+            </div>
+        }
+    </div>
+}

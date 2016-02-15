@@ -1,0 +1,123 @@
+﻿@model Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@{
+    var allDocuments = new List<Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoDocumentViewModel>();
+
+    foreach (var university in Model.UniversitiesOfInterest)
+    {
+        allDocuments.AddRange(university.DocumentRequirements);
+    }
+
+    var uniqueRequiredDocuments = allDocuments.Select(d => d.Name).Distinct().ToList();
+
+    var universitiesToDisplay = 0;
+    if (Model.UniversitiesOfInterest.Count > 4)
+    {
+        universitiesToDisplay = 5;
+    }
+    else
+    {
+        universitiesToDisplay = Model.UniversitiesOfInterest.Count();
+    }
+}
+
+<h2>@Model.Student.FirstName @Model.Student.LastName's Dashboard</h2>
+<h4>All your information at one place.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h3>Required documents</h3>
+        <div class="form-group">
+            @if (Model.Essay != null)
+            {
+                <input type="checkbox" checked="checked" disabled="disabled" />
+            }
+            else
+            {
+                <input type="checkbox" disabled="disabled" />
+            }
+            <label>Essay</label>
+            <div class="pull-right">
+                @if (Model.Essay == null)
+                {
+                    @Html.ActionLink("Create", "Edit", "Essay", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Review", "Review", "Essay", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Edit", "Edit", "Essay", null, new { @class = "btn btn-warning" })
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @if (Model.Scores != null)
+            {
+                <input type="checkbox" checked="checked" disabled="disabled" />
+            }
+            else
+            {
+                <input type="checkbox" disabled="disabled" />
+            }
+            <label>Scores</label>
+            <div class="pull-right">
+                @if (Model.Scores == null)
+                {
+                    @Html.ActionLink("Fill scores", "Edit", "Scores", null, new { @class = "btn btn-primary" })
+                }
+                else
+                {
+                    @Html.ActionLink("Review", "Review", "Scores", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Edit", "Edit", "Scores", null, new { @class = "btn btn-warning" })
+                }
+            </div>
+        </div>
+        @for (var i = 0; i < uniqueRequiredDocuments.Count; i++)
+        {
+            <div class="form-group">
+                @if (Model.Documents.Any(d => d.Name == uniqueRequiredDocuments[i]))
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+                @Html.LabelFor(m => m.Documents[i].Name)
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-8">
+                <h3>5 Universities of interest to you</h3>
+            </div>
+            <div class="col-md-4">
+                <br />
+                @Html.ActionLink("All universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+            </div>
+        </div>
+        @if (Model.UniversitiesOfInterest != null && Model.UniversitiesOfInterest.Count != 0)
+        {
+            for (var i = 0; i < universitiesToDisplay; i++)
+            {
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <h4>@Model.UniversitiesOfInterest[i].Name</h4>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info pull-right" })
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="form-group">
+                <label>You have no universities in your interests.</label>
+            </div>
+        }
+    </div>
+</div>

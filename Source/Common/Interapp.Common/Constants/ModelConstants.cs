@@ -9,7 +9,7 @@
         public const int UniversityNameMaxLength = 80;
         public const int UniversityTuitionFeeMin = 0;
         public const int UniversityTuitionFeeMax = 100000;
-        public const string UniversityNameRegex = "^[A-Z][A-z a-z-'\\.]+$";
+        public const string UniversityNameRegex = "[A-Z][A-z a-z-'\\.]+";
 
         public const int MajorNameMinLength = 10;
         public const int MajorNameMaxLength = 80;
@@ -29,7 +29,6 @@
         public const int ScoreSatMax = 800;
         public const int ScoreToeflMin = 0;
         public const int ScoreToeflMax = 677;
-        public const string ScoreCambridgeResultRegex = "^[ABC]{1}$";
 
         public const int ScoreSatTotalMin = 600;
         public const int ScoreSatTotalMax = 2400;
@@ -40,6 +39,6 @@
 
         public const int UserNamesMinLength = 2;
         public const int UserNamesMaxLength = 20;
-        public const string UserNamesRegex = "^[A-Z][a-z-]$";
+        public const string UserNamesRegex = "[A-Z][a-z]+([\\-][A-Za-z]){0,2}[a-z]*";
     }
 }

@@ -1,0 +1,19 @@
+﻿<h3>University Information</h3>
+<hr />
+<h4>Scores Requirements</h4>
+<hr />
+<h5>SAT: @((Model.University.RequiredSAT != null) ? Html.Raw(Model.University.RequiredSAT) : Html.Raw("None"))</h5>
+<h5>TOEFL (IBT/PBT): @((Model.University.RequiredIBTToefl != null) ? Html.Raw(Model.University.RequiredIBTToefl) : Html.Raw("None")) / @((Model.University.RequiredPBTToefl != null) ? Html.Raw(Model.University.RequiredPBTToefl) : Html.Raw("None"))</h5>
+<h5>Cambridge: @((Model.University.RequiredCambridgeScore != null) ? Html.Raw(Model.University.RequiredCambridgeLevel + " " + Model.University.RequiredCambridgeScore) : Html.Raw("Not required"))</h5>
+<hr />
+<h4>Document Requirements</h4>
+<hr />
+@if (Model.University.DocumentRequirements.Count == 0)
+            {
+    <h5>No documents are required.</h5>
+}
+@foreach (var document in Model.University.DocumentRequirements)
+            {
+    <h5>@document.Name</h5>
+}
+

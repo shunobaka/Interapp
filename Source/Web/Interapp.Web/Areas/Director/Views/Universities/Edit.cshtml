@@ -1,0 +1,57 @@
+﻿@model Interapp.Web.Areas.Director.Models.UniversityViewModels.UniversityViewModel
+@{
+    ViewBag.Title = "Edit university";
+}
+
+<h2>Edit university info</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>The university doesn't exist or you don't have permissions to edit it.</h3>
+    @Html.ActionLink("Back to director panel", "Index", "Home", null, new { @class = "btn btn-primary" })
+    return;
+}
+<h3>Editing "@Model.Name"</h3>
+@using (Html.BeginForm("Edit", "Universities", new { id = Model.Id }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(null, new { @class = "text-danger" })
+    <h3>General Information</h3>
+    <div class="form-group">
+        @Html.LabelFor(u => u.Name)
+        @Html.TextBoxFor(u => u.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.TuitionFee)
+        @Html.TextBoxFor(u => u.TuitionFee, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.Countries)
+        @Html.DropDownListFor(m => m.CountryId, Model.Countries, new { @class = "form-control" })
+    </div>
+    <h3>Admission Information</h3>
+    <div class="form-group">
+        @Html.LabelFor(u => u.RequiredSAT)
+        @Html.TextBoxFor(u => u.RequiredSAT, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.RequiredIBTToefl)
+        @Html.TextBoxFor(u => u.RequiredIBTToefl, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.RequiredPBTToefl)
+        @Html.TextBoxFor(u => u.RequiredPBTToefl, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.RequiredCambridgeLevel)
+        @Html.EnumDropDownListFor(u => u.RequiredCambridgeLevel, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(u => u.RequiredCambridgeScore)
+        @Html.EnumDropDownListFor(u => u.RequiredCambridgeScore, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Update" />
+        @Html.ActionLink("Cancel", "Details", "Universities", new { id = Model.Id }, new { @class = "btn btn-danger" })
+    </div>
+}
