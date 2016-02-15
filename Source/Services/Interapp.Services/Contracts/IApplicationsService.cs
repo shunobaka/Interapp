@@ -14,7 +14,7 @@
 
         Application GetById(int id);
 
-        void DeleteById(int id);
+        void Delete(int id);
 
         void Create(string studentId, int universityId, int majorId);
     }
