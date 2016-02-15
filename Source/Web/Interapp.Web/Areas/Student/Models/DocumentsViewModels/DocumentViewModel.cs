@@ -1,10 +1,9 @@
-﻿namespace Interapp.Web.Areas.Student.Models.DocumentViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.DocumentsViewModels
 {
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;
     using Data.Models;
     using Infrastructure.Mappings;
-    using UniversitiesViewModels;
 
     public class DocumentViewModel : IMapFrom<Document>
     {

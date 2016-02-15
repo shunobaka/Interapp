@@ -1,8 +1,8 @@
-﻿namespace Interapp.Web.Areas.Student.Models.DocumentViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.DocumentsViewModels
 {
     using System.Collections.Generic;
 
-    public class DocumentsFullViewModel
+    public class DocumentsListViewModel
     {
         public IList<DocumentViewModel> StudentDocuments { get; set; }
 

@@ -4,11 +4,10 @@
     using AutoMapper.QueryableExtensions;
     using Data.Models;
     using Interapp.Services.Contracts;
-    using Models.Shared;
     using Microsoft.AspNet.Identity;
-    using Models.DocumentViewModels;
     using System.Linq;
     using System.Web.Mvc;
+    using Models.DocumentsViewModels;
 
     [Authorize(Roles = "Student")]
     public class DocumentsController : Controller
@@ -35,7 +34,7 @@
                 .ProjectTo<DocumentViewModel>()
                 .ToList();
 
-            var model = new DocumentsFullViewModel()
+            var model = new DocumentsListViewModel()
             {
                 StudentDocuments = studentDocuments,
                 RequiredDocuments = requiredDocuments
