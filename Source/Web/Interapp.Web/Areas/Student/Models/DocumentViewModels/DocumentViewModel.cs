@@ -4,7 +4,7 @@
     using Common.Constants;
     using Data.Models;
     using Infrastructure.Mappings;
-    using UniversityViewModels;
+    using UniversitiesViewModels;
 
     public class DocumentViewModel : IMapFrom<Document>
     {

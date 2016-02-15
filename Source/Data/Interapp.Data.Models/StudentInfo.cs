@@ -35,12 +35,12 @@
 
         [ForeignKey("Essay")]
         public string EssayId { get; set; }
-
+        
         public virtual Essay Essay { get; set; }
 
         [ForeignKey("Scores")]
         public string ScoresId { get; set; }
-
+        
         public virtual ScoreReport Scores { get; set; }
 
         public int? MajorId { get; set; }

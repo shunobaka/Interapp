@@ -1,8 +1,6 @@
-﻿namespace Interapp.Web.Areas.Student.Models.Shared
+﻿namespace Interapp.Web.Areas.Student.Models.UniversitiesViewModels
 {
     using Services.Common;
-    using StudentInfoViewModels;
-    using UniversityViewModels;
 
     public class DetailsInformationViewModel
     {

@@ -1,16 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using System.Web.Mvc;
-    using System.Linq;
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
+    using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
-    using Microsoft.AspNet.Identity;
-    using Models.Shared;
-    using AutoMapper;
-    using Models.StudentInfoViewModels;
-    using Models.UniversityViewModels;
-    using Web.Models.UniversitiesViewModels;
+    using System.Linq;
+    using System.Web.Mvc;
 
     [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
@@ -73,7 +70,7 @@
             {
                 Eligibility = eligiblity,
                 Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = Mapper.Map<Models.UniversityViewModels.UniversityDetailsViewModel>(university)
+                University = Mapper.Map<UniversityDetailsViewModel>(university)
             };
 
             return this.View(model);

@@ -4,9 +4,9 @@
     using System.Web.Mvc;
     using AutoMapper;
     using Data.Models;
-    using Models.ScoresViewModels;
     using Microsoft.AspNet.Identity;
     using Models.Shared;
+    using Models.UniversitiesViewModels;
 
     [Authorize(Roles = "Student")]
     public class ScoresController : Controller

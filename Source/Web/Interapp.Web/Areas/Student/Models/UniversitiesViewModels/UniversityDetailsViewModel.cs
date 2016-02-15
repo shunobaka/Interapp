@@ -1,9 +1,8 @@
-﻿namespace Interapp.Web.Areas.Student.Models.UniversityViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.UniversitiesViewModels
 {
     using System.Collections.Generic;
     using Common.Enums;
     using Data.Models;
-    using DocumentViewModels;
     using Infrastructure.Mappings;
 
     public class UniversityDetailsViewModel : IMapFrom<University>

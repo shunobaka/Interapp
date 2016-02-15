@@ -5,7 +5,6 @@
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using System.Web.Mvc;
-    using Models.Shared;
 
     [Authorize(Roles = "Student")]
     public class EssayController : Controller

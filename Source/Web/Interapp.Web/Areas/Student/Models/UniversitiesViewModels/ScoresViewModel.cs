@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Student.Models.ScoresViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.UniversitiesViewModels
 {
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;

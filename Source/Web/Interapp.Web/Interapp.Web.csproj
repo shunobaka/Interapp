@@ -213,20 +213,26 @@
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentsFullViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentViewModels\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\Shared\DetailsInformationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoDocumentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\DetailsInformationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoDocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoMajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoStudentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversityViewModels\UniversityDetailsViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversityViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\StudentInfoViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -333,16 +339,14 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_RolePartial.cshtml" />
     <Content Include="Views\Universities\All.cshtml" />
-    <Content Include="Views\Shared\_UniversitiesFilterPartial.cshtml" />
+    <Content Include="Views\Universities\_UniversitiesFilterPartial.cshtml" />
     <Content Include="Views\Universities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
+    <Folder Include="Areas\Student\Models\UniversityViewModels\" />
     <Folder Include="Areas\Student\Views\Applications\" />
-    <Folder Include="Models\CountryViewModels\" />
-    <Folder Include="Models\Shared\" />
-    <Folder Include="Models\UserViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
