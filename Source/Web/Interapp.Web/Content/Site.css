@@ -22,3 +22,29 @@ select,
 textarea {
     max-width: 280px;
 }
+
+input.large-input,
+select.large-input,
+textarea.large-input {
+    max-width: 600px;
+}
+
+textarea.large-input {
+    min-height: 200px;
+}
+
+.pull-right {
+    margin: 0 5px;
+}
+
+.pull-right a {
+    margin: 0 5px;
+}
+
+.scores-container {
+    margin-left: 30px;
+}
+
+.text-bold {
+    font-weight: bold;
+}

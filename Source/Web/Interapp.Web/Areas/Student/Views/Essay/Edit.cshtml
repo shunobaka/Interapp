@@ -1,0 +1,29 @@
+﻿@model Interapp.Web.Areas.Student.Models.EssayViewModels.EssayViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit your essay</h2>
+<hr />
+@using (Html.BeginForm("Edit", "Essay", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(e => e.Title)
+        @Html.TextBoxFor(e => e.Title, new { @class = "form-control large-input" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.Content)
+        @Html.TextAreaFor(e => e.Content, new { @class = "form-control large-input" })
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        @Html.ActionLink("Cancel", "Review", null, new { @class = "btn btn-danger large-input" })
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -8,13 +8,17 @@
 
     public class StudentInfo
     {
+        private ICollection<University> universitiesOfInterest;
         private ICollection<Application> applications;
         private ICollection<Document> documents;
+        private ICollection<Response> responses;
 
         public StudentInfo()
         {
+            this.universitiesOfInterest = new HashSet<University>();
             this.applications = new HashSet<Application>();
             this.documents = new HashSet<Document>();
+            this.responses = new HashSet<Response>();
         }
 
         [Key]
@@ -34,29 +38,15 @@
 
         public virtual Essay Essay { get; set; }
 
+        [ForeignKey("Scores")]
+        public string ScoresId { get; set; }
+
+        public virtual ScoreReport Scores { get; set; }
+
         public int? MajorId { get; set; }
 
         [ForeignKey("MajorId")]
         public virtual Major Major { get; set; }
-
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatCRResult { get; set; }
-
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatWritingResult { get; set; }
-
-        [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]
-        public int? SatMathResult { get; set; }
-
-        [Range(ModelConstants.ScoreToeflMin, ModelConstants.ScoreToeflMax)]
-        public int? ToeflResult { get; set; }
-
-        public ToeflType? ToeflType { get; set; }
-
-        [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char? CambridgeResult { get; set; }
-
-        public CambridgeLevel? CambridgeLevel { get; set; }
 
         public virtual ICollection<Application> Applications
         {
@@ -81,6 +71,32 @@
             set
             {
                 this.documents = value;
+            }
+        }
+
+        public virtual ICollection<University> UniversitiesOfInterest
+        {
+            get
+            {
+                return this.universitiesOfInterest;
+            }
+
+            set
+            {
+                this.universitiesOfInterest = value;
+            }
+        }
+
+        public virtual ICollection<Response> Responses
+        {
+            get
+            {
+                return this.responses;
+            }
+
+            set
+            {
+                this.responses = value;
             }
         }
     }

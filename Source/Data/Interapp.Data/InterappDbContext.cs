@@ -10,7 +10,7 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public IDbSet<Application> Applications { get; set; }
 
         public IDbSet<Country> Countries { get; set; }
@@ -21,11 +21,15 @@
 
         public IDbSet<Major> Majors { get; set; }
 
+        public IDbSet<ScoreReport> ScoreReports { get; set; }
+
         public IDbSet<University> Universities { get; set; }
 
-        public IDbSet<DirectorInfo> DirectorInfoes { get; set; }
+        public IDbSet<DirectorInfo> DirectorInfos { get; set; }
 
-        public IDbSet<StudentInfo> StudentInfoes { get; set; }
+        public IDbSet<StudentInfo> StudentInfos { get; set; }
+
+        public IDbSet<Response> Responses { get; set; }
 
         public static InterappDbContext Create()
         {
@@ -45,6 +49,10 @@
             modelBuilder.Entity<StudentInfo>()
                 .HasOptional(u => u.Essay)
                 .WithRequired(e => e.Author);
+
+            modelBuilder.Entity<StudentInfo>()
+                .HasOptional(u => u.Scores)
+                .WithRequired(e => e.StudentInfo);
 
             modelBuilder.Entity<User>()
                 .HasRequired(u => u.Country)

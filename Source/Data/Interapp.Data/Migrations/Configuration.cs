@@ -28,6 +28,20 @@ namespace Interapp.Data.Migrations
 
                 var student = new IdentityRole { Name = "Student" };
                 manager.Create(student);
+
+                context.SaveChanges();
+            }
+
+            var seeder = new Seeder();
+
+            if (!context.Countries.Any())
+            {
+                foreach (var country in seeder.Countries)
+                {
+                    context.Countries.Add(country);
+                }
+
+                context.SaveChanges();
             }
         }
     }

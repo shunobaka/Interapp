@@ -1,0 +1,36 @@
+﻿@model Interapp.Web.Areas.Student.Models.DocumentViewModels.DocumentViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit document</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>You don't have such document or did is not a valid url to it.</h3>
+    @Html.ActionLink("Go back to dashboard", "", "Dashboard", null, new { @class = "btn btn-primary" })
+}
+else
+{
+    using (Html.BeginForm("Edit", "Documents", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(null, new { @class = "text-danger" })
+        <div class="form-group">
+        @Html.LabelFor(d => d.Name)
+        @Html.TextBoxFor(d => d.Name, new { @class = "form-control large-input" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(d => d.Content)
+            @Html.TextAreaFor(d => d.Content, new { @class = "form-control large-input" })
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Update" />
+            @Html.ActionLink("Cancel", "All", "Documents", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

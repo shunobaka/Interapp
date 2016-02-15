@@ -9,12 +9,16 @@
     public class University
     {
         private ICollection<StudentInfo> students;
+        private ICollection<StudentInfo> interestedStudents;
         private ICollection<Document> documentRequirements;
+        private ICollection<Response> responses;
 
         public University()
         {
             this.students = new HashSet<StudentInfo>();
+            this.interestedStudents = new HashSet<StudentInfo>();
             this.documentRequirements = new HashSet<Document>();
+            this.responses = new HashSet<Response>();
         }
 
         [Key]
@@ -43,9 +47,8 @@
 
         [Range(ModelConstants.ScorePBTToelfMin, ModelConstants.ScorePBTToeflMax)]
         public int? RequiredPBTToefl { get; set; }
-
-        [RegularExpression(ModelConstants.ScoreCambridgeResultRegex)]
-        public char? RequiredCambridgeScore { get; set; }
+        
+        public CambridgeResult? RequiredCambridgeScore { get; set; }
 
         public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 
@@ -68,6 +71,20 @@
             }
         }
 
+        [InverseProperty("UniversitiesOfInterest")]
+        public virtual ICollection<StudentInfo> InterestedStudents
+        {
+            get
+            {
+                return this.interestedStudents;
+            }
+
+            set
+            {
+                this.interestedStudents = value;
+            }
+        }
+
         [InverseProperty("University")]
         public virtual ICollection<StudentInfo> Students
         {
@@ -79,6 +96,19 @@
             set
             {
                 this.students = value;
+            }
+        }
+
+        public virtual ICollection<Response> Responses
+        {
+            get
+            {
+                return this.responses;
+            }
+
+            set
+            {
+                this.responses = value;
             }
         }
     }
