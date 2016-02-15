@@ -207,6 +207,7 @@
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
     <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\Models\UniversityViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
@@ -337,6 +338,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
+    <Folder Include="Areas\Student\Views\Applications\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
