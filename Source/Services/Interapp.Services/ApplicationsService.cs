@@ -21,6 +21,13 @@
             return this.applications.All();
         }
 
+        public IQueryable<Application> AllByStudent(string studentId)
+        {
+            return this.applications
+                .All()
+                .Where(a => a.StudentId == studentId);
+        }
+
         public IQueryable<Application> AllByUniversity(int universityId)
         {
             return this.applications
