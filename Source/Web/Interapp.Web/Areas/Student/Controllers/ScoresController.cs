@@ -5,8 +5,7 @@
     using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models.Shared;
-    using Models.UniversitiesViewModels;
+    using Models.ScoresViewModels;
 
     [Authorize(Roles = "Student")]
     public class ScoresController : Controller

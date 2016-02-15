@@ -222,7 +222,8 @@
     <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\Shared\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ScoresViewModels\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\CountryViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\DetailsInformationViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoApplicationViewModel.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Areas\Student\Views\Universities\Details.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_UniversityInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_StudentInfo.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_UniversitiesFilterPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -347,7 +349,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
-    <Folder Include="Areas\Student\Models\UniversityViewModels\" />
     <Folder Include="Areas\Student\Views\Applications\" />
   </ItemGroup>
   <ItemGroup>

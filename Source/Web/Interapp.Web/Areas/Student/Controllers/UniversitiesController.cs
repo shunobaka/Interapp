@@ -25,7 +25,7 @@
         {
             var studentId = this.User.Identity.GetUserId();
             var viewModelUnis = this.universities
-                .FilterUniversities(this.studentInfos.GetUniversitiesOfInterest(studentId), model)
+                .FilterUniversities(this.universities.AllForStudent(studentId), model)
                 .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 

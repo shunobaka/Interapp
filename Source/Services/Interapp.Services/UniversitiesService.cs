@@ -202,5 +202,14 @@
                 .Include(u => u.DocumentRequirements)
                 .FirstOrDefault();
         }
+
+        public IQueryable<University> AllForStudent(string studentId)
+        {
+            return this.universities
+                .All()
+                .Where(u => u.InterestedStudents
+                    .Any(s => s.StudentId == studentId))
+                .Include(u => u.Country);
+        }
     }
 }

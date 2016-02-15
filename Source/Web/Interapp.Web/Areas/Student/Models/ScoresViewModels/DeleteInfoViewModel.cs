@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Student.Models.Shared
+﻿namespace Interapp.Web.Areas.Student.Models.ScoresViewModels
 {
     public class DeleteInfoViewModel
     {
