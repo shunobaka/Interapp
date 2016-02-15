@@ -9,7 +9,9 @@
         [Key]
         public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
+
+        public bool IsReviewed { get; set; } 
 
         [Required]
         public int UniversityId { get; set; }
