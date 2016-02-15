@@ -34,6 +34,8 @@
 
         IQueryable<University> AllWithCountry();
 
+        IQueryable<University> AllForStudent(string studentId);
+
         University GetByIdWithDocuments(int id);
     }
 }

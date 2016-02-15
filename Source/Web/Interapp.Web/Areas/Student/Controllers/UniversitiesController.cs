@@ -1,17 +1,14 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using System.Web.Mvc;
-    using System.Linq;
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
+    using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
-    using Web.Models.Shared;
-    using Web.Models.UniversityViewModels;
-    using Microsoft.AspNet.Identity;
-    using Models.Shared;
-    using AutoMapper;
-    using Models.StudentInfoViewModels;
-    using Models.UniversityViewModels;
+    using System.Linq;
+    using System.Web.Mvc;
+
     [Authorize(Roles = "Student")]
     public class UniversitiesController : Controller
     {
@@ -28,11 +25,11 @@
         {
             var studentId = this.User.Identity.GetUserId();
             var viewModelUnis = this.universities
-                .FilterUniversities(this.studentInfos.GetUniversitiesOfInterest(studentId), model)
+                .FilterUniversities(this.universities.AllForStudent(studentId), model)
                 .ProjectTo<UniversitySimpleViewModel>()
                 .ToList();
 
-            var viewModel = new AllUniversitiesViewModel()
+            var viewModel = new UniversitiesListViewModel()
             {
                 Universities = viewModelUnis,
                 UniversitiesCount = viewModelUnis.Count,

@@ -14,7 +14,7 @@
     using Microsoft.Owin.Security;
     using Models;
     using Services.Contracts;
-
+    using Models.AccountViewModels;
     [Authorize]
     public class AccountController : Controller
     {

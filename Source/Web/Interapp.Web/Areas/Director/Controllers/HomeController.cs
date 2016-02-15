@@ -4,8 +4,8 @@
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
-    using Models.UniversityViewModels;
     using Services.Contracts;
+    using Models.HomeViewModels;
 
     [Authorize(Roles = "Director")]
     public class HomeController : Controller

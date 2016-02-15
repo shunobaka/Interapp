@@ -26,6 +26,8 @@
 
         ApplicationEligibility IsEligibleToApply(StudentInfo student, University university);
 
+        ApplicationEligibility IsEligibleToApply(string studentId, int universityId);
+
         StudentInfo GetByIdWithDocumentsAndScores(string id);
     }
 }
