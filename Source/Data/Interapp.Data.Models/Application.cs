@@ -32,5 +32,10 @@
 
         [ForeignKey("MajorId")]
         public virtual Major Major { get; set; }
+
+        public int? ResponseId { get; set; }
+
+        [ForeignKey("ResponseId")]
+        public virtual Response Response { get; set; }
     }
 }
