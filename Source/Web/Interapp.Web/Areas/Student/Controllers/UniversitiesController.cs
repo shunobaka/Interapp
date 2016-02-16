@@ -2,11 +2,15 @@
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Data.Models;
     using Microsoft.AspNet.Identity;
     using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Caching;
     using System.Web.Mvc;
 
     [Authorize(Roles = "Student")]
@@ -14,11 +18,13 @@
     {
         private IUniversitiesService universities;
         private IStudentInfosService studentInfos;
+        private IMajorsService majors;
 
-        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos)
+        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos, IMajorsService major)
         {
             this.universities = universities;
             this.studentInfos = studentInfos;
+            this.majors = majors;
         }
 
         public ActionResult All(FilterModel model)
@@ -74,6 +80,33 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        public ActionResult ApplicationForm()
+        {
+            var model = new ApplicationInputViewModel();
+            model.Majors = new SelectList(this.GetMajors(), "Id", "Name", model.MajorId);
+
+            return this.PartialView("_ApplicationForm", model);
+        }
+
+        private IEnumerable<Major> GetMajors()
+        {
+            if (this.HttpContext.Cache["Majors"] == null)
+            {
+                this.HttpContext.Cache.Add(
+                    "Majors",
+                    this.majors.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default,
+                    null);
+            }
+
+            return (IEnumerable<Major>)this.HttpContext.Cache["Majors"];
         }
     }
 }

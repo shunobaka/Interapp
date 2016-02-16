@@ -1,0 +1,10 @@
+﻿@model Interapp.Web.Areas.Student.Models.UniversitiesViewModels.ApplicationInputViewModel
+
+@using (Html.BeginForm("Submit", "Applications", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.UniversityId)
+    @Html.DropDownListFor(m => m.MajorId, Model.Majors, "Select major", new { @class = "form-control" })
+
+    <input type="submit" value="Submit application" class="btn btn-success" />
+}
