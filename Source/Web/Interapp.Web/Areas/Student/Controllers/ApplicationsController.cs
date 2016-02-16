@@ -63,7 +63,7 @@
                 return this.RedirectToAction(nameof(this.All));
             }
 
-            return this.View(model);
+            return this.PartialView("_Error", model);
         }
     }
 }
