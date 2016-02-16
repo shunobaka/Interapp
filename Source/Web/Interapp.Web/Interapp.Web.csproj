@@ -301,6 +301,7 @@
     <Content Include="Areas\Student\Views\Universities\_UniversityInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_StudentInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_UniversitiesFilterPartial.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\All.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,7 +356,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
-    <Folder Include="Areas\Student\Views\Applications\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
