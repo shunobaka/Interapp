@@ -7,6 +7,7 @@
 
     public class Response
     {
+        [Key]
         [ForeignKey("Application")]
         public int ApplicationId { get; set; }
 
