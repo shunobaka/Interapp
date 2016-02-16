@@ -8,13 +8,35 @@
         public Seeder()
         {
             this.Countries = new HashSet<Country>();
+            this.Majors = new HashSet<Major>();
             this.GenerateCountries();
+            this.GenerateMajors();
         }
 
         public ICollection<Country> Countries { get; set; }
 
+        public ICollection<Major> Majors { get; set; }
+
+        private void GenerateMajors()
+        {
+            this.Majors.Add(new Major() { Name = "Computer Science" });
+            this.Majors.Add(new Major() { Name = "Medicine" });
+            this.Majors.Add(new Major() { Name = "Engineering" });
+            this.Majors.Add(new Major() { Name = "Grafic Design" });
+            this.Majors.Add(new Major() { Name = "Informational and Communicational Technologies" });
+            this.Majors.Add(new Major() { Name = "Software Engineering" });
+            this.Majors.Add(new Major() { Name = "Mathematics" });
+            this.Majors.Add(new Major() { Name = "Economics" });
+            this.Majors.Add(new Major() { Name = "Law" });
+            this.Majors.Add(new Major() { Name = "History" });
+            this.Majors.Add(new Major() { Name = "Geography" });
+            this.Majors.Add(new Major() { Name = "Music" });
+            this.Majors.Add(new Major() { Name = "Magic" });
+        }
+
         private void GenerateCountries()
         {
+            this.Countries.Add(new Country() { Name = "USA" });
             this.Countries.Add(new Country() { Name = "Afghanistan" });
             this.Countries.Add(new Country() { Name = "Albania" });
             this.Countries.Add(new Country() { Name = "Algeria" });
