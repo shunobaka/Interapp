@@ -302,6 +302,7 @@
     <Content Include="Areas\Student\Views\Universities\_StudentInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_UniversitiesFilterPartial.cshtml" />
     <Content Include="Areas\Student\Views\Applications\All.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
