@@ -43,6 +43,16 @@ namespace Interapp.Data.Migrations
 
                 context.SaveChanges();
             }
+
+            if (!context.Majors.Any())
+            {
+                foreach (var major in seeder.Majors)
+                {
+                    context.Majors.Add(major);
+                }
+
+                context.SaveChanges();
+            }
         }
     }
 }
