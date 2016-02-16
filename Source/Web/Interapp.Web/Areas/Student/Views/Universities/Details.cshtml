@@ -30,10 +30,6 @@
         @if (Model.Eligibility.IsEligible)
         {
             @Html.Action("ApplicationForm", "Universities", null)
-            using (Html.BeginForm("Submit", "Applications", new { id = Model.University.Id }, FormMethod.Post, null))
-            {
-                <input type="submit" value="Submit application" class="btn btn-primary" />
-            }
         }
     </div>
     <hr />

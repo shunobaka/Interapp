@@ -20,7 +20,7 @@
         private IStudentInfosService studentInfos;
         private IMajorsService majors;
 
-        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos, IMajorsService major)
+        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos, IMajorsService majors)
         {
             this.universities = universities;
             this.studentInfos = studentInfos;
