@@ -330,6 +330,7 @@
     <Content Include="Areas\Director\Views\Applications\All.cshtml" />
     <Content Include="Areas\Director\Views\Applications\Details.cshtml" />
     <Content Include="Areas\Director\Views\Applications\Evaluate.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\All.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -386,7 +387,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
-    <Folder Include="Areas\Student\Views\Responses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
