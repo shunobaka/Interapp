@@ -22,6 +22,14 @@
             return this.applications.All();
         }
 
+        public IQueryable<Application> AllByDirector(string directorId)
+        {
+            return this.applications
+                .All()
+                .Where(a => a.University.Director.DirectorId == directorId)
+                .Include(a => a.University);
+        }
+
         public IQueryable<Application> AllByStudent(string studentId)
         {
             return this.applications
