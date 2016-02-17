@@ -1,0 +1,33 @@
+﻿@model Interapp.Web.Areas.Director.Models.ApplicationsViewModels.ResponseInputModel
+@{
+    ViewBag.Title = "Evaluate application";
+}
+
+<h2>Evaluate application</h2>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @using (Html.BeginForm("Evaluate", "Applications", new { id = (int)ViewData["app-id"] }, FormMethod.Post, null))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(a => a.Content)
+                @Html.TextAreaFor(a => a.Content, new { @class = "form-control large-input" })
+                @Html.ValidationMessageFor(a => a.Content, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.IsAdmitted)
+                @Html.CheckBoxFor(a => a.IsAdmitted)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send response" class="btn btn-success" />
+                <input type="reset" value="Clear" class="btn btn-warning" />
+                @Html.ActionLink("Back to applications", "All", "Applications", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

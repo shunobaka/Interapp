@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Interapp.Web.Areas.Director.Models.ApplicationsViewModels.ApplicationViewModel>
+@{
+    ViewBag.Title = "All applications";
+}
+
+<h2>All applications</h2>
+<hr />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Student</th>
+            <th>University</th>
+            <th>Date Created</th>
+            <th>Is evaluated</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.Id</td>
+                <td>@application.Student.Student.FirstName @application.Student.Student.LastName</td>
+                <td>@application.University.Name</td>
+                <td>@application.DateCreated</td>
+                <td>@Html.CheckBox("IsAnswered", application.IsAnswered, new { disabled = "disabled" })</td>
+                <td>@Html.ActionLink("Details", "Details", "Applications", new { id = application.Id }, new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
