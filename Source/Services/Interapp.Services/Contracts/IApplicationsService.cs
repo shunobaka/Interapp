@@ -10,11 +10,13 @@
 
         IQueryable<Application> AllByUniversity(int universityId);
 
+        IQueryable<Application> AllByStudent(string studentId);
+
         IQueryable<Application> GetFilteredByUniversity(int universityId, FilterModel filter);
 
         Application GetById(int id);
 
-        void DeleteById(int id);
+        void Delete(int id);
 
         void Create(string studentId, int universityId, int majorId);
     }

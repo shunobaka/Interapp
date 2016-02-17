@@ -22,5 +22,7 @@
         void Detach(T entity);
 
         int SaveChanges();
+
+        void Attach<TU>(TU entity) where TU : class;
     }
 }

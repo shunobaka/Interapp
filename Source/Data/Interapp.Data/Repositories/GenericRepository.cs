@@ -99,5 +99,12 @@
         {
             this.Context.Dispose();
         }
+
+        public void Attach<TU>(TU entity)
+            where TU : class
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Modified;
+        }
     }
 }

@@ -1,0 +1,7 @@
+﻿@model Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationInputViewModel
+
+<div class="alert alert-danger">
+    @Html.ValidationSummary()
+</div>
+
+@{Html.RenderAction("ApplicationForm", "Universities", new { id = Model.UniversityId });}
