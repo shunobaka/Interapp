@@ -219,6 +219,8 @@
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
@@ -307,10 +309,13 @@
     <Content Include="Areas\Student\Views\Applications\Details.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_ApplicationForm.cshtml" />
     <Content Include="Areas\Student\Views\Applications\_Error.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\_SuccessfullySubmitted.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
