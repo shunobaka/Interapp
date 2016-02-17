@@ -21,5 +21,7 @@
         void Delete(int id);
 
         void Create(string studentId, int universityId, int majorId);
+
+        void SetReviewed(int id);
     }
 }
