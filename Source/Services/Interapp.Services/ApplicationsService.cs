@@ -86,5 +86,16 @@
             // TODO: Implement
             throw new NotImplementedException();
         }
+
+        public void SetReviewed(int id)
+        {
+            var application = this.applications
+                .GetById(id);
+
+            if (application != null)
+            {
+                application.IsReviewed = true;
+            }
+        }
     }
 }

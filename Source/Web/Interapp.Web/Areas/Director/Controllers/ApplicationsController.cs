@@ -43,6 +43,8 @@
                 return this.View();
             }
 
+            this.applications.SetReviewed(id);
+
             var model = Mapper.Map<ApplicationDetailsViewModel>(application);
 
             return this.View(model);
