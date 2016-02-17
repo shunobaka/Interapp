@@ -13,8 +13,7 @@
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Interapp.Web.Controllers" }
-            )
+                namespaces: new string[] { "Interapp.Web.Controllers" })
             .DataTokens["UseNamespaceFallback"] = false;
         }
     }

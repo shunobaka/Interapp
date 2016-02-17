@@ -54,6 +54,10 @@
                 .HasOptional(u => u.Scores)
                 .WithRequired(e => e.StudentInfo);
 
+            modelBuilder.Entity<Application>()
+                .HasOptional(a => a.Response)
+                .WithRequired(r => r.Application);
+
             modelBuilder.Entity<User>()
                 .HasRequired(u => u.Country)
                 .WithMany()

@@ -1,0 +1,47 @@
+﻿@model Interapp.Web.Areas.Student.Models.UniversitiesViewModels.DetailsInformationViewModel
+@{
+    ViewBag.Title = "University details";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Application details for @Model.University.Name</h2>
+    </div>
+    <div class="col-md-4">
+        <br />
+        @Html.ActionLink("Back to universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        @Html.Partial("_UniversityInfo")
+    </div>
+    <div class="col-md-6">
+        @Html.Partial("_StudentInfo")
+    </div>
+</div>
+<div class="row text-center">
+    <hr />
+    <div class="col-md-8 col-md-offset-2" id="application-container">
+        <div class="alert @(Model.Eligibility.IsEligible ? Html.Raw("alert-success") : Html.Raw("alert-danger"))">
+            <h5>@Model.Eligibility.Message</h5>
+        </div>
+        @if (Model.Eligibility.IsEligible)
+            {
+            @Html.Action("ApplicationForm", "Universities", null)
+
+            @section scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+
+                <script>
+                    $("#application-container").on("submit", "#application-form", function () {
+                        var $loading = $("#loading");
+                        $loading.show();
+                    })
+                </script>
+            }
+        }
+    </div>
+    <hr />
+</div>
