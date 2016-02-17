@@ -8,6 +8,6 @@
     {
         public DateTime? DateCreated { get; set; }
 
-        public virtual University University { get; set; }
+        public UniversityViewModel University { get; set; }
     }
 }
