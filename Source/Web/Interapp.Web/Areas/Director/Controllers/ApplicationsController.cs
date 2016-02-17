@@ -61,6 +61,16 @@
         [ValidateAntiForgeryToken]
         public ActionResult Evaluate(int id, ResponseInputModel model)
         {
+            var directorId = this.User.Identity.GetUserId();
+            var isAuthorized = this.applications
+                .All()
+                .Any(a => a.University.DirectorId == directorId && a.Id == id);
+
+            if (!isAuthorized)
+            {
+                this.ModelState.AddModelError("Authorization", "You are not authorized to edit this application!");
+            }
+
             if (this.ModelState.IsValid)
             {
                 this.responses.Create(id, model.Content, model.IsAdmitted);
