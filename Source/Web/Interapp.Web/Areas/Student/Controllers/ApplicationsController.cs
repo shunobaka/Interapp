@@ -5,6 +5,7 @@
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
+    using System.Linq;
     using System.Web.Mvc;
 
     [Authorize(Roles = "Student")]
@@ -53,6 +54,17 @@
         public ActionResult Submit(ApplicationInputViewModel model)
         {
             var studentId = this.User.Identity.GetUserId();
+
+            var hasApplied = this.applications
+                .All()
+                .Where(a => a.UniversityId == model.UniversityId && a.StudentId == studentId)
+                .Any();
+
+            if (hasApplied)
+            {
+                this.ModelState.AddModelError("Applied", "You have already applied");
+            }
+
             var eligiblity = this.studentInfos.IsEligibleToApply(studentId, model.UniversityId);
 
             if (!eligiblity.IsEligible)
