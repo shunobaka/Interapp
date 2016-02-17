@@ -202,9 +202,16 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ResponseViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Models\HomeViewModels\CountryViewModel.cs" />
     <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\Models\HomeViewModels\UniversityViewModel.cs" />
@@ -366,6 +373,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Director\Views\Applications\" />
     <Folder Include="Areas\Director\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
