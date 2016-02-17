@@ -225,6 +225,7 @@
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
+    <Compile Include="Areas\Student\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
@@ -241,6 +242,10 @@
     <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\ResponseViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\ApplicationInputViewModel.cs" />
@@ -381,6 +386,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Director\Views\Shared\" />
+    <Folder Include="Areas\Student\Views\Responses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
