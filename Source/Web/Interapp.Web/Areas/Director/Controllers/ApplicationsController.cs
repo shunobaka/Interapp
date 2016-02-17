@@ -61,7 +61,8 @@
         {
             if (this.ModelState.IsValid)
             {
-                this.responses.Update(id, model.Content, model.IsAdmitted);
+                this.responses.Create(id, model.Content, model.IsAdmitted);
+                return this.RedirectToAction(nameof(this.All));
             }
 
             ViewData["app-id"] = id;

@@ -9,24 +9,31 @@
     public class ResponsesService : IResponsesService
     {
         private IRepository<Response> responses;
+        private IRepository<Application> applications;
 
-        public ResponsesService(IRepository<Response> responses)
+        public ResponsesService(IRepository<Response> responses, IRepository<Application> applications)
         {
             this.responses = responses;
+            this.applications = applications;
         }
 
         public void Create(int applicationId, string content, bool IsAdmitted)
         {
-            var response = new Response()
-            {
-                ApplicationId = applicationId,
-                Content = content,
-                Date = DateTime.UtcNow,
-                IsAdmitted = IsAdmitted
-            };
+            var application = this.applications.GetById(applicationId);
 
-            this.responses.Add(response);
-            this.responses.SaveChanges();
+            if (application != null)
+            {
+                var response = new Response()
+                {
+                    Content = content,
+                    Date = DateTime.UtcNow,
+                    IsAdmitted = IsAdmitted
+                };
+
+                application.Response = response;
+                application.IsAnswered = true;
+                this.applications.SaveChanges();
+            }
         }
 
         public Response GetById(int id)
