@@ -1,0 +1,52 @@
+﻿@model Interapp.Web.Areas.Director.Models.ApplicationsViewModels.ApplicationDetailsViewModel
+@{
+    ViewBag.Title = "Details for application";
+}
+
+<h2>Details for application</h2>
+<hr />
+@if (Model == null)
+{
+    <h3>No such application was found.</h3>
+    @Html.ActionLink("Back to applications", "All", "Applications", null, new { @class = "btn btn-success" })
+    return;
+}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>General information</h3>
+        <hr />
+        <h5>Student name: @Model.Student.Student.FirstName @Model.Student.Student.LastName</h5>
+        <h5>Applying to: @Model.University.Name</h5>
+        <h5>Date of application: @Model.DateCreated</h5>
+        <h5>Preferred major: @Model.Major.Name</h5>
+        <h5>Application is evaluated: @Html.CheckBoxFor(m => m.IsAnswered, new { disabled = "disabled" })</h5>
+        <br />
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <h3>Student scores information</h3>
+        <hr />
+        <h5>SAT Critical Reading: @Model.Student.Scores.SatCRResult</h5>
+        <h5>SAT Math: @Model.Student.Scores.SatMathResult</h5>
+        <h5>SAT Writing: @Model.Student.Scores.SatWritingResult</h5>
+        <h5>TOEFL: @Model.Student.Scores.ToeflType - @Model.Student.Scores.ToeflResult</h5>
+        <h5>Cambridge Certificate: @Model.Student.Scores.CambridgeLevel @Model.Student.Scores.CambridgeResult</h5>
+        <br />
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <h3>Student Essay</h3>
+        <hr />
+        <h4 class="text-center">@Model.Student.Essay.Title</h4>
+        <p>@Model.Student.Essay.Content</p>
+        <hr />
+    </div>
+    <div class="col-md-10 col-md-offset-1 text-center">
+        @if (Model.IsAnswered)
+        {
+            @Html.ActionLink("View response", "Details", "Responses", new { id = Model.Id }, new { @class = "btn btn-success" })
+        }
+        else
+        {
+            @Html.ActionLink("Write response", "Evalutate", "Applications", new { id = Model.Id }, new { @class = "btn btn-success" })
+        }
+    </div>
+</div>

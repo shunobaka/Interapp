@@ -206,9 +206,13 @@
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\MajorViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\ResponseViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoDetailsViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentViewModel.cs" />
     <Compile Include="Areas\Director\Models\ApplicationsViewModels\UniversityViewModel.cs" />
@@ -319,6 +323,7 @@
     <Content Include="Areas\Student\Views\Applications\_Error.cshtml" />
     <Content Include="Areas\Student\Views\Applications\_SuccessfullySubmitted.cshtml" />
     <Content Include="Areas\Director\Views\Applications\All.cshtml" />
+    <Content Include="Areas\Director\Views\Applications\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

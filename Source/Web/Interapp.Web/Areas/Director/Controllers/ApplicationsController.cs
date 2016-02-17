@@ -42,7 +42,7 @@
 
             var model = Mapper.Map<ApplicationDetailsViewModel>(application);
 
-            return this.View();
+            return this.View(model);
         }
     }
 }
