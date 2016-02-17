@@ -6,6 +6,8 @@
 
     public class ApplicationViewModel : IMapFrom<Application>
     {
+        public int Id { get; set; }
+
         public DateTime? DateCreated { get; set; }
 
         public UniversityViewModel University { get; set; }

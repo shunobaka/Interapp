@@ -232,6 +232,7 @@
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\MajorViewModel.cs" />
     <Compile Include="Areas\Student\Models\ApplicationsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
