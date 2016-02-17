@@ -6,6 +6,7 @@
     using Contracts;
     using Data.Models;
     using Data.Repositories;
+    using System.Data.Entity;
 
     public class ApplicationsService : IApplicationsService
     {
@@ -25,7 +26,9 @@
         {
             return this.applications
                 .All()
-                .Where(a => a.StudentId == studentId);
+                .Where(a => a.StudentId == studentId)
+                .Include(a => a.University)
+                .Include(a => a.University.Country);
         }
 
         public IQueryable<Application> AllByUniversity(int universityId)
