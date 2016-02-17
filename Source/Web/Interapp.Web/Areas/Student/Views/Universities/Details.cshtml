@@ -30,6 +30,10 @@
         @if (Model.Eligibility.IsEligible)
         {
             @Html.Action("ApplicationForm", "Universities", null)
+
+            @section scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
         }
     </div>
     <hr />
