@@ -71,6 +71,13 @@
             return this.applications
                 .All()
                 .Where(a => a.Id == id)
+                .Include(a => a.University)
+                .Include(a => a.Major)
+                .Include(a => a.Student)
+                .Include(a => a.Student.Scores)
+                .Include(a => a.Student.Essay)
+                .Include(a => a.Student.Student)
+                .Include(a => a.University.Director)
                 .FirstOrDefault();
         }
 
@@ -78,6 +85,17 @@
         {
             // TODO: Implement
             throw new NotImplementedException();
+        }
+
+        public void SetReviewed(int id)
+        {
+            var application = this.applications
+                .GetById(id);
+
+            if (application != null)
+            {
+                application.IsReviewed = true;
+            }
         }
     }
 }
