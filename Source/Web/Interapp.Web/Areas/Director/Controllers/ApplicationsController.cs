@@ -7,15 +7,18 @@
     using System.Web.Mvc;
     using System.Linq;
     using AutoMapper;
+    using System;
 
     [Authorize(Roles = "Director")]
     public class ApplicationsController : Controller
     {
         private IApplicationsService applications;
+        private IResponsesService responses;
 
-        public ApplicationsController(IApplicationsService applications)
+        public ApplicationsController(IApplicationsService applications, IResponsesService responses)
         {
             this.applications = applications;
+            this.responses = responses;
         }
 
         public ActionResult All()
@@ -42,6 +45,26 @@
 
             var model = Mapper.Map<ApplicationDetailsViewModel>(application);
 
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Evaluate(int id)
+        {
+            ViewData["app-id"] = id;
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Evaluate(int id, ResponseInputModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                this.responses.Update(id, model.Content, model.IsAdmitted);
+            }
+
+            ViewData["app-id"] = id;
             return this.View(model);
         }
     }
