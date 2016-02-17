@@ -1,5 +1,8 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
+    using AutoMapper.QueryableExtensions;
+    using Models.ApplicationsViewModels;
+    using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using System.Web.Mvc;
 
@@ -15,7 +18,12 @@
 
         public ActionResult All()
         {
-            return View();
+            var directorId = this.User.Identity.GetUserId();
+            var model = this.applications
+                .AllByDirector(directorId)
+                .ProjectTo<ApplicationViewModel>();
+
+            return View(model);
         }
     }
 }
