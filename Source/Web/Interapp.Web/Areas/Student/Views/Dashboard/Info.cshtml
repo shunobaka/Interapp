@@ -1,10 +1,10 @@
-﻿@model Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoViewModel
+﻿@model Interapp.Web.Areas.Student.Models.DashboardViewModels.StudentInfoViewModel
 @{
     ViewBag.Title = "Dashboard";
 }
 
 @{
-    var allDocuments = new List<Interapp.Web.Areas.Student.Models.StudentInfoViewModels.StudentInfoDocumentViewModel>();
+    var allDocuments = new List<Interapp.Web.Areas.Student.Models.DashboardViewModels.DocumentViewModel>();
 
     foreach (var university in Model.UniversitiesOfInterest)
     {
@@ -12,6 +12,16 @@
     }
 
     var uniqueRequiredDocuments = allDocuments.Select(d => d.Name).Distinct().ToList();
+
+    var universitiesToDisplay = 0;
+    if (Model.UniversitiesOfInterest.Count > 4)
+    {
+        universitiesToDisplay = 5;
+    }
+    else
+    {
+        universitiesToDisplay = Model.UniversitiesOfInterest.Count();
+    }
 }
 
 <h2>@Model.Student.FirstName @Model.Student.LastName's Dashboard</h2>
@@ -80,15 +90,26 @@
         }
     </div>
     <div class="col-md-6">
-        <h3>Universities you are interested in</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>5 Universities of interest to you</h3>
+            </div>
+            <div class="col-md-4">
+                <br />
+                @Html.ActionLink("All universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+            </div>
+        </div>
         @if (Model.UniversitiesOfInterest != null && Model.UniversitiesOfInterest.Count != 0)
         {
-            for (var i = 0; i < Model.UniversitiesOfInterest.Count; i++)
+            for (var i = 0; i < universitiesToDisplay; i++)
             {
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UniversitiesOfInterest[i])
-                    @*@Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id}, new { @class = "btn btn-info"})*@
-                    @Html.RouteLink("Details", "~/Universities/Details", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info" })
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <h4>@Model.UniversitiesOfInterest[i].Name</h4>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink("Details", "Details", "Universities", new { id = Model.UniversitiesOfInterest[i].Id }, new { @class = "btn btn-info pull-right" })
+                    </div>
                 </div>
             }
         }

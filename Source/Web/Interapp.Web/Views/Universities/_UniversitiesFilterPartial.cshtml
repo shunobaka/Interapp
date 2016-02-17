@@ -1,0 +1,40 @@
+﻿@model Interapp.Web.Models.UniversitiesViewModels.UniversitiesListViewModel
+@{
+    Interapp.Services.Common.FilterModel filter = new Interapp.Services.Common.FilterModel();
+
+    if (Model != null && Model.Filter != null)
+    {
+        filter = Model.Filter;
+    }
+}
+<div class="row text-center">
+    @using (Html.BeginForm("All", "Universities", null, FormMethod.Get, null))
+    {
+        <div class="col-md-3">
+            <label for="filter">Filter text</label>
+            <input type="text" value="@filter.Filter" name="Filter" class="form-control" id="filter" />
+        </div>
+        <div class="col-md-3">
+            <label for="orderBy">Order by</label>
+            <select id="orderBy" name="OrderBy" class="form-control">
+                <option @if (filter.OrderBy == "name") { @Html.Raw("selected=\"selected\"")  } value="name">Name</option>
+                <option @if (filter.OrderBy == "tuition") { @Html.Raw("selected=\"selected\"")  } value="tuition">Tuition</option>
+                <option @if (filter.OrderBy == "country") { @Html.Raw("selected=\"selected\"")  } value="country">Country</option>
+                <option @if (filter.OrderBy == "toeflibt") { @Html.Raw("selected=\"selected\"")  } value="toeflibt">Toefl IBT</option>
+                <option @if (filter.OrderBy == "toeflpbt") { @Html.Raw("selected=\"selected\"")  } value="toeflpbt">Toefl PBT</option>
+                <option @if (filter.OrderBy == "sat") { @Html.Raw("selected=\"selected\"")  } value="sat">SAT</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="order">Order type</label>
+            <select id="order" name="Order" class="form-control">
+                <option @if (filter.Order == "asc") { @Html.Raw("selected=\"selected\"")  } value="asc">Ascending</option>
+                <option @if (filter.Order == "desc") { @Html.Raw("selected=\"selected\"")  } value="desc">Descending</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label>Filter</label>
+            <input type="submit" class="btn btn-primary btn-block" value="Reload" />
+        </div>
+    }
+</div>

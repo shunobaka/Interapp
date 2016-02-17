@@ -1,12 +1,12 @@
 ﻿namespace Interapp.Services
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
-    using System.Data.Entity;
     using Interapp.Common.Enums;
 
     public class UniversitiesService : IUniversitiesService
@@ -178,7 +178,7 @@
             return universities;
         }
 
-        public IQueryable<University> AllExtended()
+        public IQueryable<University> AllWithDirectorAndCountry()
         {
             return this.universities
                 .All()
@@ -187,10 +187,28 @@
                 .Include(u => u.Director.Director);
         }
 
-        public IQueryable<University> AllSimple()
+        public IQueryable<University> AllWithCountry()
         {
             return this.universities
                 .All()
+                .Include(u => u.Country);
+        }
+
+        public University GetByIdWithDocuments(int id)
+        {
+            return this.universities
+                .All()
+                .Where(u => u.Id == id)
+                .Include(u => u.DocumentRequirements)
+                .FirstOrDefault();
+        }
+
+        public IQueryable<University> AllForStudent(string studentId)
+        {
+            return this.universities
+                .All()
+                .Where(u => u.InterestedStudents
+                    .Any(s => s.StudentId == studentId))
                 .Include(u => u.Country);
         }
     }

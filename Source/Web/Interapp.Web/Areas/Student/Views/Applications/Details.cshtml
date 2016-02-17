@@ -1,0 +1,13 @@
+﻿@model Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationDetailsViewModel
+@{
+    ViewBag.Title = "Details for application";
+}
+
+<h2>Details for application</h2>
+<hr />
+<h3>University - @Html.ActionLink(Model.University.Name, "Details", "Universities", new { area = "", id = Model.UniversityId }, null)</h3>
+<h4>Country: @Model.University.Country.Name</h4>
+<h4>Major: @Model.Major.Name</h4>
+<h4>Date created: @Model.DateCreated</h4>
+<h4>Has been reviewed: @Model.IsReviewed</h4>
+<h4>Has been answered: @Model.IsAnswered</h4>
