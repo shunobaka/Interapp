@@ -14,6 +14,8 @@
 
         void Update(int id, Major major);
 
+        void Create(string name);
+
         void Delete(int id);
     }
 }

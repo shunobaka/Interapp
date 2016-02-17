@@ -36,9 +36,19 @@ namespace Interapp.Data.Migrations
 
             if (!context.Countries.Any())
             {
-                foreach(var country in seeder.Countries)
+                foreach (var country in seeder.Countries)
                 {
                     context.Countries.Add(country);
+                }
+
+                context.SaveChanges();
+            }
+
+            if (!context.Majors.Any())
+            {
+                foreach (var major in seeder.Majors)
+                {
+                    context.Majors.Add(major);
                 }
 
                 context.SaveChanges();
