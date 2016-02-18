@@ -32,7 +32,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, User user)
+        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -41,18 +41,17 @@
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    DateOfBirth = user.DateOfBirth,
-                    Email = user.Email
+                    DateOfBirth = user.DateOfBirth
                 };
 
-                this.users.Update(user);
+                this.users.Update(entity);
             }
 
             return Json(new[] { user }.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, User user)
+        public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             this.users.Delete(user.Id);
 
