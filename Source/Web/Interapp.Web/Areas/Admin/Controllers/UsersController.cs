@@ -23,7 +23,7 @@
             return View();
         }
 
-        public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult UsersRead([DataSourceRequest]DataSourceRequest request)
         {
             var model = this.users.All().ProjectTo<UserViewModel>();
             DataSourceResult result = model.ToDataSourceResult(request);
@@ -32,7 +32,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, UserViewModel user)
+        public ActionResult UsersUpdate([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +51,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, UserViewModel user)
+        public ActionResult UsersDestroy([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             this.users.Delete(user.Id);
 
