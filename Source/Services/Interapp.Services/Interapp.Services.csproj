@@ -68,6 +68,7 @@
     <Compile Include="Contracts\IScoresService.cs" />
     <Compile Include="Contracts\IStudentInfosService.cs" />
     <Compile Include="Contracts\IUniversitiesService.cs" />
+    <Compile Include="Contracts\IUsersService.cs" />
     <Compile Include="CountriesService.cs" />
     <Compile Include="DirectorInfosService.cs" />
     <Compile Include="DocumentsService.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ScoresService.cs" />
     <Compile Include="StudentInfosService.cs" />
     <Compile Include="UniversitiesService.cs" />
+    <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Interapp.Common\Interapp.Common.csproj">

@@ -172,7 +172,7 @@
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBrith = model.DateOfBirth };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBirth = model.DateOfBirth };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
