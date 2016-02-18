@@ -17,7 +17,7 @@ namespace Interapp.Web.Areas.Admin
             context.MapRoute(
                 name: "Admin_default",
                 url: "Admin/{controller}/{action}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "Interapp.Web.Areas.Admin.Controllers" })
             .DataTokens["UseNamespaceFallback"] = false;
         }
