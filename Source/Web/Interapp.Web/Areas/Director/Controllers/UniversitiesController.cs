@@ -3,7 +3,7 @@
     using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models.UniversityViewModels;
+    using Models.UniversitiesViewModels;
     using Services.Contracts;
     using System;
     using System.Collections.Generic;

@@ -18,7 +18,9 @@
 
         public IQueryable<Country> All()
         {
-            return this.countries.All();
+            return this.countries
+                .All()
+                .OrderBy(c => c.Name);
         }
 
         public void Create(string name)

@@ -11,7 +11,7 @@
         public const int UniversityTuitionFeeMax = 100000;
         public const string UniversityNameRegex = "[A-Z][A-z a-z-'\\.]+";
 
-        public const int MajorNameMinLength = 10;
+        public const int MajorNameMinLength = 3;
         public const int MajorNameMaxLength = 80;
 
         public const int EssayTitleMinLength = 2;

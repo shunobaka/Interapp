@@ -18,8 +18,7 @@
                 name: "Student_default",
                 url: "Student/{controller}/{action}/{id}",
                 defaults: new { controller = "Dashboard", action = "Info", id = UrlParameter.Optional },
-                namespaces: new string[] { "Interapp.Web.Areas.Student.Controllers" }
-            )
+                namespaces: new string[] { "Interapp.Web.Areas.Student.Controllers" })
             .DataTokens["UseNamespaceFallback"] = false;
         }
     }
