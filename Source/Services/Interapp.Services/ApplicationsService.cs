@@ -77,6 +77,7 @@
                 .Include(a => a.Student.Scores)
                 .Include(a => a.Student.Essay)
                 .Include(a => a.Student.Student)
+                .Include(a => a.University.Country)
                 .Include(a => a.University.Director)
                 .FirstOrDefault();
         }

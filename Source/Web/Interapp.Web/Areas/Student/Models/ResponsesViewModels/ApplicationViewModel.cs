@@ -1,15 +1,12 @@
-﻿namespace Interapp.Web.Areas.Student.Models.ApplicationsViewModels
+﻿namespace Interapp.Web.Areas.Student.Models.ResponsesViewModels
 {
     using Data.Models;
     using Infrastructure.Mappings;
-    using System;
 
     public class ApplicationViewModel : IMapFrom<Application>
     {
-        public int Id { get; set; }
-
-        public DateTime? DateCreated { get; set; }
-
         public UniversityViewModel University { get; set; }
+
+        public MajorViewModel Major { get; set; }
     }
 }
