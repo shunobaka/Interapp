@@ -19,8 +19,8 @@
                         "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                        "~/Content/kendo/kendo.common-bootstrap.min.css",
-                        "~/Content/kendo/kendo.bootstrap.min.css"));
+                        "~/Content/kendo/kendo.common.min.css",
+                        "~/Content/kendo/kendo.default.min.css"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

@@ -1,4 +1,17 @@
-﻿
+﻿@{ 
+    ViewBag.Title = "Users admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Users administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
 @(Html.Kendo().Grid<Interapp.Web.Areas.Admin.Models.UsersViewModels.UserViewModel>()
       .Name("grid")
       .Columns(columns =>
@@ -20,7 +33,6 @@
           sortable.SortMode(GridSortMode.SingleColumn);
       })
       .Filterable()
-      .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Model(model =>
@@ -31,6 +43,7 @@
           .Read(read => read.Action("Users_Read", "Users"))
           .Update(update => update.Action("Users_Update", "Users"))
           .Destroy(destroy => destroy.Action("Users_Destroy", "Users"))
+          .PageSize(10)
       )
 )
 
