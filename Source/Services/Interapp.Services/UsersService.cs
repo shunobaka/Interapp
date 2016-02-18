@@ -40,11 +40,9 @@
 
             if (originalUser != null)
             {
-                originalUser.CountryId = user.CountryId;
                 originalUser.DateOfBirth = user.DateOfBirth;
                 originalUser.FirstName = user.FirstName;
                 originalUser.LastName = user.LastName;
-                originalUser.Email = user.Email;
 
                 this.users.SaveChanges();
             }

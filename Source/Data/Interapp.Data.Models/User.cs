@@ -25,7 +25,7 @@
         [RegularExpression(ModelConstants.UserNamesRegex)]
         public string LastName { get; set; }
         
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         
         public int CountryId { get; set; }
         
