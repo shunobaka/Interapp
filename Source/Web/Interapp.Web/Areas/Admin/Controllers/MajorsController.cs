@@ -59,6 +59,13 @@
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult MajorsUpdate([DataSourceRequest]DataSourceRequest request, MajorViewModel major)
         {
+            var majorExists = this.majors.All().Any(m => m.Name == major.Name);
+
+            if (majorExists)
+            {
+                this.ModelState.AddModelError("Major exists", "Major will such name already exists.");
+            }
+
             if (ModelState.IsValid)
             {
                 var entity = new Major

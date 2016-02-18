@@ -10,8 +10,9 @@
         public int Id { get; set; }
 
         [Required]
-        [MinLength(ModelConstants.MajorNameMinLength)]
-        [MaxLength(ModelConstants.MajorNameMaxLength)]
+        [StringLength(ModelConstants.MajorNameMaxLength,
+            ErrorMessage = "The {0} must be at least {2} characters long.",
+            MinimumLength = ModelConstants.MajorNameMinLength)]
         public string Name { get; set; }
     }
 }
