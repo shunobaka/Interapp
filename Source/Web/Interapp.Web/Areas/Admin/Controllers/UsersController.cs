@@ -8,7 +8,7 @@
     using Models.UsersViewModels;
     using Services.Contracts;
 
-    public class UsersController : Controller
+    public class UsersController : AdminController
     {
         private IUsersService users;
 

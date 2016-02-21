@@ -5,7 +5,7 @@
     using Models.UniversitiesViewModels;
     using Services.Contracts;
 
-    public class UniversitiesController : Controller
+    public class UniversitiesController : AdminController
     {
         private IUniversitiesService universities;
 

@@ -9,7 +9,7 @@
     using Models.MajorsViewModels;
     using Services.Contracts;
 
-    public class MajorsController : Controller
+    public class MajorsController : AdminController
     {
         private IMajorsService majors;
 
