@@ -2,8 +2,8 @@
 {
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
-    using Models.DashboardViewModels;
     using Services.Contracts;
+    using ViewModels.Dashboard;
 
     public class DashboardController : StudentController
     {

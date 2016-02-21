@@ -3,8 +3,8 @@
     using System.Web.Mvc;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models.ScoresViewModels;
     using Services.Contracts;
+    using ViewModels.Scores;
 
     public class ScoresController : StudentController
     {

@@ -2,8 +2,8 @@
 {
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
-    using Models.EssayViewModels;
     using Services.Contracts;
+    using ViewModels.Essay;
 
     public class EssayController : StudentController
     {

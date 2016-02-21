@@ -8,9 +8,9 @@
     using Data.Models;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
-    using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
+    using ViewModels.Universities;
 
     public class UniversitiesController : StudentController
     {

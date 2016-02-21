@@ -5,8 +5,8 @@
     using Data.Models;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
-    using Models.DocumentsViewModels;
     using Services.Contracts;
+    using ViewModels.Documents;
 
     public class DocumentsController : StudentController
     {

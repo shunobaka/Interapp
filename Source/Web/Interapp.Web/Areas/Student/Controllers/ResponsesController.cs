@@ -4,8 +4,8 @@
     using System.Web.Mvc;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
-    using Models.ResponsesViewModels;
     using Services.Contracts;
+    using ViewModels.Responses;
 
     public class ResponsesController : StudentController
     {
