@@ -3,15 +3,15 @@
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class DocumentsService : IDocumentsService
     {
-        private IRepository<Document> documents;
-        private IRepository<University> universities;
+        private IDbRepository<Document> documents;
+        private IDbRepository<University> universities;
 
-        public DocumentsService(IRepository<Document> documents, IRepository<University> universities)
+        public DocumentsService(IDbRepository<Document> documents, IDbRepository<University> universities)
         {
             this.documents = documents;
             this.universities = universities;
@@ -27,7 +27,7 @@
             };
 
             this.documents.Add(document);
-            this.documents.SaveChanges();
+            this.documents.Save();
         }
 
         public void CreateForUniversity(int universityId, string name, string content)
@@ -40,13 +40,14 @@
             };
 
             this.documents.Add(document);
-            this.documents.SaveChanges();
+            this.documents.Save();
         }
 
         public void Delete(int documentId)
         {
-            this.documents.Delete(documentId);
-            this.documents.SaveChanges();
+            var document = this.documents.GetById(documentId);
+            this.documents.Delete(document);
+            this.documents.Save();
         }
 
         public IQueryable<Document> GetByStudent(string studentId)
@@ -98,7 +99,7 @@
                 original.Content = document.Content;
             }
 
-            this.documents.SaveChanges();
+            this.documents.Save();
         }
     }
 }
