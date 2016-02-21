@@ -3,15 +3,15 @@
     using System;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class ResponsesService : IResponsesService
     {
-        private IRepository<Response> responses;
-        private IRepository<Application> applications;
+        private IDbRepository<Response> responses;
+        private IDbRepository<Application> applications;
 
-        public ResponsesService(IRepository<Response> responses, IRepository<Application> applications)
+        public ResponsesService(IDbRepository<Response> responses, IDbRepository<Application> applications)
         {
             this.responses = responses;
             this.applications = applications;
@@ -32,7 +32,7 @@
 
                 application.Response = response;
                 application.IsAnswered = true;
-                this.applications.SaveChanges();
+                this.applications.Save();
             }
         }
 
