@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Documents admin panel";
+    ViewBag.Title = "Essays admin panel";
 }
 
 <div class="row">
     <div class="col-md-9">
-        <h2>Documents administration panel</h2>
+        <h2>Essays administration panel</h2>
     </div>
     <div class="col-md-3">
         <br />
@@ -12,11 +12,12 @@
     </div>
 </div>
 <hr />
-@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Documents.DocumentViewModel>()
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Essays.EssayViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
-          columns.Bound(c => c.Name);
+          columns.Bound(c => c.Title);
+          columns.Bound(c => c.StudentName);
           columns.Command(command => { command.Edit(); command.Destroy(); });
       })
       .ColumnMenu()
@@ -32,12 +33,12 @@
           .Ajax()
           .Model(model =>
           {
-              model.Id(p => p.Id);
-              model.Field(m => m.Id).Editable(false);
+              model.Id(p => p.AuthorId);
+              model.Field(m => m.AuthorId).Editable(false);
           })
-          .Read(read => read.Action("DocumentsRead", "Documents"))
-          .Update(update => update.Action("DocumentsUpdate", "Documents"))
-          .Destroy(destroy => destroy.Action("DocumentsDestroy", "Documents"))
+          .Read(read => read.Action("EssaysRead", "Essays"))
+          .Update(update => update.Action("EssaysUpdate", "Essays"))
+          .Destroy(destroy => destroy.Action("EssaysDestroy", "Essays"))
           .PageSize(10)
       )
 )
@@ -45,3 +46,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

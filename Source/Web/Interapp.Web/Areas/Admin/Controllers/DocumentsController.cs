@@ -8,7 +8,7 @@
     using Services.Contracts;
     using ViewModels.Documents;
 
-    public class DocumentsController : Controller
+    public class DocumentsController : AdminController
     {
         private IDocumentsService documents;
 

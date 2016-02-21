@@ -4,6 +4,7 @@
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using ViewModels.Essay;
+    using Data.Models;
 
     public class EssayController : StudentController
     {
@@ -44,7 +45,13 @@
             if (this.ModelState.IsValid)
             {
                 var studentId = this.User.Identity.GetUserId();
-                this.essays.Update(studentId, model.Title, model.Content);
+                var updateModel = new Essay()
+                {
+                    AuthorId = studentId,
+                    Title = model.Title,
+                    Content = model.Content
+                };
+                this.essays.Update(updateModel);
 
                 return this.RedirectToAction(nameof(this.Review));
             }
