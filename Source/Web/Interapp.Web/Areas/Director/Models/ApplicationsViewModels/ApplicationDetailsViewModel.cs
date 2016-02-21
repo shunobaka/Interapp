@@ -2,7 +2,7 @@
 {
     using System;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class ApplicationDetailsViewModel : IMapFrom<Application>
     {

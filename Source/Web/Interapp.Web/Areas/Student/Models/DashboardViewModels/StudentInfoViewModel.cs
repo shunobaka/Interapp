@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class StudentInfoViewModel : IMapFrom<StudentInfo>
     {

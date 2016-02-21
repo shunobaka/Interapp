@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
@@ -28,7 +28,7 @@
             var studentId = this.User.Identity.GetUserId();
             var model = this.applications
                 .AllByStudent(studentId)
-                .ProjectTo<ApplicationViewModel>();
+                .To<ApplicationViewModel>();
 
             return this.View(model);
         }

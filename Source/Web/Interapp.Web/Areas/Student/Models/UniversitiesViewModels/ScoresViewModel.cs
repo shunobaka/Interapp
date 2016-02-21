@@ -4,7 +4,7 @@
     using Common.Constants;
     using Common.Enums;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class ScoresViewModel : IMapFrom<ScoreReport>
     {

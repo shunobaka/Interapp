@@ -6,8 +6,8 @@
     using System.Web.Caching;
     using System.Web.Mvc;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.UniversitiesViewModels;
     using Services.Common;
@@ -32,7 +32,7 @@
             var studentId = this.User.Identity.GetUserId();
             var viewModelUnis = this.universities
                 .FilterUniversities(this.universities.AllForStudent(studentId), model)
-                .ProjectTo<UniversitySimpleViewModel>()
+                .To<UniversitySimpleViewModel>()
                 .ToList();
 
             var viewModel = new UniversitiesListViewModel()

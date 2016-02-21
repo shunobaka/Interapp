@@ -3,7 +3,7 @@
     using AutoMapper;
     using Common.Enums;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class UniversityViewModel : IMapFrom<University>, IHaveCustomMappings
     {
@@ -25,7 +25,7 @@
 
         public CambridgeLevel? RequiredCambridgeLevel { get; set; }
 
-        public void CreateMappings(IConfiguration configuration)
+        public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<University, UniversityViewModel>()
                 .ForMember(u => u.CountryName, opts => opts.MapFrom(u => u.Country.Name));

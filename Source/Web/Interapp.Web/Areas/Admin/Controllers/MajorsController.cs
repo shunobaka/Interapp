@@ -2,8 +2,8 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using Models.MajorsViewModels;
@@ -25,7 +25,7 @@
 
         public ActionResult MajorsRead([DataSourceRequest]DataSourceRequest request)
         {
-            var model = this.majors.All().ProjectTo<MajorViewModel>();
+            var model = this.majors.All().To<MajorViewModel>();
             DataSourceResult result = model.ToDataSourceResult(request);
 
             return this.Json(result, JsonRequestBehavior.AllowGet);

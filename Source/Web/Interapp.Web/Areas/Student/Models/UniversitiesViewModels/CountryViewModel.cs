@@ -1,7 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.UniversitiesViewModels
 {
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class CountryViewModel : IMapFrom<Country>
     {

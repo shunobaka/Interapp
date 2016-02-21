@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper.QueryableExtensions;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.HomeViewModels;
     using Services.Contracts;
@@ -23,7 +23,7 @@
             var model = this.universities
                 .All()
                 .Where(u => u.DirectorId == userId)
-                .ProjectTo<UniversityViewModel>()
+                .To<UniversityViewModel>()
                 .ToList();
 
             return this.View(model);

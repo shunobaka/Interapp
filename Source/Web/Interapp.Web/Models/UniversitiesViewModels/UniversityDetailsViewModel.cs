@@ -4,7 +4,7 @@
     using AutoMapper;
     using Common.Enums;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class UniversityDetailsViewModel : IMapFrom<University>, IHaveCustomMappings
     {
@@ -36,7 +36,7 @@
 
         public ICollection<DocumentViewModel> DocumentRequirements { get; set; }
 
-        public void CreateMappings(IConfiguration configuration)
+        public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<University, UniversityDetailsViewModel>()
                 .ForMember(u => u.EnrolledStudents, opts => opts.MapFrom(u => u.Students.Count));

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Common.Enums;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class UniversityDetailsViewModel : IMapFrom<University>
     {

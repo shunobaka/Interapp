@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
     using System.Web.Mvc;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using Models.UsersViewModels;
@@ -25,7 +25,7 @@
 
         public ActionResult UsersRead([DataSourceRequest]DataSourceRequest request)
         {
-            var model = this.users.All().ProjectTo<UserViewModel>();
+            var model = this.users.All().To<UserViewModel>();
             DataSourceResult result = model.ToDataSourceResult(request);
 
             return this.Json(result, JsonRequestBehavior.AllowGet);

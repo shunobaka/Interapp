@@ -6,8 +6,8 @@
     using System.Web.Caching;
     using System.Web.Mvc;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
@@ -28,7 +28,7 @@
 
             var filteredUnis = this.universities
                 .FilterUniversities(unis.AsQueryable(), model)
-                .ProjectTo<UniversitySimpleViewModel>()
+                .To<UniversitySimpleViewModel>()
                 .ToList();
 
             var viewDataModel = new UniversitiesListViewModel()

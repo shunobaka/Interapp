@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class DocumentViewModel : IMapFrom<Document>
     {

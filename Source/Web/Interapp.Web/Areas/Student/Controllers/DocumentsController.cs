@@ -3,8 +3,8 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.DocumentsViewModels;
     using Services.Contracts;
@@ -28,10 +28,10 @@
             var studentId = this.User.Identity.GetUserId();
             var studentInfo = this.students.GetFullInfoById(studentId);
 
-            var studentDocuments = studentInfo.Documents.AsQueryable().ProjectTo<DocumentViewModel>().ToList();
+            var studentDocuments = studentInfo.Documents.AsQueryable().To<DocumentViewModel>().ToList();
             var requiredDocuments = this.documents
                 .GetRequiredForStudent(studentId)
-                .ProjectTo<DocumentViewModel>()
+                .To<DocumentViewModel>()
                 .ToList();
 
             var model = new DocumentsListViewModel()
