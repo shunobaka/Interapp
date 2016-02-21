@@ -2,14 +2,14 @@
 {
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class UsersService : IUsersService
     {
-        private IRepository<User> users;
+        private IDbRepository<User> users;
 
-        public UsersService(IRepository<User> users)
+        public UsersService(IDbRepository<User> users)
         {
             this.users = users;
         }
@@ -24,7 +24,7 @@
             var user = this.users.GetById(id);
 
             this.users.Delete(user);
-            this.users.SaveChanges();
+            this.users.Save();
         }
 
         public User GetById(string id)
@@ -44,7 +44,7 @@
                 originalUser.FirstName = user.FirstName;
                 originalUser.LastName = user.LastName;
 
-                this.users.SaveChanges();
+                this.users.Save();
             }
         }
     }
