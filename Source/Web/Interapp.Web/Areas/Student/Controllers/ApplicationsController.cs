@@ -1,15 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using Microsoft.AspNet.Identity;
-    using Models.ApplicationsViewModels;
-    using Services.Contracts;
     using System.Linq;
     using System.Web.Mvc;
+    using Infrastructure.Mapping;
+    using Microsoft.AspNet.Identity;
+    using Services.Contracts;
+    using ViewModels.Applications;
 
-    [Authorize(Roles = "Student")]
-    public class ApplicationsController : Controller
+    public class ApplicationsController : StudentController
     {
         private IApplicationsService applications;
         private IStudentInfosService studentInfos;
@@ -28,9 +26,9 @@
             var studentId = this.User.Identity.GetUserId();
             var model = this.applications
                 .AllByStudent(studentId)
-                .ProjectTo<ApplicationViewModel>();
+                .To<ApplicationViewModel>();
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
@@ -45,7 +43,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<ApplicationDetailsViewModel>(application);
+            var model = this.Mapper.Map<ApplicationDetailsViewModel>(application);
 
             return this.View(model);
         }
@@ -62,7 +60,7 @@
 
             if (hasApplied)
             {
-                this.ModelState.AddModelError("Applied", "You have already applied");
+                return this.PartialView("_AlreadyApplied");
             }
 
             var eligiblity = this.studentInfos.IsEligibleToApply(studentId, model.UniversityId);
@@ -74,8 +72,8 @@
             else
             {
                 var major = this.majors.GetById(model.MajorId);
-                
-                if(major == null)
+
+                if (major == null)
                 {
                     this.ModelState.AddModelError("Major", "There is no such major.");
                 }

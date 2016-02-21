@@ -1,14 +1,14 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
     using System.Web.Mvc;
+    using Data.Models;
+    using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using Data.Models;
     using Services.Contracts;
-    using AutoMapper.QueryableExtensions;
-    using Models.UsersViewModels;
+    using ViewModels.Users;
 
-    public class UsersController : Controller
+    public class UsersController : AdminController
     {
         private IUsersService users;
 
@@ -20,21 +20,21 @@
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult UsersRead([DataSourceRequest]DataSourceRequest request)
         {
-            var model = this.users.All().ProjectTo<UserViewModel>();
+            var model = this.users.All().To<UserViewModel>();
             DataSourceResult result = model.ToDataSourceResult(request);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UsersUpdate([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var entity = new User
                 {
@@ -47,7 +47,7 @@
                 this.users.Update(entity);
             }
 
-            return Json(new[] { user }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { user }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -55,7 +55,7 @@
         {
             this.users.Delete(user.Id);
 
-            return Json(new[] { user }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { user }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

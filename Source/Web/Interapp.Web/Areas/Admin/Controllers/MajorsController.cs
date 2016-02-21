@@ -1,15 +1,15 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
-    using Models.MajorsViewModels;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Data.Models;
+    using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using Services.Contracts;
-    using System.Web.Mvc;
-    using Data.Models;
-    using AutoMapper.QueryableExtensions;
-    using System.Linq;
+    using ViewModels.Majors;
 
-    public class MajorsController : Controller
+    public class MajorsController : AdminController
     {
         private IMajorsService majors;
 
@@ -17,18 +17,18 @@
         {
             this.majors = majors;
         }
-        
+
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult MajorsRead([DataSourceRequest]DataSourceRequest request)
         {
-            var model = this.majors.All().ProjectTo<MajorViewModel>();
+            var model = this.majors.All().To<MajorViewModel>();
             DataSourceResult result = model.ToDataSourceResult(request);
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -43,17 +43,17 @@
 
             Major result = null;
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 result = this.majors.Create(major.Name);
             }
 
             if (result != null)
             {
-                return Json(new[] { result }.ToDataSourceResult(request, ModelState));
+                return this.Json(new[] { result }.ToDataSourceResult(request, this.ModelState));
             }
 
-            return Json(new[] { major }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { major }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -66,7 +66,7 @@
                 this.ModelState.AddModelError("Major exists", "Major will such name already exists.");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var entity = new Major
                 {
@@ -77,7 +77,7 @@
                 this.majors.Update(entity);
             }
 
-            return Json(new[] { major }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { major }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -85,7 +85,7 @@
         {
             this.majors.Delete(major.Id);
 
-            return Json(new[] { major }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { major }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

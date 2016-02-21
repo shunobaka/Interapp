@@ -1,18 +1,16 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
-    using AutoMapper;
-    using Data.Models;
-    using Microsoft.AspNet.Identity;
-    using Models.UniversitiesViewModels;
-    using Services.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
+    using Data.Models;
+    using Microsoft.AspNet.Identity;
+    using Services.Contracts;
+    using ViewModels.Universities;
 
-    [Authorize(Roles = "Director")]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : DirectorController
     {
         private IUniversitiesService universities;
         private ICountriesService countries;
@@ -23,27 +21,12 @@
             this.countries = countries;
         }
 
-        private IEnumerable<Country> GetCountries()
-        {
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
-        }
-
         [HttpGet]
         public ActionResult Add()
         {
             var model = new UniversityCreateViewModel();
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -82,7 +65,7 @@
 
             if (university != null && university.DirectorId == userId)
             {
-                var model = Mapper.Map<UniversityViewModel>(university);
+                var model = this.Mapper.Map<UniversityViewModel>(university);
                 model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
                 return this.View(model);
@@ -94,7 +77,7 @@
         [HttpPost]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
-            var cachedCountries = GetCountries();
+            var cachedCountries = this.GetCountries();
 
             var countryExists = cachedCountries.Any(c => c.Id == model.CountryId);
 
@@ -124,11 +107,29 @@
                     model.RequiredSAT,
                     model.TuitionFee);
                 return this.RedirectToAction(nameof(this.Add));
+
                 // TODO: Change redirect
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
+        }
+
+        private IEnumerable<Country> GetCountries()
+        {
+            if (this.HttpContext.Cache["Countries"] == null)
+            {
+                this.HttpContext.Cache.Add(
+                    "Countries",
+                    this.countries.All().ToList(),
+                    null,
+                    DateTime.Now.AddHours(1),
+                    TimeSpan.Zero,
+                    CacheItemPriority.Default,
+                    null);
+            }
+
+            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
         }
     }
 }

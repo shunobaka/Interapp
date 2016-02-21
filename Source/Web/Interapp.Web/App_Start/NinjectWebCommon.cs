@@ -1,19 +1,19 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Start")]
+﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Interapp.Web.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
     using Common.Constants;
     using Data;
+    using Data.Common;
     using Data.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
-    using Data.Common;
-    using System.Data.Entity;
 
     public static class NinjectWebCommon
     {

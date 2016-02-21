@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Assemblies.cs" />
+    <Compile Include="Constants\GlobalConstants.cs" />
     <Compile Include="Constants\ModelConstants.cs" />
     <Compile Include="Constants\ModelErrorMessages.cs" />
     <Compile Include="Enums\CambridgeLevel.cs" />

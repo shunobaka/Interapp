@@ -5,15 +5,14 @@
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Services.Common;
     using Services.Contracts;
-    using Models.UniversitiesViewModels;
+    using ViewModels.Universities;
 
     [Authorize]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : BaseController
     {
         private IUniversitiesService universities;
 
@@ -21,14 +20,14 @@
         {
             this.universities = universities;
         }
-        
+
         public ActionResult All(FilterModel model)
         {
             var unis = this.GetUniversities();
 
             var filteredUnis = this.universities
                 .FilterUniversities(unis.AsQueryable(), model)
-                .ProjectTo<UniversitySimpleViewModel>()
+                .To<UniversitySimpleViewModel>()
                 .ToList();
 
             var viewDataModel = new UniversitiesListViewModel()
@@ -44,7 +43,7 @@
         public ActionResult Details(int id)
         {
             var university = this.universities.GetById(id);
-            var model = Mapper.Map<UniversityDetailsViewModel>(university);
+            var model = this.Mapper.Map<UniversityDetailsViewModel>(university);
 
             return this.View(model);
         }
