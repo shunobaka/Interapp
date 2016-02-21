@@ -46,7 +46,7 @@
 
             if (this.ModelState.IsValid)
             {
-                this.documents.CreateForUniversity(model.UniversityId, model.Name, model.Content);
+                this.documents.CreateForUniversity(model.UniversityId, model.Name);
 
                 this.TempData["Message"] = "Document was successfully added.";
                 return this.RedirectToAction(nameof(this.Index));

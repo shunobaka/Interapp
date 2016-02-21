@@ -31,12 +31,11 @@
             this.documents.Save();
         }
 
-        public void CreateForUniversity(int universityId, string name, string content)
+        public void CreateForUniversity(int universityId, string name)
         {
             var document = new Document()
             {
                 UniversityId = universityId,
-                Content = content,
                 Name = name
             };
 

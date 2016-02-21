@@ -17,8 +17,5 @@
             ModelConstants.DocumentNameMaxLength,
             ErrorMessage = ModelErrorMessages.MaxLengthErrorMessage)]
         public string Name { get; set; }
-
-        [Required]
-        public string Content { get; set; }
     }
 }

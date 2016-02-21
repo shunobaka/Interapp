@@ -13,7 +13,7 @@
 
         void CreateForStudent(string studentId, string name, string content);
 
-        void CreateForUniversity(int universityId, string name, string content);
+        void CreateForUniversity(int universityId, string name);
 
         void Delete(int documentId);
 

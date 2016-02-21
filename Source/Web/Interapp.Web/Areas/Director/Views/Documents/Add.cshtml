@@ -3,7 +3,7 @@
     ViewBag.Title = "Add document";
 }
 
-<h2>Add new document</h2>
+<h2>Add new document requirement</h2>
 <hr />
 <div class="row">
     <div class="col-md-8">
@@ -16,13 +16,6 @@
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control large-input" })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control large-input" })
-                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
