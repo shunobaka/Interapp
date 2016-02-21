@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Director.Models.ApplicationsViewModels
+﻿namespace Interapp.Web.Areas.Director.ViewModels.Applications
 {
     using Data.Models;
     using Infrastructure.Mapping;

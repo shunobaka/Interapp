@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Director.Models.HomeViewModels
+﻿namespace Interapp.Web.Areas.Director.ViewModels.Home
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

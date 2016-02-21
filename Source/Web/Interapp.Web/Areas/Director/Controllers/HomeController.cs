@@ -4,8 +4,8 @@
     using System.Web.Mvc;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
-    using Models.HomeViewModels;
     using Services.Contracts;
+    using ViewModels.Home;
 
     public class HomeController : DirectorController
     {

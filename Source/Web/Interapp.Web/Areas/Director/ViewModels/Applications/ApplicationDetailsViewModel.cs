@@ -1,10 +1,10 @@
-﻿namespace Interapp.Web.Areas.Director.Models.ApplicationsViewModels
+﻿namespace Interapp.Web.Areas.Director.ViewModels.Applications
 {
     using System;
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class ApplicationViewModel : IMapFrom<Application>
+    public class ApplicationDetailsViewModel : IMapFrom<Application>
     {
         public int Id { get; set; }
 
@@ -16,7 +16,7 @@
 
         public UniversityViewModel University { get; set; }
 
-        public StudentInfoViewModel Student { get; set; }
+        public StudentInfoDetailsViewModel Student { get; set; }
 
         public MajorViewModel Major { get; set; }
 

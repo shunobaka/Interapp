@@ -7,8 +7,8 @@
     using System.Web.Mvc;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models.UniversitiesViewModels;
     using Services.Contracts;
+    using ViewModels.Universities;
 
     public class UniversitiesController : DirectorController
     {

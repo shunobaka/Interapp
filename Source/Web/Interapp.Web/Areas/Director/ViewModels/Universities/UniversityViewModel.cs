@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Director.Models.UniversitiesViewModels
+﻿namespace Interapp.Web.Areas.Director.ViewModels.Universities
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
