@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models.AccountViewModels
+﻿namespace Interapp.Web.ViewModels.Account
 {
     using System.ComponentModel.DataAnnotations;
 

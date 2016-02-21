@@ -1,8 +1,8 @@
-﻿namespace Interapp.Web.Models.AccountViewModels
+﻿namespace Interapp.Web.ViewModels.Account
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ForgotViewModel
+    public class ExternalLoginConfirmationViewModel
     {
         [Required]
         [Display(Name = "Email")]

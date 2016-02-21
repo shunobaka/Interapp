@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Assemblies.cs" />
+    <Compile Include="Constants\GlobalConstants.cs" />
     <Compile Include="Constants\ModelConstants.cs" />
     <Compile Include="Constants\ModelErrorMessages.cs" />
     <Compile Include="Enums\CambridgeLevel.cs" />
