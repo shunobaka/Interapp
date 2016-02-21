@@ -59,7 +59,6 @@
 
             essay.Title = title;
             essay.Content = content;
-            // TODO: Make sure it works
             this.essays.Save();
         }
     }

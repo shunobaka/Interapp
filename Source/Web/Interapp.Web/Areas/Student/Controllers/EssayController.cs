@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper;
-    using Models.EssayViewModels;
-    using Microsoft.AspNet.Identity;
-    using Services.Contracts;
     using System.Web.Mvc;
+    using AutoMapper;
+    using Microsoft.AspNet.Identity;
+    using Models.EssayViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Student")]
     public class EssayController : Controller
@@ -64,7 +64,7 @@
             };
             return this.View(model);
         }
-        
+
         public ActionResult Deleted()
         {
             var model = new DeleteInfoViewModel()

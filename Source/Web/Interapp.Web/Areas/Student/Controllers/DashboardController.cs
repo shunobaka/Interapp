@@ -3,8 +3,8 @@
     using System.Web.Mvc;
     using AutoMapper;
     using Microsoft.AspNet.Identity;
-    using Services.Contracts;
     using Models.DashboardViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Student")]
     public class DashboardController : Controller

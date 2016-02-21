@@ -9,19 +9,19 @@
     public class UniversityDetailsViewModel : IMapFrom<University>, IHaveCustomMappings
     {
         public int Id { get; set; }
-       
+
         public string Name { get; set; }
-        
+
         public int TuitionFee { get; set; }
 
         public int CountryId { get; set; }
 
         public virtual CountryViewModel Country { get; set; }
-        
+
         public int? RequiredSAT { get; set; }
-        
+
         public int? RequiredIBTToefl { get; set; }
-        
+
         public int? RequiredPBTToefl { get; set; }
 
         public CambridgeResult? RequiredCambridgeScore { get; set; }

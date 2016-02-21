@@ -9,7 +9,7 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
+
         public int TuitionFee { get; set; }
 
         public IList<DocumentViewModel> DocumentRequirements { get; set; }

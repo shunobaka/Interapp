@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Web.Areas.Admin.Models.UsersViewModels
 {
-    using Infrastructure.Mappings;
-    using Data.Models;
     using System;
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;
+    using Data.Models;
+    using Infrastructure.Mappings;
 
     public class UserViewModel : IMapFrom<User>
     {
@@ -24,7 +24,7 @@
         [RegularExpression(ModelConstants.UserNamesRegex)]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
-        
+
         [DataType(DataType.Date)]
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }

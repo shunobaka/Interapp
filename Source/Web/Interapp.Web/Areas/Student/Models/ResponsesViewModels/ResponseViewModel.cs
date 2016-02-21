@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.ResponsesViewModels
 {
+    using System;
     using Data.Models;
     using Infrastructure.Mappings;
-    using System;
 
     public class ResponseViewModel : IMapFrom<Response>
     {

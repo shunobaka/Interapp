@@ -17,7 +17,7 @@
             this.applications = applications;
         }
 
-        public void Create(int applicationId, string content, bool IsAdmitted)
+        public void Create(int applicationId, string content, bool isAdmitted)
         {
             var application = this.applications.GetById(applicationId);
 
@@ -27,7 +27,7 @@
                 {
                     Content = content,
                     Date = DateTime.UtcNow,
-                    IsAdmitted = IsAdmitted
+                    IsAdmitted = isAdmitted
                 };
 
                 application.Response = response;

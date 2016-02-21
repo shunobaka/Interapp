@@ -22,7 +22,7 @@
         public int TuitionFee { get; set; }
 
         public int CountryId { get; set; }
-        
+
         public CountryViewModel Country { get; set; }
 
         [Range(ModelConstants.ScoreSatTotalMin, ModelConstants.ScoreSatTotalMax)]

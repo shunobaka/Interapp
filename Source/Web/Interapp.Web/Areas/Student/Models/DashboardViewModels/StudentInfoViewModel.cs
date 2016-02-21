@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.DashboardViewModels
 {
+    using System.Collections.Generic;
     using Data.Models;
     using Infrastructure.Mappings;
-    using System.Collections.Generic;
 
     public class StudentInfoViewModel : IMapFrom<StudentInfo>
     {

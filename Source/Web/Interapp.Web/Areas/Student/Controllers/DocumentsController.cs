@@ -1,13 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.Models;
-    using Interapp.Services.Contracts;
     using Microsoft.AspNet.Identity;
-    using System.Linq;
-    using System.Web.Mvc;
     using Models.DocumentsViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Student")]
     public class DocumentsController : Controller
@@ -40,7 +40,7 @@
                 RequiredDocuments = requiredDocuments
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public ActionResult Details(int id)

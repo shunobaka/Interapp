@@ -8,9 +8,9 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Data.Models;
+    using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
-    using Models.UniversitiesViewModels;
 
     [Authorize]
     public class UniversitiesController : Controller
@@ -21,7 +21,7 @@
         {
             this.universities = universities;
         }
-        
+
         public ActionResult All(FilterModel model)
         {
             var unis = this.GetUniversities();

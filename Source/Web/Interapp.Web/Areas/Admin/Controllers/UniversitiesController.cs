@@ -1,9 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
-    using Models.UniversitiesViewModels;
-    using Kendo.Mvc.UI;
-    using Services.Contracts;
     using System.Web.Mvc;
+    using Kendo.Mvc.UI;
+    using Models.UniversitiesViewModels;
+    using Services.Contracts;
 
     public class UniversitiesController : Controller
     {
@@ -16,12 +16,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
-
-        //public JsonResult UpdateUniversity([DataSourceRequest] DataSourceRequest request, UniversityViewModel university)
-        //{
-
-        //}
     }
 }
