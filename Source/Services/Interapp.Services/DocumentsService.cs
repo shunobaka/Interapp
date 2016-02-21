@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
@@ -100,6 +101,14 @@
             }
 
             this.documents.Save();
+        }
+
+        public IQueryable<Document> GetByDirector(string directorId)
+        {
+            return this.documents
+                .All()
+                .Where(d => d.University != null && d.University.DirectorId == directorId)
+                .Include(d => d.University);
         }
     }
 }
