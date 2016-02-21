@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -200,7 +200,6 @@
   <ItemGroup>
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\EmailService.cs" />
@@ -287,8 +286,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
-    <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -532,6 +529,10 @@
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>
       <Name>Interapp.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interapp.Web.Infrastructure\Interapp.Web.Infrastructure.csproj">
+      <Project>{362979b8-654f-4d6e-8f95-2558b98fa8d4}</Project>
+      <Name>Interapp.Web.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
