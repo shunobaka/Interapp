@@ -48,3 +48,8 @@ textarea.large-input {
 .text-bold {
     font-weight: bold;
 }
+
+div.k-edit-form-container
+{
+    width: auto;
+}

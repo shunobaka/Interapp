@@ -4,16 +4,16 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class StudentInfosService : IStudentInfosService
     {
-        private IRepository<StudentInfo> studentInfos;
-        private IRepository<User> users;
-        private IRepository<University> universities;
+        private IDbRepository<StudentInfo> studentInfos;
+        private IDbRepository<User> users;
+        private IDbRepository<University> universities;
 
-        public StudentInfosService(IRepository<StudentInfo> studentInfos, IRepository<User> users, IRepository<University> universities)
+        public StudentInfosService(IDbRepository<StudentInfo> studentInfos, IDbRepository<User> users, IDbRepository<University> universities)
         {
             this.studentInfos = studentInfos;
             this.users = users;
@@ -35,7 +35,7 @@
             this.universities.Detach(university);
             student.UniversitiesOfInterest.Add(university);
             this.studentInfos.Attach(university);
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public void Create(string studentId)
@@ -46,7 +46,7 @@
                 .FirstOrDefault();
 
             student.StudentInfo = new StudentInfo();
-            this.users.SaveChanges();
+            this.users.Save();
         }
 
         public void EnrollStudent(string studentId, int universityId, int majorId)
@@ -58,7 +58,7 @@
 
             student.UniversityId = universityId;
             student.MajorId = majorId;
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public StudentInfo GetById(string id)
@@ -115,8 +115,14 @@
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
-            this.studentInfos.Update(info);
-            this.studentInfos.SaveChanges();
+            if (student != null)
+            {
+                student.MajorId = info.MajorId;
+                student.UniversityId = info.UniversityId;
+
+                this.studentInfos.Save();
+            }
+
             //// TODO: Fix maybe?
         }
 
@@ -195,6 +201,14 @@
                 .Include(s => s.Documents)
                 .Include(s => s.Scores)
                 .FirstOrDefault();
+        }
+
+        public ApplicationEligibility IsEligibleToApply(string studentId, int universityId)
+        {
+            var student = this.studentInfos.GetById(studentId);
+            var university = this.universities.GetById(universityId);
+
+            return this.IsEligibleToApply(student, university);
         }
     }
 }

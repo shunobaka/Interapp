@@ -68,6 +68,9 @@
       <HintPath>..\..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2016\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -202,9 +205,28 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Admin\Models\MajorsViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UsersViewModels\UserViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ResponseInputModel.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\EssayViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentViewModel.cs" />
+    <Compile Include="Areas\Director\Models\ApplicationsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Models\HomeViewModels\CountryViewModel.cs" />
     <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\Models\HomeViewModels\UniversityViewModel.cs" />
@@ -214,8 +236,15 @@
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
+    <Compile Include="Areas\Student\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ApplicationsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
     <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
@@ -225,10 +254,16 @@
     <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\DocumentsViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\ResponseViewModel.cs" />
+    <Compile Include="Areas\Student\Models\ResponsesViewModels\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ApplicationInputViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\CountryViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\DetailsInformationViewModel.cs" />
+    <Compile Include="Areas\Student\Models\UniversitiesViewModels\MajorViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoApplicationViewModel.cs" />
     <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoDocumentViewModel.cs" />
     <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
@@ -265,6 +300,59 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\kendo\Default\editor.png" />
+    <Content Include="Content\kendo\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\Default\loading-image.gif" />
+    <Content Include="Content\kendo\Default\loading.gif" />
+    <Content Include="Content\kendo\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\Default\markers.png" />
+    <Content Include="Content\kendo\Default\markers_2x.png" />
+    <Content Include="Content\kendo\Default\slider-h.gif" />
+    <Content Include="Content\kendo\Default\slider-v.gif" />
+    <Content Include="Content\kendo\Default\sprite.png" />
+    <Content Include="Content\kendo\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\kendo\images\back.png" />
+    <Content Include="Content\kendo\images\kendoui.svg" />
+    <Content Include="Content\kendo\images\wp8_icons.png" />
+    <Content Include="Content\kendo\images\wp8_inverseicons.png" />
+    <Content Include="Content\kendo\kendo.common.min.css" />
+    <Content Include="Content\kendo\kendo.default.min.css" />
+    <Content Include="Content\kendo\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\textures\dots1.png" />
+    <Content Include="Content\kendo\textures\dots10.png" />
+    <Content Include="Content\kendo\textures\dots11.png" />
+    <Content Include="Content\kendo\textures\dots12.png" />
+    <Content Include="Content\kendo\textures\dots13.png" />
+    <Content Include="Content\kendo\textures\dots2.png" />
+    <Content Include="Content\kendo\textures\dots3.png" />
+    <Content Include="Content\kendo\textures\dots4.png" />
+    <Content Include="Content\kendo\textures\dots5.png" />
+    <Content Include="Content\kendo\textures\dots6.png" />
+    <Content Include="Content\kendo\textures\dots7.png" />
+    <Content Include="Content\kendo\textures\dots8.png" />
+    <Content Include="Content\kendo\textures\dots9.png" />
+    <Content Include="Content\kendo\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\textures\glass.png" />
+    <Content Include="Content\kendo\textures\highlight.png" />
+    <Content Include="Content\kendo\textures\hsv-gradient.png" />
+    <Content Include="Content\kendo\textures\hue.png" />
+    <Content Include="Content\kendo\textures\leather1.png" />
+    <Content Include="Content\kendo\textures\leather2.png" />
+    <Content Include="Content\kendo\textures\noise.png" />
+    <Content Include="Content\kendo\textures\stripe1.png" />
+    <Content Include="Content\kendo\textures\stripe2.png" />
+    <Content Include="Content\kendo\textures\stripe3.png" />
+    <Content Include="Content\kendo\textures\stripe4.png" />
+    <Content Include="Content\kendo\textures\stripe5.png" />
+    <Content Include="Content\kendo\textures\stripe6.png" />
+    <Content Include="Content\kendo\textures\transparency.png" />
+    <Content Include="Content\kendo\textures\transtexture.png" />
+    <Content Include="Content\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,14 +386,52 @@
     <Content Include="Areas\Student\Views\Universities\_UniversityInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_StudentInfo.cshtml" />
     <Content Include="Areas\Student\Views\Universities\_UniversitiesFilterPartial.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\All.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Universities\_ApplicationForm.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\_Error.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\_SuccessfullySubmitted.cshtml" />
+    <Content Include="Areas\Director\Views\Applications\All.cshtml" />
+    <Content Include="Areas\Director\Views\Applications\Details.cshtml" />
+    <Content Include="Areas\Director\Views\Applications\Evaluate.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\All.cshtml" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\kendo\images\kendoui.ttf" />
+    <Content Include="Content\kendo\images\kendoui.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\kendo\kendo.all.min.js" />
+    <Content Include="Scripts\kendo\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -351,8 +477,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Universities\" />
     <Folder Include="Areas\Director\Views\Shared\" />
-    <Folder Include="Areas\Student\Views\Applications\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -366,6 +493,10 @@
     <ProjectReference Include="..\..\Common\Interapp.Common\Interapp.Common.csproj">
       <Project>{84d4a80b-ecf3-466e-9c31-848e26d2cb7c}</Project>
       <Name>Interapp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interapp.Data.Common\Interapp.Data.Common.csproj">
+      <Project>{7c59c680-5a2e-47dd-b830-05c60bacab4f}</Project>
+      <Name>Interapp.Data.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Interapp.Data.Models\Interapp.Data.Models.csproj">
       <Project>{414780b8-3bbe-4942-bfcf-8f27d215d3a9}</Project>

@@ -1,17 +1,18 @@
 ﻿namespace Interapp.Services
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class ApplicationsService : IApplicationsService
     {
-        private IRepository<Application> applications;
+        private IDbRepository<Application> applications;
 
-        public ApplicationsService(IRepository<Application> applications)
+        public ApplicationsService(IDbRepository<Application> applications)
         {
             this.applications = applications;
         }
@@ -21,11 +22,21 @@
             return this.applications.All();
         }
 
+        public IQueryable<Application> AllByDirector(string directorId)
+        {
+            return this.applications
+                .All()
+                .Where(a => a.University.Director.DirectorId == directorId)
+                .Include(a => a.University);
+        }
+
         public IQueryable<Application> AllByStudent(string studentId)
         {
             return this.applications
                 .All()
-                .Where(a => a.StudentId == studentId);
+                .Where(a => a.StudentId == studentId)
+                .Include(a => a.University)
+                .Include(a => a.University.Country);
         }
 
         public IQueryable<Application> AllByUniversity(int universityId)
@@ -46,13 +57,14 @@
             };
 
             this.applications.Add(application);
-            this.applications.SaveChanges();
+            this.applications.Save();
         }
 
         public void Delete(int id)
         {
-            this.applications.Delete(id);
-            this.applications.SaveChanges();
+            var application = this.applications.GetById(id);
+            this.applications.Delete(application);
+            this.applications.Save();
         }
 
         public Application GetById(int id)
@@ -60,6 +72,14 @@
             return this.applications
                 .All()
                 .Where(a => a.Id == id)
+                .Include(a => a.University)
+                .Include(a => a.Major)
+                .Include(a => a.Student)
+                .Include(a => a.Student.Scores)
+                .Include(a => a.Student.Essay)
+                .Include(a => a.Student.Student)
+                .Include(a => a.University.Country)
+                .Include(a => a.University.Director)
                 .FirstOrDefault();
         }
 
@@ -67,6 +87,17 @@
         {
             // TODO: Implement
             throw new NotImplementedException();
+        }
+
+        public void SetReviewed(int id)
+        {
+            var application = this.applications
+                .GetById(id);
+
+            if (application != null)
+            {
+                application.IsReviewed = true;
+            }
         }
     }
 }

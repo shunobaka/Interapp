@@ -1,0 +1,32 @@
+﻿@model Interapp.Web.Areas.Student.Models.UniversitiesViewModels.ApplicationInputViewModel
+
+<div id="application">
+    <div class="col-md-3">
+        <img src="~/Content/loading.gif" alt="loading..." id="loading" style="display: none" width="50" />
+    </div>
+    <div class="col-md-6">
+        @using (Ajax.BeginForm(
+            "Submit",
+            "Applications",
+            null,
+            new AjaxOptions
+            {
+                UpdateTargetId = "application",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "POST"
+            },
+            new { id = "application-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.UniversityId)
+            <div class="form-group row">
+                <div class="col-md-8 col-md-offset-2">
+                    @Html.DropDownListFor(m => m.MajorId, Model.Majors, "Select major", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit application" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>

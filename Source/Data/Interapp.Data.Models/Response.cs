@@ -3,24 +3,16 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
+    using Common.Models;
+    using Interapp.Common.Constants;
 
-    public class Response
+    public class Response : BaseModel
     {
         [Key]
-        public int Id { get; set; }
+        [ForeignKey("Application")]
+        public int ApplicationId { get; set; }
 
-        [Required]
-        public string StudentId { get; set; }
-
-        [ForeignKey("StudentId")]
-        public virtual StudentInfo Student { get; set; }
-
-        [Required]
-        public int UniversityId { get; set; }
-
-        [ForeignKey("UniversityId")]
-        public virtual University University { get; set; }
+        public virtual Application Application { get; set; }
 
         [Required]
         [MinLength(ModelConstants.ResponseContentMinLength)]

@@ -64,22 +64,31 @@
     <Compile Include="Contracts\IDocumentsService.cs" />
     <Compile Include="Contracts\IEssaysService.cs" />
     <Compile Include="Contracts\IMajorsService.cs" />
+    <Compile Include="Contracts\IResponsesService.cs" />
     <Compile Include="Contracts\IScoresService.cs" />
     <Compile Include="Contracts\IStudentInfosService.cs" />
     <Compile Include="Contracts\IUniversitiesService.cs" />
+    <Compile Include="Contracts\IUsersService.cs" />
     <Compile Include="CountriesService.cs" />
     <Compile Include="DirectorInfosService.cs" />
     <Compile Include="DocumentsService.cs" />
     <Compile Include="EssaysService.cs" />
+    <Compile Include="MajorsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponsesService.cs" />
     <Compile Include="ScoresService.cs" />
     <Compile Include="StudentInfosService.cs" />
     <Compile Include="UniversitiesService.cs" />
+    <Compile Include="UsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Interapp.Common\Interapp.Common.csproj">
       <Project>{84d4a80b-ecf3-466e-9c31-848e26d2cb7c}</Project>
       <Name>Interapp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interapp.Data.Common\Interapp.Data.Common.csproj">
+      <Project>{7c59c680-5a2e-47dd-b830-05c60bacab4f}</Project>
+      <Name>Interapp.Data.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Interapp.Data.Models\Interapp.Data.Models.csproj">
       <Project>{414780b8-3bbe-4942-bfcf-8f27d215d3a9}</Project>
@@ -97,6 +106,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

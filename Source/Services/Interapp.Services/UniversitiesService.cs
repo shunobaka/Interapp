@@ -5,15 +5,15 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
     using Interapp.Common.Enums;
 
     public class UniversitiesService : IUniversitiesService
     {
-        private IRepository<University> universities;
+        private IDbRepository<University> universities;
 
-        public UniversitiesService(IRepository<University> universities)
+        public UniversitiesService(IDbRepository<University> universities)
         {
             this.universities = universities;
         }
@@ -34,13 +34,14 @@
             };
 
             this.universities.Add(university);
-            this.universities.SaveChanges();
+            this.universities.Save();
         }
 
         public void DeleteById(int id)
         {
-            this.universities.Delete(id);
-            this.universities.SaveChanges();
+            var university = this.universities.GetById(id);
+            this.universities.Delete(university);
+            this.universities.Save();
         }
 
         public University GetById(int id)
@@ -87,7 +88,7 @@
                 university.RequiredSAT = sat;
                 university.TuitionFee = tuition;
 
-                this.universities.SaveChanges();
+                this.universities.Save();
             }
         }
 
