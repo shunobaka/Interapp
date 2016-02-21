@@ -4,14 +4,14 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class CountriesService : ICountriesService
     {
-        private IRepository<Country> countries;
+        private IDbRepository<Country> countries;
 
-        public CountriesService(IRepository<Country> countries)
+        public CountriesService(IDbRepository<Country> countries)
         {
             this.countries = countries;
         }
@@ -31,12 +31,14 @@
             };
 
             this.countries.Add(country);
-            this.countries.SaveChanges();
+            this.countries.Save();
         }
 
         public void DeleteById(int id)
         {
-            this.countries.Delete(id);
+            var country = this.countries.GetById(id);
+            this.countries.Delete(country);
+            this.countries.Save();
         }
 
         public Country GetById(int id)
