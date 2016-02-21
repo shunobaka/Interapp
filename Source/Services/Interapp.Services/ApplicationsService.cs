@@ -1,18 +1,18 @@
 ﻿namespace Interapp.Services
 {
     using System;
+    using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
-    using System.Data.Entity;
 
     public class ApplicationsService : IApplicationsService
     {
-        private IRepository<Application> applications;
+        private IDbRepository<Application> applications;
 
-        public ApplicationsService(IRepository<Application> applications)
+        public ApplicationsService(IDbRepository<Application> applications)
         {
             this.applications = applications;
         }
@@ -57,13 +57,14 @@
             };
 
             this.applications.Add(application);
-            this.applications.SaveChanges();
+            this.applications.Save();
         }
 
         public void Delete(int id)
         {
-            this.applications.Delete(id);
-            this.applications.SaveChanges();
+            var application = this.applications.GetById(id);
+            this.applications.Delete(application);
+            this.applications.Save();
         }
 
         public Application GetById(int id)
@@ -77,6 +78,7 @@
                 .Include(a => a.Student.Scores)
                 .Include(a => a.Student.Essay)
                 .Include(a => a.Student.Student)
+                .Include(a => a.University.Country)
                 .Include(a => a.University.Director)
                 .FirstOrDefault();
         }

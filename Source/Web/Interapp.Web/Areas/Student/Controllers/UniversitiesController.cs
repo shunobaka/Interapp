@@ -1,30 +1,34 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using Data.Models;
-    using Microsoft.AspNet.Identity;
-    using Models.UniversitiesViewModels;
-    using Services.Common;
-    using Services.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
+    using Data.Models;
+    using Infrastructure.Mapping;
+    using Microsoft.AspNet.Identity;
+    using Services.Common;
+    using Services.Contracts;
+    using ViewModels.Universities;
 
-    [Authorize(Roles = "Student")]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : StudentController
     {
         private IUniversitiesService universities;
         private IStudentInfosService studentInfos;
         private IMajorsService majors;
+        private IApplicationsService applications;
 
-        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos, IMajorsService majors)
+        public UniversitiesController(
+            IUniversitiesService universities,
+            IStudentInfosService studentInfos,
+            IMajorsService majors,
+            IApplicationsService applications)
         {
             this.universities = universities;
             this.studentInfos = studentInfos;
             this.majors = majors;
+            this.applications = applications;
         }
 
         public ActionResult All(FilterModel model)
@@ -32,7 +36,7 @@
             var studentId = this.User.Identity.GetUserId();
             var viewModelUnis = this.universities
                 .FilterUniversities(this.universities.AllForStudent(studentId), model)
-                .ProjectTo<UniversitySimpleViewModel>()
+                .To<UniversitySimpleViewModel>()
                 .ToList();
 
             var viewModel = new UniversitiesListViewModel()
@@ -42,13 +46,13 @@
                 Filter = model
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public ActionResult Add(int id)
         {
-            if (Request.IsAjaxRequest())
+            if (this.Request.IsAjaxRequest())
             {
                 var studentId = this.User.Identity.GetUserId();
                 var universitiesOfInterest = this.studentInfos.GetUniversitiesOfInterest(studentId);
@@ -71,17 +75,21 @@
             var university = this.universities.GetByIdWithDocuments(id);
             var student = this.studentInfos.GetByIdWithDocumentsAndScores(studentId);
             var eligiblity = this.studentInfos.IsEligibleToApply(student, university);
+            var hasApplied = this.applications
+                .All()
+                .Any(a => a.StudentId == studentId && a.UniversityId == id);
 
             var model = new DetailsInformationViewModel()
             {
                 Eligibility = eligiblity,
-                Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = Mapper.Map<UniversityDetailsViewModel>(university)
+                Student = this.Mapper.Map<StudentInfoApplicationViewModel>(student),
+                University = this.Mapper.Map<UniversityDetailsViewModel>(university),
+                HasApplied = hasApplied
             };
 
             return this.View(model);
         }
-        
+
         public ActionResult ApplicationForm(int id)
         {
             var model = new ApplicationInputViewModel();

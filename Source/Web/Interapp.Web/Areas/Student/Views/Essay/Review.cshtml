@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Areas.Student.Models.EssayViewModels.EssayViewModel
+﻿@model Interapp.Web.Areas.Student.ViewModels.Essay.EssayViewModel
 @{
     ViewBag.Title = "Essay";
 }
@@ -8,7 +8,6 @@
 @if (Model != null)
 {
     @Html.ActionLink("Edit essay", "Edit", null, new { @class = "btn btn-warning pull-right"})
-    @Html.ActionLink("Delete essay", "Delete", null, new { @class = "btn btn-danger pull-right" })
 }
 <hr />
 <div class="row">
