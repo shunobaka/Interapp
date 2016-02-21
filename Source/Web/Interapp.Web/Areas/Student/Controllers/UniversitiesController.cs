@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
@@ -13,8 +12,7 @@
     using Services.Common;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : StudentController
     {
         private IUniversitiesService universities;
         private IStudentInfosService studentInfos;
@@ -75,8 +73,8 @@
             var model = new DetailsInformationViewModel()
             {
                 Eligibility = eligiblity,
-                Student = Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = Mapper.Map<UniversityDetailsViewModel>(university)
+                Student = this.Mapper.Map<StudentInfoApplicationViewModel>(student),
+                University = this.Mapper.Map<UniversityDetailsViewModel>(university)
             };
 
             return this.View(model);

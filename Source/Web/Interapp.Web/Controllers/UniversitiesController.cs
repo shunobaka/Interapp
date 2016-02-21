@@ -43,7 +43,7 @@
         public ActionResult Details(int id)
         {
             var university = this.universities.GetById(id);
-            var model = Mapper.Map<UniversityDetailsViewModel>(university);
+            var model = this.Mapper.Map<UniversityDetailsViewModel>(university);
 
             return this.View(model);
         }

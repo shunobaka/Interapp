@@ -1,14 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
     using Models.ScoresViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class ScoresController : Controller
+    public class ScoresController : StudentController
     {
         private IScoresService scores;
 
@@ -23,7 +21,7 @@
             var score = this.scores
                 .GetByStudentId(studentId);
 
-            var model = Mapper.Map<ScoresViewModel>(score);
+            var model = this.Mapper.Map<ScoresViewModel>(score);
             return this.View(model);
         }
 
@@ -34,7 +32,7 @@
             var score = this.scores
                .GetByStudentId(studentId);
 
-            var model = Mapper.Map<ScoresViewModel>(score);
+            var model = this.Mapper.Map<ScoresViewModel>(score);
 
             return this.View(model);
         }

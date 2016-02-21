@@ -2,14 +2,12 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.ResponsesViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class ResponsesController : Controller
+    public class ResponsesController : StudentController
     {
         private IResponsesService responses;
 
@@ -39,7 +37,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<ResponseViewModel>(response);
+            var model = this.Mapper.Map<ResponseViewModel>(response);
 
             return this.View(model);
         }

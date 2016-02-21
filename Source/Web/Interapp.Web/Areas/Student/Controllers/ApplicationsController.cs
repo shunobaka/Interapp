@@ -2,14 +2,12 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class ApplicationsController : Controller
+    public class ApplicationsController : StudentController
     {
         private IApplicationsService applications;
         private IStudentInfosService studentInfos;
@@ -45,7 +43,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<ApplicationDetailsViewModel>(application);
+            var model = this.Mapper.Map<ApplicationDetailsViewModel>(application);
 
             return this.View(model);
         }

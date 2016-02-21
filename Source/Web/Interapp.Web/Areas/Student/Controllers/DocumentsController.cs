@@ -2,15 +2,13 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.DocumentsViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class DocumentsController : Controller
+    public class DocumentsController : StudentController
     {
         private IDocumentsService documents;
         private IUniversitiesService universities;
@@ -53,7 +51,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<DocumentViewModel>(document);
+            var model = this.Mapper.Map<DocumentViewModel>(document);
 
             return this.View(model);
         }
@@ -90,7 +88,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<DocumentViewModel>(document);
+            var model = this.Mapper.Map<DocumentViewModel>(document);
 
             return this.View(model);
         }

@@ -1,13 +1,11 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
     using System.Web.Mvc;
-    using AutoMapper;
     using Microsoft.AspNet.Identity;
     using Models.EssayViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Student")]
-    public class EssayController : Controller
+    public class EssayController : StudentController
     {
         private IEssaysService essays;
 
@@ -22,7 +20,7 @@
             var essay = this.essays
                 .GetByStudentId(studentId);
 
-            var model = Mapper.Map<EssayViewModel>(essay);
+            var model = this.Mapper.Map<EssayViewModel>(essay);
 
             return this.View(model);
         }
@@ -34,7 +32,7 @@
             var essay = this.essays
                .GetByStudentId(studentId);
 
-            var model = Mapper.Map<EssayViewModel>(essay);
+            var model = this.Mapper.Map<EssayViewModel>(essay);
 
             return this.View(model);
         }
