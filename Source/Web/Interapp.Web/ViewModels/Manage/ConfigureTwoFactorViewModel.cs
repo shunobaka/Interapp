@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models.ManageViewModels
+﻿namespace Interapp.Web.ViewModels.Manage
 {
     using System.Collections.Generic;
 
