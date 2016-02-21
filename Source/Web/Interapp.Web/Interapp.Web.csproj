@@ -213,10 +213,10 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
-    <Compile Include="Areas\Admin\Models\MajorsViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\UsersViewModels\UserViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Admin\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Director\Controllers\DirectorController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />

@@ -62,35 +62,5 @@
 
             return this.View(model);
         }
-
-        [HttpGet]
-        public ActionResult Delete()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ItemName = "scores",
-                ControllerName = "Scores"
-            };
-            return this.View(model);
-        }
-
-        public ActionResult Deleted()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ItemName = "scores",
-                ControllerName = "Scores"
-            };
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public ActionResult DeletePost()
-        {
-            var studentId = this.User.Identity.GetUserId();
-            this.scores.Delete(studentId);
-
-            return this.RedirectToAction(nameof(this.Deleted));
-        }
     }
 }
