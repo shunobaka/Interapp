@@ -26,7 +26,6 @@
                 var response = new Response()
                 {
                     Content = content,
-                    Date = DateTime.UtcNow,
                     IsAdmitted = isAdmitted
                 };
 
