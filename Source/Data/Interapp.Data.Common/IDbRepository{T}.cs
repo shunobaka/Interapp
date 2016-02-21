@@ -4,7 +4,7 @@
     using Models;
 
     public interface IDbRepository<T>
-        where T : BaseModel
+        where T : class, IAuditInfo, IDeletableEntity
     {
         IQueryable<T> All();
 

@@ -6,7 +6,7 @@
     using Models;
 
     public class DbRepository<T> : IDbRepository<T>
-        where T : BaseModel
+        where T : class, IAuditInfo, IDeletableEntity
     {
         public DbRepository(DbContext context)
         {

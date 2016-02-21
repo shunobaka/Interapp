@@ -1,7 +1,6 @@
 ﻿namespace Interapp.Data.Common.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public abstract class BaseModel : IAuditInfo, IDeletableEntity
