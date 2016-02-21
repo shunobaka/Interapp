@@ -237,6 +237,7 @@
     <Compile Include="Areas\Director\ViewModels\Documents\DocumentViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Documents\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Universities\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Universities\CountryViewModel.cs" />

@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Interapp.Web.Areas.Director.ViewModels.Home.UniversityViewModel>
+﻿@model Interapp.Web.Areas.Director.ViewModels.Home.IndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Director's panel";
+
+    var pages = Math.Ceiling(Model.UniversitiesCount / (decimal)Model.PageSize);
 }
 
 <h2>Director's panel</h2>
@@ -8,26 +10,61 @@
 <div class="row">
     <div class="col-md-6">
         <h3>My universities</h3>
-        @if (Model == null || Model.Count() == 0)
+        @if (Model.Universities == null || Model.Universities.Count() == 0)
         {
             <h4>You still have no universities.</h4>
         }
         else
         {
-            foreach (var university in Model)
+            for (int i = 0; i < Model.Universities.Count; i++)
             {
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>@university.Name</h4>
+                        <h4>@Model.Universities[i].Name</h4>
                     </div>
                     <div class="col-md-6">
-                        @Html.ActionLink("Details", "Details", "Universities", new { area = "", id = university.Id }, new { @class = "btn btn-success pull-right" })
-                        @Html.ActionLink("Edit", "Edit", "Universities", new { id = university.Id }, new { @class = "btn btn-warning pull-right" })
+                        @Html.ActionLink("Details", "Details", "Universities", new { area = "", id = Model.Universities[i].Id }, new { @class = "btn btn-success pull-right" })
+                        @Html.ActionLink("Edit", "Edit", "Universities", new { id = Model.Universities[i].Id }, new { @class = "btn btn-warning pull-right" })
                     </div>
                 </div>
-                <br />
+                if (i != Model.Universities.Count - 1)
+                {
+                    <br />
+                }
             }
         }
+        <div class="row text-center">
+            <ul class="pagination">
+                <li class="@(Model.Page <= 1 ? Html.Raw("disabled") : Html.Raw(""))">
+                    @if (Model.Page <= 1)
+                    {
+                        <span aria-hidden="true">&laquo;</span>
+                    }
+                    else
+                    {
+                        <a href="/Director/Home/Index/@(Model.Page - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    }
+                </li>
+                @for (int i = 1; i <= pages; i++)
+                {
+                    <li class="@(Model.Page == i ? Html.Raw("active") : Html.Raw(""))"><a href="/Director/Home/Index/@i">@i</a></li>
+                }
+                <li class="@(Model.Page >= pages ? Html.Raw("disabled") : Html.Raw(""))">
+                    @if (Model.Page >= pages)
+                    {
+                        <span aria-hidden="true">&raquo;</span>
+                    }
+                    else
+                    {
+                        <a href="/Director/Home/Index/@(Model.Page + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    }
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="col-md-6">
         <h3>Management</h3>
