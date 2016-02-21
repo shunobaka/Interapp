@@ -111,5 +111,10 @@
                 .Where(d => d.University != null && d.University.DirectorId == directorId)
                 .Include(d => d.University);
         }
+
+        public IQueryable<Document> All()
+        {
+            return this.documents.All();
+        }
     }
 }

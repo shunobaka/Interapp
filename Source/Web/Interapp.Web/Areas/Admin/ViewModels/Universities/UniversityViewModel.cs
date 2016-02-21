@@ -12,8 +12,12 @@
         public int Id { get; set; }
 
         [Required]
-        [MinLength(ModelConstants.UniversityNameMinLength)]
-        [MaxLength(ModelConstants.UniversityNameMaxLength)]
+        [MinLength(
+            ModelConstants.UniversityNameMinLength,
+            ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
+        [MaxLength(
+            ModelConstants.UniversityNameMaxLength,
+            ErrorMessage = ModelErrorMessages.MaxLengthErrorMessage)]
         [RegularExpression(ModelConstants.UniversityNameRegex)]
         public string Name { get; set; }
 

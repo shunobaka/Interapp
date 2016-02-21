@@ -5,6 +5,8 @@
 
     public interface IDocumentsService
     {
+        IQueryable<Document> All();
+
         IQueryable<Document> GetByUniversity(int universityId);
 
         IQueryable<Document> GetByStudent(string studentId);
