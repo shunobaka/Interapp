@@ -1,9 +1,9 @@
 ﻿namespace Interapp.Web.Areas.Director.Models.ApplicationsViewModels
 {
-    using Data.Models;
-    using Infrastructure.Mappings;
-    using Common.Constants;
     using System.ComponentModel.DataAnnotations;
+    using Common.Constants;
+    using Data.Models;
+    using Infrastructure.Mapping;
 
     public class ResponseInputModel : IMapFrom<Response>
     {

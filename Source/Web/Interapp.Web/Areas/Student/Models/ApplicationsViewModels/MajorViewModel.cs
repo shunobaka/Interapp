@@ -1,7 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.ApplicationsViewModels
 {
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class MajorViewModel : IMapFrom<Major>
     {

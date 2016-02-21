@@ -1,7 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.ResponsesViewModels
 {
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class UniversityViewModel : IMapFrom<University>
     {

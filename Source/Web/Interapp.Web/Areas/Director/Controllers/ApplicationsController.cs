@@ -1,13 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
-    using AutoMapper.QueryableExtensions;
-    using Models.ApplicationsViewModels;
-    using Microsoft.AspNet.Identity;
-    using Services.Contracts;
-    using System.Web.Mvc;
     using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper;
-    using System;
+    using Infrastructure.Mapping;
+    using Microsoft.AspNet.Identity;
+    using Models.ApplicationsViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Director")]
     public class ApplicationsController : Controller
@@ -26,9 +25,9 @@
             var directorId = this.User.Identity.GetUserId();
             var model = this.applications
                 .AllByDirector(directorId)
-                .ProjectTo<ApplicationViewModel>();
+                .To<ApplicationViewModel>();
 
-            return View(model);
+            return this.View(model);
         }
 
         public ActionResult Details(int id)
@@ -53,7 +52,7 @@
         [HttpGet]
         public ActionResult Evaluate(int id)
         {
-            ViewData["app-id"] = id;
+            this.ViewData["app-id"] = id;
             return this.View();
         }
 
@@ -77,7 +76,7 @@
                 return this.RedirectToAction(nameof(this.All));
             }
 
-            ViewData["app-id"] = id;
+            this.ViewData["app-id"] = id;
             return this.View(model);
         }
     }

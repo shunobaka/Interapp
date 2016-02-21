@@ -6,7 +6,7 @@
     using Common.Constants;
     using Common.Enums;
     using Data.Models;
-    using Infrastructure.Mappings;
+    using Infrastructure.Mapping;
 
     public class UniversityViewModel : IMapFrom<University>
     {
@@ -22,7 +22,7 @@
         public int TuitionFee { get; set; }
 
         public int CountryId { get; set; }
-        
+
         public CountryViewModel Country { get; set; }
 
         [Range(ModelConstants.ScoreSatTotalMin, ModelConstants.ScoreSatTotalMax)]

@@ -2,10 +2,10 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper.QueryableExtensions;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
-    using Services.Contracts;
     using Models.HomeViewModels;
+    using Services.Contracts;
 
     [Authorize(Roles = "Director")]
     public class HomeController : Controller
@@ -23,7 +23,7 @@
             var model = this.universities
                 .All()
                 .Where(u => u.DirectorId == userId)
-                .ProjectTo<UniversityViewModel>()
+                .To<UniversityViewModel>()
                 .ToList();
 
             return this.View(model);

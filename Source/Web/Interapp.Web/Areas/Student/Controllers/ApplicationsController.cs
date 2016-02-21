@@ -1,12 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
-    using System.Linq;
-    using System.Web.Mvc;
 
     [Authorize(Roles = "Student")]
     public class ApplicationsController : Controller
@@ -28,9 +28,9 @@
             var studentId = this.User.Identity.GetUserId();
             var model = this.applications
                 .AllByStudent(studentId)
-                .ProjectTo<ApplicationViewModel>();
+                .To<ApplicationViewModel>();
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
@@ -74,8 +74,8 @@
             else
             {
                 var major = this.majors.GetById(model.MajorId);
-                
-                if(major == null)
+
+                if (major == null)
                 {
                     this.ModelState.AddModelError("Major", "There is no such major.");
                 }

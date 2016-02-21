@@ -1,8 +1,8 @@
 ﻿namespace Interapp.Web.Areas.Student.Models.ApplicationsViewModels
 {
-    using Data.Models;
-    using Infrastructure.Mappings;
     using System;
+    using Data.Models;
+    using Infrastructure.Mapping;
 
     public class ApplicationViewModel : IMapFrom<Application>
     {
