@@ -24,7 +24,8 @@
             {
                 AuthorId = studentId,
                 Content = content,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);
@@ -36,7 +37,8 @@
             var document = new Document()
             {
                 UniversityId = universityId,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);

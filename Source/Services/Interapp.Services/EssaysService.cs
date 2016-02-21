@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Linq;
     using Contracts;
     using Data.Common;
@@ -20,7 +21,8 @@
             {
                 AuthorId = studentId,
                 Title = title,
-                Content = content
+                Content = content,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.essays.Add(essay);

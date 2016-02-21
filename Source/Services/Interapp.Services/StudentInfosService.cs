@@ -6,6 +6,7 @@
     using Contracts;
     using Data.Common;
     using Data.Models;
+    using System;
 
     public class StudentInfosService : IStudentInfosService
     {
@@ -45,7 +46,10 @@
                 .Where(u => u.Id == studentId)
                 .FirstOrDefault();
 
-            student.StudentInfo = new StudentInfo();
+            student.StudentInfo = new StudentInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
             this.users.Save();
         }
 

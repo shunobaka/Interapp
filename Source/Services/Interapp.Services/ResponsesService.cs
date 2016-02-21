@@ -26,7 +26,8 @@
                 var response = new Response()
                 {
                     Content = content,
-                    IsAdmitted = isAdmitted
+                    IsAdmitted = isAdmitted,
+                    CreatedOn = DateTime.UtcNow
                 };
 
                 application.Response = response;

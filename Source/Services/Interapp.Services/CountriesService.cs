@@ -27,7 +27,8 @@
         {
             var country = new Country()
             {
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.countries.Add(country);
