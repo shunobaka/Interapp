@@ -219,6 +219,7 @@
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Director\Controllers\DirectorController.cs" />
+    <Compile Include="Areas\Director\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\ResponseInputModel.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
@@ -496,6 +497,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Universities\" />
+    <Folder Include="Areas\Director\Views\Documents\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
