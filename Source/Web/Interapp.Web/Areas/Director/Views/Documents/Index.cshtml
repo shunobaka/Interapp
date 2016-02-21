@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Interapp.Web.Areas.Director.ViewModels.Documents.DocumentViewModel>
+@{
+    ViewBag.Title = "Documents";
+
+    var groupedDocuments = Model.GroupBy(d => d.University.Name);
+}
+
+<h2>Documents for my universities</h2>
+<hr />
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success text-center">
+        <h4>@this.TempData["Message"]</h4>
+    </div>
+}
+<div class="row text-center">
+    @Html.ActionLink("Add new document", "Add", "Documents", null, new { @class = "btn btn-primary" })
+</div>
+<div class="row">
+    @if (Model.Count() == 0)
+    {
+        <div class="text-center">
+            <h4>You have no document requirements for your universities.</h4>
+        </div>
+    }
+    @foreach (var group in groupedDocuments)
+    {
+        <div class="col-md-6">
+            <h3>@group.Key</h3>
+            <ul>
+                @foreach (var document in group)
+                {
+                    <li>@Html.ActionLink(document.Name, "Details", "Documents", new { id = document.Id }, null)</li>
+                }
+            </ul>
+        </div>
+    }
+</div>

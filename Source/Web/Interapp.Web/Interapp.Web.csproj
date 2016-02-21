@@ -233,6 +233,9 @@
     <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\StudentViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentInputViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\CountryViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Universities\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\UniversityViewModel.cs" />
@@ -439,6 +442,9 @@
     <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
     <Content Include="Areas\Student\Views\Applications\_AlreadyApplied.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Add.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\_UniversitiesDropdown.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -497,7 +503,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Universities\" />
-    <Folder Include="Areas\Director\Views\Documents\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

@@ -10,8 +10,6 @@
         [Key]
         public int Id { get; set; }
 
-        public DateTime? DateCreated { get; set; }
-
         public bool IsReviewed { get; set; }
 
         public bool IsAnswered { get; set; }

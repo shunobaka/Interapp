@@ -50,7 +50,6 @@
         {
             var application = new Application()
             {
-                DateCreated = DateTime.UtcNow,
                 MajorId = majorId,
                 StudentId = studentId,
                 UniversityId = universityId

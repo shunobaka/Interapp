@@ -115,6 +115,17 @@
             return this.View(model);
         }
 
+        [ChildActionOnly]
+        public ActionResult GetDropdownList()
+        {
+            var directorId = this.User.Identity.GetUserId();
+            var modelUniversities = this.universities.All()
+                .Where(u => u.DirectorId == directorId);
+
+            var model = new SelectList(modelUniversities, "Id", "Name", "UniversityId");
+            return this.PartialView("_UniversitiesDropdown", model);
+        }
+
         private IEnumerable<Country> GetCountries()
         {
             if (this.HttpContext.Cache["Countries"] == null)
