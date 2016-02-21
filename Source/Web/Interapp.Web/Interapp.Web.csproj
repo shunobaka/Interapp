@@ -215,11 +215,13 @@
     <Compile Include="Areas\Admin\Controllers\EssaysController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Countries\CountryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Documents\DocumentViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Essays\EssayViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Scores\ScoresViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
@@ -460,6 +462,8 @@
     <Content Include="Areas\Admin\Views\Documents\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Essays\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EssayViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Scores\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ScoresViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

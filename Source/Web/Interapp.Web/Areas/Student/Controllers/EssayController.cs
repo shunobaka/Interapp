@@ -1,10 +1,10 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
     using System.Web.Mvc;
+    using Data.Models;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using ViewModels.Essay;
-    using Data.Models;
 
     public class EssayController : StudentController
     {
