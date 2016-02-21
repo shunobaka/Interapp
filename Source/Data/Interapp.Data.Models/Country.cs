@@ -3,9 +3,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
+    using Common.Models;
+    using Interapp.Common.Constants;
 
-    public class Country
+    public class Country : BaseModel
     {
         private ICollection<User> users;
         private ICollection<University> universities;

@@ -2,10 +2,11 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using Common.Constants;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Common.Models;
+    using Interapp.Common.Constants;
 
-    public class Response
+    public class Response : BaseModel
     {
         [Key]
         [ForeignKey("Application")]
