@@ -1,7 +1,7 @@
 ﻿namespace Interapp.Services.Contracts
 {
-    using Data.Models;
     using System.Linq;
+    using Data.Models;
 
     public interface IUsersService
     {

@@ -1,92 +1,38 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using Interapp.Data.Models;
-
-namespace Interapp.Web.Areas.Admin
+﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
+    using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    using Data.Models;
+    using Services.Contracts;
+    using AutoMapper.QueryableExtensions;
+    using Models.UsersViewModels;
+
     public class UsersController : Controller
     {
-        private IUsersRepository users;
+        private IUsersService users;
 
-        public UsersController(IUsersRepository users)
+        public UsersController(IUsersService users)
         {
             this.users = users;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult UsersRead([DataSourceRequest]DataSourceRequest request)
         {
-            IQueryable<User> users = db.Users;
-            DataSourceResult result = users.ToDataSourceResult(request, user => new {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                DateOfBrith = user.DateOfBrith,
-                DirectorInfoId = user.DirectorInfoId,
-                StudentInfoId = user.StudentInfoId,
-                Email = user.Email,
-                EmailConfirmed = user.EmailConfirmed,
-                PasswordHash = user.PasswordHash,
-                SecurityStamp = user.SecurityStamp,
-                PhoneNumber = user.PhoneNumber,
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-                TwoFactorEnabled = user.TwoFactorEnabled,
-                LockoutEndDateUtc = user.LockoutEndDateUtc,
-                LockoutEnabled = user.LockoutEnabled,
-                AccessFailedCount = user.AccessFailedCount,
-                UserName = user.UserName
-            });
+            var model = this.users.All().ProjectTo<UserViewModel>();
+            DataSourceResult result = model.ToDataSourceResult(request);
 
-            return Json(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Create([DataSourceRequest]DataSourceRequest request, User user)
-        {
-            if (ModelState.IsValid)
-            {
-                var entity = new User
-                {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    DateOfBrith = user.DateOfBrith,
-                    DirectorInfoId = user.DirectorInfoId,
-                    StudentInfoId = user.StudentInfoId,
-                    Email = user.Email,
-                    EmailConfirmed = user.EmailConfirmed,
-                    PasswordHash = user.PasswordHash,
-                    SecurityStamp = user.SecurityStamp,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-                    TwoFactorEnabled = user.TwoFactorEnabled,
-                    LockoutEndDateUtc = user.LockoutEndDateUtc,
-                    LockoutEnabled = user.LockoutEnabled,
-                    AccessFailedCount = user.AccessFailedCount,
-                    UserName = user.UserName
-                };
-
-                db.Users.Add(entity);
-                db.SaveChanges();
-                user.Id = entity.Id;
-            }
-
-            return Json(new[] { user }.ToDataSourceResult(request, ModelState));
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Update([DataSourceRequest]DataSourceRequest request, User user)
+        public ActionResult UsersUpdate([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -95,68 +41,21 @@ namespace Interapp.Web.Areas.Admin
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    DateOfBrith = user.DateOfBrith,
-                    DirectorInfoId = user.DirectorInfoId,
-                    StudentInfoId = user.StudentInfoId,
-                    Email = user.Email,
-                    EmailConfirmed = user.EmailConfirmed,
-                    PasswordHash = user.PasswordHash,
-                    SecurityStamp = user.SecurityStamp,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-                    TwoFactorEnabled = user.TwoFactorEnabled,
-                    LockoutEndDateUtc = user.LockoutEndDateUtc,
-                    LockoutEnabled = user.LockoutEnabled,
-                    AccessFailedCount = user.AccessFailedCount,
-                    UserName = user.UserName
+                    DateOfBirth = user.DateOfBirth
                 };
 
-                db.Users.Attach(entity);
-                db.Entry(entity).State = EntityState.Modified;
-                db.SaveChanges();
+                this.users.Update(entity);
             }
 
             return Json(new[] { user }.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Destroy([DataSourceRequest]DataSourceRequest request, User user)
+        public ActionResult UsersDestroy([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
-            if (ModelState.IsValid)
-            {
-                var entity = new User
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    DateOfBrith = user.DateOfBrith,
-                    DirectorInfoId = user.DirectorInfoId,
-                    StudentInfoId = user.StudentInfoId,
-                    Email = user.Email,
-                    EmailConfirmed = user.EmailConfirmed,
-                    PasswordHash = user.PasswordHash,
-                    SecurityStamp = user.SecurityStamp,
-                    PhoneNumber = user.PhoneNumber,
-                    PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-                    TwoFactorEnabled = user.TwoFactorEnabled,
-                    LockoutEndDateUtc = user.LockoutEndDateUtc,
-                    LockoutEnabled = user.LockoutEnabled,
-                    AccessFailedCount = user.AccessFailedCount,
-                    UserName = user.UserName
-                };
-
-                db.Users.Attach(entity);
-                db.Users.Remove(entity);
-                db.SaveChanges();
-            }
+            this.users.Delete(user.Id);
 
             return Json(new[] { user }.ToDataSourceResult(request, ModelState));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

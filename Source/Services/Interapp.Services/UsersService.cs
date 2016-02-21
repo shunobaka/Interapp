@@ -1,12 +1,11 @@
 ﻿namespace Interapp.Services
 {
-    using System;
     using System.Linq;
     using Contracts;
     using Data.Models;
     using Data.Repositories;
 
-    class UsersService : IUsersService
+    public class UsersService : IUsersService
     {
         private IRepository<User> users;
 
@@ -41,11 +40,9 @@
 
             if (originalUser != null)
             {
-                originalUser.CountryId = user.CountryId;
-                originalUser.DateOfBrith = user.DateOfBrith;
+                originalUser.DateOfBirth = user.DateOfBirth;
                 originalUser.FirstName = user.FirstName;
                 originalUser.LastName = user.LastName;
-                originalUser.Email = user.Email;
 
                 this.users.SaveChanges();
             }

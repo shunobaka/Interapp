@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Majors admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Majors administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.Models.MajorsViewModels.MajorViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+      .ColumnMenu()
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+          })
+          .Read(read => read.Action("MajorsRead", "Majors"))
+          .Create(create => create.Action("MajorsCreate", "Majors"))
+          .Update(update => update.Action("MajorsUpdate", "Majors"))
+          .Destroy(destroy => destroy.Action("MajorsDestroy", "Majors"))
+          .PageSize(10)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

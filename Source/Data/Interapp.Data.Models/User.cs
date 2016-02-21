@@ -1,13 +1,11 @@
 ﻿namespace Interapp.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
-    using Common.Constants;
+    using Interapp.Common.Constants;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -24,11 +22,11 @@
         [MaxLength(ModelConstants.UserNamesMaxLength)]
         [RegularExpression(ModelConstants.UserNamesRegex)]
         public string LastName { get; set; }
-        
-        public DateTime DateOfBrith { get; set; }
-        
+
+        public DateTime? DateOfBirth { get; set; }
+
         public int CountryId { get; set; }
-        
+
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
 

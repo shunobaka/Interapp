@@ -6,6 +6,7 @@
     using Data.Models;
     using Common;
     using Data.Repositories;
+
     public class MajorsService : IMajorsService
     {
         private IRepository<Major> majors;
@@ -18,17 +19,6 @@
         public IQueryable<Major> All()
         {
             return this.majors.All();
-        }
-
-        public void Create(string name)
-        {
-            var major = new Major()
-            {
-                Name = name
-            };
-
-            this.majors.Add(major);
-            this.majors.SaveChanges();
         }
 
         public void Delete(int id)
@@ -50,9 +40,28 @@
             throw new NotImplementedException();
         }
 
-        public void Update(int id, Major major)
+        public void Update(Major major)
         {
-            throw new NotImplementedException();
+            var originalMajor = this.majors.GetById(major.Id);
+
+            if (originalMajor != null)
+            {
+                originalMajor.Name = major.Name;
+                this.majors.SaveChanges();
+            }
+        }
+
+        public Major Create(string name)
+        {
+            var major = new Major()
+            {
+                Name = name
+            };
+
+            this.majors.Add(major);
+            this.majors.SaveChanges();
+
+            return major;
         }
     }
 }
