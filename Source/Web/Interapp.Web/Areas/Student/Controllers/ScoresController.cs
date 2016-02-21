@@ -1,14 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using Services.Contracts;
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
-    using Models.ScoresViewModels;
+    using Services.Contracts;
+    using ViewModels.Scores;
 
-    [Authorize(Roles = "Student")]
-    public class ScoresController : Controller
+    public class ScoresController : StudentController
     {
         private IScoresService scores;
 
@@ -23,8 +21,8 @@
             var score = this.scores
                 .GetByStudentId(studentId);
 
-            var model = Mapper.Map<ScoresViewModel>(score);
-            return View(model);
+            var model = this.Mapper.Map<ScoresViewModel>(score);
+            return this.View(model);
         }
 
         [HttpGet]
@@ -34,7 +32,7 @@
             var score = this.scores
                .GetByStudentId(studentId);
 
-            var model = Mapper.Map<ScoresViewModel>(score);
+            var model = this.Mapper.Map<ScoresViewModel>(score);
 
             return this.View(model);
         }
@@ -63,36 +61,6 @@
             }
 
             return this.View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Delete()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ItemName = "scores",
-                ControllerName = "Scores"
-            };
-            return this.View(model);
-        }
-
-        public ActionResult Deleted()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ItemName = "scores",
-                ControllerName = "Scores"
-            };
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public ActionResult DeletePost()
-        {
-            var studentId = this.User.Identity.GetUserId();
-            this.scores.Delete(studentId);
-
-            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }

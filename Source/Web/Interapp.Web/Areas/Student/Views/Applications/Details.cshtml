@@ -1,13 +1,26 @@
-﻿@model Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationDetailsViewModel
+﻿@model Interapp.Web.Areas.Student.ViewModels.Applications.ApplicationDetailsViewModel
 @{
     ViewBag.Title = "Details for application";
 }
 
-<h2>Details for application</h2>
+<div class="row">
+    <div class="col-md-8">
+        <h2>Details for application</h2>        
+    </div>
+    <div class="col-md-4">
+        <br />
+        @Html.ActionLink("My applications", "All", "Applications", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
 <hr />
-<h3>University - @Html.ActionLink(Model.University.Name, "Details", "Universities", new { area = "", id = Model.UniversityId }, null)</h3>
-<h4>Country: @Model.University.Country.Name</h4>
-<h4>Major: @Model.Major.Name</h4>
-<h4>Date created: @Model.DateCreated</h4>
-<h4>Has been reviewed: @Model.IsReviewed</h4>
-<h4>Has been answered: @Model.IsAnswered</h4>
+<h4>University - @Html.ActionLink(Model.University.Name, "Details", "Universities", new { area = "", id = Model.UniversityId }, null)</h4>
+<h5>Country: @Model.University.Country.Name</h5>
+<h5>Major: @Model.Major.Name</h5>
+<h5>Date created: @Model.DateCreated</h5>
+<h5>Has been reviewed: @Html.CheckBoxFor(m => m.IsReviewed, new { disabled = "disabled" })</h5>
+<h5>Has been answered: @Html.CheckBoxFor(m => m.IsAnswered, new { disabled = "disabled" })</h5>
+@if (Model.IsAnswered)
+{
+    <hr />
+    @Html.ActionLink("See response", "Details", "Response", new { id = Model.Id }, new { @class = "btn btn-success" })
+}

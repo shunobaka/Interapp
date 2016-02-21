@@ -12,15 +12,15 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-    using Models;
     using Services.Contracts;
-    using Models.AccountViewModels;
+    using ViewModels.Account;
+
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private const string XsrfKey = "XsrfId";
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private ApplicationSignInManager signInManager;
+        private ApplicationUserManager userManager;
         private ICountriesService countries;
         private IStudentInfosService studentInfos;
         private IDirectorInfosService directorInfos;
@@ -43,12 +43,12 @@
         {
             get
             {
-                return this._signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return this.signInManager ?? this.HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
 
             private set
             {
-                this._signInManager = value;
+                this.signInManager = value;
             }
         }
 
@@ -56,12 +56,12 @@
         {
             get
             {
-                return this._userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return this.userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
 
             private set
             {
-                this._userManager = value;
+                this.userManager = value;
             }
         }
 
@@ -69,14 +69,14 @@
         {
             get
             {
-                return HttpContext.GetOwinContext().Authentication;
+                return this.HttpContext.GetOwinContext().Authentication;
             }
         }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            this.ViewBag.ReturnUrl = returnUrl;
             return this.View();
         }
 
@@ -85,7 +85,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
@@ -101,7 +101,7 @@
                     return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return this.View(model);
             }
         }
@@ -130,9 +130,9 @@
                 return this.View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
+            // The following code protects for brute force attacks against the two factor codes.
+            // If a user enters incorrect codes for a specified amount of time then the user account
+            // will be locked out for a specified amount of time.
             // You can configure the account lockout settings in IdentityConfig
             var result = await this.SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
@@ -147,7 +147,7 @@
                     return this.View(model);
             }
         }
-        
+
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -158,7 +158,7 @@
 
             return this.View(model);
         }
-        
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -170,9 +170,9 @@
                 this.ModelState.AddModelError("Country", "No such country was found, please contact administrator.");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBrith = model.DateOfBirth };
+                var user = new User { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, CountryId = model.CountryId, DateOfBirth = model.DateOfBirth };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -205,7 +205,7 @@
             // If we got this far, something failed, redisplay form
             return this.View(model);
         }
-        
+
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -218,14 +218,14 @@
             var result = await this.UserManager.ConfirmEmailAsync(userId, code);
             return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-        
+
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return this.View();
         }
-        
+
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -252,21 +252,21 @@
             // If we got this far, something failed, redisplay form
             return this.View(model);
         }
-        
+
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return this.View();
         }
-        
+
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? this.View("Error") : this.View();
         }
-        
+
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -294,14 +294,14 @@
             this.AddErrors(result);
             return this.View();
         }
-        
+
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return this.View();
         }
-        
+
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -309,9 +309,9 @@
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, this.Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-        
+
         // GET: /Account/SendCode
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
@@ -326,7 +326,7 @@
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return this.View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        
+
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -346,7 +346,7 @@
 
             return this.RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-        
+
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -375,19 +375,19 @@
                     return this.View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-        
+
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
                 return this.RedirectToAction("Index", "Manage");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await this.AuthenticationManager.GetExternalLoginInfoAsync();
@@ -414,7 +414,7 @@
             this.ViewBag.ReturnUrl = returnUrl;
             return this.View(model);
         }
-        
+
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -423,7 +423,7 @@
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return this.RedirectToAction("Index", "Home");
         }
-        
+
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
@@ -435,16 +435,16 @@
         {
             if (disposing)
             {
-                if (this._userManager != null)
+                if (this.userManager != null)
                 {
-                    this._userManager.Dispose();
-                    this._userManager = null;
+                    this.userManager.Dispose();
+                    this.userManager = null;
                 }
 
-                if (this._signInManager != null)
+                if (this.signInManager != null)
                 {
-                    this._signInManager.Dispose();
-                    this._signInManager = null;
+                    this.signInManager.Dispose();
+                    this.signInManager = null;
                 }
             }
 
@@ -455,13 +455,13 @@
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error);
+                this.ModelState.AddModelError(string.Empty, error);
             }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
                 return this.Redirect(returnUrl);
             }

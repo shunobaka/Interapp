@@ -1,4 +1,4 @@
-namespace Interapp.Data.Migrations
+﻿namespace Interapp.Data.Migrations
 {
     using System.Data.Entity.Migrations;
     using System.Linq;

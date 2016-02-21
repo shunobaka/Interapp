@@ -3,10 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
-    using Common.Enums;
+    using Common.Models;
 
-    public class StudentInfo
+    public class StudentInfo : BaseModel
     {
         private ICollection<University> universitiesOfInterest;
         private ICollection<Application> applications;
@@ -35,12 +34,12 @@
 
         [ForeignKey("Essay")]
         public string EssayId { get; set; }
-        
+
         public virtual Essay Essay { get; set; }
 
         [ForeignKey("Scores")]
         public string ScoresId { get; set; }
-        
+
         public virtual ScoreReport Scores { get; set; }
 
         public int? MajorId { get; set; }

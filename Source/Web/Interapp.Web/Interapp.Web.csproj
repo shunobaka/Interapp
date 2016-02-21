@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,6 +68,9 @@
     <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET MVC Q1 2016\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -194,71 +198,91 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\ApplicationSignInManager.cs" />
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
+    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
+    <Compile Include="Areas\Director\Controllers\DirectorController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ResponseInputModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ResponseInputModel.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoDetailsViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Director\Models\HomeViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityCreateViewModel.cs" />
-    <Compile Include="Areas\Director\Models\HomeViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\EssayViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\MajorViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ScoresViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\UniversityCreateViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
+    <Compile Include="Areas\Student\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentsListViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ScoresViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ApplicationInputViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\DetailsInformationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoDocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DocumentsListViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Essay\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\ResponseViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Scores\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Scores\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\DetailsInformationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\StudentInfoApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Essay\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\StudentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversitiesListViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversitySimpleViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversityDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UniversitiesController.cs" />
@@ -266,23 +290,88 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
-    <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
-    <Compile Include="Models\AccountViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\DirectorInfoViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\DocumentViewModel.cs" />
-    <Compile Include="Models\ManageViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
+    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="ViewModels\Universities\DirectorInfoViewModel.cs" />
+    <Compile Include="ViewModels\Universities\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversitiesListViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversitySimpleViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversityDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\kendo\Default\editor.png" />
+    <Content Include="Content\kendo\Default\imagebrowser.png" />
+    <Content Include="Content\kendo\Default\indeterminate.gif" />
+    <Content Include="Content\kendo\Default\loading-image.gif" />
+    <Content Include="Content\kendo\Default\loading.gif" />
+    <Content Include="Content\kendo\Default\loading_2x.gif" />
+    <Content Include="Content\kendo\Default\markers.png" />
+    <Content Include="Content\kendo\Default\markers_2x.png" />
+    <Content Include="Content\kendo\Default\slider-h.gif" />
+    <Content Include="Content\kendo\Default\slider-v.gif" />
+    <Content Include="Content\kendo\Default\sprite.png" />
+    <Content Include="Content\kendo\Default\sprite_2x.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi.png" />
+    <Content Include="Content\kendo\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\kendo\images\back.png" />
+    <Content Include="Content\kendo\images\kendoui.svg" />
+    <Content Include="Content\kendo\images\wp8_icons.png" />
+    <Content Include="Content\kendo\images\wp8_inverseicons.png" />
+    <Content Include="Content\kendo\kendo.common.min.css" />
+    <Content Include="Content\kendo\kendo.default.min.css" />
+    <Content Include="Content\kendo\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\textures\dots1.png" />
+    <Content Include="Content\kendo\textures\dots10.png" />
+    <Content Include="Content\kendo\textures\dots11.png" />
+    <Content Include="Content\kendo\textures\dots12.png" />
+    <Content Include="Content\kendo\textures\dots13.png" />
+    <Content Include="Content\kendo\textures\dots2.png" />
+    <Content Include="Content\kendo\textures\dots3.png" />
+    <Content Include="Content\kendo\textures\dots4.png" />
+    <Content Include="Content\kendo\textures\dots5.png" />
+    <Content Include="Content\kendo\textures\dots6.png" />
+    <Content Include="Content\kendo\textures\dots7.png" />
+    <Content Include="Content\kendo\textures\dots8.png" />
+    <Content Include="Content\kendo\textures\dots9.png" />
+    <Content Include="Content\kendo\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\textures\glass.png" />
+    <Content Include="Content\kendo\textures\highlight.png" />
+    <Content Include="Content\kendo\textures\hsv-gradient.png" />
+    <Content Include="Content\kendo\textures\hue.png" />
+    <Content Include="Content\kendo\textures\leather1.png" />
+    <Content Include="Content\kendo\textures\leather2.png" />
+    <Content Include="Content\kendo\textures\noise.png" />
+    <Content Include="Content\kendo\textures\stripe1.png" />
+    <Content Include="Content\kendo\textures\stripe2.png" />
+    <Content Include="Content\kendo\textures\stripe3.png" />
+    <Content Include="Content\kendo\textures\stripe4.png" />
+    <Content Include="Content\kendo\textures\stripe5.png" />
+    <Content Include="Content\kendo\textures\stripe6.png" />
+    <Content Include="Content\kendo\textures\transparency.png" />
+    <Content Include="Content\kendo\textures\transtexture.png" />
     <Content Include="Content\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -295,15 +384,12 @@
     <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Review.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Delete.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Deleted.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Documents\All.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Details.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Create.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Unauthorized.cshtml" />
     <Content Include="Areas\Director\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Director\Views\Home\Index.cshtml" />
@@ -325,6 +411,32 @@
     <Content Include="Areas\Director\Views\Applications\All.cshtml" />
     <Content Include="Areas\Director\Views\Applications\Details.cshtml" />
     <Content Include="Areas\Director\Views\Applications\Evaluate.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\All.cshtml" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\kendo\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\kendo\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\kendo\images\kendoui.ttf" />
+    <Content Include="Content\kendo\images\kendoui.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -335,6 +447,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\kendo\kendo.all.min.js" />
+    <Content Include="Scripts\kendo\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -380,7 +494,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Universities\" />
     <Folder Include="Areas\Director\Views\Shared\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -394,6 +510,10 @@
     <ProjectReference Include="..\..\Common\Interapp.Common\Interapp.Common.csproj">
       <Project>{84d4a80b-ecf3-466e-9c31-848e26d2cb7c}</Project>
       <Name>Interapp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interapp.Data.Common\Interapp.Data.Common.csproj">
+      <Project>{7c59c680-5a2e-47dd-b830-05c60bacab4f}</Project>
+      <Name>Interapp.Data.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Data\Interapp.Data.Models\Interapp.Data.Models.csproj">
       <Project>{414780b8-3bbe-4942-bfcf-8f27d215d3a9}</Project>
@@ -411,6 +531,15 @@
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>
       <Name>Interapp.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interapp.Web.Infrastructure\Interapp.Web.Infrastructure.csproj">
+      <Project>{362979b8-654f-4d6e-8f95-2558b98fa8d4}</Project>
+      <Name>Interapp.Web.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
