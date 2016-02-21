@@ -52,7 +52,8 @@
             {
                 MajorId = majorId,
                 StudentId = studentId,
-                UniversityId = universityId
+                UniversityId = universityId,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.applications.Add(application);

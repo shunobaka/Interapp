@@ -56,7 +56,8 @@
         {
             var major = new Major()
             {
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.majors.Add(major);

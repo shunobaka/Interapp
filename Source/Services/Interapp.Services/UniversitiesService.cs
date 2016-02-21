@@ -30,7 +30,8 @@
                 CountryId = countryId,
                 DirectorId = directorId,
                 Name = name,
-                TuitionFee = tuitionFee
+                TuitionFee = tuitionFee,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.universities.Add(university);
