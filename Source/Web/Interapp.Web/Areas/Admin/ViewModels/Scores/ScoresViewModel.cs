@@ -51,7 +51,7 @@
         {
             configuration.CreateMap<ScoreReport, ScoresViewModel>()
                 .ForMember(s => s.StudentName, opts => opts.MapFrom(s => s.StudentInfo.Student.FirstName + " " + s.StudentInfo.Student.LastName))
-                .ForMember(s => s.StudentUsername, opts => opts.MapFrom(s => s.StudentInfo.Student.Email))
+                .ForMember(s => s.StudentUsername, opts => opts.MapFrom(s => s.StudentInfo.Student.UserName))
                 .ForMember(s => s.Toefl, opts => opts.MapFrom(s => s.ToeflResult + " " + s.ToeflType))
                 .ForMember(s => s.Cambridge, opts => opts.MapFrom(s => s.CambridgeLevel + " " + s.CambridgeResult));
         }

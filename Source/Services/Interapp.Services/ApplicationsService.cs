@@ -99,5 +99,16 @@
                 application.IsReviewed = true;
             }
         }
+
+        public void Update(Application application)
+        {
+            var orgApplication = this.applications.GetById(application.Id);
+
+            if (orgApplication != null)
+            {
+                orgApplication.MajorId = application.MajorId;
+                this.applications.Save();
+            }
+        }
     }
 }
