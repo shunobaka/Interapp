@@ -16,7 +16,7 @@
     using Services.Contracts;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private const string XsrfKey = "XsrfId";
         private ApplicationSignInManager signInManager;

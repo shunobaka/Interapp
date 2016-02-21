@@ -10,7 +10,7 @@
     using Models.ManageViewModels;
 
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private const string XsrfKey = "XsrfId";
         private ApplicationSignInManager signInManager;
