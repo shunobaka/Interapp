@@ -437,6 +437,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\_AlreadyApplied.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -17,12 +17,18 @@
         private IUniversitiesService universities;
         private IStudentInfosService studentInfos;
         private IMajorsService majors;
+        private IApplicationsService applications;
 
-        public UniversitiesController(IUniversitiesService universities, IStudentInfosService studentInfos, IMajorsService majors)
+        public UniversitiesController(
+            IUniversitiesService universities,
+            IStudentInfosService studentInfos,
+            IMajorsService majors,
+            IApplicationsService applications)
         {
             this.universities = universities;
             this.studentInfos = studentInfos;
             this.majors = majors;
+            this.applications = applications;
         }
 
         public ActionResult All(FilterModel model)
@@ -69,12 +75,16 @@
             var university = this.universities.GetByIdWithDocuments(id);
             var student = this.studentInfos.GetByIdWithDocumentsAndScores(studentId);
             var eligiblity = this.studentInfos.IsEligibleToApply(student, university);
+            var hasApplied = this.applications
+                .All()
+                .Any(a => a.StudentId == studentId && a.UniversityId == id);
 
             var model = new DetailsInformationViewModel()
             {
                 Eligibility = eligiblity,
                 Student = this.Mapper.Map<StudentInfoApplicationViewModel>(student),
-                University = this.Mapper.Map<UniversityDetailsViewModel>(university)
+                University = this.Mapper.Map<UniversityDetailsViewModel>(university),
+                HasApplied = hasApplied
             };
 
             return this.View(model);

@@ -24,23 +24,32 @@
 <div class="row text-center">
     <hr />
     <div class="col-md-8 col-md-offset-2" id="application-container">
-        <div class="alert @(Model.Eligibility.IsEligible ? Html.Raw("alert-success") : Html.Raw("alert-danger"))">
-            <h5>@Model.Eligibility.Message</h5>
-        </div>
-        @if (Model.Eligibility.IsEligible)
+        @if (!Model.HasApplied)
+        {
+            <div class="alert @(Model.Eligibility.IsEligible ? Html.Raw("alert-success") : Html.Raw("alert-danger"))">
+                <h5>@Model.Eligibility.Message</h5>
+            </div>
+            if (Model.Eligibility.IsEligible)
             {
-            @Html.Action("ApplicationForm", "Universities", null)
+                @Html.Action("ApplicationForm", "Universities", null)
 
-            @section scripts {
-                @Scripts.Render("~/bundles/jqueryval")
+                @section scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
 
-                <script>
-                    $("#application-container").on("submit", "#application-form", function () {
-                        var $loading = $("#loading");
-                        $loading.show();
-                    })
-                </script>
+                    <script>
+                        $("#application-container").on("submit", "#application-form", function () {
+                            var $loading = $("#loading");
+                            $loading.show();
+                        })
+                    </script>
+                }
             }
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <h5>You have already applied for this university.</h5>
+            </div>
         }
     </div>
     <hr />

@@ -9,5 +9,7 @@
         public StudentInfoApplicationViewModel Student { get; set; }
 
         public ApplicationEligibility Eligibility { get; set; }
+
+        public bool HasApplied { get; set; }
     }
 }

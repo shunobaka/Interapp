@@ -60,7 +60,7 @@
 
             if (hasApplied)
             {
-                this.ModelState.AddModelError("Applied", "You have already applied");
+                return this.PartialView("_AlreadyApplied");
             }
 
             var eligiblity = this.studentInfos.IsEligibleToApply(studentId, model.UniversityId);
