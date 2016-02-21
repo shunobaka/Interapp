@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Applications admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Applications administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Applications.ApplicationViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.StudentName);
+          columns.Bound(c => c.StudentUsername);
+          columns.Bound(c => c.StudentEmail);
+          columns.Bound(c => c.UniversityName);
+          columns.Bound(c => c.MajorName);
+          columns.Bound(c => c.IsReviewed);
+          columns.Bound(c => c.IsAnswered);
+          columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+          })
+          .Read(read => read.Action("ApplicationsRead", "Applications"))
+          .Update(update => update.Action("ApplicationsUpdate", "Applications"))
+          .Destroy(destroy => destroy.Action("ApplicationsDestroy", "Applications"))
+          .PageSize(10)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

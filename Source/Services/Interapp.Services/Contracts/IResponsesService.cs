@@ -5,6 +5,12 @@
 
     public interface IResponsesService
     {
+        IQueryable<Response> All();
+
+        void Update(Response response);
+
+        void Delete(int id);
+
         Response GetById(int id);
 
         IQueryable<Response> GetByStudent(string studentId);

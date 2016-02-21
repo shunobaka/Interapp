@@ -25,7 +25,10 @@
                 .Where(u => u.Id == directorId)
                 .FirstOrDefault();
 
-            student.DirectorInfo = new DirectorInfo();
+            student.DirectorInfo = new DirectorInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
             this.users.Save();
         }
 

@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Linq;
     using Contracts;
     using Data.Common;
@@ -14,13 +15,19 @@
             this.essays = essays;
         }
 
+        public IQueryable<Essay> All()
+        {
+            return this.essays.All();
+        }
+
         public void Create(string studentId, string title, string content)
         {
             var essay = new Essay()
             {
                 AuthorId = studentId,
                 Title = title,
-                Content = content
+                Content = content,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.essays.Add(essay);
@@ -44,21 +51,21 @@
             return essay;
         }
 
-        public void Update(string studentId, string title, string content)
+        public void Update(Essay essay)
         {
-            var essay = this.essays
+            var orgEssay = this.essays
                 .All()
-                .Where(e => e.AuthorId == studentId)
+                .Where(e => e.AuthorId == essay.AuthorId)
                 .FirstOrDefault();
 
-            if (essay == null)
+            if (orgEssay == null)
             {
-                this.Create(studentId, title, content);
+                this.Create(essay.AuthorId, essay.Title, essay.Content);
                 return;
             }
 
-            essay.Title = title;
-            essay.Content = content;
+            orgEssay.Title = essay.Title;
+            orgEssay.Content = essay.Content;
             this.essays.Save();
         }
     }

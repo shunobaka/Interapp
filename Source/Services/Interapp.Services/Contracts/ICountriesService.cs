@@ -12,10 +12,10 @@
 
         Country GetById(int id);
 
-        void UpdateById(int id, Country country);
+        void Update(Country country);
 
-        void DeleteById(int id);
+        void Delete(int id);
 
-        void Create(string name);
+        Country Create(string name);
     }
 }

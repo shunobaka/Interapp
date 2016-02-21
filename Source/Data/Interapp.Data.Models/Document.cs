@@ -15,7 +15,6 @@
         [MaxLength(ModelConstants.DocumentNameMaxLength)]
         public string Name { get; set; }
 
-        [Required]
         public string Content { get; set; }
 
         public string AuthorId { get; set; }
