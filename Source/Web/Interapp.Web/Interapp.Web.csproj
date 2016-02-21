@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -197,85 +198,96 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\ApplicationSignInManager.cs" />
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
+    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
-    <Compile Include="Areas\Admin\Models\MajorsViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\UsersViewModels\UserViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Admin\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
+    <Compile Include="Areas\Director\Controllers\DirectorController.cs" />
+    <Compile Include="Areas\Director\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ResponseInputModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ResponseInputModel.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Director\DirectorAreaRegistration.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoDetailsViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentInfoViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\StudentViewModel.cs" />
-    <Compile Include="Areas\Director\Models\ApplicationsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Director\Models\HomeViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityCreateViewModel.cs" />
-    <Compile Include="Areas\Director\Models\HomeViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Director\Models\UniversitiesViewModels\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\EssayViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\MajorViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\ScoresViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoDetailsViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\StudentViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentInputViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\UniversityCreateViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Student\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Student\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Student\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Student\Controllers\EssayController.cs" />
     <Compile Include="Areas\Student\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Student\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\Controllers\UniversitiesController.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationDetailsViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationInputViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\ApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ApplicationsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\DocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentsListViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\DocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DocumentsViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\EssayViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ResponsesViewModels\ApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ResponsesViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ResponsesViewModels\ResponseViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ResponsesViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ScoresViewModels\DeleteInfoViewModel.cs" />
-    <Compile Include="Areas\Student\Models\ScoresViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ApplicationInputViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\DetailsInformationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\MajorViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoApplicationViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\StudentInfoDocumentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\EssayViewModels\EssayViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\ScoresViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
-    <Compile Include="Areas\Student\Models\UniversitiesViewModels\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\Models\DashboardViewModels\StudentInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DocumentsListViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Documents\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Essay\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\ResponseViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Responses\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Scores\DeleteInfoViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Scores\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\ApplicationInputViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\DetailsInformationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\DocumentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\MajorViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\StudentInfoApplicationViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Essay\EssayViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\ScoresViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\StudentViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversitiesListViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversitySimpleViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversityDetailsViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Universities\UniversityViewModel.cs" />
+    <Compile Include="Areas\Student\ViewModels\Dashboard\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UniversitiesController.cs" />
@@ -283,17 +295,30 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
-    <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
-    <Compile Include="Models\AccountViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\UniversitiesViewModels\CountryViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\DirectorInfoViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\DocumentViewModel.cs" />
-    <Compile Include="Models\ManageViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversitiesListViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversitySimpleViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UniversityDetailsViewModel.cs" />
-    <Compile Include="Models\UniversitiesViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
+    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Universities\CountryViewModel.cs" />
+    <Compile Include="ViewModels\Universities\DirectorInfoViewModel.cs" />
+    <Compile Include="ViewModels\Universities\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversitiesListViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversitySimpleViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UniversityDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Universities\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -364,15 +389,12 @@
     <Content Include="Areas\Student\Views\Dashboard\Info.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Review.cshtml" />
     <Content Include="Areas\Student\Views\Essay\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Delete.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Deleted.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Review.cshtml" />
     <Content Include="Areas\Student\Views\Scores\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Documents\All.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Details.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Create.cshtml" />
     <Content Include="Areas\Student\Views\Documents\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Shared\Unauthorized.cshtml" />
     <Content Include="Areas\Director\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Director\Views\Home\Index.cshtml" />
@@ -420,6 +442,10 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
+    <Content Include="Areas\Student\Views\Applications\_AlreadyApplied.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Add.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\_UniversitiesDropdown.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -494,6 +520,10 @@
       <Project>{84d4a80b-ecf3-466e-9c31-848e26d2cb7c}</Project>
       <Name>Interapp.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Data\Interapp.Data.Common\Interapp.Data.Common.csproj">
+      <Project>{7c59c680-5a2e-47dd-b830-05c60bacab4f}</Project>
+      <Name>Interapp.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\Interapp.Data.Models\Interapp.Data.Models.csproj">
       <Project>{414780b8-3bbe-4942-bfcf-8f27d215d3a9}</Project>
       <Name>Interapp.Data.Models</Name>
@@ -510,6 +540,15 @@
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>
       <Name>Interapp.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interapp.Web.Infrastructure\Interapp.Web.Infrastructure.csproj">
+      <Project>{362979b8-654f-4d6e-8f95-2558b98fa8d4}</Project>
+      <Name>Interapp.Web.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

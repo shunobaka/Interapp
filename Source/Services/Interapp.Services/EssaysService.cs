@@ -1,15 +1,16 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class EssaysService : IEssaysService
     {
-        private IRepository<Essay> essays;
+        private IDbRepository<Essay> essays;
 
-        public EssaysService(IRepository<Essay> essays)
+        public EssaysService(IDbRepository<Essay> essays)
         {
             this.essays = essays;
         }
@@ -20,17 +21,19 @@
             {
                 AuthorId = studentId,
                 Title = title,
-                Content = content
+                Content = content,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.essays.Add(essay);
-            this.essays.SaveChanges();
+            this.essays.Save();
         }
 
         public void Delete(string studentId)
         {
-            this.essays.Delete(studentId);
-            this.essays.SaveChanges();
+            var essay = this.essays.GetById(studentId);
+            this.essays.Delete(essay);
+            this.essays.Save();
         }
 
         public Essay GetByStudentId(string studentId)
@@ -58,8 +61,7 @@
 
             essay.Title = title;
             essay.Content = content;
-            this.essays.Update(essay);
-            this.essays.SaveChanges();
+            this.essays.Save();
         }
     }
 }

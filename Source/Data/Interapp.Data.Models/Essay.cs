@@ -2,9 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
+    using Common.Models;
+    using Interapp.Common.Constants;
 
-    public class Essay
+    public class Essay : BaseModel
     {
         [Required]
         [MinLength(ModelConstants.EssayTitleMinLength)]
@@ -15,11 +16,11 @@
         [MinLength(ModelConstants.EssayContentMinLength)]
         [MaxLength(ModelConstants.EssayContentMaxLength)]
         public string Content { get; set; }
-        
+
         [Key]
         [Required]
         public string AuthorId { get; set; }
-        
+
         [ForeignKey("AuthorId")]
         public virtual StudentInfo Author { get; set; }
     }

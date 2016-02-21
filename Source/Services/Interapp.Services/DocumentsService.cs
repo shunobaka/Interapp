@@ -1,17 +1,18 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class DocumentsService : IDocumentsService
     {
-        private IRepository<Document> documents;
-        private IRepository<University> universities;
+        private IDbRepository<Document> documents;
+        private IDbRepository<University> universities;
 
-        public DocumentsService(IRepository<Document> documents, IRepository<University> universities)
+        public DocumentsService(IDbRepository<Document> documents, IDbRepository<University> universities)
         {
             this.documents = documents;
             this.universities = universities;
@@ -23,30 +24,32 @@
             {
                 AuthorId = studentId,
                 Content = content,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);
-            this.documents.SaveChanges();
+            this.documents.Save();
         }
 
-        public void CreateForUniversity(int universityId, string name, string content)
+        public void CreateForUniversity(int universityId, string name)
         {
             var document = new Document()
             {
                 UniversityId = universityId,
-                Content = content,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);
-            this.documents.SaveChanges();
+            this.documents.Save();
         }
 
         public void Delete(int documentId)
         {
-            this.documents.Delete(documentId);
-            this.documents.SaveChanges();
+            var document = this.documents.GetById(documentId);
+            this.documents.Delete(document);
+            this.documents.Save();
         }
 
         public IQueryable<Document> GetByStudent(string studentId)
@@ -98,7 +101,15 @@
                 original.Content = document.Content;
             }
 
-            this.documents.SaveChanges();
+            this.documents.Save();
+        }
+
+        public IQueryable<Document> GetByDirector(string directorId)
+        {
+            return this.documents
+                .All()
+                .Where(d => d.University != null && d.University.DirectorId == directorId)
+                .Include(d => d.University);
         }
     }
 }

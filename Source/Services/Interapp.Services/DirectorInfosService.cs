@@ -4,15 +4,15 @@
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class DirectorInfosService : IDirectorInfosService
     {
-        private IRepository<DirectorInfo> directorInfos;
-        private IRepository<User> users;
+        private IDbRepository<DirectorInfo> directorInfos;
+        private IDbRepository<User> users;
 
-        public DirectorInfosService(IRepository<DirectorInfo> directorInfos, IRepository<User> users)
+        public DirectorInfosService(IDbRepository<DirectorInfo> directorInfos, IDbRepository<User> users)
         {
             this.directorInfos = directorInfos;
             this.users = users;
@@ -25,8 +25,11 @@
                 .Where(u => u.Id == directorId)
                 .FirstOrDefault();
 
-            student.DirectorInfo = new DirectorInfo();
-            this.users.SaveChanges();
+            student.DirectorInfo = new DirectorInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
+            this.users.Save();
         }
 
         public DirectorInfo GetById(string id)

@@ -1,20 +1,20 @@
 ﻿namespace Interapp.Services
 {
-    using System;
     using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
+    using System;
 
     public class StudentInfosService : IStudentInfosService
     {
-        private IRepository<StudentInfo> studentInfos;
-        private IRepository<User> users;
-        private IRepository<University> universities;
+        private IDbRepository<StudentInfo> studentInfos;
+        private IDbRepository<User> users;
+        private IDbRepository<University> universities;
 
-        public StudentInfosService(IRepository<StudentInfo> studentInfos, IRepository<User> users, IRepository<University> universities)
+        public StudentInfosService(IDbRepository<StudentInfo> studentInfos, IDbRepository<User> users, IDbRepository<University> universities)
         {
             this.studentInfos = studentInfos;
             this.users = users;
@@ -36,7 +36,7 @@
             this.universities.Detach(university);
             student.UniversitiesOfInterest.Add(university);
             this.studentInfos.Attach(university);
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public void Create(string studentId)
@@ -46,8 +46,11 @@
                 .Where(u => u.Id == studentId)
                 .FirstOrDefault();
 
-            student.StudentInfo = new StudentInfo();
-            this.users.SaveChanges();
+            student.StudentInfo = new StudentInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
+            this.users.Save();
         }
 
         public void EnrollStudent(string studentId, int universityId, int majorId)
@@ -59,7 +62,7 @@
 
             student.UniversityId = universityId;
             student.MajorId = majorId;
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public StudentInfo GetById(string id)
@@ -116,8 +119,14 @@
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
-            this.studentInfos.Update(info);
-            this.studentInfos.SaveChanges();
+            if (student != null)
+            {
+                student.MajorId = info.MajorId;
+                student.UniversityId = info.UniversityId;
+
+                this.studentInfos.Save();
+            }
+
             //// TODO: Fix maybe?
         }
 

@@ -1,17 +1,16 @@
 ﻿namespace Interapp.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
-    using Common.Constants;
+    using Common.Models;
+    using Interapp.Common.Constants;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class User : IdentityUser
+    public class User : IdentityUser, IAuditInfo, IDeletableEntity
     {
         [Required]
         [MinLength(ModelConstants.UserNamesMinLength)]
@@ -24,11 +23,11 @@
         [MaxLength(ModelConstants.UserNamesMaxLength)]
         [RegularExpression(ModelConstants.UserNamesRegex)]
         public string LastName { get; set; }
-        
+
         public DateTime? DateOfBirth { get; set; }
-        
+
         public int CountryId { get; set; }
-        
+
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
 
@@ -41,6 +40,14 @@
         public string StudentInfoId { get; set; }
 
         public virtual StudentInfo StudentInfo { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

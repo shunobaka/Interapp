@@ -1,10 +1,10 @@
-﻿@model Interapp.Web.Areas.Student.Models.DashboardViewModels.StudentInfoViewModel
+﻿@model Interapp.Web.Areas.Student.ViewModels.Dashboard.StudentInfoViewModel
 @{
     ViewBag.Title = "Dashboard";
 }
 
 @{
-    var allDocuments = new List<Interapp.Web.Areas.Student.Models.DashboardViewModels.DocumentViewModel>();
+    var allDocuments = new List<Interapp.Web.Areas.Student.ViewModels.Dashboard.DocumentViewModel>();
 
     foreach (var university in Model.UniversitiesOfInterest)
     {

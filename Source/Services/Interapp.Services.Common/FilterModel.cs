@@ -7,7 +7,7 @@
             this.Page = 1;
             this.PageSize = 10;
         }
-        
+
         public string OrderBy { get; set; }
 
         public string Order { get; set; }

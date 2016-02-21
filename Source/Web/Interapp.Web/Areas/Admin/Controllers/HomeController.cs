@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Interapp.Web.Areas.Admin.Controllers
+﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    using System.Web.Mvc;
+
+    public class HomeController : AdminController
     {
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
     }
 }

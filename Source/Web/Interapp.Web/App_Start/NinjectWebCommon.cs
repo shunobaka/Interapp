@@ -1,12 +1,14 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Start")]
+﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Interapp.Web.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Interapp.Web.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
     using Common.Constants;
     using Data;
+    using Data.Common;
     using Data.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
@@ -63,8 +65,9 @@ namespace Interapp.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind(typeof(DbContext)).To(typeof(InterappDbContext));
             kernel.Bind(typeof(IInterappDbContext)).To(typeof(InterappDbContext));
-            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
 
             kernel.Bind(b => b.From(Assemblies.DataServices)
                               .SelectAllClasses()

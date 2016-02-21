@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Areas.Director.Models.UniversitiesViewModels.UniversityViewModel
+﻿@model Interapp.Web.Areas.Director.ViewModels.Universities.UniversityViewModel
 @{
     ViewBag.Title = "Edit university";
 }
@@ -52,6 +52,6 @@
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-success" value="Update" />
-        @Html.ActionLink("Cancel", "Details", "Universities", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Cancel", "", "", null, new { @class = "btn btn-danger" })
     </div>
 }
