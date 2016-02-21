@@ -5,14 +5,12 @@
     using System.Linq;
     using System.Web.Caching;
     using System.Web.Mvc;
-    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNet.Identity;
     using Models.UniversitiesViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Director")]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : DirectorController
     {
         private IUniversitiesService universities;
         private ICountriesService countries;
@@ -67,7 +65,7 @@
 
             if (university != null && university.DirectorId == userId)
             {
-                var model = Mapper.Map<UniversityViewModel>(university);
+                var model = this.Mapper.Map<UniversityViewModel>(university);
                 model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
                 return this.View(model);

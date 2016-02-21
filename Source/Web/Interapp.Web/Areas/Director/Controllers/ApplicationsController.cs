@@ -2,14 +2,12 @@
 {
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Director")]
-    public class ApplicationsController : Controller
+    public class ApplicationsController : DirectorController
     {
         private IApplicationsService applications;
         private IResponsesService responses;
@@ -44,7 +42,7 @@
 
             this.applications.SetReviewed(id);
 
-            var model = Mapper.Map<ApplicationDetailsViewModel>(application);
+            var model = this.Mapper.Map<ApplicationDetailsViewModel>(application);
 
             return this.View(model);
         }

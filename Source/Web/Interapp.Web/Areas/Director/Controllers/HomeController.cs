@@ -7,8 +7,7 @@
     using Models.HomeViewModels;
     using Services.Contracts;
 
-    [Authorize(Roles = "Director")]
-    public class HomeController : Controller
+    public class HomeController : DirectorController
     {
         private IUniversitiesService universities;
 
