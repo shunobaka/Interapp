@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Universities admin panel";
+    ViewBag.Title = "Countries admin panel";
 }
 
 <div class="row">
     <div class="col-md-9">
-        <h2>Universities administration panel</h2>
+        <h2>Countries administration panel</h2>
     </div>
     <div class="col-md-3">
         <br />
@@ -12,22 +12,20 @@
     </div>
 </div>
 <hr />
-@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Universities.UniversityViewModel>()
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Countries.CountryViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
           columns.Bound(c => c.Name);
-          columns.Bound(c => c.CountryName);
-          columns.Bound(c => c.DirectorName);
-          columns.Bound(c => c.TuitionFee);
-          columns.Bound(c => c.RequiredCambridgeLevel);
-          columns.Bound(c => c.RequiredCambridgeScore);
-          columns.Bound(c => c.RequiredIBTToefl);
-          columns.Bound(c => c.RequiredPBTToefl);
-          columns.Bound(c => c.RequiredSAT);
+          columns.Bound(c => c.UsersCount);
+          columns.Bound(c => c.UniversitiesCount);
           columns.Command(command => { command.Edit(); command.Destroy(); });
       })
       .ColumnMenu()
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
       .Editable(editable => editable.Mode(GridEditMode.PopUp))
       .Pageable()
       .Navigatable()
@@ -43,9 +41,10 @@
               model.Id(p => p.Id);
               model.Field(m => m.Id).Editable(false);
           })
-          .Read(read => read.Action("UniversitiesRead", "Universities"))
-          .Update(update => update.Action("UniversitiesUpdate", "Universities"))
-          .Destroy(destroy => destroy.Action("UniversitiesDestroy", "Universities"))
+          .Read(read => read.Action("CountriesRead", "Countries"))
+          .Create(create => create.Action("CountriesCreate", "Countries"))
+          .Update(update => update.Action("CountriesUpdate", "Countries"))
+          .Destroy(destroy => destroy.Action("CountriesDestroy", "Countries"))
           .PageSize(10)
       )
 )

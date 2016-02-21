@@ -23,7 +23,7 @@
                 .OrderBy(c => c.Name);
         }
 
-        public void Create(string name)
+        public Country Create(string name)
         {
             var country = new Country()
             {
@@ -33,9 +33,11 @@
 
             this.countries.Add(country);
             this.countries.Save();
+
+            return country;
         }
 
-        public void DeleteById(int id)
+        public void Delete(int id)
         {
             var country = this.countries.GetById(id);
             this.countries.Delete(country);
@@ -55,9 +57,15 @@
             throw new NotImplementedException();
         }
 
-        public void UpdateById(int id, Country country)
+        public void Update(Country country)
         {
-            throw new NotImplementedException();
+            var orgCountry = this.countries.GetById(country.Id);
+
+            if (country != null)
+            {
+                orgCountry.Name = country.Name;
+                this.countries.Save();
+            }
         }
     }
 }

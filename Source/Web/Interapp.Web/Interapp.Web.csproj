@@ -210,9 +210,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Countries\CountryViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Documents\DocumentViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
@@ -448,6 +452,10 @@
     <Content Include="Areas\Director\Views\Universities\_UniversitiesDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Universities\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UniversityViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CountryViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DocumentViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Documents\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
