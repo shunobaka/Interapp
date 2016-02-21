@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class MajorViewModel : IMapFrom<Major>
+    public class MajorViewModel : IMapFrom<Major>, IMapTo<Major>
     {
         public int Id { get; set; }
 

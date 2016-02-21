@@ -6,7 +6,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class UserViewModel : IMapFrom<User>
+    public class UserViewModel : IMapFrom<User>, IMapTo<User>
     {
         [ScaffoldColumn(false)]
         public string Id { get; set; }

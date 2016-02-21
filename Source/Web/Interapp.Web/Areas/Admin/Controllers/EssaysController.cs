@@ -35,13 +35,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var entity = new Essay
-                {
-                    AuthorId = essay.AuthorId,
-                    Title = essay.Title,
-                    Content = essay.Content
-                };
-
+                var entity = this.Mapper.Map<Essay>(essay);
                 this.essays.Update(entity);
             }
 

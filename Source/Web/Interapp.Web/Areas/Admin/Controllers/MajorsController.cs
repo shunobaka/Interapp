@@ -68,12 +68,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var entity = new Major
-                {
-                    Id = major.Id,
-                    Name = major.Name
-                };
-
+                var entity = this.Mapper.Map<Major>(major);
                 this.majors.Update(entity);
             }
 

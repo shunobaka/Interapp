@@ -68,12 +68,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var entity = new Country
-                {
-                    Id = country.Id,
-                    Name = country.Name
-                };
-
+                var entity = this.Mapper.Map<Country>(country);
                 this.countries.Update(entity);
             }
 

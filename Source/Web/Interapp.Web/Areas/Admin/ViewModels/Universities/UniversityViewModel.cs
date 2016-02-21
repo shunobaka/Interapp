@@ -7,7 +7,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class UniversityViewModel : IMapFrom<University>, IHaveCustomMappings
+    public class UniversityViewModel : IMapFrom<University>, IMapTo<University>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

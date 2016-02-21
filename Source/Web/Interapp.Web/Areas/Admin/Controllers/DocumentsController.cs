@@ -35,13 +35,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var entity = new Document
-                {
-                    Id = document.Id,
-                    Name = document.Name,
-                    Content = document.Content
-                };
-
+                var entity = this.Mapper.Map<Document>(document);
                 this.documents.Update(entity);
             }
 

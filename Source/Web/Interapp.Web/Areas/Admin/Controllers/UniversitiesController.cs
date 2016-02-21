@@ -43,18 +43,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var entity = new University
-                {
-                    Id = university.Id,
-                    Name = university.Name,
-                    TuitionFee = university.TuitionFee,
-                    RequiredCambridgeLevel = university.RequiredCambridgeLevel,
-                    RequiredCambridgeScore = university.RequiredCambridgeScore,
-                    RequiredIBTToefl = university.RequiredIBTToefl,
-                    RequiredPBTToefl = university.RequiredPBTToefl,
-                    RequiredSAT = university.RequiredSAT
-                };
-
+                var entity = this.Mapper.Map<University>(university);
                 this.universities.Update(entity);
             }
 

@@ -36,14 +36,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var entity = new User
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    DateOfBirth = user.DateOfBirth
-                };
-
+                var entity = this.Mapper.Map<User>(user);
                 this.users.Update(entity);
             }
 

@@ -6,7 +6,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class DocumentViewModel : IMapFrom<Document>, IHaveCustomMappings
+    public class DocumentViewModel : IMapFrom<Document>, IMapTo<Document>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

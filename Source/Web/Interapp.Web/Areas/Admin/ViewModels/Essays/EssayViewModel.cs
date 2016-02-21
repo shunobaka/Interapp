@@ -6,7 +6,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class EssayViewModel : IMapFrom<Essay>, IHaveCustomMappings
+    public class EssayViewModel : IMapFrom<Essay>, IMapTo<Essay>, IHaveCustomMappings
     {
         public string AuthorId { get; set; }
 
