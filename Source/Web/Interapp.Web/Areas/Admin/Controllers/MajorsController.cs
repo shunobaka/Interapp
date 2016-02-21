@@ -38,7 +38,7 @@
 
             if (majorExists)
             {
-                this.ModelState.AddModelError("Major exists", "Major will such name already exists.");
+                this.ModelState.AddModelError("Major exists", "Major with such name already exists.");
             }
 
             Major result = null;

@@ -96,17 +96,20 @@
 
             if (this.ModelState.IsValid)
             {
-                this.universities.Update(
-                    id,
-                    model.CountryId,
-                    model.Name,
-                    model.RequiredCambridgeLevel,
-                    model.RequiredCambridgeScore,
-                    model.RequiredIBTToefl,
-                    model.RequiredPBTToefl,
-                    model.RequiredSAT,
-                    model.TuitionFee);
-                return this.RedirectToAction(nameof(this.Add));
+                var universityUpdateModel = new University()
+                {
+                    Id = id,
+                    CountryId = model.CountryId,
+                    Name = model.Name,
+                    RequiredCambridgeLevel = model.RequiredCambridgeLevel,
+                    RequiredCambridgeScore = model.RequiredCambridgeScore,
+                    RequiredIBTToefl = model.RequiredIBTToefl,
+                    RequiredPBTToefl = model.RequiredPBTToefl,
+                    RequiredSAT = model.RequiredSAT,
+                    TuitionFee = model.TuitionFee
+                };
+                this.universities.Update(universityUpdateModel);
+                return this.RedirectToRoute("/Director");
 
                 // TODO: Change redirect
             }

@@ -1,0 +1,45 @@
+﻿@model Interapp.Web.Areas.Admin.ViewModels.Universities.UniversityViewModel
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.TuitionFee, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.TuitionFee, new { @class = "form-control", type = "number" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.RequiredSAT, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RequiredSAT, new { @class = "form-control", type = "number" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.RequiredIBTToefl, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RequiredIBTToefl, new { @class = "form-control", type = "number" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.RequiredPBTToefl, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RequiredPBTToefl, new { @class = "form-control", type = "number" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.RequiredCambridgeLevel, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.EnumDropDownListFor(m => m.RequiredCambridgeLevel, "Choose score", new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.RequiredCambridgeScore, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.EnumDropDownListFor(m => m.RequiredCambridgeScore, "Choose level", new { @class = "form-control" })
+    </div>
+</div>
