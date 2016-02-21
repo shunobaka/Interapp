@@ -35,7 +35,7 @@
             this.universities.Detach(university);
             student.UniversitiesOfInterest.Add(university);
             this.studentInfos.Attach(university);
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public void Create(string studentId)

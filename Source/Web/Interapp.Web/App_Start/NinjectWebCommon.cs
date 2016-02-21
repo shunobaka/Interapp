@@ -13,6 +13,7 @@ namespace Interapp.Web.App_Start
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
     using Data.Common;
+    using System.Data.Entity;
 
     public static class NinjectWebCommon
     {
@@ -64,6 +65,7 @@ namespace Interapp.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind(typeof(DbContext)).To(typeof(InterappDbContext));
             kernel.Bind(typeof(IInterappDbContext)).To(typeof(InterappDbContext));
             kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
 
