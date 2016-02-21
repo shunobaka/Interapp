@@ -12,8 +12,8 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-    using Models.AccountViewModels;
     using Services.Contracts;
+    using ViewModels.Account;
 
     [Authorize]
     public class AccountController : BaseController

@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models.UniversitiesViewModels
+﻿namespace Interapp.Web.ViewModels.Universities
 {
     using Data.Models;
     using Infrastructure.Mapping;

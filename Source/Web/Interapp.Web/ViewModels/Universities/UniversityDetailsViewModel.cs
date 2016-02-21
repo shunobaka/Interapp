@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Models.UniversitiesViewModels
+﻿namespace Interapp.Web.ViewModels.Universities
 {
     using System.Collections.Generic;
     using AutoMapper;
