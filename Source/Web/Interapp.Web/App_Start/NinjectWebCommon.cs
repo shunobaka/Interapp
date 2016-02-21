@@ -12,6 +12,7 @@ namespace Interapp.Web.App_Start
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
+    using Data.Common;
 
     public static class NinjectWebCommon
     {
@@ -64,7 +65,7 @@ namespace Interapp.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind(typeof(IInterappDbContext)).To(typeof(InterappDbContext));
-            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
 
             kernel.Bind(b => b.From(Assemblies.DataServices)
                               .SelectAllClasses()
