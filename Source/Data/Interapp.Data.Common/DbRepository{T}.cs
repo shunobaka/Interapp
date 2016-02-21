@@ -58,5 +58,23 @@
         {
             this.Context.SaveChanges();
         }
+
+        public T Attach(T entity)
+        {
+            return this.Context.Set<T>().Attach(entity);
+        }
+
+        public void Detach(T entity)
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Detached;
+        }
+
+        public void Attach<TEntity>(TEntity entity)
+            where TEntity : class
+        {
+            var entry = this.Context.Entry(entity);
+            entry.State = EntityState.Modified;
+        }
     }
 }

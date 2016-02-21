@@ -19,5 +19,12 @@
         void HardDelete(T entity);
 
         void Save();
+
+        T Attach(T entity);
+
+        void Detach(T entity);
+
+        void Attach<TEntity>(TEntity entity)
+            where TEntity : class;
     }
 }
