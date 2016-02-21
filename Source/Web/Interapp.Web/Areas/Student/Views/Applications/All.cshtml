@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationViewModel>
+@{
+    ViewBag.Title = "All applications";
+}
+
+<h2>My applications</h2>
+<hr />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>University name</th>
+            <th>Country</th>
+            <th>Date created</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.University.Name</td>
+                <td>@application.University.Country.Name</td>
+                <td>@application.DateCreated</td>
+                <td>@Html.ActionLink("Details", "Details", "Applications", new { id = application.Id }, new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </tbody>
+</table>

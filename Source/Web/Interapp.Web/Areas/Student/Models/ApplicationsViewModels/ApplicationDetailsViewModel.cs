@@ -6,6 +6,8 @@
 
     public class ApplicationDetailsViewModel : IMapFrom<Application>
     {
+        public int Id { get; set; }
+
         public DateTime? DateCreated { get; set; }
 
         public bool IsReviewed { get; set; }
@@ -14,8 +16,8 @@
         
         public int UniversityId { get; set; }
         
-        public virtual University University { get; set; }
+        public UniversityViewModel University { get; set; }
         
-        public virtual Major Major { get; set; }
+        public MajorViewModel Major { get; set; }
     }
 }

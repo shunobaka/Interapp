@@ -12,7 +12,9 @@
 
         Major GetById(int id);
 
-        void Update(int id, Major major);
+        void Update(Major major);
+
+        Major Create(string name);
 
         void Delete(int id);
     }

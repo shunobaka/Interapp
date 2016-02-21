@@ -6,10 +6,10 @@
 
     public class ApplicationViewModel : IMapFrom<Application>
     {
+        public int Id { get; set; }
+
         public DateTime? DateCreated { get; set; }
 
-        public virtual University University { get; set; }
-
-        public virtual Major Major { get; set; }
+        public UniversityViewModel University { get; set; }
     }
 }

@@ -5,6 +5,7 @@
     using Microsoft.AspNet.Identity;
     using Models.ApplicationsViewModels;
     using Services.Contracts;
+    using System.Linq;
     using System.Web.Mvc;
 
     [Authorize(Roles = "Student")]
@@ -12,11 +13,13 @@
     {
         private IApplicationsService applications;
         private IStudentInfosService studentInfos;
+        private IMajorsService majors;
 
-        public ApplicationsController(IApplicationsService applications, IStudentInfosService studentInfos)
+        public ApplicationsController(IApplicationsService applications, IStudentInfosService studentInfos, IMajorsService majors)
         {
             this.applications = applications;
             this.studentInfos = studentInfos;
+            this.majors = majors;
         }
 
         [HttpGet]
@@ -26,6 +29,7 @@
             var model = this.applications
                 .AllByStudent(studentId)
                 .ProjectTo<ApplicationViewModel>();
+
             return View(model);
         }
 
@@ -50,20 +54,40 @@
         public ActionResult Submit(ApplicationInputViewModel model)
         {
             var studentId = this.User.Identity.GetUserId();
+
+            var hasApplied = this.applications
+                .All()
+                .Where(a => a.UniversityId == model.UniversityId && a.StudentId == studentId)
+                .Any();
+
+            if (hasApplied)
+            {
+                this.ModelState.AddModelError("Applied", "You have already applied");
+            }
+
             var eligiblity = this.studentInfos.IsEligibleToApply(studentId, model.UniversityId);
 
             if (!eligiblity.IsEligible)
             {
                 this.ModelState.AddModelError("Eligiblity", eligiblity.Message);
             }
+            else
+            {
+                var major = this.majors.GetById(model.MajorId);
+                
+                if(major == null)
+                {
+                    this.ModelState.AddModelError("Major", "There is no such major.");
+                }
+            }
 
             if (this.ModelState.IsValid)
             {
                 this.applications.Create(studentId, model.UniversityId, model.MajorId);
-                return this.RedirectToAction(nameof(this.All));
+                return this.PartialView("_SuccessfullySubmitted");
             }
 
-            return this.View(model);
+            return this.PartialView("_Error", model);
         }
     }
 }
