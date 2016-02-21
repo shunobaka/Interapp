@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using Services.Common;
-    using UniversitiesViewModels;
 
     public class UniversitiesListViewModel
     {

@@ -7,9 +7,9 @@
     using System.Web.Mvc;
     using Data.Models;
     using Infrastructure.Mapping;
-    using Models.UniversitiesViewModels;
     using Services.Common;
     using Services.Contracts;
+    using ViewModels.Universities;
 
     [Authorize]
     public class UniversitiesController : BaseController
