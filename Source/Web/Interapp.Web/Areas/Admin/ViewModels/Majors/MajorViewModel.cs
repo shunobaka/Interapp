@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Admin.Models.MajorsViewModels
+﻿namespace Interapp.Web.Areas.Admin.ViewModels.Majors
 {
     using System.ComponentModel.DataAnnotations;
     using Common.Constants;

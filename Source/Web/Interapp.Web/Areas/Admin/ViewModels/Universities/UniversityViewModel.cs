@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Admin.Models.UniversitiesViewModels
+﻿namespace Interapp.Web.Areas.Admin.ViewModels.Universities
 {
     using AutoMapper;
     using Common.Enums;

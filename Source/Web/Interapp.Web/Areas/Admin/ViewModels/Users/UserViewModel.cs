@@ -1,4 +1,4 @@
-﻿namespace Interapp.Web.Areas.Admin.Models.UsersViewModels
+﻿namespace Interapp.Web.Areas.Admin.ViewModels.Users
 {
     using System;
     using System.ComponentModel.DataAnnotations;

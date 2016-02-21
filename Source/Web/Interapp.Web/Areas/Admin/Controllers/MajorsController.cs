@@ -6,8 +6,8 @@
     using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using Models.MajorsViewModels;
     using Services.Contracts;
+    using ViewModels.Majors;
 
     public class MajorsController : AdminController
     {

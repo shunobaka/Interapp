@@ -1,8 +1,6 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
     using System.Web.Mvc;
-    using Kendo.Mvc.UI;
-    using Models.UniversitiesViewModels;
     using Services.Contracts;
 
     public class UniversitiesController : AdminController
