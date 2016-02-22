@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class DocumentViewModel : IMapFrom<Document>
+    public class DocumentViewModel : IMapFrom<Document>, IMapTo<Document>
     {
         public int Id { get; set; }
 

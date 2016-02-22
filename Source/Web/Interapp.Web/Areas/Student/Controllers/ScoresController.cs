@@ -44,17 +44,8 @@
             if (this.ModelState.IsValid)
             {
                 var studentId = this.User.Identity.GetUserId();
-                var scoresReport = new ScoreReport()
-                {
-                    CambridgeLevel = model.CambridgeLevel,
-                    CambridgeResult = model.CambridgeResult,
-                    SatCRResult = model.SatCRResult,
-                    SatMathResult = model.SatMathResult,
-                    SatWritingResult = model.SatWritingResult,
-                    ToeflResult = model.ToeflResult,
-                    ToeflType = model.ToeflType,
-                    StudentInfoId = studentId
-                };
+                var scoresReport = this.Mapper.Map<ScoreReport>(model);
+                scoresReport.StudentInfoId = studentId;
                 this.scores.Update(scoresReport);
 
                 return this.RedirectToAction(nameof(this.Review));

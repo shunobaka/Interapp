@@ -1,9 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Caching;
     using System.Web.Mvc;
     using Data.Models;
     using Microsoft.AspNet.Identity;
@@ -30,6 +28,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(UniversityCreateViewModel model)
         {
             var universityWithNameExists = this.universities.All().Any(u => u.Name == model.Name);
@@ -75,6 +74,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
             var cachedCountries = this.GetCountries();
@@ -96,22 +96,10 @@
 
             if (this.ModelState.IsValid)
             {
-                var universityUpdateModel = new University()
-                {
-                    Id = id,
-                    CountryId = model.CountryId,
-                    Name = model.Name,
-                    RequiredCambridgeLevel = model.RequiredCambridgeLevel,
-                    RequiredCambridgeScore = model.RequiredCambridgeScore,
-                    RequiredIBTToefl = model.RequiredIBTToefl,
-                    RequiredPBTToefl = model.RequiredPBTToefl,
-                    RequiredSAT = model.RequiredSAT,
-                    TuitionFee = model.TuitionFee
-                };
+                var universityUpdateModel = this.Mapper.Map<University>(model);
+                universityUpdateModel.Id = id;
                 this.universities.Update(universityUpdateModel);
                 return this.RedirectToRoute("/Director");
-
-                // TODO: Change redirect
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
@@ -129,21 +117,12 @@
             return this.PartialView("_UniversitiesDropdown", model);
         }
 
-        private IEnumerable<Country> GetCountries()
+        private IList<Country> GetCountries()
         {
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add(
-                    "Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default,
-                    null);
-            }
-
-            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
+            return this.Cache.Get(
+                "Countries",
+                () => this.countries.All().ToList(),
+                60 * 60);
         }
     }
 }

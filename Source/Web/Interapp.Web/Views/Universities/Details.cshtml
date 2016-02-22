@@ -26,6 +26,7 @@
                     id = "add-uni-form"
                 }))
                 {
+                    @Html.AntiForgeryToken();
                     <input type="button" value="Add to universities of interest" class="btn btn-success pull-right" onclick="postForm()" />
                 }
             </div>

@@ -102,61 +102,18 @@
 
             if (original.AuthorId != studentId)
             {
-                this.ModelState.AddModelError("Oh snap!", "You are not authorized to edit this document!!!");
+                this.ModelState.AddModelError("Oh snap!", "You are not authorized to edit this document!");
             }
 
             if (this.ModelState.IsValid)
             {
-                var document = new Document()
-                {
-                    Name = model.Name,
-                    Id = model.Id,
-                    Content = model.Content
-                };
+                var document = this.Mapper.Map<Document>(model);
                 this.documents.Update(document);
 
                 return this.RedirectToAction(nameof(this.All));
             }
 
             return this.View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ControllerName = "Documents",
-                ItemName = "document",
-                ItemId = id
-            };
-            return this.View(model);
-        }
-
-        public ActionResult Deleted()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ControllerName = "Documents",
-                ItemName = "document"
-            };
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public ActionResult DeletePost(int id)
-        {
-            var document = this.documents.GetById(id);
-            var studentId = this.User.Identity.GetUserId();
-
-            if (document.AuthorId != studentId)
-            {
-                return this.View("Unathorized");
-            }
-
-            this.documents.Delete(id);
-
-            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }

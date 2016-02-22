@@ -218,6 +218,7 @@
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Applications\ApplicationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Countries\CountryViewModel.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Responses\ResponseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Scores\ScoresViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Students\StudentViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
@@ -300,6 +302,7 @@
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UniversitiesController.cs" />
@@ -335,8 +338,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\500.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\404.jpg" />
     <Content Include="Content\kendo\Default\editor.png" />
     <Content Include="Content\kendo\Default\imagebrowser.png" />
     <Content Include="Content\kendo\Default\indeterminate.gif" />
@@ -473,6 +478,10 @@
     <Content Include="Areas\Admin\Views\Applications\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ApplicationViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Applications\_MajorsDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\_UniversitiesDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\_MajorsDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\StudentViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -527,6 +536,8 @@
     <Content Include="Views\Universities\All.cshtml" />
     <Content Include="Views\Universities\_UniversitiesFilterPartial.cshtml" />
     <Content Include="Views\Universities\Details.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +572,10 @@
     <ProjectReference Include="..\..\Services\Interapp.Services.Common\Interapp.Services.Common.csproj">
       <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
       <Name>Interapp.Services.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Interapp.Services.Web\Interapp.Services.Web.csproj">
+      <Project>{550d2608-91bd-41e7-9fc2-bcb3f4612a8c}</Project>
+      <Name>Interapp.Services.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>

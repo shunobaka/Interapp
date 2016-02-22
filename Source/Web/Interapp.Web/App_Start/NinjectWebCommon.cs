@@ -14,6 +14,7 @@ namespace Interapp.Web.App_Start
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
+    using Services.Web;
 
     public static class NinjectWebCommon
     {
@@ -68,6 +69,7 @@ namespace Interapp.Web.App_Start
             kernel.Bind(typeof(DbContext)).To(typeof(InterappDbContext));
             kernel.Bind(typeof(IInterappDbContext)).To(typeof(InterappDbContext));
             kernel.Bind(typeof(IDbRepository<>)).To(typeof(DbRepository<>));
+            kernel.Bind(typeof(ICacheService)).To(typeof(HttpCacheService));
 
             kernel.Bind(b => b.From(Assemblies.DataServices)
                               .SelectAllClasses()

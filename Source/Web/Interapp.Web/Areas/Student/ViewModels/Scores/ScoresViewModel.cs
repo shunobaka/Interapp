@@ -6,7 +6,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class ScoresViewModel : IMapFrom<ScoreReport>
+    public class ScoresViewModel : IMapFrom<ScoreReport>, IMapTo<ScoreReport>
     {
         [Display(Name = "SAT Critical Reading")]
         [Range(ModelConstants.ScoreSatMin, ModelConstants.ScoreSatMax)]

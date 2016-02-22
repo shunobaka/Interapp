@@ -29,5 +29,9 @@
         ApplicationEligibility IsEligibleToApply(string studentId, int universityId);
 
         StudentInfo GetByIdWithDocumentsAndScores(string id);
+
+        void Update(StudentInfo studentInfo);
+
+        IQueryable<StudentInfo> All();
     }
 }

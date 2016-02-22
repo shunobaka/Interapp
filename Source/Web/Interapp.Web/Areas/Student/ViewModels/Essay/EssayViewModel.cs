@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class EssayViewModel : IMapFrom<Essay>
+    public class EssayViewModel : IMapFrom<Essay>, IMapTo<Essay>
     {
         [Required]
         [MinLength(
