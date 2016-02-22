@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Interapp.Web.Infrastructure")]
+[assembly: AssemblyTitle("Interapp.Web.Routes.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Interapp.Web.Infrastructure")]
+[assembly: AssemblyProduct("Interapp.Web.Routes.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("362979b8-654f-4d6e-8f95-2558b98fa8d4")]
+[assembly: Guid("e5d8ea2d-a3d5-4a75-a0a7-7e5657dd7f45")]
 
 // Version information for an assembly consists of the following four values:
 //
