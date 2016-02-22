@@ -16,6 +16,7 @@
                 "Majors",
                 "Responses",
                 "Scores",
+                "Students",
                 "Universities",
                 "Users"
             };
