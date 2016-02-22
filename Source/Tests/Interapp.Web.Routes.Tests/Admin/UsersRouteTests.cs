@@ -8,12 +8,12 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class ApplicationsRouteTests
+    public class UsersRouteTests
     {
         [Test]
-        public void TestRouteAdminApplicationsIndex()
+        public void TestRouteAdminUsersIndex()
         {
-            const string Url = "/Admin/Applications";
+            const string Url = "/Admin/Users";
             const string AreaName = "Admin";
 
             var routeCollection = new RouteCollection();
@@ -23,7 +23,7 @@
             var areaRegistrationContext = new AreaRegistrationContext(areaRegistration.AreaName, routeCollection);
             areaRegistration.RegisterArea(areaRegistrationContext);
 
-            routeCollection.ShouldMap(Url).To<ApplicationsController>(c => c.Index());
+            routeCollection.ShouldMap(Url).To<UsersController>(c => c.Index());
         }
     }
 }
