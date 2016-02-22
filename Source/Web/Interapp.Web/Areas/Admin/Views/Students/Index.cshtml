@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Essays admin panel";
+    ViewBag.Title = "Students admin panel";
 }
 
 <div class="row">
     <div class="col-md-9">
-        <h2>Essays administration panel</h2>
+        <h2>Students administration panel</h2>
     </div>
     <div class="col-md-3">
         <br />
@@ -12,13 +12,16 @@
     </div>
 </div>
 <hr />
-@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Essays.EssayViewModel>()
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Students.StudentViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
-          columns.Bound(c => c.Title);
-          columns.Bound(c => c.StudentName);
-          columns.Command(command => { command.Edit(); command.Destroy(); });
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.Username);
+          columns.Bound(c => c.Email);
+          columns.Bound(c => c.UniversityName);
+          columns.Bound(c => c.MajorName);
+          columns.Command(command => { command.Edit(); });
       })
       .ColumnMenu()
       .Editable(editable => editable.Mode(GridEditMode.PopUp))
@@ -33,12 +36,11 @@
           .Ajax()
           .Model(model =>
           {
-              model.Id(p => p.AuthorId);
-              model.Field(m => m.AuthorId).Editable(false);
+              model.Id(p => p.StudentId);
+              model.Field(m => m.StudentId).Editable(false);
           })
-          .Read(read => read.Action("EssaysRead", "Essays"))
-          .Update(update => update.Action("EssaysUpdate", "Essays"))
-          .Destroy(destroy => destroy.Action("EssaysDestroy", "Essays"))
+          .Read(read => read.Action("StudentsRead", "Students"))
+          .Update(update => update.Action("StudentsUpdate", "Students"))
           .PageSize(10)
       )
 )

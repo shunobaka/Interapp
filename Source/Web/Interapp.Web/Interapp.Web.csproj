@@ -227,6 +227,7 @@
     <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Responses\ResponseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Scores\ScoresViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Students\StudentViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
@@ -477,6 +478,10 @@
     <Content Include="Areas\Admin\Views\Applications\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ApplicationViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Applications\_MajorsDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\_UniversitiesDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\_MajorsDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\StudentViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -536,7 +541,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Students\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
