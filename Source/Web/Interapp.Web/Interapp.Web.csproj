@@ -567,6 +567,10 @@
       <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
       <Name>Interapp.Services.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Services\Interapp.Services.Web\Interapp.Services.Web.csproj">
+      <Project>{550d2608-91bd-41e7-9fc2-bcb3f4612a8c}</Project>
+      <Name>Interapp.Services.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>
       <Name>Interapp.Services</Name>

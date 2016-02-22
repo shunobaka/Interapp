@@ -1,11 +1,8 @@
 ﻿namespace Interapp.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
-    using System.Web.Caching;
     using System.Web.Mvc;
     using Common.Enums;
     using Data.Models;
@@ -153,8 +150,12 @@
         public ActionResult Register()
         {
             var model = new RegisterViewModel();
-
-            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
+            var countriesList =
+                this.Cache.Get(
+                    "Countries",
+                    () => this.countries.All().ToList(),
+                    60 * 60);
+            model.Countries = new SelectList(countriesList, "Id", "Name", model.CountryId);
 
             return this.View(model);
         }
@@ -188,19 +189,18 @@
                     }
 
                     await this.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     return this.RedirectToAction("Index", "Home");
                 }
 
                 this.AddErrors(result);
             }
 
-            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
+            var countriesList =
+                this.Cache.Get(
+                    "Countries",
+                    () => this.countries.All().ToList(),
+                    60 * 60);
+            model.Countries = new SelectList(countriesList, "Id", "Name", model.CountryId);
 
             // If we got this far, something failed, redisplay form
             return this.View(model);
@@ -467,23 +467,6 @@
             }
 
             return this.RedirectToAction("Index", "Home");
-        }
-
-        private IEnumerable<Country> GetCountries()
-        {
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add(
-                    "Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default,
-                    null);
-            }
-
-            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
