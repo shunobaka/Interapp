@@ -30,6 +30,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(UniversityCreateViewModel model)
         {
             var universityWithNameExists = this.universities.All().Any(u => u.Name == model.Name);
@@ -75,6 +76,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
             var cachedCountries = this.GetCountries();
@@ -96,19 +98,20 @@
 
             if (this.ModelState.IsValid)
             {
-                this.universities.Update(
-                    id,
-                    model.CountryId,
-                    model.Name,
-                    model.RequiredCambridgeLevel,
-                    model.RequiredCambridgeScore,
-                    model.RequiredIBTToefl,
-                    model.RequiredPBTToefl,
-                    model.RequiredSAT,
-                    model.TuitionFee);
-                return this.RedirectToAction(nameof(this.Add));
-
-                // TODO: Change redirect
+                var universityUpdateModel = new University()
+                {
+                    Id = id,
+                    CountryId = model.CountryId,
+                    Name = model.Name,
+                    RequiredCambridgeLevel = model.RequiredCambridgeLevel,
+                    RequiredCambridgeScore = model.RequiredCambridgeScore,
+                    RequiredIBTToefl = model.RequiredIBTToefl,
+                    RequiredPBTToefl = model.RequiredPBTToefl,
+                    RequiredSAT = model.RequiredSAT,
+                    TuitionFee = model.TuitionFee
+                };
+                this.universities.Update(universityUpdateModel);
+                return this.RedirectToRoute("/Director");
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);

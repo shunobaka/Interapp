@@ -23,5 +23,7 @@
         void Create(string studentId, int universityId, int majorId);
 
         void SetReviewed(int id);
+
+        void Update(Application application);
     }
 }

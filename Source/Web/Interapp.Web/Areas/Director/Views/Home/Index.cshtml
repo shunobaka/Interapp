@@ -42,14 +42,14 @@
                     }
                     else
                     {
-                        <a href="/Director/Home/Index/@(Model.Page - 1)" aria-label="Previous">
+                        <a href="/Director/Home?page=@(Model.Page - 1)" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     }
                 </li>
                 @for (int i = 1; i <= pages; i++)
                 {
-                    <li class="@(Model.Page == i ? Html.Raw("active") : Html.Raw(""))"><a href="/Director/Home/Index/@i">@i</a></li>
+                    <li class="@(Model.Page == i ? Html.Raw("active") : Html.Raw(""))"><a href="/Director/Home?page=@i">@i</a></li>
                 }
                 <li class="@(Model.Page >= pages ? Html.Raw("disabled") : Html.Raw(""))">
                     @if (Model.Page >= pages)
@@ -58,7 +58,7 @@
                     }
                     else
                     {
-                        <a href="/Director/Home/Index/@(Model.Page + 1)" aria-label="Next">
+                        <a href="/Director/Home?page=@(Model.Page + 1)" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     }

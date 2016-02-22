@@ -13,18 +13,9 @@
 
         University GetById(int id);
 
-        void Update(
-            int universityId,
-            int countryId,
-            string name,
-            CambridgeLevel? cambridgeLevel,
-            CambridgeResult? cambridgeScore,
-            int? ibtToefl,
-            int? pbtToefl,
-            int? sat,
-            int tuition);
+        void Update(University university);
 
-        void DeleteById(int id);
+        void Delete(int id);
 
         void Create(string directorId, string name, int tuitionFee, int countryId);
 

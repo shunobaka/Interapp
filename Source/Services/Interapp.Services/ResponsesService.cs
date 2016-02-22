@@ -57,5 +57,29 @@
                 .All()
                 .Where(r => r.Application.UniversityId == universityId);
         }
+
+        public IQueryable<Response> All()
+        {
+            return this.responses.All();
+        }
+
+        public void Update(Response response)
+        {
+            var orgResponse = this.responses.GetById(response.ApplicationId);
+
+            if (orgResponse != null)
+            {
+                orgResponse.Content = response.Content;
+                orgResponse.IsAdmitted = response.IsAdmitted;
+                this.responses.Save();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var response = this.responses.GetById(id);
+            this.responses.Delete(response);
+            this.responses.Save();
+        }
     }
 }

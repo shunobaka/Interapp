@@ -17,11 +17,11 @@
             this.universities = universities;
         }
 
-        public ActionResult Index(int id = 1)
+        public ActionResult Index(int page = 1)
         {
-            if (id < 1)
+            if (page < 1)
             {
-                id = 1;
+                page = 1;
             }
 
             var userId = this.User.Identity.GetUserId();
@@ -32,11 +32,11 @@
                 .OrderBy(u => u.Name);
 
             var universitiesCount = universitiesList.Count();
-            var modelUniversities = universitiesList.Skip((id - 1) * PageSize).Take(PageSize).ToList();
+            var modelUniversities = universitiesList.Skip((page - 1) * PageSize).Take(PageSize).ToList();
 
             var model = new IndexViewModel()
             {
-                Page = id,
+                Page = page,
                 UniversitiesCount = universitiesCount,
                 Universities = modelUniversities,
                 PageSize = PageSize

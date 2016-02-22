@@ -14,6 +14,11 @@
             this.scores = scores;
         }
 
+        public IQueryable<ScoreReport> All()
+        {
+            return this.scores.All();
+        }
+
         public void Create(ScoreReport newScores)
         {
             this.scores.Add(newScores);

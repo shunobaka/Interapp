@@ -2,7 +2,7 @@
 {
     public class GlobalConstants
     {
-        public const string AdminRoleName = "Admin";
+        public const string AdminRoleName = "Administrator";
         public const string StudentRoleName = "Student";
         public const string DirectorRoleName = "Director";
     }

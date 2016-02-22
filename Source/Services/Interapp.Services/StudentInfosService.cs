@@ -1,12 +1,12 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Common;
     using Contracts;
     using Data.Common;
     using Data.Models;
-    using System;
 
     public class StudentInfosService : IStudentInfosService
     {
