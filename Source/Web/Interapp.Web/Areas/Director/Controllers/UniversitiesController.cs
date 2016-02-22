@@ -1,14 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Caching;
     using System.Web.Mvc;
     using Data.Models;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using ViewModels.Universities;
+    using System.Collections.Generic;
 
     public class UniversitiesController : DirectorController
     {
@@ -129,21 +127,12 @@
             return this.PartialView("_UniversitiesDropdown", model);
         }
 
-        private IEnumerable<Country> GetCountries()
+        private IList<Country> GetCountries()
         {
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add(
-                    "Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default,
-                    null);
-            }
-
-            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
+            return this.Cache.Get(
+                "Countries",
+                () => this.countries.All().ToList(),
+                60 * 60);
         }
     }
 }
