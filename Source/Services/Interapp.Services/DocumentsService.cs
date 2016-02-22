@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Contracts;
@@ -23,20 +24,21 @@
             {
                 AuthorId = studentId,
                 Content = content,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);
             this.documents.Save();
         }
 
-        public void CreateForUniversity(int universityId, string name, string content)
+        public void CreateForUniversity(int universityId, string name)
         {
             var document = new Document()
             {
                 UniversityId = universityId,
-                Content = content,
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.documents.Add(document);
@@ -100,6 +102,19 @@
             }
 
             this.documents.Save();
+        }
+
+        public IQueryable<Document> GetByDirector(string directorId)
+        {
+            return this.documents
+                .All()
+                .Where(d => d.University != null && d.University.DirectorId == directorId)
+                .Include(d => d.University);
+        }
+
+        public IQueryable<Document> All()
+        {
+            return this.documents.All();
         }
     }
 }

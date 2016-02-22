@@ -1,5 +1,6 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using Common;
@@ -45,7 +46,10 @@
                 .Where(u => u.Id == studentId)
                 .FirstOrDefault();
 
-            student.StudentInfo = new StudentInfo();
+            student.StudentInfo = new StudentInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
             this.users.Save();
         }
 

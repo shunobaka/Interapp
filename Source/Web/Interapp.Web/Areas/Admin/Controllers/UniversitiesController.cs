@@ -1,7 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Admin.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
+    using Data.Models;
+    using Infrastructure.Mapping;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
     using Services.Contracts;
+    using ViewModels.Universities;
 
     public class UniversitiesController : AdminController
     {
@@ -15,6 +21,41 @@
         public ActionResult Index()
         {
             return this.View();
+        }
+
+        public ActionResult UniversitiesRead([DataSourceRequest]DataSourceRequest request)
+        {
+            var model = this.universities.All().To<UniversityViewModel>();
+            DataSourceResult result = model.ToDataSourceResult(request);
+
+            return this.Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UniversitiesUpdate([DataSourceRequest]DataSourceRequest request, UniversityViewModel university)
+        {
+            var universityExists = this.universities.All().Any(m => m.Name == university.Name);
+
+            if (universityExists)
+            {
+                this.ModelState.AddModelError("University exists", "University with such name already exists.");
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                var entity = this.Mapper.Map<University>(university);
+                this.universities.Update(entity);
+            }
+
+            return this.Json(new[] { university }.ToDataSourceResult(request, this.ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UniversitiesDestroy([DataSourceRequest]DataSourceRequest request, UniversityViewModel university)
+        {
+            this.universities.Delete(university.Id);
+
+            return this.Json(new[] { university }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

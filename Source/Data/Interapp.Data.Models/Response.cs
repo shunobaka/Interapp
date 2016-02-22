@@ -20,9 +20,6 @@
         public string Content { get; set; }
 
         [Required]
-        public DateTime? Date { get; set; }
-
-        [Required]
         public bool IsAdmitted { get; set; }
     }
 }

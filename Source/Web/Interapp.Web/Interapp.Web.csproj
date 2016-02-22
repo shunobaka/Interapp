@@ -210,15 +210,28 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ApplicationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DocumentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EssaysController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ResponsesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScoresController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Applications\ApplicationViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Countries\CountryViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Essays\EssayViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Majors\MajorViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Responses\ResponseViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Scores\ScoresViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\Controllers\ApplicationsController.cs" />
     <Compile Include="Areas\Director\Controllers\DirectorController.cs" />
+    <Compile Include="Areas\Director\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\Director\Controllers\HomeController.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\ResponseInputModel.cs" />
     <Compile Include="Areas\Director\Controllers\UniversitiesController.cs" />
@@ -232,7 +245,11 @@
     <Compile Include="Areas\Director\ViewModels\Applications\StudentInfoViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\StudentViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Applications\UniversityViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentInputViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\DocumentViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Documents\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\CountryViewModel.cs" />
+    <Compile Include="Areas\Director\ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Universities\UniversityCreateViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Home\UniversityViewModel.cs" />
     <Compile Include="Areas\Director\ViewModels\Universities\CountryViewModel.cs" />
@@ -438,6 +455,24 @@
     <Content Include="Areas\Admin\Views\Majors\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MajorViewModel.cshtml" />
     <Content Include="Areas\Student\Views\Applications\_AlreadyApplied.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\Director\Views\Documents\Add.cshtml" />
+    <Content Include="Areas\Director\Views\Universities\_UniversitiesDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Universities\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UniversityViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CountryViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DocumentViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Essays\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EssayViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Scores\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ScoresViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Responses\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ResponseViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Applications\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ApplicationViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Applications\_MajorsDropdown.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -495,7 +530,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Universities\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

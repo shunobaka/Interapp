@@ -50,10 +50,10 @@
         {
             var application = new Application()
             {
-                DateCreated = DateTime.UtcNow,
                 MajorId = majorId,
                 StudentId = studentId,
-                UniversityId = universityId
+                UniversityId = universityId,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.applications.Add(application);
@@ -97,6 +97,17 @@
             if (application != null)
             {
                 application.IsReviewed = true;
+            }
+        }
+
+        public void Update(Application application)
+        {
+            var orgApplication = this.applications.GetById(application.Id);
+
+            if (orgApplication != null)
+            {
+                orgApplication.MajorId = application.MajorId;
+                this.applications.Save();
             }
         }
     }

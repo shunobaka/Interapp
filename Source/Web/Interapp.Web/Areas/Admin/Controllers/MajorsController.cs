@@ -38,7 +38,7 @@
 
             if (majorExists)
             {
-                this.ModelState.AddModelError("Major exists", "Major will such name already exists.");
+                this.ModelState.AddModelError("Major exists", "Major with such name already exists.");
             }
 
             Major result = null;
@@ -68,12 +68,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var entity = new Major
-                {
-                    Id = major.Id,
-                    Name = major.Name
-                };
-
+                var entity = this.Mapper.Map<Major>(major);
                 this.majors.Update(entity);
             }
 
