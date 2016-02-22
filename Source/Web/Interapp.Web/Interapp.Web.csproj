@@ -218,6 +218,7 @@
     <Compile Include="Areas\Admin\Controllers\MajorsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ResponsesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScoresController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UniversitiesController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Applications\ApplicationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Countries\CountryViewModel.cs" />
@@ -535,6 +536,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Students\" />
     <Folder Include="Areas\Director\Views\Shared\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

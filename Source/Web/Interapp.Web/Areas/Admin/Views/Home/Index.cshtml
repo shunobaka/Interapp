@@ -1,7 +1,19 @@
-﻿
+﻿@model IEnumerable<string>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h2 class="text-center">Administration Panel</h2>
+<hr />
+<div class="row text-center">
+    @foreach (var panel in Model)
+    {
+        <div class="col-md-3">
+            <br />
+            <h4>@panel</h4>
+            @Html.ActionLink("Manage", "Index", panel, null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+        </div>
+    }
+</div>
