@@ -102,17 +102,12 @@
 
             if (original.AuthorId != studentId)
             {
-                this.ModelState.AddModelError("Oh snap!", "You are not authorized to edit this document!!!");
+                this.ModelState.AddModelError("Oh snap!", "You are not authorized to edit this document!");
             }
 
             if (this.ModelState.IsValid)
             {
-                var document = new Document()
-                {
-                    Name = model.Name,
-                    Id = model.Id,
-                    Content = model.Content
-                };
+                var document = this.Mapper.Map<Document>(model);
                 this.documents.Update(document);
 
                 return this.RedirectToAction(nameof(this.All));

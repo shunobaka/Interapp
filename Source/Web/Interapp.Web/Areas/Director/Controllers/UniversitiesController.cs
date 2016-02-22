@@ -96,18 +96,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var universityUpdateModel = new University()
-                {
-                    Id = id,
-                    CountryId = model.CountryId,
-                    Name = model.Name,
-                    RequiredCambridgeLevel = model.RequiredCambridgeLevel,
-                    RequiredCambridgeScore = model.RequiredCambridgeScore,
-                    RequiredIBTToefl = model.RequiredIBTToefl,
-                    RequiredPBTToefl = model.RequiredPBTToefl,
-                    RequiredSAT = model.RequiredSAT,
-                    TuitionFee = model.TuitionFee
-                };
+                var universityUpdateModel = this.Mapper.Map<University>(model);
+                universityUpdateModel.Id = id;
                 this.universities.Update(universityUpdateModel);
                 return this.RedirectToRoute("/Director");
             }
