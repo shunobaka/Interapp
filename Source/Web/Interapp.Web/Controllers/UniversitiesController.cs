@@ -1,11 +1,7 @@
 ﻿namespace Interapp.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Caching;
     using System.Web.Mvc;
-    using Data.Models;
     using Infrastructure.Mapping;
     using Services.Common;
     using Services.Contracts;
@@ -23,7 +19,10 @@
 
         public ActionResult All(FilterModel model)
         {
-            var unis = this.GetUniversities();
+            var unis = this.Cache.Get(
+                    "Universities",
+                    () => this.universities.AllWithCountry().ToList(),
+                    30 * 60);
 
             var filteredUnis = this.universities
                 .FilterUniversities(unis.AsQueryable(), model)
@@ -46,25 +45,6 @@
             var model = this.Mapper.Map<UniversityDetailsViewModel>(university);
 
             return this.View(model);
-        }
-
-        private IList<University> GetUniversities()
-        {
-            if (this.HttpContext.Cache["Universities"] == null)
-            {
-                // TODO: Make cache for hour
-                var unis = this.universities.AllWithCountry().ToList();
-                this.HttpContext.Cache.Add(
-                    "Universities",
-                    unis,
-                    null,
-                    DateTime.Now.AddSeconds(10),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default,
-                    null);
-            }
-
-            return (IList<University>)this.HttpContext.Cache["Universities"];
         }
     }
 }
