@@ -45,12 +45,8 @@
             if (this.ModelState.IsValid)
             {
                 var studentId = this.User.Identity.GetUserId();
-                var updateModel = new Essay()
-                {
-                    AuthorId = studentId,
-                    Title = model.Title,
-                    Content = model.Content
-                };
+                var updateModel = this.Mapper.Map<Essay>(model);
+                updateModel.AuthorId = studentId;
                 this.essays.Update(updateModel);
 
                 return this.RedirectToAction(nameof(this.Review));

@@ -300,6 +300,7 @@
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UniversitiesController.cs" />
@@ -335,8 +336,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\500.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\404.jpg" />
     <Content Include="Content\kendo\Default\editor.png" />
     <Content Include="Content\kendo\Default\imagebrowser.png" />
     <Content Include="Content\kendo\Default\indeterminate.gif" />
@@ -527,6 +530,8 @@
     <Content Include="Views\Universities\All.cshtml" />
     <Content Include="Views\Universities\_UniversitiesFilterPartial.cshtml" />
     <Content Include="Views\Universities\Details.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -561,6 +566,10 @@
     <ProjectReference Include="..\..\Services\Interapp.Services.Common\Interapp.Services.Common.csproj">
       <Project>{87cad520-3d00-41d2-ae47-ef81cd3a49a6}</Project>
       <Name>Interapp.Services.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\Interapp.Services.Web\Interapp.Services.Web.csproj">
+      <Project>{550d2608-91bd-41e7-9fc2-bcb3f4612a8c}</Project>
+      <Name>Interapp.Services.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Services\Interapp.Services\Interapp.Services.csproj">
       <Project>{bd112133-15b4-4dda-8907-1b28a4f47a0d}</Project>

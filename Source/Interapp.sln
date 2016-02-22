@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interapp.Data.Common", "Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interapp.Web.Infrastructure", "Web\Interapp.Web.Infrastructure\Interapp.Web.Infrastructure.csproj", "{362979B8-654F-4D6E-8F95-2558B98FA8D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interapp.Web.Routes.Tests", "Tests\Interapp.Web.Routes.Tests\Interapp.Web.Routes.Tests.csproj", "{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interapp.Services.Web", "Services\Interapp.Services.Web\Interapp.Services.Web.csproj", "{550D2608-91BD-41E7-9FC2-BCB3F4612A8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,14 @@ Global
 		{362979B8-654F-4D6E-8F95-2558B98FA8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{362979B8-654F-4D6E-8F95-2558B98FA8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{362979B8-654F-4D6E-8F95-2558B98FA8D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550D2608-91BD-41E7-9FC2-BCB3F4612A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550D2608-91BD-41E7-9FC2-BCB3F4612A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550D2608-91BD-41E7-9FC2-BCB3F4612A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550D2608-91BD-41E7-9FC2-BCB3F4612A8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +92,7 @@ Global
 		{87CAD520-3D00-41D2-AE47-EF81CD3A49A6} = {68ECBC49-60A4-4364-80D4-D8ADA25BD52F}
 		{7C59C680-5A2E-47DD-B830-05C60BACAB4F} = {240907C4-5C69-42B2-8AFE-27B9DDEA2BD3}
 		{362979B8-654F-4D6E-8F95-2558B98FA8D4} = {4C73CB99-F7F5-435B-BF96-5002DF270A14}
+		{E5D8EA2D-A3D5-4A75-A0A7-7E5657DD7F45} = {92FC0E4C-5931-4502-B09E-C7FBAE9EE25F}
+		{550D2608-91BD-41E7-9FC2-BCB3F4612A8C} = {68ECBC49-60A4-4364-80D4-D8ADA25BD52F}
 	EndGlobalSection
 EndGlobal
