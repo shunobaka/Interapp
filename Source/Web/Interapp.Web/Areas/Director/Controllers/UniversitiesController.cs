@@ -1,12 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Data.Models;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
     using ViewModels.Universities;
-    using System.Collections.Generic;
 
     public class UniversitiesController : DirectorController
     {

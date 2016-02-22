@@ -94,27 +94,11 @@
         public ActionResult ApplicationForm(int id)
         {
             var model = new ApplicationInputViewModel();
-            model.Majors = new SelectList(this.GetMajors(), "Id", "Name", model.MajorId);
+            var majorsList = this.Cache.Get("Majors", () => this.majors.All().ToList(), 60 * 60);
+            model.Majors = new SelectList(majorsList, "Id", "Name", model.MajorId);
             model.UniversityId = id;
 
             return this.PartialView("_ApplicationForm", model);
-        }
-
-        private IEnumerable<Major> GetMajors()
-        {
-            if (this.HttpContext.Cache["Majors"] == null)
-            {
-                this.HttpContext.Cache.Add(
-                    "Majors",
-                    this.majors.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default,
-                    null);
-            }
-
-            return (IEnumerable<Major>)this.HttpContext.Cache["Majors"];
         }
     }
 }
