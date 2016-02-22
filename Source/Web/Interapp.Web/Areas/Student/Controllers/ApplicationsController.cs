@@ -49,6 +49,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Submit(ApplicationInputViewModel model)
         {
             var studentId = this.User.Identity.GetUserId();

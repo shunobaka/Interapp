@@ -30,6 +30,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(UniversityCreateViewModel model)
         {
             var universityWithNameExists = this.universities.All().Any(u => u.Name == model.Name);
@@ -75,6 +76,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
             var cachedCountries = this.GetCountries();
@@ -110,8 +112,6 @@
                 };
                 this.universities.Update(universityUpdateModel);
                 return this.RedirectToRoute("/Director");
-
-                // TODO: Change redirect
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);

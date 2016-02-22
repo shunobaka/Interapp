@@ -50,6 +50,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(int id)
         {
             if (this.Request.IsAjaxRequest())
