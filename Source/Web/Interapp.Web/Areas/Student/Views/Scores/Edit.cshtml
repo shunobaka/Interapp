@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Areas.Student.Models.ScoresViewModels.ScoresViewModel
+﻿@model Interapp.Web.Areas.Student.ViewModels.Scores.ScoresViewModel
 @{
     ViewBag.Title = "Edit scores";
 }
@@ -43,3 +43,6 @@
     </div>
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

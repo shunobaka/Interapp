@@ -3,10 +3,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
-    using Common.Enums;
+    using Common.Models;
+    using Interapp.Common.Constants;
+    using Interapp.Common.Enums;
 
-    public class University
+    public class University : BaseModel
     {
         private ICollection<StudentInfo> students;
         private ICollection<StudentInfo> interestedStudents;
@@ -33,7 +34,7 @@
 
         [Range(ModelConstants.UniversityTuitionFeeMin, ModelConstants.UniversityTuitionFeeMax)]
         public int TuitionFee { get; set; }
-        
+
         public int CountryId { get; set; }
 
         [ForeignKey("CountryId")]
@@ -47,7 +48,7 @@
 
         [Range(ModelConstants.ScorePBTToelfMin, ModelConstants.ScorePBTToeflMax)]
         public int? RequiredPBTToefl { get; set; }
-        
+
         public CambridgeResult? RequiredCambridgeScore { get; set; }
 
         public CambridgeLevel? RequiredCambridgeLevel { get; set; }

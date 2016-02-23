@@ -5,15 +5,15 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
     using Interapp.Common.Enums;
 
     public class UniversitiesService : IUniversitiesService
     {
-        private IRepository<University> universities;
+        private IDbRepository<University> universities;
 
-        public UniversitiesService(IRepository<University> universities)
+        public UniversitiesService(IDbRepository<University> universities)
         {
             this.universities = universities;
         }
@@ -30,17 +30,19 @@
                 CountryId = countryId,
                 DirectorId = directorId,
                 Name = name,
-                TuitionFee = tuitionFee
+                TuitionFee = tuitionFee,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.universities.Add(university);
-            this.universities.SaveChanges();
+            this.universities.Save();
         }
 
-        public void DeleteById(int id)
+        public void Delete(int id)
         {
-            this.universities.Delete(id);
-            this.universities.SaveChanges();
+            var university = this.universities.GetById(id);
+            this.universities.Delete(university);
+            this.universities.Save();
         }
 
         public University GetById(int id)
@@ -55,39 +57,25 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<University> GetFiltered(FilterModel filter)
+        public void Update(University university)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(
-            int universityId,
-            int countryId,
-            string name,
-            CambridgeLevel? cambridgeLevel,
-            CambridgeResult? cambridgeScore,
-            int? ibtToefl,
-            int? pbtToefl,
-            int? sat,
-            int tuition)
-        {
-            var university = this.universities
+            var orgUniversity = this.universities
                 .All()
-                .Where(u => u.Id == universityId)
+                .Where(u => u.Id == university.Id)
                 .FirstOrDefault();
 
-            if (university != null)
+            if (orgUniversity != null)
             {
-                university.CountryId = countryId;
-                university.Name = name;
-                university.RequiredCambridgeLevel = cambridgeLevel;
-                university.RequiredCambridgeScore = cambridgeScore;
-                university.RequiredIBTToefl = ibtToefl;
-                university.RequiredPBTToefl = pbtToefl;
-                university.RequiredSAT = sat;
-                university.TuitionFee = tuition;
+                orgUniversity.Name = university.Name;
+                orgUniversity.RequiredCambridgeLevel = university.RequiredCambridgeLevel;
+                orgUniversity.RequiredCambridgeScore = university.RequiredCambridgeScore;
+                orgUniversity.RequiredIBTToefl = university.RequiredIBTToefl;
+                orgUniversity.RequiredPBTToefl = university.RequiredPBTToefl;
+                orgUniversity.RequiredSAT = university.RequiredSAT;
+                orgUniversity.TuitionFee = university.TuitionFee;
+                orgUniversity.CountryId = university.CountryId;
 
-                this.universities.SaveChanges();
+                this.universities.Save();
             }
         }
 
@@ -99,8 +87,6 @@
             }
 
             universities = universities.OrderBy(u => u.Name);
-            var page = 1;
-            var pageSize = 10;
 
             if (filter != null)
             {
@@ -109,10 +95,7 @@
                     universities = universities.Where(u => u.Name.Contains(filter.Filter));
                 }
 
-                page = filter.Page;
-                pageSize = filter.PageSize;
-
-                if (filter.OrderBy == null)
+                if (filter.OrderBy != null)
                 {
                     if (filter.Order == "asc")
                     {
@@ -122,7 +105,7 @@
                         }
                         else if (filter.OrderBy == "country")
                         {
-                            universities = universities.OrderBy(u => u.Country);
+                            universities = universities.OrderBy(u => u.Country.Name);
                         }
                         else if (filter.OrderBy == "tuition")
                         {
@@ -170,10 +153,6 @@
                     }
                 }
             }
-
-            universities = universities
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
 
             return universities;
         }

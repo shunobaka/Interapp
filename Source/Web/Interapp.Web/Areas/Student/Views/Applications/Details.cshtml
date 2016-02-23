@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationDetailsViewModel
+﻿@model Interapp.Web.Areas.Student.ViewModels.Applications.ApplicationDetailsViewModel
 @{
     ViewBag.Title = "Details for application";
 }
@@ -16,11 +16,11 @@
 <h4>University - @Html.ActionLink(Model.University.Name, "Details", "Universities", new { area = "", id = Model.UniversityId }, null)</h4>
 <h5>Country: @Model.University.Country.Name</h5>
 <h5>Major: @Model.Major.Name</h5>
-<h5>Date created: @Model.DateCreated</h5>
+<h5>Date created: @Model.CreatedOn</h5>
 <h5>Has been reviewed: @Html.CheckBoxFor(m => m.IsReviewed, new { disabled = "disabled" })</h5>
 <h5>Has been answered: @Html.CheckBoxFor(m => m.IsAnswered, new { disabled = "disabled" })</h5>
 @if (Model.IsAnswered)
 {
     <hr />
-    @Html.ActionLink("See response", "Details", "Response", new { id = Model.Id }, new { @class = "btn btn-success" })
+    @Html.ActionLink("See response", "Details", "Responses", new { id = Model.Id }, new { @class = "btn btn-success" })
 }

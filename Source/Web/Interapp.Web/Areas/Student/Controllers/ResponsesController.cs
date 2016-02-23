@@ -1,15 +1,13 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper.QueryableExtensions;
-    using Models.ResponsesViewModels;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
-    using System.Web.Mvc;
-    using AutoMapper;
-    using System.Linq;
+    using ViewModels.Responses;
 
-    [Authorize(Roles = "Student")]
-    public class ResponsesController : Controller
+    public class ResponsesController : StudentController
     {
         private IResponsesService responses;
 
@@ -23,10 +21,10 @@
             var studentId = this.User.Identity.GetUserId();
             var model = this.responses
                 .GetByStudent(studentId)
-                .ProjectTo<ResponseViewModel>()
+                .To<ResponseViewModel>()
                 .ToList();
 
-            return View(model);
+            return this.View(model);
         }
 
         public ActionResult Details(int id)
@@ -39,7 +37,7 @@
                 return this.View();
             }
 
-            var model = Mapper.Map<ResponseViewModel>(response);
+            var model = this.Mapper.Map<ResponseViewModel>(response);
 
             return this.View(model);
         }

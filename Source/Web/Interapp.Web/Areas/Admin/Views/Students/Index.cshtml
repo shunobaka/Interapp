@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Students admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Students administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Students.StudentViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.Username);
+          columns.Bound(c => c.Email);
+          columns.Bound(c => c.UniversityName);
+          columns.Bound(c => c.MajorName);
+          columns.Command(command => { command.Edit(); });
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.StudentId);
+              model.Field(m => m.StudentId).Editable(false);
+          })
+          .Read(read => read.Action("StudentsRead", "Students"))
+          .Update(update => update.Action("StudentsUpdate", "Students"))
+          .PageSize(10)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

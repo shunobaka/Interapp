@@ -2,28 +2,34 @@
 {
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class ScoresService : IScoresService
     {
-        private IRepository<ScoreReport> scores;
+        private IDbRepository<ScoreReport> scores;
 
-        public ScoresService(IRepository<ScoreReport> scores)
+        public ScoresService(IDbRepository<ScoreReport> scores)
         {
             this.scores = scores;
+        }
+
+        public IQueryable<ScoreReport> All()
+        {
+            return this.scores.All();
         }
 
         public void Create(ScoreReport newScores)
         {
             this.scores.Add(newScores);
-            this.scores.SaveChanges();
+            this.scores.Save();
         }
 
         public void Delete(string studentId)
         {
-            this.scores.Delete(studentId);
-            this.scores.SaveChanges();
+            var score = this.scores.GetById(studentId);
+            this.scores.Delete(score);
+            this.scores.Save();
         }
 
         public ScoreReport GetByStudentId(string studentId)
@@ -57,7 +63,7 @@
             scoreReport.CambridgeLevel = newScores.CambridgeLevel;
             scoreReport.CambridgeResult = newScores.CambridgeResult;
 
-            this.scores.SaveChanges();
+            this.scores.Save();
         }
     }
 }

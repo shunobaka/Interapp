@@ -2,9 +2,18 @@
 <hr />
 <h4>Scores</h4>
 <hr />
-<h5>SAT: @((Model.Student.Scores.SatCRResult != null && Model.Student.Scores.SatMathResult != null && Model.Student.Scores.SatWritingResult != null) ? Html.Raw(Model.Student.Scores.SatCRResult + Model.Student.Scores.SatMathResult + Model.Student.Scores.SatWritingResult) : Html.Raw("None"))</h5>
-<h5>TOEFL: @((Model.Student.Scores.ToeflResult != null && Model.Student.Scores.ToeflType != null) ? Html.Raw(Model.Student.Scores.ToeflResult + " " + Model.Student.Scores.ToeflType) : Html.Raw("None"))</h5>
-<h5>Cambridge: @((Model.Student.Scores.CambridgeResult != null && Model.Student.Scores.CambridgeLevel != null) ? Html.Raw(Model.Student.Scores.CambridgeLevel + " " + Model.Student.Scores.CambridgeResult) : Html.Raw("None"))</h5>
+@if (Model.Student.Scores == null)
+{
+    <h5>You have no scores.</h5>
+    <br />
+    <br />
+}
+else
+{
+    <h5>SAT: @((Model.Student.Scores.SatCRResult != null && Model.Student.Scores.SatMathResult != null && Model.Student.Scores.SatWritingResult != null) ? Html.Raw(Model.Student.Scores.SatCRResult + Model.Student.Scores.SatMathResult + Model.Student.Scores.SatWritingResult) : Html.Raw("None"))</h5>
+    <h5>TOEFL: @((Model.Student.Scores.ToeflResult != null && Model.Student.Scores.ToeflType != null) ? Html.Raw(Model.Student.Scores.ToeflResult + " " + Model.Student.Scores.ToeflType) : Html.Raw("None"))</h5>
+    <h5>Cambridge: @((Model.Student.Scores.CambridgeResult != null && Model.Student.Scores.CambridgeLevel != null) ? Html.Raw(Model.Student.Scores.CambridgeLevel + " " + Model.Student.Scores.CambridgeResult) : Html.Raw("None"))</h5>
+}
 <hr />
 <h4>Documents</h4>
 <hr />

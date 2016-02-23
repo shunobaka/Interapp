@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Universities admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Universities administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Universities.UniversityViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.CountryName);
+          columns.Bound(c => c.DirectorName);
+          columns.Bound(c => c.TuitionFee);
+          columns.Bound(c => c.RequiredCambridgeLevel);
+          columns.Bound(c => c.RequiredCambridgeScore);
+          columns.Bound(c => c.RequiredIBTToefl);
+          columns.Bound(c => c.RequiredPBTToefl);
+          columns.Bound(c => c.RequiredSAT);
+          columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+          })
+          .Read(read => read.Action("UniversitiesRead", "Universities"))
+          .Update(update => update.Action("UniversitiesUpdate", "Universities"))
+          .Destroy(destroy => destroy.Action("UniversitiesDestroy", "Universities"))
+          .PageSize(10)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

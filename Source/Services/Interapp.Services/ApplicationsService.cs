@@ -1,18 +1,17 @@
 ﻿namespace Interapp.Services
 {
     using System;
-    using System.Linq;
-    using Common;
-    using Contracts;
-    using Data.Models;
-    using Data.Repositories;
     using System.Data.Entity;
+    using System.Linq;
+    using Contracts;
+    using Data.Common;
+    using Data.Models;
 
     public class ApplicationsService : IApplicationsService
     {
-        private IRepository<Application> applications;
+        private IDbRepository<Application> applications;
 
-        public ApplicationsService(IRepository<Application> applications)
+        public ApplicationsService(IDbRepository<Application> applications)
         {
             this.applications = applications;
         }
@@ -50,20 +49,21 @@
         {
             var application = new Application()
             {
-                DateCreated = DateTime.UtcNow,
                 MajorId = majorId,
                 StudentId = studentId,
-                UniversityId = universityId
+                UniversityId = universityId,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.applications.Add(application);
-            this.applications.SaveChanges();
+            this.applications.Save();
         }
 
         public void Delete(int id)
         {
-            this.applications.Delete(id);
-            this.applications.SaveChanges();
+            var application = this.applications.GetById(id);
+            this.applications.Delete(application);
+            this.applications.Save();
         }
 
         public Application GetById(int id)
@@ -82,12 +82,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Application> GetFilteredByUniversity(int universityId, FilterModel filter)
-        {
-            // TODO: Implement
-            throw new NotImplementedException();
-        }
-
         public void SetReviewed(int id)
         {
             var application = this.applications
@@ -96,6 +90,18 @@
             if (application != null)
             {
                 application.IsReviewed = true;
+                this.applications.Save();
+            }
+        }
+
+        public void Update(Application application)
+        {
+            var orgApplication = this.applications.GetById(application.Id);
+
+            if (orgApplication != null)
+            {
+                orgApplication.MajorId = application.MajorId;
+                this.applications.Save();
             }
         }
     }

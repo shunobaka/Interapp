@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Interapp.Web.Areas.Student.Models.ApplicationsViewModels.ApplicationViewModel>
+﻿@model IEnumerable<Interapp.Web.Areas.Student.ViewModels.Applications.ApplicationViewModel>
 @{
     ViewBag.Title = "All applications";
 }
@@ -20,7 +20,7 @@
             <tr>
                 <td>@application.University.Name</td>
                 <td>@application.University.Country.Name</td>
-                <td>@application.DateCreated</td>
+                <td>@application.CreatedOn</td>
                 <td>@Html.ActionLink("Details", "Details", "Applications", new { id = application.Id }, new { @class = "btn btn-primary" })</td>
             </tr>
         }

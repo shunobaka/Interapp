@@ -2,10 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
-    using Common.Enums;
+    using Common.Models;
+    using Interapp.Common.Constants;
+    using Interapp.Common.Enums;
 
-    public class ScoreReport
+    public class ScoreReport : BaseModel
     {
         [Key]
         [Required]
@@ -27,7 +28,7 @@
         public int? ToeflResult { get; set; }
 
         public ToeflType? ToeflType { get; set; }
-        
+
         public CambridgeResult? CambridgeResult { get; set; }
 
         public CambridgeLevel? CambridgeLevel { get; set; }

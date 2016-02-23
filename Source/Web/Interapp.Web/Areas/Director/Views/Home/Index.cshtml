@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Interapp.Web.Areas.Director.Models.HomeViewModels.UniversityViewModel>
+﻿@model Interapp.Web.Areas.Director.ViewModels.Home.IndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Director's panel";
+
+    var pages = Math.Ceiling(Model.UniversitiesCount / (decimal)Model.PageSize);
 }
 
 <h2>Director's panel</h2>
@@ -8,24 +10,98 @@
 <div class="row">
     <div class="col-md-6">
         <h3>My universities</h3>
-        @Html.ActionLink("Add new university", "Add", "Universities", null, new { @class = "btn btn-primary" })
-        @if (Model == null || Model.Count() == 0)
+        @if (Model.Universities == null || Model.Universities.Count() == 0)
         {
             <h4>You still have no universities.</h4>
         }
         else
         {
-            <br />
-            <br />
-            foreach (var university in Model)
+            for (int i = 0; i < Model.Universities.Count; i++)
             {
-                <div class="form-group">
-                    @Html.LabelForModel(university.Name)
-                    @Html.ActionLink("Details", "Details", "Universities", new { area = "", id = university.Id }, new { @class = "btn btn-success pull-right" })
-                    @Html.ActionLink("Edit", "Edit", "Universities", new { id = university.Id }, new { @class = "btn btn-warning pull-right" })
-                    <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>@Model.Universities[i].Name</h4>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.ActionLink("Details", "Details", "Universities", new { area = "", id = Model.Universities[i].Id }, new { @class = "btn btn-success pull-right" })
+                        @Html.ActionLink("Edit", "Edit", "Universities", new { id = Model.Universities[i].Id }, new { @class = "btn btn-warning pull-right" })
+                    </div>
                 </div>
+                if (i != Model.Universities.Count - 1)
+                {
+                    <br />
+                }
             }
         }
+        <div class="row text-center">
+            <ul class="pagination">
+                <li class="@(Model.Page <= 1 ? Html.Raw("disabled") : Html.Raw(""))">
+                    @if (Model.Page <= 1)
+                    {
+                        <span aria-hidden="true">&laquo;</span>
+                    }
+                    else
+                    {
+                        <a href="/Director/Home?page=@(Model.Page - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    }
+                </li>
+                @for (int i = 1; i <= pages; i++)
+                {
+                    <li class="@(Model.Page == i ? Html.Raw("active") : Html.Raw(""))"><a href="/Director/Home?page=@i">@i</a></li>
+                }
+                <li class="@(Model.Page >= pages ? Html.Raw("disabled") : Html.Raw(""))">
+                    @if (Model.Page >= pages)
+                    {
+                        <span aria-hidden="true">&raquo;</span>
+                    }
+                    else
+                    {
+                        <a href="/Director/Home?page=@(Model.Page + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Management</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Documents</h4>
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Manage", "", "Documents", null, new { @class = "btn btn-primary btn-block" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Applications</h4>
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Manage", "All", "Applications", null, new { @class = "btn btn-primary btn-block" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Responses</h4>
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Manage", "", "Responses", null, new { @class = "btn btn-primary btn-block" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <h4>University</h4>
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Add", "Add", "Universities", null, new { @class = "btn btn-primary btn-block" })
+            </div>
+        </div>
     </div>
 </div>

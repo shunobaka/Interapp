@@ -1,4 +1,4 @@
-namespace Interapp.Data.Migrations
+﻿namespace Interapp.Data.Migrations
 {
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -10,7 +10,7 @@ namespace Interapp.Data.Migrations
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = true;
-            this.AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(InterappDbContext context)
@@ -32,27 +32,7 @@ namespace Interapp.Data.Migrations
                 context.SaveChanges();
             }
 
-            var seeder = new Seeder();
-
-            if (!context.Countries.Any())
-            {
-                foreach (var country in seeder.Countries)
-                {
-                    context.Countries.Add(country);
-                }
-
-                context.SaveChanges();
-            }
-
-            if (!context.Majors.Any())
-            {
-                foreach (var major in seeder.Majors)
-                {
-                    context.Majors.Add(major);
-                }
-
-                context.SaveChanges();
-            }
+            var seeder = new Seeder(context);
         }
     }
 }

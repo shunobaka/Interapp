@@ -3,8 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Common.Models;
 
-    public class DirectorInfo
+    public class DirectorInfo : BaseModel
     {
         private ICollection<University> universities;
 

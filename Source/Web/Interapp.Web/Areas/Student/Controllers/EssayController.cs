@@ -1,13 +1,12 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using AutoMapper;
-    using Models.EssayViewModels;
+    using System.Web.Mvc;
+    using Data.Models;
     using Microsoft.AspNet.Identity;
     using Services.Contracts;
-    using System.Web.Mvc;
+    using ViewModels.Essay;
 
-    [Authorize(Roles = "Student")]
-    public class EssayController : Controller
+    public class EssayController : StudentController
     {
         private IEssaysService essays;
 
@@ -22,7 +21,7 @@
             var essay = this.essays
                 .GetByStudentId(studentId);
 
-            var model = Mapper.Map<EssayViewModel>(essay);
+            var model = this.Mapper.Map<EssayViewModel>(essay);
 
             return this.View(model);
         }
@@ -34,7 +33,7 @@
             var essay = this.essays
                .GetByStudentId(studentId);
 
-            var model = Mapper.Map<EssayViewModel>(essay);
+            var model = this.Mapper.Map<EssayViewModel>(essay);
 
             return this.View(model);
         }
@@ -46,42 +45,14 @@
             if (this.ModelState.IsValid)
             {
                 var studentId = this.User.Identity.GetUserId();
-                this.essays.Update(studentId, model.Title, model.Content);
+                var updateModel = this.Mapper.Map<Essay>(model);
+                updateModel.AuthorId = studentId;
+                this.essays.Update(updateModel);
 
                 return this.RedirectToAction(nameof(this.Review));
             }
 
             return this.View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Delete()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ControllerName = "Essay",
-                ItemName = "essay"
-            };
-            return this.View(model);
-        }
-        
-        public ActionResult Deleted()
-        {
-            var model = new DeleteInfoViewModel()
-            {
-                ControllerName = "Essay",
-                ItemName = "essay"
-            };
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public ActionResult DeletePost()
-        {
-            var studentId = this.User.Identity.GetUserId();
-            this.essays.Delete(studentId);
-
-            return this.RedirectToAction(nameof(this.Deleted));
         }
     }
 }

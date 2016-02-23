@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Interapp.Web.Areas.Director.Models.ApplicationsViewModels.ApplicationViewModel>
+﻿@model IEnumerable<Interapp.Web.Areas.Director.ViewModels.Applications.ApplicationViewModel>
 @{
     ViewBag.Title = "All applications";
 }
@@ -23,7 +23,7 @@
                 <td>@application.Id</td>
                 <td>@application.Student.Student.FirstName @application.Student.Student.LastName</td>
                 <td>@application.University.Name</td>
-                <td>@application.DateCreated</td>
+                <td>@application.CreatedOn</td>
                 <td>@Html.CheckBox("IsAnswered", application.IsAnswered, new { disabled = "disabled" })</td>
                 <td>@Html.ActionLink("Details", "Details", "Applications", new { id = application.Id }, new { @class = "btn btn-primary" })</td>
             </tr>

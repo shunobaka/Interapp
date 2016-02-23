@@ -4,14 +4,14 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class CountriesService : ICountriesService
     {
-        private IRepository<Country> countries;
+        private IDbRepository<Country> countries;
 
-        public CountriesService(IRepository<Country> countries)
+        public CountriesService(IDbRepository<Country> countries)
         {
             this.countries = countries;
         }
@@ -23,20 +23,25 @@
                 .OrderBy(c => c.Name);
         }
 
-        public void Create(string name)
+        public Country Create(string name)
         {
             var country = new Country()
             {
-                Name = name
+                Name = name,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.countries.Add(country);
-            this.countries.SaveChanges();
+            this.countries.Save();
+
+            return country;
         }
 
-        public void DeleteById(int id)
+        public void Delete(int id)
         {
-            this.countries.Delete(id);
+            var country = this.countries.GetById(id);
+            this.countries.Delete(country);
+            this.countries.Save();
         }
 
         public Country GetById(int id)
@@ -47,14 +52,15 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Country> GetFiltered(FilterModel filter)
+        public void Update(Country country)
         {
-            throw new NotImplementedException();
-        }
+            var orgCountry = this.countries.GetById(country.Id);
 
-        public void UpdateById(int id, Country country)
-        {
-            throw new NotImplementedException();
+            if (country != null)
+            {
+                orgCountry.Name = country.Name;
+                this.countries.Save();
+            }
         }
     }
 }

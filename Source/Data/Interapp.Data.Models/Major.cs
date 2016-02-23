@@ -3,9 +3,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Common.Constants;
+    using Common.Models;
+    using Interapp.Common.Constants;
 
-    public class Major
+    public class Major : BaseModel
     {
         private ICollection<Application> applications;
         private ICollection<StudentInfo> students;
@@ -15,7 +16,7 @@
             this.applications = new HashSet<Application>();
             this.students = new HashSet<StudentInfo>();
         }
-        
+
         [Key]
         public int Id { get; set; }
 

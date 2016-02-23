@@ -8,13 +8,11 @@
     {
         IQueryable<Major> All();
 
-        IQueryable<Major> GetFiltered(FilterModel filter);
-
         Major GetById(int id);
 
-        void Update(int id, Major major);
+        void Update(Major major);
 
-        void Create(string name);
+        Major Create(string name);
 
         void Delete(int id);
     }

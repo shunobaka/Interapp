@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Scores admin panel";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>Scores administration panel</h2>
+    </div>
+    <div class="col-md-3">
+        <br />
+        @Html.ActionLink("Back to main panel", "", "", null, new { @class = "btn btn-primary pull-right" })
+    </div>
+</div>
+<hr />
+@(Html.Kendo().Grid<Interapp.Web.Areas.Admin.ViewModels.Scores.ScoresViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.StudentName);
+          columns.Bound(c => c.StudentUsername);
+          columns.Bound(c => c.SatCRResult);
+          columns.Bound(c => c.SatMathResult);
+          columns.Bound(c => c.SatWritingResult);
+          columns.Bound(c => c.Toefl);
+          columns.Bound(c => c.Cambridge);
+          columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.StudentInfoId);
+              model.Field(m => m.StudentInfoId).Editable(false);
+          })
+          .Read(read => read.Action("ScoresRead", "Scores"))
+          .Update(update => update.Action("ScoresUpdate", "Scores"))
+          .Destroy(destroy => destroy.Action("ScoresDestroy", "Scores"))
+          .PageSize(10)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

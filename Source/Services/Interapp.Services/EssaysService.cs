@@ -1,17 +1,23 @@
 ﻿namespace Interapp.Services
 {
+    using System;
     using System.Linq;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class EssaysService : IEssaysService
     {
-        private IRepository<Essay> essays;
+        private IDbRepository<Essay> essays;
 
-        public EssaysService(IRepository<Essay> essays)
+        public EssaysService(IDbRepository<Essay> essays)
         {
             this.essays = essays;
+        }
+
+        public IQueryable<Essay> All()
+        {
+            return this.essays.All();
         }
 
         public void Create(string studentId, string title, string content)
@@ -20,17 +26,19 @@
             {
                 AuthorId = studentId,
                 Title = title,
-                Content = content
+                Content = content,
+                CreatedOn = DateTime.UtcNow
             };
 
             this.essays.Add(essay);
-            this.essays.SaveChanges();
+            this.essays.Save();
         }
 
         public void Delete(string studentId)
         {
-            this.essays.Delete(studentId);
-            this.essays.SaveChanges();
+            var essay = this.essays.GetById(studentId);
+            this.essays.Delete(essay);
+            this.essays.Save();
         }
 
         public Essay GetByStudentId(string studentId)
@@ -43,23 +51,22 @@
             return essay;
         }
 
-        public void Update(string studentId, string title, string content)
+        public void Update(Essay essay)
         {
-            var essay = this.essays
+            var orgEssay = this.essays
                 .All()
-                .Where(e => e.AuthorId == studentId)
+                .Where(e => e.AuthorId == essay.AuthorId)
                 .FirstOrDefault();
 
-            if (essay == null)
+            if (orgEssay == null)
             {
-                this.Create(studentId, title, content);
+                this.Create(essay.AuthorId, essay.Title, essay.Content);
                 return;
             }
 
-            essay.Title = title;
-            essay.Content = content;
-            this.essays.Update(essay);
-            this.essays.SaveChanges();
+            orgEssay.Title = essay.Title;
+            orgEssay.Content = essay.Content;
+            this.essays.Save();
         }
     }
 }

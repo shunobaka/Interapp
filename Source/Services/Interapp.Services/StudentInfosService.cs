@@ -5,16 +5,16 @@
     using System.Linq;
     using Common;
     using Contracts;
+    using Data.Common;
     using Data.Models;
-    using Data.Repositories;
 
     public class StudentInfosService : IStudentInfosService
     {
-        private IRepository<StudentInfo> studentInfos;
-        private IRepository<User> users;
-        private IRepository<University> universities;
+        private IDbRepository<StudentInfo> studentInfos;
+        private IDbRepository<User> users;
+        private IDbRepository<University> universities;
 
-        public StudentInfosService(IRepository<StudentInfo> studentInfos, IRepository<User> users, IRepository<University> universities)
+        public StudentInfosService(IDbRepository<StudentInfo> studentInfos, IDbRepository<User> users, IDbRepository<University> universities)
         {
             this.studentInfos = studentInfos;
             this.users = users;
@@ -36,7 +36,7 @@
             this.universities.Detach(university);
             student.UniversitiesOfInterest.Add(university);
             this.studentInfos.Attach(university);
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public void Create(string studentId)
@@ -46,8 +46,11 @@
                 .Where(u => u.Id == studentId)
                 .FirstOrDefault();
 
-            student.StudentInfo = new StudentInfo();
-            this.users.SaveChanges();
+            student.StudentInfo = new StudentInfo()
+            {
+                CreatedOn = DateTime.UtcNow
+            };
+            this.users.Save();
         }
 
         public void EnrollStudent(string studentId, int universityId, int majorId)
@@ -59,7 +62,7 @@
 
             student.UniversityId = universityId;
             student.MajorId = majorId;
-            this.studentInfos.SaveChanges();
+            this.studentInfos.Save();
         }
 
         public StudentInfo GetById(string id)
@@ -116,9 +119,13 @@
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 
-            this.studentInfos.Update(info);
-            this.studentInfos.SaveChanges();
-            //// TODO: Fix maybe?
+            if (student != null)
+            {
+                student.MajorId = info.MajorId;
+                student.UniversityId = info.UniversityId;
+
+                this.studentInfos.Save();
+            }
         }
 
         public IQueryable<University> GetUniversitiesOfInterest(string studentId)
@@ -135,6 +142,19 @@
         public ApplicationEligibility IsEligibleToApply(StudentInfo student, University university)
         {
             var eligibilityResult = new ApplicationEligibility();
+
+            if (student.Scores == null)
+            {
+                eligibilityResult.Message = "You must fill in your scores.";
+                return eligibilityResult;
+            }
+
+            if (student.Essay == null)
+            {
+                eligibilityResult.Message = "You must write your essay.";
+                return eligibilityResult;
+            }
+
             var totalSat = student.Scores.SatCRResult + student.Scores.SatMathResult + student.Scores.SatWritingResult;
 
             if (totalSat < university.RequiredSAT)
@@ -204,6 +224,25 @@
             var university = this.universities.GetById(universityId);
 
             return this.IsEligibleToApply(student, university);
+        }
+
+        public void Update(StudentInfo studentInfo)
+        {
+            var student = this.studentInfos.GetById(studentInfo.StudentId);
+
+            if (student != null)
+            {
+                student.UniversityId = studentInfo.UniversityId;
+                student.MajorId = studentInfo.MajorId;
+                this.studentInfos.Save();
+            }
+        }
+
+        public IQueryable<StudentInfo> All()
+        {
+            return this.studentInfos.All()
+                .Include(s => s.University)
+                .Include(s => s.Student);
         }
     }
 }

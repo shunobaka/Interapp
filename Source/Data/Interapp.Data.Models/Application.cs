@@ -3,13 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Common.Models;
 
-    public class Application
+    public class Application : BaseModel
     {
         [Key]
         public int Id { get; set; }
-
-        public DateTime? DateCreated { get; set; }
 
         public bool IsReviewed { get; set; }
 

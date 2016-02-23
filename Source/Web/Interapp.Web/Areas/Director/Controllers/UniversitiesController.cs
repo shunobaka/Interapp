@@ -1,18 +1,14 @@
 ﻿namespace Interapp.Web.Areas.Director.Controllers
 {
-    using AutoMapper;
-    using Data.Models;
-    using Microsoft.AspNet.Identity;
-    using Models.UniversitiesViewModels;
-    using Services.Contracts;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Caching;
     using System.Web.Mvc;
+    using Data.Models;
+    using Microsoft.AspNet.Identity;
+    using Services.Contracts;
+    using ViewModels.Universities;
 
-    [Authorize(Roles = "Director")]
-    public class UniversitiesController : Controller
+    public class UniversitiesController : DirectorController
     {
         private IUniversitiesService universities;
         private ICountriesService countries;
@@ -23,30 +19,16 @@
             this.countries = countries;
         }
 
-        private IEnumerable<Country> GetCountries()
-        {
-            if (this.HttpContext.Cache["Countries"] == null)
-            {
-                this.HttpContext.Cache.Add("Countries",
-                    this.countries.All().ToList(),
-                    null,
-                    DateTime.Now.AddHours(1),
-                    TimeSpan.Zero,
-                    CacheItemPriority.Default, null);
-            }
-
-            return (IEnumerable<Country>)this.HttpContext.Cache["Countries"];
-        }
-
         [HttpGet]
         public ActionResult Add()
         {
             var model = new UniversityCreateViewModel();
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(UniversityCreateViewModel model)
         {
             var universityWithNameExists = this.universities.All().Any(u => u.Name == model.Name);
@@ -82,7 +64,7 @@
 
             if (university != null && university.DirectorId == userId)
             {
-                var model = Mapper.Map<UniversityViewModel>(university);
+                var model = this.Mapper.Map<UniversityViewModel>(university);
                 model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
                 return this.View(model);
@@ -92,9 +74,10 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
-            var cachedCountries = GetCountries();
+            var cachedCountries = this.GetCountries();
 
             var countryExists = cachedCountries.Any(c => c.Id == model.CountryId);
 
@@ -113,22 +96,33 @@
 
             if (this.ModelState.IsValid)
             {
-                this.universities.Update(
-                    id,
-                    model.CountryId,
-                    model.Name,
-                    model.RequiredCambridgeLevel,
-                    model.RequiredCambridgeScore,
-                    model.RequiredIBTToefl,
-                    model.RequiredPBTToefl,
-                    model.RequiredSAT,
-                    model.TuitionFee);
-                return this.RedirectToAction(nameof(this.Add));
-                // TODO: Change redirect
+                var universityUpdateModel = this.Mapper.Map<University>(model);
+                universityUpdateModel.Id = id;
+                this.universities.Update(universityUpdateModel);
+                return this.Redirect("/Director");
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetDropdownList()
+        {
+            var directorId = this.User.Identity.GetUserId();
+            var modelUniversities = this.universities.All()
+                .Where(u => u.DirectorId == directorId);
+
+            var model = new SelectList(modelUniversities, "Id", "Name", "UniversityId");
+            return this.PartialView("_UniversitiesDropdown", model);
+        }
+
+        private IList<Country> GetCountries()
+        {
+            return this.Cache.Get(
+                "Countries",
+                () => this.countries.All().ToList(),
+                60 * 60);
         }
     }
 }

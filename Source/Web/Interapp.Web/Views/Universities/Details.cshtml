@@ -1,4 +1,4 @@
-﻿@model Interapp.Web.Models.UniversitiesViewModels.UniversityDetailsViewModel
+﻿@model Interapp.Web.ViewModels.Universities.UniversityDetailsViewModel
 @{
     ViewBag.Title = "University Details";
 }
@@ -26,6 +26,7 @@
                     id = "add-uni-form"
                 }))
                 {
+                    @Html.AntiForgeryToken();
                     <input type="button" value="Add to universities of interest" class="btn btn-success pull-right" onclick="postForm()" />
                 }
             </div>
@@ -82,9 +83,13 @@
     <script>
         function postForm(e) {
             $("#loading").show();
+            var verificationToken = $("input[name=\"__RequestVerificationToken\"]").val()
             $.ajax({
                 url: "/Student/Universities/Add/" + @Model.Id,
                 method: "post",
+                data: {
+                    "__RequestVerificationToken": verificationToken
+                },
                 success: function (response) {
                     $('#messages').html(response);
                     $('#add-form-container').html('');

@@ -2,15 +2,16 @@
 {
     using System;
     using System.Linq;
-    using Contracts;
-    using Data.Models;
     using Common;
-    using Data.Repositories;
+    using Contracts;
+    using Data.Common;
+    using Data.Models;
+
     public class MajorsService : IMajorsService
     {
-        private IRepository<Major> majors;
+        private IDbRepository<Major> majors;
 
-        public MajorsService(IRepository<Major> majors)
+        public MajorsService(IDbRepository<Major> majors)
         {
             this.majors = majors;
         }
@@ -20,21 +21,11 @@
             return this.majors.All();
         }
 
-        public void Create(string name)
-        {
-            var major = new Major()
-            {
-                Name = name
-            };
-
-            this.majors.Add(major);
-            this.majors.SaveChanges();
-        }
-
         public void Delete(int id)
         {
-            this.majors.Delete(id);
-            this.majors.SaveChanges();
+            var major = this.majors.GetById(id);
+            this.majors.Delete(major);
+            this.majors.Save();
         }
 
         public Major GetById(int id)
@@ -45,14 +36,29 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Major> GetFiltered(FilterModel filter)
+        public void Update(Major major)
         {
-            throw new NotImplementedException();
+            var originalMajor = this.majors.GetById(major.Id);
+
+            if (originalMajor != null)
+            {
+                originalMajor.Name = major.Name;
+                this.majors.Save();
+            }
         }
 
-        public void Update(int id, Major major)
+        public Major Create(string name)
         {
-            throw new NotImplementedException();
+            var major = new Major()
+            {
+                Name = name,
+                CreatedOn = DateTime.UtcNow
+            };
+
+            this.majors.Add(major);
+            this.majors.Save();
+
+            return major;
         }
     }
 }
