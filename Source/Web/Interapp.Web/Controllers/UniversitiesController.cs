@@ -27,14 +27,39 @@
 
             var filteredUnis = this.universities
                 .FilterUniversities(universitiesList.AsQueryable(), model)
-                .To<UniversitySimpleViewModel>()
-                .ToList();
+                .To<UniversitySimpleViewModel>();
+
+            var universitiesCount = filteredUnis.Count();
+
+            var page = 1;
+            var pageSize = 10;
+
+            if (model != null)
+            {
+                page = model.Page;
+                pageSize = model.PageSize;
+            }
+
+            var resultUniversitiesList =
+                filteredUnis
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+            var query = string.Empty;
+
+            if (model != null)
+            {
+                query = "&Filter=" + model.Filter + "&OrderBy=" + model.OrderBy + "&Order=" + model.Order;
+            }
 
             var viewDataModel = new UniversitiesListViewModel()
             {
-                Universities = filteredUnis,
+                Universities = resultUniversitiesList,
                 Filter = model,
-                UniversitiesCount = universitiesList.Count
+                UniversitiesCount = universitiesCount,
+                Query = query,
+                Page = model.Page
             };
 
             return this.View(viewDataModel);

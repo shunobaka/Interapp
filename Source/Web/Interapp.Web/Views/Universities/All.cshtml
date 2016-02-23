@@ -11,21 +11,70 @@
 }
 else
 {
+    var universitiesCount = Model.Universities != null ? Model.Universities.Count() : 0;
+    var pages = Math.Ceiling(Model.UniversitiesCount / (decimal)10);
     @Html.Partial("_UniversitiesFilterPartial")
     <hr />
     <div class="row">
-        @foreach (var university in Model.Universities)
+        @for (var i = 0; i < universitiesCount; i += 2)
         {
-        <div class="col-md-6">
-            <div class="col-md-8">
-                <h3>@university.Name</h3>
-                <h5>Country: @university.Country.Name</h5>
-                <h5>Tuition fee: @string.Format("{0:C}", university.TuitionFee)</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-8">
+                        <h3>@Model.Universities[i].Name</h3>
+                        <h5>Country: @Model.Universities[i].Country.Name</h5>
+                        <h5>Tuition fee: @string.Format("{0:C}", Model.Universities[i].TuitionFee)</h5>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink("View Details", "Details", "Universities", new { id = Model.Universities[i].Id }, new { @class = "btn btn-primary pull-right" })
+                    </div>
+                </div>
+                @if (i + 1 < universitiesCount)
+                {
+                    <div class="col-md-6">
+                        <div class="col-md-8">
+                            <h3>@Model.Universities[i + 1].Name</h3>
+                            <h5>Country: @Model.Universities[i + 1].Country.Name</h5>
+                            <h5>Tuition fee: @string.Format("{0:C}", Model.Universities[i + 1].TuitionFee)</h5>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ActionLink("View Details", "Details", "Universities", new { id = Model.Universities[i + 1].Id }, new { @class = "btn btn-primary pull-right" })
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="col-md-4">
-                @Html.ActionLink("View Details", "Details", "Universities", new { id = university.Id }, new { @class = "btn btn-primary pull-right" })
-            </div>
-        </div>
         }
+    </div>
+    <div class="row">
+        <ul class="pagination">
+            <li class="@(Model.Page <= 1 ? Html.Raw("disabled") : Html.Raw(""))">
+                @if (Model.Page <= 1)
+                {
+                    <span aria-hidden="true">&laquo;</span>
+                }
+                else
+                {
+                    <a href="/Universities/All?page=@(Model.Page - 1 + Model.Query)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                }
+            </li>
+            @for (int i = 1; i <= pages; i++)
+                {
+                <li class="@(Model.Page == i ? Html.Raw("active") : Html.Raw(""))"><a href=@("/Universities/All?page=" + i + Model.Query)>@i</a></li>
+            }
+            <li class="@(Model.Page >= pages ? Html.Raw("disabled") : Html.Raw(""))">
+                @if (Model.Page >= pages)
+                {
+                    <span aria-hidden="true">&raquo;</span>
+                }
+                else
+                {
+                    <a href="/Universities/All?page=@(Model.Page + 1 + Model.Query)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                }
+            </li>
+        </ul>
     </div>
 }

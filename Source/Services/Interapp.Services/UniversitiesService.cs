@@ -91,8 +91,6 @@
             }
 
             universities = universities.OrderBy(u => u.Name);
-            var page = 1;
-            var pageSize = 10;
 
             if (filter != null)
             {
@@ -101,10 +99,7 @@
                     universities = universities.Where(u => u.Name.Contains(filter.Filter));
                 }
 
-                page = filter.Page;
-                pageSize = filter.PageSize;
-
-                if (filter.OrderBy == null)
+                if (filter.OrderBy != null)
                 {
                     if (filter.Order == "asc")
                     {
@@ -162,10 +157,6 @@
                     }
                 }
             }
-
-            universities = universities
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
 
             return universities;
         }
