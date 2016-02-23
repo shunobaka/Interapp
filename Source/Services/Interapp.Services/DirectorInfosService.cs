@@ -18,6 +18,11 @@
             this.users = users;
         }
 
+        public IQueryable<DirectorInfo> All()
+        {
+            return this.directorInfos.All();
+        }
+
         public void Create(string directorId)
         {
             var student = this.users

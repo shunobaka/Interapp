@@ -8,6 +8,17 @@
 </div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 text-center">
-        <h4>If you are not a user, please log in to get started!</h4>
+        @if (Request.IsAuthenticated)
+        {
+            <h4>As you know, here you can find everything you too in order to succeed in life so don't miss the chance and get right down to business!</h4>
+        }
+        else
+        {
+            <h4>In order to get started with getting into the university of your dreams, please @Html.ActionLink("login", "Login", "Account") or @Html.ActionLink("register", "Register", "Account").</h4>
+        }
     </div>
+</div>
+<hr />
+<div class="row text-center">
+    @Html.Action("Statistics")
 </div>

@@ -5,6 +5,8 @@
 
     public interface IDirectorInfosService
     {
+        IQueryable<DirectorInfo> All();
+
         DirectorInfo GetById(string id);
 
         void Create(string directorId);
