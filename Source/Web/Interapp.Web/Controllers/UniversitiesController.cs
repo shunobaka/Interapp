@@ -6,8 +6,7 @@
     using Services.Common;
     using Services.Contracts;
     using ViewModels.Universities;
-
-    [Authorize]
+    
     public class UniversitiesController : BaseController
     {
         private IUniversitiesService universities;
