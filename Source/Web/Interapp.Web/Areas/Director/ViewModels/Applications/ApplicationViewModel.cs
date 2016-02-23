@@ -4,7 +4,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class ApplicationViewModel : IMapFrom<Application>
+    public class ApplicationViewModel : IMapFrom<Application>, IMapTo<Application>
     {
         public int Id { get; set; }
 

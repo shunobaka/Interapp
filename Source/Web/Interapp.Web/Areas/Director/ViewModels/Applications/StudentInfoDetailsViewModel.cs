@@ -3,7 +3,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class StudentInfoDetailsViewModel : IMapFrom<StudentInfo>
+    public class StudentInfoDetailsViewModel : IMapFrom<StudentInfo>, IMapTo<StudentInfo>
     {
         public StudentViewModel Student { get; set; }
 

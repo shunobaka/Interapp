@@ -5,7 +5,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class ResponseInputModel : IMapFrom<Response>
+    public class ResponseInputModel : IMapFrom<Response>, IMapTo<Response>
     {
         [Required]
         [MinLength(ModelConstants.ResponseContentMinLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
