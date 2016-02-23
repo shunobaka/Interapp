@@ -35,6 +35,7 @@
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
+                @Html.HiddenFor(m => m.ApplicationId)
                 <input type="submit" value="Get enrolled in university!" class="btn btn-success" />
             </div>
         }

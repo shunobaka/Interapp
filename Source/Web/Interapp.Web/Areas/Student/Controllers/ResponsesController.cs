@@ -46,9 +46,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Enroll(int id)
+        public ActionResult Enroll(int applicationId)
         {
-            var response = this.responses.GetById(id);
+            var response = this.responses.GetById(applicationId);
             var application = response.Application;
             var studentId = this.User.Identity.GetUserId();
 
