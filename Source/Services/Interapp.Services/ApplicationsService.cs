@@ -97,6 +97,7 @@
             if (application != null)
             {
                 application.IsReviewed = true;
+                this.applications.Save();
             }
         }
 
