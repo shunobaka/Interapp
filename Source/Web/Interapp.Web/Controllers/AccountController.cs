@@ -153,7 +153,7 @@
             var countriesList =
                 this.Cache.Get(
                     "Countries",
-                    () => this.countries.All().ToList(),
+                    () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
                     60 * 60);
             model.Countries = new SelectList(countriesList, "Id", "Name", model.CountryId);
 
@@ -198,7 +198,7 @@
             var countriesList =
                 this.Cache.Get(
                     "Countries",
-                    () => this.countries.All().ToList(),
+                    () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
                     60 * 60);
             model.Countries = new SelectList(countriesList, "Id", "Name", model.CountryId);
 

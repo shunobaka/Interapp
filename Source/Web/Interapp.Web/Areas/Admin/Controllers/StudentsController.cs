@@ -58,7 +58,7 @@
         [ChildActionOnly]
         public ActionResult GetUniversitiesDropdownList()
         {
-            var universitiesList = this.Cache.Get("AdminUniversities", () => this.universities.All(), 60 * 5);
+            var universitiesList = this.universities.All().To<UniversityViewModel>();
             var model = new SelectList(universitiesList, "Id", "Name", "UniversityId");
 
             return this.PartialView("_UniversitiesDropdown", model);

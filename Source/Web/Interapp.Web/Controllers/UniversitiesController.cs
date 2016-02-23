@@ -18,14 +18,10 @@
 
         public ActionResult All(FilterModel model)
         {
-            var universitiesList =
-                this.Cache.Get(
-                    "Universities",
-                    () => this.universities.AllWithCountry().ToList(),
-                    30 * 60);
+            var universitiesList = this.universities.AllWithCountry();
 
             var filteredUnis = this.universities
-                .FilterUniversities(universitiesList.AsQueryable(), model)
+                .FilterUniversities(universitiesList, model)
                 .To<UniversitySimpleViewModel>();
 
             var universitiesCount = filteredUnis.Count();
