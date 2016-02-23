@@ -36,8 +36,8 @@
 
             if (model != null)
             {
-                page = model.Page;
-                pageSize = model.PageSize;
+                page = model.Page < 1 ? 1 : model.Page;
+                pageSize = model.PageSize < 1 ? 1 : model.PageSize;
             }
 
             var resultUniversitiesList =
