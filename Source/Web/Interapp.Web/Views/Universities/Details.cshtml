@@ -83,9 +83,13 @@
     <script>
         function postForm(e) {
             $("#loading").show();
+            var verificationToken = $("input[name=\"__RequestVerificationToken\"]").val()
             $.ajax({
                 url: "/Student/Universities/Add/" + @Model.Id,
                 method: "post",
+                data: {
+                    "__RequestVerificationToken": verificationToken
+                },
                 success: function (response) {
                     $('#messages').html(response);
                     $('#add-form-container').html('');
