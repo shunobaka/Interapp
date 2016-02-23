@@ -144,6 +144,19 @@
         public ApplicationEligibility IsEligibleToApply(StudentInfo student, University university)
         {
             var eligibilityResult = new ApplicationEligibility();
+
+            if (student.Scores == null)
+            {
+                eligibilityResult.Message = "You must fill in your scores.";
+                return eligibilityResult;
+            }
+
+            if (student.Essay == null)
+            {
+                eligibilityResult.Message = "You must write your essay.";
+                return eligibilityResult;
+            }
+
             var totalSat = student.Scores.SatCRResult + student.Scores.SatMathResult + student.Scores.SatWritingResult;
 
             if (totalSat < university.RequiredSAT)
