@@ -274,16 +274,13 @@
     <Compile Include="Areas\Student\ViewModels\Dashboard\EssayViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Dashboard\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Dashboard\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Documents\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\DocumentsListViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Essay\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\ApplicationViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\MajorViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\ResponseViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Scores\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Scores\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Universities\ApplicationInputViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Universities\CountryViewModel.cs" />
