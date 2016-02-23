@@ -109,7 +109,7 @@
                         }
                         else if (filter.OrderBy == "country")
                         {
-                            universities = universities.OrderBy(u => u.Country);
+                            universities = universities.OrderBy(u => u.Country.Name);
                         }
                         else if (filter.OrderBy == "tuition")
                         {
