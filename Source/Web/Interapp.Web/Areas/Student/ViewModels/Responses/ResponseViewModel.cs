@@ -12,7 +12,7 @@
 
         public bool IsAdmitted { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public ApplicationViewModel Application { get; set; }
     }

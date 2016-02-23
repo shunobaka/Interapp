@@ -481,6 +481,9 @@
     <Content Include="Areas\Admin\Views\Students\_UniversitiesDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Students\_MajorsDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\StudentViewModel.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\_Congratulations.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\_Sorry.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

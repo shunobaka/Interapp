@@ -1,0 +1,47 @@
+﻿@model Interapp.Web.Areas.Student.ViewModels.Responses.ResponseViewModel
+@{
+    ViewBag.Title = "Response Details";
+}
+
+<h2>Details for response</h2>
+<hr />
+@if (Model == null)
+{
+    <h2>You are not authorized to view this response.</h2>
+}
+<h3>University: @Model.Application.University.Name</h3>
+<h3>Major: @Model.Application.Major.Name</h3>
+<h3>Date received: @Model.CreatedOn</h3>
+<br />
+<h3>Is Admitted: @(Model.IsAdmitted ? Html.Raw("Yes") : Html.Raw("No"))</h3>
+<br />
+<h3>Message:</h3>
+<p class="word-break">@Model.Content</p>
+<hr />
+@if (Model.IsAdmitted)
+{
+    <div id="enrollInfo">
+        @using (Ajax.BeginForm(
+                "Enroll",
+                "Responses",
+                null,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "enrollInfo",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST"
+                },
+                new { id = "enroll" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="submit" value="Get enrolled in university!" class="btn btn-success" />
+            </div>
+        }
+    </div>
+}
+@Html.ActionLink("Back to dashboard", "", "", null, new { @class = "btn btn-primary" })
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
