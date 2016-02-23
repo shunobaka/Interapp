@@ -31,16 +31,16 @@
 
         [Required]
         [Display(Name = "First name")]
-        [MinLength(ModelConstants.UserNamesMinLength)]
-        [MaxLength(ModelConstants.UserNamesMaxLength)]
-        [RegularExpression(ModelConstants.UserNamesRegex)]
+        [MinLength(ModelConstants.UserNamesMinLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
+        [MaxLength(ModelConstants.UserNamesMaxLength, ErrorMessage = ModelErrorMessages.MaxLengthErrorMessage)]
+        [RegularExpression(ModelConstants.UserNamesRegex, ErrorMessage = ModelErrorMessages.NameRegexErrorMessage)]
         public string FirstName { get; set; }
 
         [Required]
         [Display(Name = "Last name")]
-        [MinLength(ModelConstants.UserNamesMinLength)]
-        [MaxLength(ModelConstants.UserNamesMaxLength)]
-        [RegularExpression(ModelConstants.UserNamesRegex)]
+        [MinLength(ModelConstants.UserNamesMinLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
+        [MaxLength(ModelConstants.UserNamesMaxLength, ErrorMessage = ModelErrorMessages.MaxLengthErrorMessage)]
+        [RegularExpression(ModelConstants.UserNamesRegex, ErrorMessage = ModelErrorMessages.NameRegexErrorMessage)]
         public string LastName { get; set; }
 
         [Required]
