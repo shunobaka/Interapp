@@ -214,5 +214,24 @@
 
             return this.IsEligibleToApply(student, university);
         }
+
+        public void Update(StudentInfo studentInfo)
+        {
+            var student = this.studentInfos.GetById(studentInfo.StudentId);
+
+            if (student != null)
+            {
+                student.UniversityId = studentInfo.UniversityId;
+                student.MajorId = studentInfo.MajorId;
+                this.studentInfos.Save();
+            }
+        }
+
+        public IQueryable<StudentInfo> All()
+        {
+            return this.studentInfos.All()
+                .Include(s => s.University)
+                .Include(s => s.Student);
+        }
     }
 }
