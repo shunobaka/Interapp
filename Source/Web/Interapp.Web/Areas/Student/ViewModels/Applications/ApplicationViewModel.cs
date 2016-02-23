@@ -8,7 +8,7 @@
     {
         public int Id { get; set; }
 
-        public DateTime? DateCreated { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public UniversityViewModel University { get; set; }
     }

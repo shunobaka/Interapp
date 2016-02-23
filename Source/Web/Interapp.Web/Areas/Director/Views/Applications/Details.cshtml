@@ -17,7 +17,7 @@
         <hr />
         <h5>Student name: @Model.Student.Student.FirstName @Model.Student.Student.LastName</h5>
         <h5>Applying to: @Model.University.Name</h5>
-        <h5>Date of application: @Model.DateCreated</h5>
+        <h5>Date of application: @Model.CreatedOn</h5>
         <h5>Preferred major: @Model.Major.Name</h5>
         <h5>Application is evaluated: @Html.CheckBoxFor(m => m.IsAnswered, new { disabled = "disabled" })</h5>
         <br />
