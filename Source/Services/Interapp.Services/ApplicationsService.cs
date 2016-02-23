@@ -3,7 +3,6 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using Common;
     using Contracts;
     using Data.Common;
     using Data.Models;
@@ -81,12 +80,6 @@
                 .Include(a => a.University.Country)
                 .Include(a => a.University.Director)
                 .FirstOrDefault();
-        }
-
-        public IQueryable<Application> GetFilteredByUniversity(int universityId, FilterModel filter)
-        {
-            // TODO: Implement
-            throw new NotImplementedException();
         }
 
         public void SetReviewed(int id)

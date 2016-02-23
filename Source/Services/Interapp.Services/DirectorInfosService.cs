@@ -49,10 +49,5 @@
                 .Include(d => d.Director)
                 .FirstOrDefault();
         }
-
-        public void Update(string directorId, DirectorInfo info)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

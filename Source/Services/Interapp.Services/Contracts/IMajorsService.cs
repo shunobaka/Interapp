@@ -8,8 +8,6 @@
     {
         IQueryable<Major> All();
 
-        IQueryable<Major> GetFiltered(FilterModel filter);
-
         Major GetById(int id);
 
         void Update(Major major);

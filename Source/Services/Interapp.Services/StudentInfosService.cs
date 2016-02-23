@@ -126,8 +126,6 @@
 
                 this.studentInfos.Save();
             }
-
-            //// TODO: Fix maybe?
         }
 
         public IQueryable<University> GetUniversitiesOfInterest(string studentId)

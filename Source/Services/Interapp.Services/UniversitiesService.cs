@@ -57,11 +57,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<University> GetFiltered(FilterModel filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(University university)
         {
             var orgUniversity = this.universities

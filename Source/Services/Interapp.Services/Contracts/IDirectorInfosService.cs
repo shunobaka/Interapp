@@ -7,8 +7,6 @@
     {
         DirectorInfo GetById(string id);
 
-        void Update(string directorId, DirectorInfo info);
-
         void Create(string directorId);
 
         DirectorInfo GetFullInfoById(string id);

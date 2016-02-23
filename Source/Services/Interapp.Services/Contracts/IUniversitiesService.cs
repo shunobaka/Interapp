@@ -3,13 +3,10 @@
     using System.Linq;
     using Common;
     using Data.Models;
-    using Interapp.Common.Enums;
 
     public interface IUniversitiesService
     {
         IQueryable<University> All();
-
-        IQueryable<University> GetFiltered(FilterModel filter);
 
         University GetById(int id);
 
