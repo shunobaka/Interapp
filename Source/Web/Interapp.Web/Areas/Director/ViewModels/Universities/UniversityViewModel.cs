@@ -13,9 +13,9 @@
         public int Id { get; set; }
 
         [Required]
-        [MinLength(ModelConstants.UniversityNameMinLength)]
-        [MaxLength(ModelConstants.UniversityNameMaxLength)]
-        [RegularExpression(ModelConstants.UniversityNameRegex)]
+        [MinLength(ModelConstants.UniversityNameMinLength, ErrorMessage = ModelErrorMessages.MaxLengthErrorMessage)]
+        [MaxLength(ModelConstants.UniversityNameMaxLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
+        [RegularExpression(ModelConstants.UniversityNameRegex, ErrorMessage = "University name may contain only Letters, Dashes, Brackets, Comma, Apostrophe, Whitespaces and &.")]
         public string Name { get; set; }
 
         [Display(Name = "Tuition fee")]

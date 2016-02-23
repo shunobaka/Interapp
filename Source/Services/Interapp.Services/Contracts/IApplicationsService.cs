@@ -14,8 +14,6 @@
 
         IQueryable<Application> AllByDirector(string directorId);
 
-        IQueryable<Application> GetFilteredByUniversity(int universityId, FilterModel filter);
-
         Application GetById(int id);
 
         void Delete(int id);

@@ -17,7 +17,7 @@
         <hr />
         <h5>Student name: @Model.Student.Student.FirstName @Model.Student.Student.LastName</h5>
         <h5>Applying to: @Model.University.Name</h5>
-        <h5>Date of application: @Model.DateCreated</h5>
+        <h5>Date of application: @Model.CreatedOn</h5>
         <h5>Preferred major: @Model.Major.Name</h5>
         <h5>Application is evaluated: @Html.CheckBoxFor(m => m.IsAnswered, new { disabled = "disabled" })</h5>
         <br />
@@ -35,8 +35,8 @@
     <div class="col-md-10 col-md-offset-1">
         <h3>Student Essay</h3>
         <hr />
-        <h4 class="text-center">@Model.Student.Essay.Title</h4>
-        <p>@Model.Student.Essay.Content</p>
+        <h4 class="text-center word-break">@Model.Student.Essay.Title</h4>
+        <p class="word-break">@Model.Student.Essay.Content</p>
         <hr />
     </div>
     <div class="col-md-10 col-md-offset-1 text-center">

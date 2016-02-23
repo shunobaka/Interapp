@@ -99,7 +99,7 @@
                 var universityUpdateModel = this.Mapper.Map<University>(model);
                 universityUpdateModel.Id = id;
                 this.universities.Update(universityUpdateModel);
-                return this.RedirectToRoute("/Director");
+                return this.Redirect("/Director");
             }
 
             model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);

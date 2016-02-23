@@ -4,7 +4,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class ScoresViewModel : IMapFrom<ScoreReport>
+    public class ScoresViewModel : IMapFrom<ScoreReport>, IMapTo<ScoreReport>
     {
         public string StudentInfoId { get; set; }
 

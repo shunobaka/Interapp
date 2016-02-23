@@ -30,7 +30,7 @@
             <ul>
                 @foreach (var document in group)
                 {
-                    <li>@Html.ActionLink(document.Name, "Details", "Documents", new { id = document.Id }, null)</li>
+                    <li>@document.Name</li>
                 }
             </ul>
         </div>

@@ -57,11 +57,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<University> GetFiltered(FilterModel filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(University university)
         {
             var orgUniversity = this.universities
@@ -78,6 +73,7 @@
                 orgUniversity.RequiredPBTToefl = university.RequiredPBTToefl;
                 orgUniversity.RequiredSAT = university.RequiredSAT;
                 orgUniversity.TuitionFee = university.TuitionFee;
+                orgUniversity.CountryId = university.CountryId;
 
                 this.universities.Save();
             }
@@ -91,8 +87,6 @@
             }
 
             universities = universities.OrderBy(u => u.Name);
-            var page = 1;
-            var pageSize = 10;
 
             if (filter != null)
             {
@@ -101,10 +95,7 @@
                     universities = universities.Where(u => u.Name.Contains(filter.Filter));
                 }
 
-                page = filter.Page;
-                pageSize = filter.PageSize;
-
-                if (filter.OrderBy == null)
+                if (filter.OrderBy != null)
                 {
                     if (filter.Order == "asc")
                     {
@@ -114,7 +105,7 @@
                         }
                         else if (filter.OrderBy == "country")
                         {
-                            universities = universities.OrderBy(u => u.Country);
+                            universities = universities.OrderBy(u => u.Country.Name);
                         }
                         else if (filter.OrderBy == "tuition")
                         {
@@ -162,10 +153,6 @@
                     }
                 }
             }
-
-            universities = universities
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
 
             return universities;
         }

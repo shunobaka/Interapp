@@ -75,7 +75,9 @@
         </div>
     </div>
     <div class="col-md-3">
-        <h2>Place for image</h2>
+        <h3 class="text-center">Gallery</h3>
+        <hr />
+        <img src="~/Content/university.jpg" width="100%" />
     </div>
 </div>
 
@@ -83,9 +85,13 @@
     <script>
         function postForm(e) {
             $("#loading").show();
+            var verificationToken = $("input[name=\"__RequestVerificationToken\"]").val()
             $.ajax({
                 url: "/Student/Universities/Add/" + @Model.Id,
                 method: "post",
+                data: {
+                    "__RequestVerificationToken": verificationToken
+                },
                 success: function (response) {
                     $('#messages').html(response);
                     $('#add-form-container').html('');

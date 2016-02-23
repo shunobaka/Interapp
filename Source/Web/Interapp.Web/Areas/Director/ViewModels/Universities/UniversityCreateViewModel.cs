@@ -11,7 +11,7 @@
         [Display(Name = "University name")]
         [MinLength(ModelConstants.UniversityNameMinLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
         [MaxLength(ModelConstants.UniversityNameMaxLength, ErrorMessage = ModelErrorMessages.MinLengthErrorMessage)]
-        [RegularExpression(ModelConstants.UniversityNameRegex)]
+        [RegularExpression(ModelConstants.UniversityNameRegex, ErrorMessage = "University name may contain only Letters, Dashes, Brackets, Comma, Apostrophe, Whitespaces and &.")]
         public string Name { get; set; }
 
         [Display(Name = "Tuition fee")]

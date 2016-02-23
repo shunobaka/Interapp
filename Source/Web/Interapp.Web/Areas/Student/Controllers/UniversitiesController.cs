@@ -1,11 +1,7 @@
 ﻿namespace Interapp.Web.Areas.Student.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Caching;
     using System.Web.Mvc;
-    using Data.Models;
     using Infrastructure.Mapping;
     using Microsoft.AspNet.Identity;
     using Services.Common;
@@ -34,19 +30,45 @@
         public ActionResult All(FilterModel model)
         {
             var studentId = this.User.Identity.GetUserId();
-            var viewModelUnis = this.universities
-                .FilterUniversities(this.universities.AllForStudent(studentId), model)
-                .To<UniversitySimpleViewModel>()
-                .ToList();
 
-            var viewModel = new UniversitiesListViewModel()
+            var filteredUnis = this.universities
+                .FilterUniversities(this.universities.AllForStudent(studentId), model)
+                .To<UniversitySimpleViewModel>();
+
+            var universitiesCount = filteredUnis.Count();
+
+            var page = 1;
+            var pageSize = 10;
+
+            if (model != null)
             {
-                Universities = viewModelUnis,
-                UniversitiesCount = viewModelUnis.Count,
-                Filter = model
+                page = model.Page < 1 ? 1 : model.Page;
+                pageSize = model.PageSize < 1 ? 1 : model.PageSize;
+            }
+
+            var resultUniversitiesList =
+                filteredUnis
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+            var query = string.Empty;
+
+            if (model != null)
+            {
+                query = "&Filter=" + model.Filter + "&OrderBy=" + model.OrderBy + "&Order=" + model.Order;
+            }
+
+            var viewDataModel = new UniversitiesListViewModel()
+            {
+                Universities = resultUniversitiesList,
+                Filter = model,
+                UniversitiesCount = universitiesCount,
+                Query = query,
+                Page = model.Page
             };
 
-            return this.View(viewModel);
+            return this.View(viewDataModel);
         }
 
         [HttpPost]

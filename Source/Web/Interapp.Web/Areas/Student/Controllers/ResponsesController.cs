@@ -10,10 +10,12 @@
     public class ResponsesController : StudentController
     {
         private IResponsesService responses;
+        private IStudentInfosService students;
 
-        public ResponsesController(IResponsesService responses)
+        public ResponsesController(IResponsesService responses, IStudentInfosService students)
         {
             this.responses = responses;
+            this.students = students;
         }
 
         public ActionResult All()
@@ -40,6 +42,24 @@
             var model = this.Mapper.Map<ResponseViewModel>(response);
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Enroll(int applicationId)
+        {
+            var response = this.responses.GetById(applicationId);
+            var application = response.Application;
+            var studentId = this.User.Identity.GetUserId();
+
+            if (response != null && application.StudentId == studentId && response.IsAdmitted)
+            {
+                this.students.EnrollStudent(studentId, application.UniversityId, application.MajorId);
+
+                return this.PartialView("_Congratulations", application.University.Name);
+            }
+
+            return this.PartialView("_Sorry");
         }
     }
 }

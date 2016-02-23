@@ -3,7 +3,6 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using Common;
     using Contracts;
     using Data.Common;
     using Data.Models;
@@ -83,12 +82,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Application> GetFilteredByUniversity(int universityId, FilterModel filter)
-        {
-            // TODO: Implement
-            throw new NotImplementedException();
-        }
-
         public void SetReviewed(int id)
         {
             var application = this.applications
@@ -97,6 +90,7 @@
             if (application != null)
             {
                 application.IsReviewed = true;
+                this.applications.Save();
             }
         }
 

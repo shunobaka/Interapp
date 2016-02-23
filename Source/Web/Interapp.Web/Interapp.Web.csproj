@@ -274,16 +274,13 @@
     <Compile Include="Areas\Student\ViewModels\Dashboard\EssayViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Dashboard\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Dashboard\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Documents\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\DocumentsListViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\DocumentViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Documents\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Essay\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\ApplicationViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\MajorViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\ResponseViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Responses\UniversityViewModel.cs" />
-    <Compile Include="Areas\Student\ViewModels\Scores\DeleteInfoViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Scores\ScoresViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Universities\ApplicationInputViewModel.cs" />
     <Compile Include="Areas\Student\ViewModels\Universities\CountryViewModel.cs" />
@@ -319,6 +316,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Home\StatisticsViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -395,6 +393,7 @@
     <Content Include="Content\kendo\textures\transparency.png" />
     <Content Include="Content\kendo\textures\transtexture.png" />
     <Content Include="Content\loading.gif" />
+    <Content Include="Content\university.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -482,6 +481,9 @@
     <Content Include="Areas\Admin\Views\Students\_UniversitiesDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Students\_MajorsDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\StudentViewModel.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\_Congratulations.cshtml" />
+    <Content Include="Areas\Student\Views\Responses\_Sorry.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -510,7 +512,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -538,6 +539,7 @@
     <Content Include="Views\Universities\Details.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Home\_Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

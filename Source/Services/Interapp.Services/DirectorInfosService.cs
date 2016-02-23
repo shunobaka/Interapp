@@ -18,6 +18,11 @@
             this.users = users;
         }
 
+        public IQueryable<DirectorInfo> All()
+        {
+            return this.directorInfos.All();
+        }
+
         public void Create(string directorId)
         {
             var student = this.users
@@ -48,11 +53,6 @@
                 .Include(d => d.Universities)
                 .Include(d => d.Director)
                 .FirstOrDefault();
-        }
-
-        public void Update(string directorId, DirectorInfo info)
-        {
-            throw new NotImplementedException();
         }
     }
 }

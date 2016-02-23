@@ -52,11 +52,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Country> GetFiltered(FilterModel filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Country country)
         {
             var orgCountry = this.countries.GetById(country.Id);

@@ -3,7 +3,7 @@
     using Data.Models;
     using Infrastructure.Mapping;
 
-    public class UniversityViewModel : IMapFrom<University>
+    public class UniversityViewModel : IMapFrom<University>, IMapTo<University>
     {
         public int Id { get; set; }
 

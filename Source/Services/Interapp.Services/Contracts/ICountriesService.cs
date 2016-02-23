@@ -8,8 +8,6 @@
     {
         IQueryable<Country> All();
 
-        IQueryable<Country> GetFiltered(FilterModel filter);
-
         Country GetById(int id);
 
         void Update(Country country);

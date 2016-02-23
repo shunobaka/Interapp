@@ -36,11 +36,6 @@
                 .FirstOrDefault();
         }
 
-        public IQueryable<Major> GetFiltered(FilterModel filter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Major major)
         {
             var originalMajor = this.majors.GetById(major.Id);

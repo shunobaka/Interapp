@@ -8,7 +8,6 @@
 @if (Model != null)
 {
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning pull-right" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger pull-right" })
 }
 <hr />
 @if (Model == null)
@@ -18,8 +17,8 @@
 else
 {
     <h5>Name of document</h5>
-    <h4>@Model.Name</h4>
+    <h4 class="word-break">@Model.Name</h4>
     <br />
     <h5>Content</h5>
-    <h4>@Model.Content</h4>
+    <h4 class="word-break">@Model.Content</h4>
 }

@@ -5,10 +5,14 @@
 
     public class UniversitiesListViewModel
     {
-        public IEnumerable<UniversitySimpleViewModel> Universities { get; set; }
+        public IList<UniversitySimpleViewModel> Universities { get; set; }
 
         public FilterModel Filter { get; set; }
 
         public int UniversitiesCount { get; set; }
+
+        public int Page { get; set; }
+
+        public string Query { get; set; }
     }
 }

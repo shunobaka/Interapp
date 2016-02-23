@@ -68,7 +68,6 @@
 
         public IQueryable<Document> GetRequiredForStudent(string studentId)
         {
-            // TODO: Check logic
             var requiredDocuments = this.documents.All()
                 .Where(d => d.University != null &&
                     d.University.InterestedStudents

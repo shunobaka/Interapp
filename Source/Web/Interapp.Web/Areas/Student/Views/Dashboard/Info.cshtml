@@ -29,7 +29,16 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <h3>Required documents</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Required documents</h3>
+            </div>
+            <div class="col-md-4">
+                <br />
+                @Html.ActionLink("Documents", "All", "Documents", null, new { @class = "btn btn-primary pull-right" })
+            </div>
+        </div>
+        <br />
         <div class="form-group">
             @if (Model.Essay != null)
             {
@@ -85,20 +94,22 @@
                 {
                     <input type="checkbox" disabled="disabled" />
                 }
-                @Html.LabelFor(m => m.Documents[i].Name)
+                <label class="control-label">@uniqueRequiredDocuments[i]</label>
             </div>
         }
     </div>
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-8">
-                <h3>5 Universities of interest to you</h3>
+            <div class="col-md-6">
+                <h3>5 Universities of Interest</h3>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <br />
-                @Html.ActionLink("All universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+                @Html.ActionLink("Universities", "All", "Universities", null, new { @class = "btn btn-success pull-right" })
+                @Html.ActionLink("Applications", "All", "Applications", null, new { @class = "btn btn-success pull-right" })
             </div>
         </div>
+        <br />
         @if (Model.UniversitiesOfInterest != null && Model.UniversitiesOfInterest.Count != 0)
         {
             for (var i = 0; i < universitiesToDisplay; i++)

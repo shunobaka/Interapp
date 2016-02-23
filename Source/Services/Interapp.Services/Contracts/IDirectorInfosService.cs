@@ -5,9 +5,9 @@
 
     public interface IDirectorInfosService
     {
-        DirectorInfo GetById(string id);
+        IQueryable<DirectorInfo> All();
 
-        void Update(string directorId, DirectorInfo info);
+        DirectorInfo GetById(string id);
 
         void Create(string directorId);
 
