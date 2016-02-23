@@ -78,6 +78,7 @@
                 orgUniversity.RequiredPBTToefl = university.RequiredPBTToefl;
                 orgUniversity.RequiredSAT = university.RequiredSAT;
                 orgUniversity.TuitionFee = university.TuitionFee;
+                orgUniversity.CountryId = university.CountryId;
 
                 this.universities.Save();
             }
