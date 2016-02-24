@@ -82,12 +82,15 @@
                 .All()
                 .Where(s => s.StudentId == id)
                 .Include(s => s.Documents)
-                .Include(s => s.Documents)
+                .Include("Documents")
                 .Include(s => s.UniversitiesOfInterest)
                 .Include(s => s.Student)
                 .Include(s => s.Essay)
                 .Include(s => s.Scores)
-                .Include(s => s.UniversitiesOfInterest.Select(u => u.DocumentRequirements))
+                .Include(s => s.Applications)
+                .Include(s => s.Major)
+                .Include(s => s.University)
+                .Include(s => s.Responses)
                 .FirstOrDefault();
             return student;
         }
@@ -96,8 +99,8 @@
         {
             var student = this.studentInfos
                 .All()
-                .Include(s => s.Documents)
-                .Include(s => s.UniversitiesOfInterest)
+                .Include("Documents")
+                .Include("Universities")
                 .Where(s => s.StudentId == studentId)
                 .FirstOrDefault();
 

@@ -228,7 +228,6 @@
     <Compile Include="Areas\Admin\ViewModels\Responses\ResponseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Scores\ScoresViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Students\StudentViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\Students\UniversityViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users\UserViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Universities\UniversityViewModel.cs" />

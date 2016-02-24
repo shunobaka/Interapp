@@ -96,7 +96,7 @@
         {
             var studentId = this.User.Identity.GetUserId();
             var university = this.universities.GetByIdWithDocuments(id);
-            var student = this.studentInfos.GetFullInfoById(studentId);
+            var student = this.studentInfos.GetByIdWithDocumentsAndScores(studentId);
             var eligiblity = this.studentInfos.IsEligibleToApply(student, university);
             var hasApplied = this.applications
                 .All()

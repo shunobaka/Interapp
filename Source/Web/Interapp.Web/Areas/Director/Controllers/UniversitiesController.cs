@@ -23,13 +23,7 @@
         public ActionResult Add()
         {
             var model = new UniversityCreateViewModel();
-
-            var cachedCountries = this.Cache.Get(
-                "Countries",
-                () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
-                60 * 60);
-
-            model.Countries = new SelectList(cachedCountries, "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
         }
 
@@ -58,12 +52,7 @@
                 return this.RedirectToAction("Index", "Home", null);
             }
 
-            var cachedCountries = this.Cache.Get(
-                "Countries",
-                () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
-                60 * 60);
-
-            model.Countries = new SelectList(cachedCountries, "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
         }
 
@@ -76,12 +65,7 @@
             if (university != null && university.DirectorId == userId)
             {
                 var model = this.Mapper.Map<UniversityViewModel>(university);
-                var cachedCountries = this.Cache.Get(
-                    "Countries",
-                    () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
-                    60 * 60);
-
-                model.Countries = new SelectList(cachedCountries, "Id", "Name", model.CountryId);
+                model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
 
                 return this.View(model);
             }
@@ -93,10 +77,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, UniversityViewModel model)
         {
-            var cachedCountries = this.Cache.Get(
-                "Countries",
-                () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
-                60 * 60);
+            var cachedCountries = this.GetCountries();
 
             var countryExists = cachedCountries.Any(c => c.Id == model.CountryId);
 
@@ -121,12 +102,7 @@
                 return this.Redirect("/Director");
             }
 
-            var countries = this.Cache.Get(
-                "Countries",
-                () => this.countries.All().Select(c => new { Id = c.Id, Name = c.Name }).ToList(),
-                60 * 60);
-
-            model.Countries = new SelectList(countries, "Id", "Name", model.CountryId);
+            model.Countries = new SelectList(this.GetCountries(), "Id", "Name", model.CountryId);
             return this.View(model);
         }
 
@@ -139,6 +115,14 @@
 
             var model = new SelectList(modelUniversities, "Id", "Name", "UniversityId");
             return this.PartialView("_UniversitiesDropdown", model);
+        }
+
+        private IList<Country> GetCountries()
+        {
+            return this.Cache.Get(
+                "Countries",
+                () => this.countries.All().ToList(),
+                60 * 60);
         }
     }
 }
